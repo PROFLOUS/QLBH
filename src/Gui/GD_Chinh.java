@@ -61,7 +61,7 @@ public class GD_Chinh extends javax.swing.JFrame {
         Slider();
 //        setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 30, 30));
 //        addBorder();
-
+         
     }
 
     /**
@@ -147,10 +147,14 @@ public class GD_Chinh extends javax.swing.JFrame {
         frmKhachHang1 = new Gui.FrmKhachHang();
         frmBanHang1 = new Gui.FrmBanHang();
         frmNhanVien1 = new Gui.FrmNhanVien();
-        frmNhaCungCap1 = new Gui.FrmNhaCungCap();
         frmHeThong1 = new Gui.FrmHeThong();
         frmThongKe1 = new Gui.FrmThongKe();
         frmThongTinTaiKhoan1 = new Gui.FrmThongTinTaiKhoan();
+        try {
+            frmNhaCungCap1 = new Gui.FrmNhaCungCap();
+        } catch (java.sql.SQLException e1) {
+            e1.printStackTrace();
+        }
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(0, 700));
@@ -804,10 +808,10 @@ public class GD_Chinh extends javax.swing.JFrame {
         pnl_Main.add(frmKhachHang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, -1, -1));
         pnl_Main.add(frmBanHang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, -1, -1));
         pnl_Main.add(frmNhanVien1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, -1, -1));
-        pnl_Main.add(frmNhaCungCap1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, -1, -1));
         pnl_Main.add(frmHeThong1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, -1, -1));
         pnl_Main.add(frmThongKe1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, -1, -1));
         pnl_Main.add(frmThongTinTaiKhoan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        pnl_Main.add(frmNhaCungCap1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

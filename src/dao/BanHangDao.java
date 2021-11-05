@@ -35,7 +35,7 @@ public class BanHangDao {
         public List<SanPham> SearchSp(String text){
             List<SanPham> list = new ArrayList<>();
             try {
-                PreparedStatement stmt = con.prepareStatement("select * from SanPham where [TenSP] like  ? ");
+                PreparedStatement stmt = con.prepareStatement("select top 5 * from SanPham where [TenSP] like  ? ");
                 
                 stmt.setString(1,"%"+text+"%");
                 ResultSet rs = stmt.executeQuery();

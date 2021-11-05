@@ -19,6 +19,14 @@ public class TaiKhoan {
     private String matKhau;
     private String tenQuyen;
     private String trangThai;
+    private String tenTaiKhoan;
+
+    public TaiKhoan(String matKhau, String tenQuyen, String trangThai, String tenTaiKhoan) {
+        this.matKhau = matKhau;
+        this.tenQuyen = tenQuyen;
+        this.trangThai = trangThai;
+        this.tenTaiKhoan = tenTaiKhoan;
+    }
 
     public TaiKhoan(String matKhau, String tenQuyen, String trangThai) {
         this.matKhau = matKhau;
@@ -42,6 +50,10 @@ public class TaiKhoan {
         return trangThai;
     }
 
+    public String getTenTaiKhoan() {
+        return tenTaiKhoan;
+    }
+
     public void setNhanVien(NhanVien nhanVien) {
         this.nhanVien = nhanVien;
     }
@@ -58,6 +70,13 @@ public class TaiKhoan {
         this.trangThai = trangThai;
     }
 
+    public void setTenTaiKhoan(String tenTaiKhoan) {
+        this.tenTaiKhoan = tenTaiKhoan;
+    }
+    
+    
+    
+    
   
     
     

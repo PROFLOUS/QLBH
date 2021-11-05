@@ -155,7 +155,6 @@ public class SanPhamDao {
             try {
                 java.sql.Connection con = connect.getInstance().getConnection();
                 PreparedStatement stmt = con.prepareStatement("select * from SanPham where [TenSP] like ? ");
-                
                 stmt.setString(1,"%"+text+"%");
                 ResultSet rs = stmt.executeQuery();
                 while(rs.next()) {

@@ -5,6 +5,7 @@
 package entity;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  *
@@ -29,8 +30,21 @@ public class NhanVien {
     private Date ngaySinh;
     private Date ngayVaoLam;
     private String tinhTrang;
+    
+    private ChucVu chucVu;
 
     public NhanVien() {
+    }
+
+    public NhanVien(String maNV, String tenNV, String sdt, String diaChi, Date ngaySinh, Date ngayVaoLam, String tinhTrang, ChucVu chucVu) {
+        this.maNV = maNV;
+        this.tenNV = tenNV;
+        this.sdt = sdt;
+        this.diaChi = diaChi;
+        this.ngaySinh = ngaySinh;
+        this.ngayVaoLam = ngayVaoLam;
+        this.tinhTrang = tinhTrang;
+        this.chucVu = chucVu;
     }
 
     public NhanVien(String maNV, String tenNV, String sdt, String diaChi, Date ngaySinh, Date ngayVaoLam, String tinhTrang) {
@@ -42,62 +56,102 @@ public class NhanVien {
         this.ngayVaoLam = ngayVaoLam;
         this.tinhTrang = tinhTrang;
     }
+    
 
     public String getMaNV() {
         return maNV;
-    }
-
-    public void setMaNV(String maNV) {
-        this.maNV = maNV;
     }
 
     public String getTenNV() {
         return tenNV;
     }
 
-    public void setTenNV(String tenNV) {
-        this.tenNV = tenNV;
-    }
-
     public String getSdt() {
         return sdt;
-    }
-
-    public void setSdt(String sdt) {
-        this.sdt = sdt;
     }
 
     public String getDiaChi() {
         return diaChi;
     }
 
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
-    }
-
     public Date getNgaySinh() {
         return ngaySinh;
-    }
-
-    public void setNgaySinh(Date ngaySinh) {
-        this.ngaySinh = ngaySinh;
     }
 
     public Date getNgayVaoLam() {
         return ngayVaoLam;
     }
 
-    public void setNgayVaoLam(Date ngayVaoLam) {
-        this.ngayVaoLam = ngayVaoLam;
-    }
-
     public String getTinhTrang() {
         return tinhTrang;
+    }
+
+    public ChucVu getChucVu() {
+        return chucVu;
+    }
+
+    public void setMaNV(String maNV) {
+        this.maNV = maNV;
+    }
+
+    public void setTenNV(String tenNV) {
+        this.tenNV = tenNV;
+    }
+
+    public void setSdt(String sdt) {
+        this.sdt = sdt;
+    }
+
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
+    }
+
+    public void setNgaySinh(Date ngaySinh) {
+        this.ngaySinh = ngaySinh;
+    }
+
+    public void setNgayVaoLam(Date ngayVaoLam) {
+        this.ngayVaoLam = ngayVaoLam;
     }
 
     public void setTinhTrang(String tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
+
+    public void setChucVu(ChucVu chucVu) {
+        this.chucVu = chucVu;
+    }
+
+    @Override
+    public String toString() {
+        return "NhanVien{" + "maNV=" + maNV + ", tenNV=" + tenNV + ", sdt=" + sdt + ", diaChi=" + diaChi + ", ngaySinh=" + ngaySinh + ", ngayVaoLam=" + ngayVaoLam + ", tinhTrang=" + tinhTrang + ", chucVu=" + chucVu + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + Objects.hashCode(this.maNV);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final NhanVien other = (NhanVien) obj;
+        if (!Objects.equals(this.maNV, other.maNV)) {
+            return false;
+        }
+        return true;
+    }
+
     
     
       

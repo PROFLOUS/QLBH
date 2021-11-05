@@ -75,14 +75,9 @@ public class FrmBanHang extends javax.swing.JPanel {
         dssp = new  ArrayList<SanPham>();
         SanPham sp = new SanPham();
         
-        sld_KM.setValue(0);
-        Hashtable labelTable = new Hashtable();
-        labelTable.put( new Integer( 15 ), new JLabel("20%") );
-       labelTable.put( new Integer( 0 ), new JLabel("0") );
-        labelTable.put( new Integer( 30 ), new JLabel("50%") );
+       
         
-        sld_KM.setLabelTable( labelTable );
-        sld_KM.setFont(new Font("Consolas",Font.ITALIC, 18));
+        
         Hide();
        
         
@@ -194,6 +189,9 @@ public class FrmBanHang extends javax.swing.JPanel {
         
         
     }
+    public void getTex(String vl){
+        lbl_TenKh.setText(vl);
+    }
     //xóa sảm phảm từ dơn hàng
     public void huy(int r){
         
@@ -286,7 +284,9 @@ public class FrmBanHang extends javax.swing.JPanel {
         lbl_maKh = new javax.swing.JLabel();
         lbl_TenKh1 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        sld_KM = new javax.swing.JSlider();
+        txt_TienDua1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         pnl_textSearch = new javax.swing.JPanel();
         txt_Search_SP = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
@@ -301,7 +301,7 @@ public class FrmBanHang extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(1090, 700));
 
-        pnl_FormBanHang.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_FormBanHang.setBackground(new java.awt.Color(243, 244, 237));
         pnl_FormBanHang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbl_text_BanHang.setFont(new java.awt.Font("Segoe UI Semibold", 0, 20)); // NOI18N
@@ -341,7 +341,7 @@ public class FrmBanHang extends javax.swing.JPanel {
             }
         });
 
-        lbl_TenKh.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        lbl_TenKh.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         lbl_TenKh.setForeground(new java.awt.Color(0, 0, 0));
         lbl_TenKh.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
@@ -456,7 +456,7 @@ public class FrmBanHang extends javax.swing.JPanel {
             }
         });
 
-        lbl_SDT.setFont(new java.awt.Font("Consolas", 2, 18)); // NOI18N
+        lbl_SDT.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         lbl_SDT.setForeground(new java.awt.Color(0, 0, 0));
 
         lbl_Ket.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
@@ -489,16 +489,44 @@ public class FrmBanHang extends javax.swing.JPanel {
         jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("Khuyến mãi:");
 
-        sld_KM.setBackground(new java.awt.Color(255, 255, 255));
-        sld_KM.setFont(new java.awt.Font("Consolas", 2, 18)); // NOI18N
-        sld_KM.setForeground(new java.awt.Color(0, 0, 0));
-        sld_KM.setMajorTickSpacing(15);
-        sld_KM.setMaximum(30);
-        sld_KM.setPaintLabels(true);
-        sld_KM.setToolTipText("");
-        sld_KM.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                sld_KMStateChanged(evt);
+        txt_TienDua1.setBackground(new java.awt.Color(255, 255, 255));
+        txt_TienDua1.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        txt_TienDua1.setForeground(new java.awt.Color(0, 0, 0));
+        txt_TienDua1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txt_TienDua1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(102, 153, 255)));
+        txt_TienDua1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_TienDua1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_TienDua1FocusLost(evt);
+            }
+        });
+        txt_TienDua1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_TienDua1MouseClicked(evt);
+            }
+        });
+        txt_TienDua1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_TienDua1ActionPerformed(evt);
+            }
+        });
+        txt_TienDua1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_TienDua1KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_TienDua1KeyTyped(evt);
+            }
+        });
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/add-user.png"))); // NOI18N
+        jLabel2.setToolTipText("Thêm Khách Hàng Mới");
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
             }
         });
 
@@ -508,9 +536,6 @@ public class FrmBanHang extends javax.swing.JPanel {
             pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
                 .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(txt_Search_KH, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -531,10 +556,18 @@ public class FrmBanHang extends javax.swing.JPanel {
                                 .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btn_ThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txt_Ghichu, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 28, Short.MAX_VALUE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_maKh, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(176, 176, 176)
+                                .addGap(0, 28, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_maKh, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(176, 176, 176))
+                    .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(txt_Search_KH, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
                         .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -556,40 +589,42 @@ public class FrmBanHang extends javax.swing.JPanel {
                             .addComponent(jLabel5)
                             .addComponent(jLabel14))
                         .addGap(177, 177, 177)
-                        .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lbl_TongTien, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                            .addComponent(sld_KM, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbl_TongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_TienDua1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         pnl_ThanhToanLayout.setVerticalGroup(
             pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txt_Search_KH, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnl_ThanhToanLayout.createSequentialGroup()
-                            .addGap(4, 4, 4)
-                            .addComponent(lbl_TongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txt_Search_KH, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(lbl_TongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(sld_KM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
-                                    .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(lbl_SDT, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-                                        .addComponent(lbl_TenKh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbl_Ket, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(lbl_TenKh1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(lbl_XoaKh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_TienDua1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lbl_TenKh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                                    .addComponent(lbl_SDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbl_Ket, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_TenKh1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbl_XoaKh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_ThanhToanLayout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(lbl_maKh, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
@@ -844,7 +879,7 @@ public class FrmBanHang extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
+            .addGap(0, 1091, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -1011,6 +1046,10 @@ public class FrmBanHang extends javax.swing.JPanel {
 
     private void btn_ThanhToanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThanhToanMouseClicked
        
+        System.out.println("ok");
+        
+        
+       
         
     }//GEN-LAST:event_btn_ThanhToanMouseClicked
 
@@ -1125,21 +1164,33 @@ public class FrmBanHang extends javax.swing.JPanel {
         TinhTong();
     }//GEN-LAST:event_lbl_TangSLMouseClicked
 
-    private void sld_KMStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sld_KMStateChanged
+    private void txt_TienDua1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_TienDua1FocusGained
         // TODO add your handling code here:
-        int km = sld_KM.getValue();
-        txt_Ghichu.setText(""+km);
-        double tienKm ;
-        if(km == 15){
-           tienKm = (tong *20/100);
-           lbl_TienPhaiTra.setText(tienKm+"");
-        }else if(km==30){
-            tienKm = (tong *50/100);
-            lbl_TienPhaiTra.setText(tienKm+"");
-        }
-        
-        
-    }//GEN-LAST:event_sld_KMStateChanged
+    }//GEN-LAST:event_txt_TienDua1FocusGained
+
+    private void txt_TienDua1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_TienDua1FocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_TienDua1FocusLost
+
+    private void txt_TienDua1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_TienDua1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_TienDua1MouseClicked
+
+    private void txt_TienDua1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_TienDua1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_TienDua1ActionPerformed
+
+    private void txt_TienDua1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_TienDua1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_TienDua1KeyReleased
+
+    private void txt_TienDua1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_TienDua1KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_TienDua1KeyTyped
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+       new FrmThemKh().setVisible(true);
+    }//GEN-LAST:event_jLabel2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1147,18 +1198,20 @@ public class FrmBanHang extends javax.swing.JPanel {
     private javax.swing.JButton btn_XoaMatHang;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbl_GiamSL;
     private javax.swing.JLabel lbl_Ket;
-    private javax.swing.JLabel lbl_SDT;
+    public static javax.swing.JLabel lbl_SDT;
     private javax.swing.JLabel lbl_TangSL;
-    private javax.swing.JLabel lbl_TenKh;
+    public static javax.swing.JLabel lbl_TenKh;
     private javax.swing.JLabel lbl_TenKh1;
     private javax.swing.JLabel lbl_TextSL;
     private javax.swing.JLabel lbl_TienPhaiTra;
@@ -1171,12 +1224,12 @@ public class FrmBanHang extends javax.swing.JPanel {
     private javax.swing.JPanel pnl_ThanhToan;
     private javax.swing.JPanel pnl_tab_Form_BangHang;
     private javax.swing.JPanel pnl_textSearch;
-    private javax.swing.JSlider sld_KM;
     public javax.swing.JTable tbl_BanHang;
     private javax.swing.JTextField txt_Ghichu;
     private javax.swing.JTextField txt_Search_KH;
     private javax.swing.JTextField txt_Search_SP;
     private javax.swing.JTextField txt_SuaSL;
     private javax.swing.JTextField txt_TienDua;
+    public static javax.swing.JTextField txt_TienDua1;
     // End of variables declaration//GEN-END:variables
 }

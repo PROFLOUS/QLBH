@@ -59,20 +59,30 @@ public class NhanVienDao {
                                  Date ngayVaoLam = rs.getDate(6);
                                  String tinhTrang = rs.getString(7);
                                  String maCV = rs.getString(8);
-				
-                            
                                  nv = new NhanVien(maNV, tenNV, sdt, diaChi, ngaySinh, ngayVaoLam, tinhTrang);
-
-                                
 			}
             } catch (Exception e) {
                 e.printStackTrace();
             }
-               
                return nv;
-             
-        
-        
-     
     } 
+    
+    //dọc dữ liệu lên bảng
+    public ArrayList<NhanVien>getAllNV(){
+        try {
+            java.sql.Connection con = connect.getInstance().getConnection();
+            Statement stmt = con.createStatement();
+            String Sql = "select * from NhanVien";
+            ResultSet rs = stmt.executeQuery(Sql);
+            while (rs.next()) {
+                ChucVuDao cv_dao = new ChucVuDao();
+                ChucVu cv = cv_dao.getCVByMaCV(rs.getString("MaCV"));
+                NhanVien nv = new NhanVien(rs.getString("MaNV"), rs.getString("TenNV"), rs.getString("SDT"),rs.getString("DiaChi"), rs.getDate("NgaySinh"), rs.getDate("NgayVaoLam"), rs.getString("TinhTrang"));
+                nv.setChucVu(cv);
+                listNV.add(nv);
+            }
+        } catch (Exception e) {
+        }
+        return listNV;
+    }
 }

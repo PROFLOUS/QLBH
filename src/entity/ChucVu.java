@@ -18,14 +18,12 @@ import java.util.Objects;
 public class ChucVu {
     private String maCV;
     private String tenCV;
-    private float hsLuong;
-    
-    
-    public ChucVu(){
-        
+    private double hsLuong;
+
+    public ChucVu() {
     }
 
-    public ChucVu(String maCV, String tenCV, float hsLuong) {
+    public ChucVu(String maCV, String tenCV, double hsLuong) {
         this.maCV = maCV;
         this.tenCV = tenCV;
         this.hsLuong = hsLuong;
@@ -35,30 +33,35 @@ public class ChucVu {
         return maCV;
     }
 
-    public void setMaCV(String maCV) {
-        this.maCV = maCV;
-    }
-
     public String getTenCV() {
         return tenCV;
+    }
+
+    public double getHsLuong() {
+        return hsLuong;
+    }
+
+    public void setMaCV(String maCV) {
+        this.maCV = maCV;
     }
 
     public void setTenCV(String tenCV) {
         this.tenCV = tenCV;
     }
 
-    public float getHsLuong() {
-        return hsLuong;
-    }
-
-    public void setHsLuong(float hsLuong) {
+    public void setHsLuong(double hsLuong) {
         this.hsLuong = hsLuong;
     }
 
     @Override
+    public String toString() {
+        return "ChucVu{" + "maCV=" + maCV + ", tenCV=" + tenCV + ", hsLuong=" + hsLuong + '}';
+    }
+
+    @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.maCV);
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.maCV);
         return hash;
     }
 
@@ -79,6 +82,9 @@ public class ChucVu {
         }
         return true;
     }
+    
+    
+    
     
     
     

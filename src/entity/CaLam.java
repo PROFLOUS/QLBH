@@ -5,6 +5,7 @@
 package entity;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  *
@@ -20,51 +21,72 @@ import java.util.Date;
 public class CaLam {
     private String maCa;
     private NhanVien NV;
-    private Date ngayLam;
     private String buoi;
 
     public CaLam() {
     }
 
-    public CaLam(String maCa, Date ngayLam, String buoi) {
+    public CaLam(String maCa, NhanVien NV, String buoi) {
         this.maCa = maCa;
-        this.ngayLam = ngayLam;
+        this.NV = NV;
         this.buoi = buoi;
     }
 
-    
-
     public String getMaCa() {
         return maCa;
-    }
-
-    public NhanVien getNV() {
-        return NV;
-    }
-
-    public Date getNgayLam() {
-        return ngayLam;
-    }
-
-    public String getBuoi() {
-        return buoi;
     }
 
     public void setMaCa(String maCa) {
         this.maCa = maCa;
     }
 
+    public NhanVien getNV() {
+        return NV;
+    }
+
     public void setNV(NhanVien NV) {
         this.NV = NV;
     }
 
-    public void setNgayLam(Date ngayLam) {
-        this.ngayLam = ngayLam;
+    public String getBuoi() {
+        return buoi;
     }
 
     public void setBuoi(String buoi) {
         this.buoi = buoi;
     }
+
+    @Override
+    public String toString() {
+        return "CaLam{" + "maCa=" + maCa + ", NV=" + NV + ", buoi=" + buoi + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.maCa);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final CaLam other = (CaLam) obj;
+        if (!Objects.equals(this.maCa, other.maCa)) {
+            return false;
+        }
+        return true;
+    }
+
+    
 
    
     
