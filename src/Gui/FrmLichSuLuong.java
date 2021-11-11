@@ -18,7 +18,7 @@ public class FrmLichSuLuong extends javax.swing.JFrame {
      */
     public FrmLichSuLuong() {
         initComponents();
-        this.setLocationRelativeTo(null);
+//        this.setLocationRelativeTo(null);
 //        setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 30, 30));
         
     }
@@ -219,7 +219,7 @@ public class FrmLichSuLuong extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable3;
+    public static javax.swing.JTable jTable3;
     private javax.swing.JToggleButton jToggleButton3;
     // End of variables declaration//GEN-END:variables
 }

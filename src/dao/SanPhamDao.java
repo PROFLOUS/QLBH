@@ -5,6 +5,7 @@
 package dao;
 
 import Connect.connect;
+import static Connect.connect.con;
 import entity.DanhMucSP;
 import entity.HoaDonBanHang;
 import entity.SanPham;
@@ -265,4 +266,26 @@ public class SanPhamDao {
         }
         return  list;
     }
+    
+     //tim sam pham theo ma vs ten
+        public List<SanPham> SearchMaSpOrTenSp(String text){
+            List<SanPham> list = new ArrayList<>();
+            try {
+                java.sql.Connection con = connect.getInstance().getConnection();
+                PreparedStatement stmt = con.prepareStatement("select * from SanPham inner join DanhMucSP on SanPham.MaLoai=DanhMucSP.MaLoai\n" +
+"where TenLoai like N'%"+text+"%' or [TenSP] like N'%"+text+"%' or [MaSP]='"+text+"'" );
+                ResultSet rs = stmt.executeQuery();
+                while(rs.next()) {
+                DanhMucSPDao dm_dao = new DanhMucSPDao();
+                DanhMucSP dm = null;
+                dm = dm_dao.getDMSP(rs.getString(8));
+                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(4), rs.getInt(3), rs.getString(5), rs.getString(6), rs.getString(7));
+                sp.setDmsp(dm);
+                list.add(sp);
+            }
+            } catch (Exception e) {
+            }
+            
+            return list;
+        }
 }

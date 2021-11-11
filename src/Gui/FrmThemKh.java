@@ -37,13 +37,12 @@ public class FrmThemKh extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txt_TenKh = new javax.swing.JTextField();
-        txt_Sdt = new javax.swing.JTextField();
         txt_DiaChi = new javax.swing.JTextField();
         btnExit2 = new javax.swing.JToggleButton();
         btnThem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(243, 244, 237));
 
@@ -184,9 +183,9 @@ public class FrmThemKh extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Thêm Thành Công");
          System.out.println(txt_Sdt.getText());
          System.out.println(FrmBanHang.txt_TienDua1.getText());
-         
-        setVisible(false);
-        
+         setVisible(false);
+              FrmBanHang.txt_Search_KH.setVisible(false);
+              FrmBanHang.btn_AddKh.setVisible(false);
 
     }//GEN-LAST:event_btnThemMouseClicked
 
@@ -276,7 +275,7 @@ public class FrmThemKh extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     public static javax.swing.JTextField txt_DiaChi;
-    public static javax.swing.JTextField txt_Sdt;
-    public static javax.swing.JTextField txt_TenKh;
+    public static final javax.swing.JTextField txt_Sdt = new javax.swing.JTextField();
+    public static final javax.swing.JTextField txt_TenKh = new javax.swing.JTextField();
     // End of variables declaration//GEN-END:variables
 }

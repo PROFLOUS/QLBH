@@ -50,5 +50,23 @@ public class BanHangDao {
             
             return list;
         }
+        
+        //tim sam pham theo ma vs ten
+        public List<SanPham> SearchMaSpOrTenSp(String text){
+            List<SanPham> list = new ArrayList<>();
+            try {
+                PreparedStatement stmt = con.prepareStatement("select top 5 * from SanPham where [TenSP] like N'%"+text+"%' or [MaSP]='"+text+"'");
+                ResultSet rs = stmt.executeQuery();
+                while(rs.next()) {
+                
+                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(4), rs.getInt(3), rs.getString(5), rs.getString(6), rs.getString(7));
+                    
+                list.add(sp);
+            }
+            } catch (Exception e) {
+            }
+            
+            return list;
+        }
     
 }

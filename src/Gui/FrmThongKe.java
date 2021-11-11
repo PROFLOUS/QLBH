@@ -33,10 +33,11 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
         
           buttons[0] =btn_tab_TKeDT;
         buttons[1] =btn_tab_TKeHBC;
-        buttons[2] = btn_tab_TKeHT;
-        buttons[3] = btn_tab_TKeKH;
         
-        setButtonBorder(btn_tab_TKeDT);
+        buttons[2] = btn_tab_TKeKH;
+        buttons[3] = btn_tab_TQTK;
+        
+        setButtonBorder(btn_tab_TQTK);
    
         
 
@@ -95,13 +96,16 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
         lbl_text_ThongKe = new javax.swing.JLabel();
         pnl_menuTab_ThongKe = new javax.swing.JPanel();
         btn_tab_TKeDT = new javax.swing.JButton();
-        btn_tab_TKeHT = new javax.swing.JButton();
         btn_tab_TKeHBC = new javax.swing.JButton();
         btn_tab_TKeKH = new javax.swing.JButton();
-        pnl_tab_Form_TKedt = new javax.swing.JPanel();
-        pnl_tab_FormTKeht = new javax.swing.JPanel();
-        pnl_tab_FormTKhbc = new javax.swing.JPanel();
-        pnl_tab_FormTKkh = new javax.swing.JPanel();
+        btn_tab_TQTK = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        frmTongQuanBaoCao1 = new Gui.FrmTongQuanBaoCao();
+        frmTkeDoanhThu1 = new Gui.FrmTkeDoanhThu();
+        frmTkeHangBanChay1 = new Gui.FrmTkeHangBanChay();
+        frmTkeKhachHang1 = new Gui.FrmTkeKhachHang();
+
+        setPreferredSize(new java.awt.Dimension(1090, 28));
 
         pnl_FormThongKe.setBackground(new java.awt.Color(255, 255, 255));
         pnl_FormThongKe.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -131,18 +135,6 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
             }
         });
 
-        btn_tab_TKeHT.setBackground(new java.awt.Color(255, 255, 255));
-        btn_tab_TKeHT.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btn_tab_TKeHT.setForeground(new java.awt.Color(153, 153, 153));
-        btn_tab_TKeHT.setText("Thống Kê Hàng Tồn Kho");
-        btn_tab_TKeHT.setBorder(null);
-        btn_tab_TKeHT.setContentAreaFilled(false);
-        btn_tab_TKeHT.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_tab_TKeHTMouseClicked(evt);
-            }
-        });
-
         btn_tab_TKeHBC.setBackground(new java.awt.Color(255, 255, 255));
         btn_tab_TKeHBC.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btn_tab_TKeHBC.setForeground(new java.awt.Color(153, 153, 153));
@@ -167,122 +159,75 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
             }
         });
 
+        btn_tab_TQTK.setBackground(new java.awt.Color(255, 255, 255));
+        btn_tab_TQTK.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btn_tab_TQTK.setForeground(new java.awt.Color(0, 0, 0));
+        btn_tab_TQTK.setText("Tổng Quan Thống Kê");
+        btn_tab_TQTK.setBorder(null);
+        btn_tab_TQTK.setContentAreaFilled(false);
+        btn_tab_TQTK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_tab_TQTKMouseClicked(evt);
+            }
+        });
+        btn_tab_TQTK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tab_TQTKActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_menuTab_ThongKeLayout = new javax.swing.GroupLayout(pnl_menuTab_ThongKe);
         pnl_menuTab_ThongKe.setLayout(pnl_menuTab_ThongKeLayout);
         pnl_menuTab_ThongKeLayout.setHorizontalGroup(
             pnl_menuTab_ThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_menuTab_ThongKeLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addGap(51, 51, 51)
+                .addComponent(btn_tab_TQTK)
+                .addGap(63, 63, 63)
                 .addComponent(btn_tab_TKeDT)
-                .addGap(44, 44, 44)
-                .addComponent(btn_tab_TKeHT)
-                .addGap(45, 45, 45)
+                .addGap(61, 61, 61)
                 .addComponent(btn_tab_TKeHBC)
-                .addGap(43, 43, 43)
+                .addGap(52, 52, 52)
                 .addComponent(btn_tab_TKeKH)
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addContainerGap(239, Short.MAX_VALUE))
         );
         pnl_menuTab_ThongKeLayout.setVerticalGroup(
             pnl_menuTab_ThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_menuTab_ThongKeLayout.createSequentialGroup()
-                .addGroup(pnl_menuTab_ThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_tab_TKeKH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_tab_TKeDT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                    .addComponent(btn_tab_TKeHT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_tab_TKeHBC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addGroup(pnl_menuTab_ThongKeLayout.createSequentialGroup()
+                .addGroup(pnl_menuTab_ThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btn_tab_TQTK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_tab_TKeDT, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(btn_tab_TKeHBC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_tab_TKeKH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnl_FormThongKe.add(pnl_menuTab_ThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1090, 50));
+        pnl_FormThongKe.add(pnl_menuTab_ThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1090, 40));
 
-        pnl_tab_Form_TKedt.setBackground(new java.awt.Color(0, 153, 153));
+        jTabbedPane1.addTab("tab4", frmTongQuanBaoCao1);
+        jTabbedPane1.addTab("tab1", frmTkeDoanhThu1);
+        jTabbedPane1.addTab("tab2", frmTkeHangBanChay1);
+        jTabbedPane1.addTab("tab3", frmTkeKhachHang1);
 
-        javax.swing.GroupLayout pnl_tab_Form_TKedtLayout = new javax.swing.GroupLayout(pnl_tab_Form_TKedt);
-        pnl_tab_Form_TKedt.setLayout(pnl_tab_Form_TKedtLayout);
-        pnl_tab_Form_TKedtLayout.setHorizontalGroup(
-            pnl_tab_Form_TKedtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1300, Short.MAX_VALUE)
-        );
-        pnl_tab_Form_TKedtLayout.setVerticalGroup(
-            pnl_tab_Form_TKedtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
-        );
-
-        pnl_FormThongKe.add(pnl_tab_Form_TKedt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 1300, 720));
-
-        pnl_tab_FormTKeht.setBackground(new java.awt.Color(204, 204, 255));
-
-        javax.swing.GroupLayout pnl_tab_FormTKehtLayout = new javax.swing.GroupLayout(pnl_tab_FormTKeht);
-        pnl_tab_FormTKeht.setLayout(pnl_tab_FormTKehtLayout);
-        pnl_tab_FormTKehtLayout.setHorizontalGroup(
-            pnl_tab_FormTKehtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1300, Short.MAX_VALUE)
-        );
-        pnl_tab_FormTKehtLayout.setVerticalGroup(
-            pnl_tab_FormTKehtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
-        );
-
-        pnl_FormThongKe.add(pnl_tab_FormTKeht, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 1300, 720));
-
-        pnl_tab_FormTKhbc.setBackground(new java.awt.Color(153, 153, 0));
-
-        javax.swing.GroupLayout pnl_tab_FormTKhbcLayout = new javax.swing.GroupLayout(pnl_tab_FormTKhbc);
-        pnl_tab_FormTKhbc.setLayout(pnl_tab_FormTKhbcLayout);
-        pnl_tab_FormTKhbcLayout.setHorizontalGroup(
-            pnl_tab_FormTKhbcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1300, Short.MAX_VALUE)
-        );
-        pnl_tab_FormTKhbcLayout.setVerticalGroup(
-            pnl_tab_FormTKhbcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
-        );
-
-        pnl_FormThongKe.add(pnl_tab_FormTKhbc, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 1300, 720));
-
-        pnl_tab_FormTKkh.setBackground(new java.awt.Color(153, 0, 51));
-
-        javax.swing.GroupLayout pnl_tab_FormTKkhLayout = new javax.swing.GroupLayout(pnl_tab_FormTKkh);
-        pnl_tab_FormTKkh.setLayout(pnl_tab_FormTKkhLayout);
-        pnl_tab_FormTKkhLayout.setHorizontalGroup(
-            pnl_tab_FormTKkhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1300, Short.MAX_VALUE)
-        );
-        pnl_tab_FormTKkhLayout.setVerticalGroup(
-            pnl_tab_FormTKkhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
-        );
-
-        pnl_FormThongKe.add(pnl_tab_FormTKkh, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 1300, 720));
+        pnl_FormThongKe.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 35, 1090, 660));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1300, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(pnl_FormThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnl_FormThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(pnl_FormThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(pnl_FormThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_tab_TKeDTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tab_TKeDTMouseClicked
         // TODO add your handling code here:
-        pnl_tab_Form_TKedt.setVisible(true);
-        pnl_tab_FormTKeht.setVisible(false);
-        pnl_tab_FormTKhbc.setVisible(false);
-        pnl_tab_FormTKkh.setVisible(false);
+        jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_btn_tab_TKeDTMouseClicked
 
     private void btn_tab_TKeDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tab_TKeDTActionPerformed
@@ -290,42 +235,37 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
 
     }//GEN-LAST:event_btn_tab_TKeDTActionPerformed
 
-    private void btn_tab_TKeHTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tab_TKeHTMouseClicked
-        // TODO add your handling code here:
-        pnl_tab_Form_TKedt.setVisible(false);
-        pnl_tab_FormTKeht.setVisible(true);
-        pnl_tab_FormTKhbc.setVisible(false);
-        pnl_tab_FormTKkh.setVisible(false);
-    }//GEN-LAST:event_btn_tab_TKeHTMouseClicked
-
     private void btn_tab_TKeHBCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tab_TKeHBCMouseClicked
         // TODO add your handling code here:
-        pnl_tab_Form_TKedt.setVisible(false);
-        pnl_tab_FormTKeht.setVisible(false);
-        pnl_tab_FormTKhbc.setVisible(true);
-        pnl_tab_FormTKkh.setVisible(false);
+         jTabbedPane1.setSelectedIndex(2);
     }//GEN-LAST:event_btn_tab_TKeHBCMouseClicked
 
     private void btn_tab_TKeKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tab_TKeKHMouseClicked
         // TODO add your handling code here:
-        pnl_tab_Form_TKedt.setVisible(false);
-        pnl_tab_FormTKeht.setVisible(false);
-        pnl_tab_FormTKhbc.setVisible(false);
-        pnl_tab_FormTKkh.setVisible(true);
+        jTabbedPane1.setSelectedIndex(3);
     }//GEN-LAST:event_btn_tab_TKeKHMouseClicked
+
+    private void btn_tab_TQTKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tab_TQTKMouseClicked
+        jTabbedPane1.setSelectedIndex(0);
+    }//GEN-LAST:event_btn_tab_TQTKMouseClicked
+
+    private void btn_tab_TQTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tab_TQTKActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_tab_TQTKActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_tab_TKeDT;
     private javax.swing.JButton btn_tab_TKeHBC;
-    private javax.swing.JButton btn_tab_TKeHT;
     private javax.swing.JButton btn_tab_TKeKH;
+    private javax.swing.JButton btn_tab_TQTK;
+    private Gui.FrmTkeDoanhThu frmTkeDoanhThu1;
+    private Gui.FrmTkeHangBanChay frmTkeHangBanChay1;
+    private Gui.FrmTkeKhachHang frmTkeKhachHang1;
+    private Gui.FrmTongQuanBaoCao frmTongQuanBaoCao1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbl_text_ThongKe;
     private javax.swing.JPanel pnl_FormThongKe;
     private javax.swing.JPanel pnl_menuTab_ThongKe;
-    private javax.swing.JPanel pnl_tab_FormTKeht;
-    private javax.swing.JPanel pnl_tab_FormTKhbc;
-    private javax.swing.JPanel pnl_tab_FormTKkh;
-    private javax.swing.JPanel pnl_tab_Form_TKedt;
     // End of variables declaration//GEN-END:variables
 }
