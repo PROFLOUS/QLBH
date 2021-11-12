@@ -111,4 +111,40 @@ public class NhanVienDao {
             }
                return nv;
     } 
+     
+     //tìm nhân viên biết mã, tên ,sdt 
+    public java.util.List<NhanVien>SearchMaOrTenOrSdt(String text){
+            java.util.List<NhanVien> list = new ArrayList<>();
+            try {
+                java.sql.Connection con = connect.getInstance().getConnection();
+                PreparedStatement stmt = con.prepareStatement("select * from NhanVien where [MaNV]='"+text+"' or [SDT] like N'%"+text+"%' or  [TenNV] like N'%"+text+"%'" );
+                ResultSet rs = stmt.executeQuery();
+                while(rs.next()) {
+                ChucVuDao cv_dao = new ChucVuDao();
+                ChucVu cv = cv_dao.getCVByMaCV(rs.getString(8));
+                NhanVien nv = new NhanVien(rs.getString(1), rs.getString(2),
+                        rs.getString(3), rs.getString(5),
+                        rs.getDate(4), rs.getDate(6), cv);
+           
+                list.add(nv);
+            }
+            } catch (Exception e) {
+            }
+            
+            return list;
+        }
+    
+    //xóa nhan vien khi biét mã
+    public boolean xoaNV(String maNV) {
+        int n = 0;
+        try {
+            java.sql.Connection con = connect.getInstance().getConnection();
+            String sql = "delete from NhanVien where MaNV = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, maNV);
+            n = ps.executeUpdate();
+        } catch (Exception e) {
+        }
+        return n > 0;
+    }
 }

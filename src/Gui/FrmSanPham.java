@@ -243,10 +243,11 @@ public class FrmSanPham extends javax.swing.JPanel {
 //    }
     
     public void addBorder() {
-        buttons = new JButton[2];
+        buttons = new JButton[3];
         //Form san pham
         buttons[0] = btn_tab_SanPham1;
         buttons[1] = btn_tab_DMSanPham1;
+        buttons[2] = btn_tab_NhapHang;
         
         setButtonBorder(btn_tab_SanPham1);
         addAction();
@@ -304,6 +305,7 @@ public class FrmSanPham extends javax.swing.JPanel {
         pnl_menuTab_SanPham1 = new javax.swing.JPanel();
         btn_tab_SanPham1 = new javax.swing.JButton();
         btn_tab_DMSanPham1 = new javax.swing.JButton();
+        btn_tab_NhapHang = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         try {
             frmDsSp1 = new Gui.FrmDsSp();
@@ -311,6 +313,7 @@ public class FrmSanPham extends javax.swing.JPanel {
             e1.printStackTrace();
         }
         frmDmSp1 = new Gui.FrmDmSp();
+        frmNhapHang1 = new Gui.FrmNhapHang();
 
         setPreferredSize(new java.awt.Dimension(1090, 700));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -360,6 +363,23 @@ public class FrmSanPham extends javax.swing.JPanel {
             }
         });
 
+        btn_tab_NhapHang.setBackground(new java.awt.Color(255, 255, 255));
+        btn_tab_NhapHang.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btn_tab_NhapHang.setForeground(new java.awt.Color(153, 153, 153));
+        btn_tab_NhapHang.setText("Nhập Hàng");
+        btn_tab_NhapHang.setBorder(null);
+        btn_tab_NhapHang.setContentAreaFilled(false);
+        btn_tab_NhapHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_tab_NhapHangMouseClicked(evt);
+            }
+        });
+        btn_tab_NhapHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tab_NhapHangActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_menuTab_SanPham1Layout = new javax.swing.GroupLayout(pnl_menuTab_SanPham1);
         pnl_menuTab_SanPham1.setLayout(pnl_menuTab_SanPham1Layout);
         pnl_menuTab_SanPham1Layout.setHorizontalGroup(
@@ -367,16 +387,19 @@ public class FrmSanPham extends javax.swing.JPanel {
             .addGroup(pnl_menuTab_SanPham1Layout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(btn_tab_SanPham1)
-                .addGap(44, 44, 44)
+                .addGap(59, 59, 59)
                 .addComponent(btn_tab_DMSanPham1)
-                .addContainerGap(771, Short.MAX_VALUE))
+                .addGap(64, 64, 64)
+                .addComponent(btn_tab_NhapHang)
+                .addContainerGap(612, Short.MAX_VALUE))
         );
         pnl_menuTab_SanPham1Layout.setVerticalGroup(
             pnl_menuTab_SanPham1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_menuTab_SanPham1Layout.createSequentialGroup()
-                .addGroup(pnl_menuTab_SanPham1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_tab_SanPham1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                    .addComponent(btn_tab_DMSanPham1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnl_menuTab_SanPham1Layout.createSequentialGroup()
+                .addGroup(pnl_menuTab_SanPham1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_tab_SanPham1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(btn_tab_NhapHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_tab_DMSanPham1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -386,6 +409,7 @@ public class FrmSanPham extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("tab1", frmDsSp1);
         jTabbedPane1.addTab("tab2", frmDmSp1);
+        jTabbedPane1.addTab("tab3", frmNhapHang1);
 
         add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -50, 1090, 830));
     }// </editor-fold>//GEN-END:initComponents
@@ -406,12 +430,22 @@ public class FrmSanPham extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_tab_DMSanPham1ActionPerformed
 
+    private void btn_tab_NhapHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tab_NhapHangMouseClicked
+        jTabbedPane1.setSelectedIndex(2);
+    }//GEN-LAST:event_btn_tab_NhapHangMouseClicked
+
+    private void btn_tab_NhapHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tab_NhapHangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_tab_NhapHangActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_tab_DMSanPham1;
+    private javax.swing.JButton btn_tab_NhapHang;
     private javax.swing.JButton btn_tab_SanPham1;
     private Gui.FrmDmSp frmDmSp1;
     private Gui.FrmDsSp frmDsSp1;
+    private Gui.FrmNhapHang frmNhapHang1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbl_text_SanPham1;
     private javax.swing.JPanel pnl_Tab;

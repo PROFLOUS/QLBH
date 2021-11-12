@@ -130,7 +130,7 @@ public class FrmDsSp extends javax.swing.JPanel {
         txt_Size.setText("");
         txt_MauSac.setText("");
         lbl_GetSp.setText("");
-        lbl_HinhAnh.setIcon(null);
+        lbl_HinhAnh.setIcon( new ImageIcon("D:\\code\\DeTai_NB\\PTUD_QLBH-main - Copy\\PTUD_QLBH-main\\src\\imgVSicon\\image.png"));
         txt_TenSp.requestFocus();
     }
     
@@ -357,6 +357,8 @@ public class FrmDsSp extends javax.swing.JPanel {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         lbl_HinhAnh.setBackground(new java.awt.Color(255, 255, 255));
+        lbl_HinhAnh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_HinhAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/image.png"))); // NOI18N
         lbl_HinhAnh.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(102, 153, 255)));
 
         btn_SuaAnh.setBackground(new java.awt.Color(21, 151, 229));

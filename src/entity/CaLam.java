@@ -4,7 +4,8 @@
  */
 package entity;
 
-import java.util.Date;
+
+import java.sql.Date;
 import java.util.Objects;
 
 /**
@@ -22,6 +23,7 @@ public class CaLam {
     private String maCa;
     private NhanVien NV;
     private String buoi;
+    private Date ngayLam;
 
     public CaLam() {
     }
@@ -32,39 +34,54 @@ public class CaLam {
         this.buoi = buoi;
     }
 
-    public String getMaCa() {
-        return maCa;
+    public CaLam(String maCa, NhanVien NV, String buoi, Date ngayLam) {
+        this.maCa = maCa;
+        this.NV = NV;
+        this.buoi = buoi;
+        this.ngayLam = ngayLam;
     }
 
-    public void setMaCa(String maCa) {
-        this.maCa = maCa;
+    public String getMaCa() {
+        return maCa;
     }
 
     public NhanVien getNV() {
         return NV;
     }
 
-    public void setNV(NhanVien NV) {
-        this.NV = NV;
-    }
-
     public String getBuoi() {
         return buoi;
+    }
+
+    public Date getNgayLam() {
+        return ngayLam;
+    }
+
+    public void setMaCa(String maCa) {
+        this.maCa = maCa;
+    }
+
+    public void setNV(NhanVien NV) {
+        this.NV = NV;
     }
 
     public void setBuoi(String buoi) {
         this.buoi = buoi;
     }
 
+    public void setNgayLam(Date ngayLam) {
+        this.ngayLam = ngayLam;
+    }
+
     @Override
     public String toString() {
-        return "CaLam{" + "maCa=" + maCa + ", NV=" + NV + ", buoi=" + buoi + '}';
+        return "CaLam{" + "maCa=" + maCa + ", NV=" + NV + ", buoi=" + buoi + ", ngayLam=" + ngayLam + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.maCa);
+        hash = 97 * hash + Objects.hashCode(this.maCa);
         return hash;
     }
 
@@ -85,6 +102,8 @@ public class CaLam {
         }
         return true;
     }
+
+    
 
     
 

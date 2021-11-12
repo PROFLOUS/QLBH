@@ -5,6 +5,7 @@
  */
 package Gui;
 
+import com.toedter.calendar.JTextFieldDateEditor;
 import dao.CaLamDao;
 import dao.ChucVuDao;
 import dao.LuongDao;
@@ -13,6 +14,9 @@ import entity.CaLam;
 import entity.ChucVu;
 import entity.Luong;
 import entity.NhanVien;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -22,16 +26,19 @@ import javax.swing.table.DefaultTableModel;
  * @author HP
  */
 public class FrmCaLam extends javax.swing.JPanel {
-private DefaultTableModel dfCL_Model;
-private DefaultTableModel dfNV2_Model;
- ArrayList<CaLam> dsCa;
-   ArrayList<NhanVien> dsNv;
+
+    private DefaultTableModel dfCL_Model;
+    private DefaultTableModel dfNV2_Model;
+    ArrayList<CaLam> dsCa;
+    ArrayList<NhanVien> dsNv;
     ArrayList<Luong> dsLuong;
     ArrayList<ChucVu> dsCv;
     CaLamDao ca_dao;
     NhanVienDao nv_dao;
     LuongDao l_dao;
     ChucVuDao cv_dao;
+    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
     public FrmCaLam() {
         initComponents();
         dsCa = new ArrayList<CaLam>();
@@ -45,46 +52,66 @@ private DefaultTableModel dfNV2_Model;
         upTblCaLam();
         upTblNV2();
         upCbo_NV();
-        
-        
+        Date date = new Date();
+        jDateChooser1.setDate(date);
+
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) jDateChooser1.getDateEditor();
+        editor.setEditable(false);
+
     }
+
+    //kiem tra ngày làm
+    public boolean kiemTraDate() {
+        Date dateTime = jDateChooser1.getDate();
+        Date date = new Date();
+        if (!(dateTime.getTime() > date.getTime())) {
+            JOptionPane.showMessageDialog(this, "Ngày vào làm phải sau hoặc bằng ngày hiện tại!");
+            return false;
+        }
+        return true;
+    }
+
     //dọc dữ liêu lên cbo nhân vien
-    public  void upCbo_NV(){
+    public void upCbo_NV() {
 //        dsNv = nv_dao.getAllNV();
         for (NhanVien nv : dsNv) {
             cbo_MaNv.addItem(nv.getMaNV());
         }
     }
-    
-        //đọc dữ liệu lên bảg nhân viên 2
-    public void upTblNV2(){
+
+    //đọc dữ liệu lên bảg nhân viên 2
+    public void upTblNV2() {
         dfNV2_Model = (DefaultTableModel) tbl_NV_2.getModel();
         dsNv = nv_dao.getAllNV();
-        for (NhanVien nv : dsNv){
+        for (NhanVien nv : dsNv) {
             dfNV2_Model.addRow(new Object[]{
-                nv.getMaNV(),nv.getTenNV(),nv.getChucVu().getTenCV()
+                nv.getMaNV(), nv.getTenNV(), nv.getChucVu().getTenCV()
             });
         }
     }
 
     //xoá rổng textfield ca làm
-    public void xoaRongTextCa(){
+    public void xoaRongTextCa() {
         txt_MaCa.setText("");
-        
+
     }
-    public CaLam restText(){
+
+    public CaLam restText() {
+
         String maCa = txt_MaCa.getText().toString();
         String maNv = cbo_MaNv.getSelectedItem().toString();
         String buoi = cbo_Buoi.getSelectedItem().toString();
         NhanVien nv = nv_dao.getNVByMaNV(maNv);
-        
-        return new CaLam(maCa, nv, buoi);
+        String dateTime = (String) formatter.format(jDateChooser1.getDate());
+        System.out.println(dateTime);
+        return new CaLam(maCa, nv, buoi, java.sql.Date.valueOf(dateTime));
     }
-    
-    public void xoaModelCa(){
+
+    public void xoaModelCa() {
         DefaultTableModel del = (DefaultTableModel) tbl_CaLam.getModel();
         del.getDataVector().removeAllElements();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -107,6 +134,8 @@ private DefaultTableModel dfNV2_Model;
         cbo_MaNv = new javax.swing.JComboBox<>();
         lbl_DanhMuc = new javax.swing.JLabel();
         cbo_Buoi = new javax.swing.JComboBox<>();
+        lbl_MauSac2 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         pnl_tab_FormCaLam.setBackground(new java.awt.Color(243, 244, 237));
 
@@ -116,11 +145,11 @@ private DefaultTableModel dfNV2_Model;
 
             },
             new String [] {
-                "Mã Ca Làm", "Mã Nhân Viên", "Tên Nhân Viên", "Buổi"
+                "Mã Ca Làm", "Mã Nhân Viên", "Tên Nhân Viên", "Buổi", "Ngày Làm"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -203,7 +232,7 @@ private DefaultTableModel dfNV2_Model;
         });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/refresh (3).png"))); // NOI18N
-        jButton1.setToolTipText("Cập nhật lại danh mục");
+        jButton1.setToolTipText("Tải lại danh sách ");
         jButton1.setBorder(null);
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -298,12 +327,18 @@ private DefaultTableModel dfNV2_Model;
         cbo_Buoi.setForeground(new java.awt.Color(0, 0, 0));
         cbo_Buoi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sáng", "Chiều", "Tối" }));
 
+        lbl_MauSac2.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        lbl_MauSac2.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_MauSac2.setText("Ngày Làm:");
+
+        jDateChooser1.setDateFormatString("dd-MM-yyyy");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap(69, Short.MAX_VALUE)
+                .addGap(81, 81, 81)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(lbl_DanhMuc)
@@ -313,10 +348,14 @@ private DefaultTableModel dfNV2_Model;
                         .addComponent(lbl_MaCa)
                         .addGap(56, 56, 56)
                         .addComponent(txt_MaCa, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(52, 52, 52)
-                .addComponent(lbl_MauSac1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_MauSac1)
+                    .addComponent(lbl_MauSac2))
                 .addGap(34, 34, 34)
-                .addComponent(cbo_MaNv, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                    .addComponent(cbo_MaNv, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(81, 81, 81))
         );
         jPanel6Layout.setVerticalGroup(
@@ -324,36 +363,44 @@ private DefaultTableModel dfNV2_Model;
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_MaCa, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txt_MaCa, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbl_MauSac1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbo_MaNv, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(lbl_DanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cbo_Buoi, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19))
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_MaCa, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_MaCa, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(lbl_DanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbo_Buoi, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_MauSac1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbo_MaNv, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(0, 2, Short.MAX_VALUE)
+                                .addComponent(lbl_MauSac2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(19, 19, 19))))
         );
 
         javax.swing.GroupLayout pnl_tab_FormCaLamLayout = new javax.swing.GroupLayout(pnl_tab_FormCaLam);
         pnl_tab_FormCaLam.setLayout(pnl_tab_FormCaLamLayout);
         pnl_tab_FormCaLamLayout.setHorizontalGroup(
             pnl_tab_FormCaLamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_tab_FormCaLamLayout.createSequentialGroup()
+            .addGroup(pnl_tab_FormCaLamLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_tab_FormCaLamLayout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
-                .addGroup(pnl_tab_FormCaLamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGroup(pnl_tab_FormCaLamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_tab_FormCaLamLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         pnl_tab_FormCaLamLayout.setVerticalGroup(
             pnl_tab_FormCaLamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,7 +429,7 @@ private DefaultTableModel dfNV2_Model;
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
+            .addGap(0, 621, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -397,6 +444,7 @@ private DefaultTableModel dfNV2_Model;
         txt_MaCa.setText(dfCL_Model.getValueAt(r, 0).toString());
         cbo_MaNv.setSelectedItem(dfCL_Model.getValueAt(r, 1).toString());
         cbo_Buoi.setSelectedItem(dfCL_Model.getValueAt(r, 3));
+        jDateChooser1.setDate(java.sql.Date.valueOf(dfCL_Model.getValueAt(r, 4).toString()));
 
     }//GEN-LAST:event_tbl_CaLamMouseClicked
 
@@ -405,32 +453,34 @@ private DefaultTableModel dfNV2_Model;
         //        btn_SuaAnh.setEnabled(true);
     }//GEN-LAST:event_btn_ThemCaMouseClicked
     //đọc dữ liệu lên bảng ca làm
-    public void upTblCaLam(){
+    public void upTblCaLam() {
         dfCL_Model = (DefaultTableModel) tbl_CaLam.getModel();
         dsCa = ca_dao.getAllCaLam();
         for (CaLam ca : dsCa) {
             dfCL_Model.addRow(new Object[]{
-                ca.getMaCa(),ca.getNV().getMaNV(),ca.getNV().getTenNV(),ca.getBuoi()
+                ca.getMaCa(), ca.getNV().getMaNV(), ca.getNV().getTenNV(), ca.getBuoi(), ca.getNgayLam()
             });
         }
-        
+
     }
     private void btn_LuuCaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_LuuCaMouseClicked
-        CaLam ca = restText();
-        if(ca_dao.themCa(ca)){
-            dfCL_Model.addRow(new Object[]{
-                ca.getMaCa(),ca.getNV().getMaNV(),ca.getNV().getTenNV(),ca.getBuoi()
-            });
-            
-            dsCa.removeAll(dsCa);
-            xoaRongTextCa();
-            xoaModelCa();
-            upTblCaLam();
+        if (kiemTraDate()) {
+            CaLam ca = restText();
+            if (ca_dao.themCa(ca)) {
+                dfCL_Model.addRow(new Object[]{
+                    ca.getMaCa(), ca.getNV().getMaNV(), ca.getNV().getTenNV(), ca.getBuoi(), ca.getNgayLam()
+                });
+
+                dsCa.removeAll(dsCa);
+                xoaRongTextCa();
+                xoaModelCa();
+                upTblCaLam();
 //            xoaModelLuong();
 //            upTblLuong();
-            JOptionPane.showMessageDialog(null, "Thêm thành công");
-        }else{
-            JOptionPane.showMessageDialog(null, " đã có vui lòng nhập lại ");
+                JOptionPane.showMessageDialog(null, "Thêm thành công");
+            } else {
+                JOptionPane.showMessageDialog(null, " đã có vui lòng nhập lại ");
+            }
         }
 
     }//GEN-LAST:event_btn_LuuCaMouseClicked
@@ -443,40 +493,40 @@ private DefaultTableModel dfNV2_Model;
         //        int r = tbl_Sp.getSelectedRow();
         //        btn_SuaAnh.setEnabled(true);
         //        if (r != -1) {
-            //            btn_SuaAnh.setVisible(true);
-            //            String maSP = dfSP_Model.getValueAt(r, 0).toString();
-            //            System.out.println(maSP);
-            //            String tenSP = txt_TenSp.getText().trim();
-            //            String tenDm = cbo_Dm.getSelectedItem().toString();
-            //            String mau = txt_MauSac.getText().trim();
-            //            String hinh = lbl_HinhAnh.getIcon().toString();
-            //            //System.out.println(hinh);
-            //            String size = txt_Size.getText().trim();
-            //            int sl = Integer.parseInt(txt_SlKho.getText().trim());
-            //            double dg = Double.parseDouble(txt_DonGia.getText().trim());
-            //            DanhMucSP dm = dm_dao.getDMByTen(tenDm);
-            //            SanPham sp = new SanPham(dm, maSP, tenSP, dg, sl, hinh, size, mau);
-            //            //System.out.println(sp.toString());
-            //            if (sp_dao.updateSP(maSP, sp)) {
-                //                xoaRongTextSp();
-                //                dfSP_Model.setRowCount(0);
-                //                dsSP = sp_dao.getAllSP();
-                //                for (SanPham it : dsSP) {
-                    //                    dfSP_Model.addRow(new Object[]{
-                        //                        it.getMaSP(), it.getTenSP(), it.getDmsp().getTenLoai(),
-                        //                        it.getMauSac(), it.getSize(), it.getSoLuong(),
-                        //                        it.getDonGia(), it.getHinhAnh()
-                        //                    });
-                //                }
-            //                dsSP.removeAll(dsSP);
-            //                xoaRongTextSp();
-            //                xoaModelSP();
-            //                upTblSP();
-            //                xoaModelTksp();
-            //                upTblTkSP();
-            //                upCbo_DM();
-            //                JOptionPane.showMessageDialog(this, "Cập nhật danh sách thành công");
-            //            }
+        //            btn_SuaAnh.setVisible(true);
+        //            String maSP = dfSP_Model.getValueAt(r, 0).toString();
+        //            System.out.println(maSP);
+        //            String tenSP = txt_TenSp.getText().trim();
+        //            String tenDm = cbo_Dm.getSelectedItem().toString();
+        //            String mau = txt_MauSac.getText().trim();
+        //            String hinh = lbl_HinhAnh.getIcon().toString();
+        //            //System.out.println(hinh);
+        //            String size = txt_Size.getText().trim();
+        //            int sl = Integer.parseInt(txt_SlKho.getText().trim());
+        //            double dg = Double.parseDouble(txt_DonGia.getText().trim());
+        //            DanhMucSP dm = dm_dao.getDMByTen(tenDm);
+        //            SanPham sp = new SanPham(dm, maSP, tenSP, dg, sl, hinh, size, mau);
+        //            //System.out.println(sp.toString());
+        //            if (sp_dao.updateSP(maSP, sp)) {
+        //                xoaRongTextSp();
+        //                dfSP_Model.setRowCount(0);
+        //                dsSP = sp_dao.getAllSP();
+        //                for (SanPham it : dsSP) {
+        //                    dfSP_Model.addRow(new Object[]{
+        //                        it.getMaSP(), it.getTenSP(), it.getDmsp().getTenLoai(),
+        //                        it.getMauSac(), it.getSize(), it.getSoLuong(),
+        //                        it.getDonGia(), it.getHinhAnh()
+        //                    });
+        //                }
+        //                dsSP.removeAll(dsSP);
+        //                xoaRongTextSp();
+        //                xoaModelSP();
+        //                upTblSP();
+        //                xoaModelTksp();
+        //                upTblTkSP();
+        //                upCbo_DM();
+        //                JOptionPane.showMessageDialog(this, "Cập nhật danh sách thành công");
+        //            }
         //
         //        } else {
         //            JOptionPane.showMessageDialog(null, "Bạn chưa chọn dòng nào!");
@@ -526,6 +576,7 @@ private DefaultTableModel dfNV2_Model;
     private javax.swing.JComboBox<String> cbo_Buoi;
     private javax.swing.JComboBox<String> cbo_MaNv;
     private javax.swing.JButton jButton1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
@@ -533,6 +584,7 @@ private DefaultTableModel dfNV2_Model;
     private javax.swing.JLabel lbl_DanhMuc;
     private javax.swing.JLabel lbl_MaCa;
     private javax.swing.JLabel lbl_MauSac1;
+    private javax.swing.JLabel lbl_MauSac2;
     private javax.swing.JPanel pnl_tab_FormCaLam;
     private javax.swing.JTable tbl_CaLam;
     private javax.swing.JTable tbl_NV_2;

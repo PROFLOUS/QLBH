@@ -141,8 +141,6 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblDiaChi1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtDiaChiNV" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                                  <Component id="lblDiaChi4" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cbo_CV" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="dt_NgaySinh" max="32767" attributes="0"/>
@@ -152,6 +150,10 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                       <Component id="lblDiaChi3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lblDiaChi4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbo_CV" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -187,7 +189,7 @@
             <Component class="javax.swing.JTextField" name="txtTenNV">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="a9" green="c2" red="ad" type="rgb"/>
+                  <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nh&#x1ead;p T&#xea;n...."/>
               </Properties>
@@ -204,7 +206,7 @@
             <Component class="javax.swing.JTextField" name="txtDiaChiNV">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="a9" green="c2" red="ad" type="rgb"/>
+                  <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nh&#x1ead;p &#x111;&#x1ecb;a ch&#x1ec9;..."/>
               </Properties>
@@ -220,7 +222,7 @@
             <Component class="javax.swing.JTextField" name="txtMaNV">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="a9" green="c2" red="ad" type="rgb"/>
+                  <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="M&#xe3; Nh&#xe2;n Vi&#xea;n"/>
               </Properties>
@@ -237,7 +239,7 @@
             <Component class="javax.swing.JTextField" name="txtSDTNV">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="a9" green="c2" red="ad" type="rgb"/>
+                  <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nh&#x1ead;p s&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i..."/>
               </Properties>
@@ -252,8 +254,14 @@
               </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="dt_NgaySinh">
+              <Properties>
+                <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
+              </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="dt_NgVaoLam">
+              <Properties>
+                <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblDiaChi3">
               <Properties>
@@ -366,7 +374,7 @@
             <Component class="javax.swing.JTextField" name="txtSearch1">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="a9" green="c2" red="ad" type="rgb"/>
+                  <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nh&#x1ead;p m&#xe3;, t&#xea;n, s&#x111;t...."/>
               </Properties>
@@ -391,7 +399,6 @@
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnTimKiem1MouseClicked"/>
@@ -455,7 +462,6 @@
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnShow1MouseClicked"/>
@@ -476,7 +482,6 @@
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnLuu1MouseClicked"/>

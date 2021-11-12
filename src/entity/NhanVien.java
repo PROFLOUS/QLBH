@@ -57,6 +57,15 @@ public class NhanVien {
         this.ngayVaoLam = ngayVaoLam;
         this.tinhTrang = tinhTrang;
     }
+    public NhanVien(String maNV, String tenNV, String sdt, String diaChi, Date ngaySinh, Date ngayVaoLam, ChucVu chucVu) {
+        this.maNV = maNV;
+        this.tenNV = tenNV;
+        this.sdt = sdt;
+        this.diaChi = diaChi;
+        this.ngaySinh = ngaySinh;
+        this.ngayVaoLam = ngayVaoLam;
+        this.chucVu = chucVu;
+    }
     
 
     public String getMaNV() {
