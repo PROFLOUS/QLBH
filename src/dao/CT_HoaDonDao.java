@@ -8,7 +8,9 @@ import Connect.connect;
 import entity.CT_HDBanHang;
 import entity.HoaDonBanHang;
 import entity.SanPham;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
@@ -68,6 +70,26 @@ public class CT_HoaDonDao {
         return listCTHD;
     }
 	
-
+  //them 1 CT_HoaDon vao database
+	public boolean createCTHoaDonBH(CT_HDBanHang ct) {
+            java.sql.Connection con = connect.getInstance().getConnection();
+			
+            PreparedStatement stmt = null;
+            int n = 0;
+            try {
+		stmt = con.prepareStatement("Insert Into CT_HoaDonBanHang values(?,?,?,?)");
+		stmt.setInt(1, ct.getSoLuong());
+		
+                stmt.setDouble(2, ct.getDonGia());
+              
+                stmt.setString(3, ct.getHoaDon().getMaHD());
+                stmt.setString(4,ct.getSanPham().getMaSP());
+                 n = stmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+				
+                    return n > 0;
+		}
 
 }

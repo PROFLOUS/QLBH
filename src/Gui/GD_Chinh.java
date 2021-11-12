@@ -34,6 +34,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.UIManager;
@@ -679,6 +680,12 @@ public class GD_Chinh extends javax.swing.JFrame {
     }//GEN-LAST:event_pnl_button_HeThongMouseClicked
 
     private void pnl_button_HoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_button_HoaDonMouseClicked
+         try {
+          //   frmHoaDon1 = new FrmHoaDon();
+             frmHoaDon1.renderListHoaDon();
+        } catch (Exception e) {
+             JOptionPane.showMessageDialog(rootPane, "ERRO");
+        }
 
         // TODO add your handling code here:
 //        pnl_FormTongQuan.setVisible(false);

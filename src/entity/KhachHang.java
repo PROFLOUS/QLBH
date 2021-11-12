@@ -12,8 +12,16 @@ public class KhachHang {
     private String maKH;
     private String tenKH;
     private String sdt;
+    private String diaChi;
 
     public KhachHang() {
+    }
+
+    public KhachHang(String maKH, String tenKH, String sdt, String diaChi) {
+        this.maKH = maKH;
+        this.tenKH = tenKH;
+        this.sdt = sdt;
+        this.diaChi = diaChi;
     }
 
     public KhachHang(String maKH, String tenKH, String sdt) {
@@ -21,6 +29,8 @@ public class KhachHang {
         this.tenKH = tenKH;
         this.sdt = sdt;
     }
+
+   
 
     public String getMaKH() {
         return maKH;
@@ -44,6 +54,19 @@ public class KhachHang {
 
     public void setSdt(String sdt) {
         this.sdt = sdt;
+    }
+
+    public String getDiaChi() {
+        return diaChi;
+    }
+
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
+    }
+
+    @Override
+    public String toString() {
+        return "KhachHang{" + "maKH=" + maKH + ", tenKH=" + tenKH + ", sdt=" + sdt + '}';
     }
     
     

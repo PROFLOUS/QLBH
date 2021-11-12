@@ -30,6 +30,7 @@ public class NhanVien {
     private Date ngaySinh;
     private Date ngayVaoLam;
     private String tinhTrang;
+    private String trangThai;
     
     private ChucVu chucVu;
 
@@ -120,6 +121,14 @@ public class NhanVien {
 
     public void setChucVu(ChucVu chucVu) {
         this.chucVu = chucVu;
+    }
+
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
     }
 
     @Override

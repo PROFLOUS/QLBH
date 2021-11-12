@@ -24,15 +24,16 @@ import javax.swing.table.DefaultTableModel;
  * @author GMT
  */
 public class FrmHoaDon extends javax.swing.JPanel{
-    ArrayList<HoaDonBanHang> listHoaDon = new ArrayList<HoaDonBanHang>();
+   // ArrayList<HoaDonBanHang> listHoaDon = new ArrayList<HoaDonBanHang>();
        private javax.swing.table.DefaultTableModel modelTBHoaDon;
     /**
      * Creates new form FrmHoaDon
      */
     public FrmHoaDon() throws SQLException {
         initComponents();
+        
         try {
-             connect.getInstance().connect();
+            connect.getInstance().connect();
         
             renderListHoaDon();
         } catch (Exception e) {
@@ -43,22 +44,27 @@ public class FrmHoaDon extends javax.swing.JPanel{
         Hoa Don
     */
     //dua du lieu HoaDon len Table
-	private void renderListHoaDon() {
+	public void renderListHoaDon() {
 		 HoaDonDao hoaDonDao = new HoaDonDao();
                  String[] title = { "MaHD", "Ngày Tạo", "Khách Hàng", "Số lượng", "Tổng Tiền", "Tiền Khách Đưa", "Nhân Viên", "Ghi Chú"};
-		 listHoaDon  = hoaDonDao.getDsHoaDon();
-                modelTBHoaDon = new DefaultTableModel(title,0);
+		 ArrayList<HoaDonBanHang> listHoaDon  = hoaDonDao.getDsHoaDon();
+                System.out.print(listHoaDon.size());
+                 modelTBHoaDon = new DefaultTableModel(title,0);
+                int i = 0;
 		for(HoaDonBanHang s : listHoaDon) {
+                   //  System.out.print(i++);
 			String[] rowData = {
 				s.getMaHD(),changeDateToString(s.getNgayLapHD()),s.getKhachHang().getTenKH(),String.valueOf(s.getSoLuong()),String.valueOf(s.getTongTien()),
                             String.valueOf(s.getTienKhachDua()),s.getNhanVien().getTenNV(),s.getGhiChu()
 			};
                        
 			modelTBHoaDon.addRow(rowData);
+                        
 		}
                
 		tbHoaDon.setModel(modelTBHoaDon);
                 lblNumHD.setText(String.valueOf(listHoaDon.size()));
+                System.out.print("render");
 	}
          /*
             Chuyen tu date sang String
@@ -244,8 +250,8 @@ public class FrmHoaDon extends javax.swing.JPanel{
                 .addGap(27, 27, 27)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -262,7 +268,10 @@ public class FrmHoaDon extends javax.swing.JPanel{
     private void btnSearchHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchHDMouseClicked
        String text = txtSearchHD.getText();
         AtomicBoolean check = new AtomicBoolean();
-       
+       	 HoaDonDao hoaDonDao = new HoaDonDao();
+               
+		 ArrayList<HoaDonBanHang> listHoaDon  = hoaDonDao.getDsHoaDon();
+               
         listHoaDon.forEach(s ->{
             if(s.getMaHD().toUpperCase().equals(text.toUpperCase())){
                 check.set(true);

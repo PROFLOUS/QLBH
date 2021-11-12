@@ -83,6 +83,7 @@ public class FrmCT_HoaDon extends javax.swing.JFrame {
     public void renderInfoHD(){
         HoaDonDao hoaDonDao = new HoaDonDao();
         HoaDonBanHang hd =  hoaDonDao.findHDByMaHD(maHD);
+        //System.out.print(hd.toString());
         lbHoaDon.setText(hd.getMaHD());
         lbGhiChu.setText(hd.getGhiChu());
         lbNV.setText(hd.getNhanVien().getTenNV());
@@ -93,7 +94,7 @@ public class FrmCT_HoaDon extends javax.swing.JFrame {
         lbTienKhachDua.setText(String.valueOf(hd.getTienKhachDua()));
         lbTongTien.setText(String.valueOf(hd.getTongTien()));
         lbSoLuong.setText(String.valueOf(hd.getSoLuong()));
-        
+        lbGiamGia.setText(String.valueOf(hd.getTienKhuyenMai()));
     }
     
     //lấy ra tên đệm và tên
@@ -568,12 +569,12 @@ public class FrmCT_HoaDon extends javax.swing.JFrame {
             .addGroup(jpParentLayout.createSequentialGroup()
                 .addGap(285, 285, 285)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(308, Short.MAX_VALUE))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
         jpParentLayout.setVerticalGroup(
             jpParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpParentLayout.createSequentialGroup()
-                .addContainerGap(120, Short.MAX_VALUE)
+                .addContainerGap(113, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(85, 85, 85))
         );
@@ -582,11 +583,11 @@ public class FrmCT_HoaDon extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpParent, javax.swing.GroupLayout.DEFAULT_SIZE, 1426, Short.MAX_VALUE)
+            .addComponent(jpParent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpParent, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
+            .addComponent(jpParent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

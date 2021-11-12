@@ -6,6 +6,7 @@ package entity;
 
 import java.util.Date;
 
+
 /**
  *
  * @author GMT
@@ -21,35 +22,57 @@ import java.util.Date;
 
 public class HoaDonBanHang {
     private String maHD;
-    private Date ngayLapHD;
+   
     private int soLuong;
     private Double tongTien;
     private Double tienKhachDua;
     private String ghiChu;
-    
-    
+    private Double tienKhuyenMai;
+    private Date ngayLap;
     private KhachHang khachHang;
     private NhanVien nhanVien;
 
     public HoaDonBanHang() {
     }
 
-    public HoaDonBanHang(String maHD, Date ngayLapHD, int soLuong, Double tongTien, Double tienKhachDua, String ghiChu) {
+    public HoaDonBanHang(String maHD, int soLuong, Double tongTien, Double tienKhachDua, String ghiChu, Double tienKhuyenMai ) {
         this.maHD = maHD;
-        this.ngayLapHD = ngayLapHD;
         this.soLuong = soLuong;
         this.tongTien = tongTien;
         this.tienKhachDua = tienKhachDua;
         this.ghiChu = ghiChu;
+        this.ngayLap = new Date();
+        this.tienKhuyenMai = tienKhuyenMai;
     }
+    
+
+    public HoaDonBanHang(String maHD,Date ngayLap,  int soLuong, Double tongTien, Double tienKhachDua, String ghiChu, Double KhuyenMai) {
+        this.maHD = maHD;
+        this.ngayLap = ngayLap;
+        this.soLuong = soLuong;
+        this.tongTien = tongTien;
+        this.tienKhachDua = tienKhachDua;
+        this.ghiChu = ghiChu;
+        this.tienKhuyenMai = KhuyenMai;
+    }
+    
+      public HoaDonBanHang(String maHD,Date ngayLap,  int soLuong, Double tongTien, Double tienKhachDua, String ghiChu) {
+        this.maHD = maHD;
+        this.ngayLap = ngayLap;
+        this.soLuong = soLuong;
+        this.tongTien = tongTien;
+        this.tienKhachDua = tienKhachDua;
+        this.ghiChu = ghiChu;
+        
+    }
+
+  
 
     public void setMaHD(String maHD) {
         this.maHD = maHD;
     }
 
-    public void setNgayLapHD(Date ngayLapHD) {
-        this.ngayLapHD = ngayLapHD;
-    }
+   
 
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
@@ -79,10 +102,6 @@ public class HoaDonBanHang {
         return maHD;
     }
 
-    public Date getNgayLapHD() {
-        return ngayLapHD;
-    }
-
     public int getSoLuong() {
         return soLuong;
     }
@@ -105,6 +124,19 @@ public class HoaDonBanHang {
 
     public NhanVien getNhanVien() {
         return nhanVien;
+    }
+
+    @Override
+    public String toString() {
+        return "HoaDonBanHang{" + "maHD=" + maHD +  ", soLuong=" + soLuong + ", tongTien=" + tongTien + ", tienKhachDua=" + tienKhachDua + ", ghiChu=" + ghiChu + ", khachHang=" + khachHang + ", nhanVien=" + nhanVien + '}';
+    }
+
+    public Double getTienKhuyenMai() {
+        return tienKhuyenMai;
+    }
+
+    public Date getNgayLapHD() {
+        return ngayLap;
     }
     
     

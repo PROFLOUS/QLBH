@@ -5,12 +5,14 @@
 package dao;
 
 import Connect.connect;
+import entity.HoaDonBanHang;
 import entity.KhachHang;
 import entity.NhanVien;
 import entity.SanPham;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
@@ -76,4 +78,50 @@ public class KhachHangDao {
             
             return list;
         }
+      
+      //tìm kím KH bang sdt
+      public KhachHang SearchKhBySDT(String sdt){
+             KhachHang kh = null;
+            try {
+                PreparedStatement stmt = con.prepareStatement("select * from KhachHang where [SDT] =  ? ");
+                
+                stmt.setString(1,sdt);
+                ResultSet rs = stmt.executeQuery();
+                while(rs.next()) {
+ 
+                 kh = new KhachHang(rs.getString(1), rs.getString(2), rs.getString(3));
+               
+            }
+            } catch (Exception e) {
+            }
+            
+            return kh;
+        }
+      //them 1 KH vao database
+	public boolean createKhachHang(KhachHang kh) {
+            java.sql.Connection con = connect.getInstance().getConnection();
+			
+            PreparedStatement stmt = null;
+            int n = 0;
+            try {
+		stmt = con.prepareStatement("Insert Into KhachHang values(?,?,?,?)");
+                
+             
+
+            
+                
+		stmt.setString(1, kh.getMaKH());
+                stmt.setString(2, kh.getTenKH());
+                stmt.setString(3, kh.getSdt());
+                stmt.setString(4, kh.getDiaChi());
+                
+
+                                        
+                 n = stmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+				
+                    return n > 0;
+		}
 }

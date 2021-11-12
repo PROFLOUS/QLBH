@@ -11,6 +11,7 @@ import entity.HoaDonBanHang;
 import entity.SanPham;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
@@ -288,4 +289,35 @@ public class SanPhamDao {
             
             return list;
         }
+        
+        
+        //cap nhat lai soluong san pham
+        //so luong moi - sl hien tai - slDa ban
+        /**
+         * @param String maSP, int slSP - so luong san pham da ban
+         * @return 
+         */
+        public boolean updateSLSP(String maSP, int slSpDaBan){
+            SanPham sp = findSPByMaSP(maSP);
+            int newSL = sp.getSoLuong() - slSpDaBan;
+            int n = 0;
+            java.sql.Connection con = connect.getInstance().getConnection();
+			
+            PreparedStatement stmt = null;
+            try {
+		
+                stmt = con.prepareStatement("UPDATE SanPham SET  SoLuong = ?  WHERE MaSP = ?");
+		
+		stmt.setInt(1,newSL);
+		stmt.setString(2,maSP);
+		
+					
+		n = stmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+            return n > 0;
+        }
+        
+        
 }

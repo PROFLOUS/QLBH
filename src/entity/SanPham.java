@@ -25,6 +25,14 @@ public class SanPham {
         
     }
 
+    public SanPham(String maSP, String tenSP, Double donGia, int soLuong, String mauSac) {
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.donGia = donGia;
+        this.soLuong = soLuong;
+        this.mauSac = mauSac;
+    }
+
     public SanPham(String maSP, String tenSP, Double donGia, int soLuong, String hinhAnh, String size, String mauSac) {
         this.maSP = maSP;
         this.tenSP = tenSP;
@@ -156,6 +164,11 @@ public class SanPham {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "SanPham{" + "dmsp=" + dmsp + ", maSP=" + maSP + ", tenSP=" + tenSP + ", donGia=" + donGia + ", soLuong=" + soLuong + ", hinhAnh=" + hinhAnh + ", size=" + size + ", mauSac=" + mauSac + '}';
     }
    
      
