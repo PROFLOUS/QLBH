@@ -681,23 +681,13 @@ public class GD_Chinh extends javax.swing.JFrame {
 
     private void pnl_button_HoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_button_HoaDonMouseClicked
          try {
-          //   frmHoaDon1 = new FrmHoaDon();
-             frmHoaDon1.renderListHoaDon();
+              FrmHoaDonBanHang fr = new FrmHoaDonBanHang();
+              fr.renderListHoaDon();
         } catch (Exception e) {
              JOptionPane.showMessageDialog(rootPane, "ERRO");
         }
 
-        // TODO add your handling code here:
-//        pnl_FormTongQuan.setVisible(false);
-//        frmBanHang1.setVisible(false);
-//        frmKhachHang1.setVisible(false);
-//        frmSanPham2.setVisible(false);
-//        frmNhanVien1.setVisible(false);
-//        pnl_FormHoaDon.setVisible(true);
-//        frmHeThong1.setVisible(false);
-//        frmThongKe1.setVisible(false);
-//        frmThongTinTaiKhoan1.setVisible(false);
-//        frmNhaCungCap1.setVisible(false);
+
         jTabbedPane1.setSelectedIndex(6);
         pnl_button_TongQuan.setBackground(new Color(153, 204, 255));
         pnl_button_BanHang.setBackground(new Color(153, 204, 255));
@@ -712,17 +702,7 @@ public class GD_Chinh extends javax.swing.JFrame {
     }//GEN-LAST:event_pnl_button_HoaDonMouseClicked
 
     private void pnl_button_NhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_button_NhanVienMouseClicked
-        // TODO add your handling code here:
-//        pnl_FormTongQuan.setVisible(false);
-//        frmBanHang1.setVisible(false);
-//        frmKhachHang1.setVisible(false);
-//        frmSanPham2.setVisible(false);
-//        frmNhanVien1.setVisible(true);
-//        pnl_FormHoaDon.setVisible(false);
-//        frmHeThong1.setVisible(false);
-//        frmThongKe1.setVisible(false);
-//        frmThongTinTaiKhoan1.setVisible(false);
-//        frmNhaCungCap1.setVisible(false);
+
         jTabbedPane1.setSelectedIndex(4);
         pnl_button_TongQuan.setBackground(new Color(153, 204, 255));
         pnl_button_BanHang.setBackground(new Color(153, 204, 255));
@@ -737,17 +717,7 @@ public class GD_Chinh extends javax.swing.JFrame {
     }//GEN-LAST:event_pnl_button_NhanVienMouseClicked
 
     private void pnl_button_KhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_button_KhachHangMouseClicked
-        // TODO add your handling code here:
-//        pnl_FormTongQuan.setVisible(false);
-//        frmBanHang1.setVisible(false);
-//        frmKhachHang1.setVisible(true);
-//        frmSanPham2.setVisible(false);
-//        frmNhanVien1.setVisible(false);
-//        pnl_FormHoaDon.setVisible(false);
-//        frmHeThong1.setVisible(false);
-//        frmThongKe1.setVisible(false);
-//        frmThongTinTaiKhoan1.setVisible(false);
-//        frmNhaCungCap1.setVisible(false);
+
         jTabbedPane1.setSelectedIndex(3);
         pnl_button_TongQuan.setBackground(new Color(153, 204, 255));
         pnl_button_BanHang.setBackground(new Color(153, 204, 255));
@@ -762,18 +732,7 @@ public class GD_Chinh extends javax.swing.JFrame {
     }//GEN-LAST:event_pnl_button_KhachHangMouseClicked
 
     private void pnl_button_SanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_button_SanPhamMouseClicked
-        // TODO add your handling code here:
-//        pnl_FormTongQuan.setVisible(false);
-//        frmBanHang1.setVisible(false);
-//        frmKhachHang1.setVisible(false);
-//        frmSanPham2.setVisible(true);
-//        frmNhanVien1.setVisible(false);
-//        pnl_FormHoaDon.setVisible(false);
-//        frmHeThong1.setVisible(false);
-//        frmThongKe1.setVisible(false);
-//        frmThongTinTaiKhoan1.setVisible(false);
-//        frmNhaCungCap1.setVisible(false);
-//        pnl_TranGDChinh1.display(new FrmSanPham());
+
         pnl_button_TongQuan.setBackground(new Color(153, 204, 255));
         pnl_button_BanHang.setBackground(new Color(153, 204, 255));
         pnl_button_SanPham.setBackground(Color.white);
@@ -790,17 +749,6 @@ public class GD_Chinh extends javax.swing.JFrame {
     private void pnl_button_BanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_button_BanHangMouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(2);
-//        frmTongQuan1.setVisible(false);
-//        frmBanHang1.setVisible(true);
-//        frmKhachHang1.setVisible(false);
-//        frmSanPham2.setVisible(false);
-//        frmNhanVien1.setVisible(false);
-//        pnl_FormHoaDon.setVisible(false);
-//        frmHeThong1.setVisible(false);
-//        frmThongKe1.setVisible(false);
-//        frmThongTinTaiKhoan1.setVisible(false);
-//        frmNhaCungCap1.setVisible(false);
-//         pnl_TranGDChinh1.display(new FrmBanHang());
         pnl_button_TongQuan.setBackground(new Color(153, 204, 255));
         pnl_button_BanHang.setBackground(Color.white);
         pnl_button_SanPham.setBackground(new Color(153, 204, 255));
@@ -829,40 +777,6 @@ public class GD_Chinh extends javax.swing.JFrame {
 
     }//GEN-LAST:event_pnl_button_TongQuanMouseClicked
 
-//    private List<DataSearch> search(String search) {
-//        int limitData = 7;
-//        List<DataSearch> list = new ArrayList<>();
-//        String dataTesting[] = {"Dangdt","Danggodboi","hoang anh","tiendat"};
-//        for (String d : dataTesting) {
-//            if (d.toLowerCase().contains(search)) {
-//                boolean story = isStory(d);
-//                if (story) {
-//                    list.add(0, new DataSearch(d, story));
-//                    //  add or insert to first record
-//                } else {
-//                    list.add(new DataSearch(d, story));
-//                    //  add to last record
-//                }
-//                if (list.size() == limitData) {
-//                    break;
-//                }
-//            }
-//        }
-//        return list;
-//    }
-//    private boolean isStory(String text) {
-//        for (String d : dataStory) {
-//            if (d.toLowerCase().equals(text.toLowerCase())) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//    String dataStory[] = {"300 - Rise of an Empire",
-//        "Empire Records",
-//        "Empire State",
-//        "Frozen",
-//        "The Courier"};
     /**
      * @param args the command line arguments
      */

@@ -46,7 +46,6 @@ public class FrmDsSp extends javax.swing.JPanel {
         } catch (Exception e) {
             System.out.println("loll");
             e.printStackTrace();
-
         }
     }
 

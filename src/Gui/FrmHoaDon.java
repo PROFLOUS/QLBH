@@ -7,6 +7,7 @@ package Gui;
 import Connect.connect;
 import dao.HoaDonDao;
 import entity.HoaDonBanHang;
+import java.awt.Color;
 import java.awt.List;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -16,7 +17,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicBoolean;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,48 +28,106 @@ import javax.swing.table.DefaultTableModel;
  * @author GMT
  */
 public class FrmHoaDon extends javax.swing.JPanel{
+    public Border default_border = BorderFactory.createMatteBorder(0, 0, 3, 0, new Color(153, 153, 153));
+    public Border active_border = BorderFactory.createMatteBorder(0, 0, 3, 0, new Color(153, 204, 255));
+    public JButton[] buttons;
    // ArrayList<HoaDonBanHang> listHoaDon = new ArrayList<HoaDonBanHang>();
        private javax.swing.table.DefaultTableModel modelTBHoaDon;
     /**
      * Creates new form FrmHoaDon
      */
-    public FrmHoaDon() throws SQLException {
+    public FrmHoaDon() throws SQLException  {
         initComponents();
+        addBorder();
         
-        try {
-            connect.getInstance().connect();
+//        try {
+//            connect.getInstance().connect();
+//        
+//            renderListHoaDon();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+    }
+    
+        public void addBorder() {
+        buttons = new JButton[2];
+        //Form san pham
+        buttons[0] = btn_tab_SanPham1;
+        buttons[1] = btn_tab_DMSanPham1;
         
-            renderListHoaDon();
-        } catch (Exception e) {
-            e.printStackTrace();
+        
+        setButtonBorder(btn_tab_SanPham1);
+        addAction();
+    }
+//    //set border active
+//
+    public void setButtonBorder(JButton button) {
+        button.setBorder(active_border);
+        button.setForeground(Color.black);
+    }
+//
+//    //add even
+    public void addAction() {
+        for (JButton button : buttons) {
+            button.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    for (JButton btn : buttons) {
+                        btn.setBorder(default_border);
+                        btn.setForeground(new Color(153, 153, 153));
+                    }
+                    button.setBorder(active_border);
+                    button.setForeground(Color.black);
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+
+                }
+            });
         }
     }
 /*
         Hoa Don
     */
     //dua du lieu HoaDon len Table
-	public void renderListHoaDon() {
-		 HoaDonDao hoaDonDao = new HoaDonDao();
-                 String[] title = { "MaHD", "Ngày Tạo", "Khách Hàng", "Số lượng", "Tổng Tiền", "Tiền Khách Đưa", "Nhân Viên", "Ghi Chú"};
-		 ArrayList<HoaDonBanHang> listHoaDon  = hoaDonDao.getDsHoaDon();
-                System.out.print(listHoaDon.size());
-                 modelTBHoaDon = new DefaultTableModel(title,0);
-                int i = 0;
-		for(HoaDonBanHang s : listHoaDon) {
-                   //  System.out.print(i++);
-			String[] rowData = {
-				s.getMaHD(),changeDateToString(s.getNgayLapHD()),s.getKhachHang().getTenKH(),String.valueOf(s.getSoLuong()),String.valueOf(s.getTongTien()),
-                            String.valueOf(s.getTienKhachDua()),s.getNhanVien().getTenNV(),s.getGhiChu()
-			};
-                       
-			modelTBHoaDon.addRow(rowData);
-                        
-		}
-               
-		tbHoaDon.setModel(modelTBHoaDon);
-                lblNumHD.setText(String.valueOf(listHoaDon.size()));
-                System.out.print("render");
-	}
+//	public void renderListHoaDon() {
+//		 HoaDonDao hoaDonDao = new HoaDonDao();
+//                 String[] title = { "MaHD", "Ngày Tạo", "Khách Hàng", "Số lượng", "Tổng Tiền", "Tiền Khách Đưa", "Nhân Viên", "Ghi Chú"};
+//		 ArrayList<HoaDonBanHang> listHoaDon  = hoaDonDao.getDsHoaDon();
+//                System.out.print(listHoaDon.size());
+//                 modelTBHoaDon = new DefaultTableModel(title,0);
+//                int i = 0;
+//		for(HoaDonBanHang s : listHoaDon) {
+//                   //  System.out.print(i++);
+//			String[] rowData = {
+//				s.getMaHD(),changeDateToString(s.getNgayLapHD()),s.getKhachHang().getTenKH(),String.valueOf(s.getSoLuong()),String.valueOf(s.getTongTien()),
+//                            String.valueOf(s.getTienKhachDua()),s.getNhanVien().getTenNV(),s.getGhiChu()
+//			};
+//                       
+//			modelTBHoaDon.addRow(rowData);
+//                        
+//		}
+//               
+//		tbHoaDon.setModel(modelTBHoaDon);
+//                lblNumHD.setText(String.valueOf(listHoaDon.size()));
+//                System.out.print("render");
+//	}
          /*
             Chuyen tu date sang String
             @param date Date
@@ -74,7 +136,6 @@ public class FrmHoaDon extends javax.swing.JPanel{
          public String changeDateToString(Date date){
             
                 DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-
                 String dateString  = df.format(date);
                 return dateString;
           }
@@ -89,215 +150,105 @@ public class FrmHoaDon extends javax.swing.JPanel{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jSeparator1 = new javax.swing.JSeparator();
-        txtSearchHD = new javax.swing.JTextField();
-        btnShowHD = new javax.swing.JButton();
-        btnSearchHD = new javax.swing.JButton();
-        btnThemHD = new javax.swing.JToggleButton();
-        jLabel1 = new javax.swing.JLabel();
-        lblNumHD = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbHoaDon = new javax.swing.JTable();
+        pnl_Tab = new javax.swing.JPanel();
+        lbl_text_SanPham1 = new javax.swing.JLabel();
+        pnl_menuTab_SanPham1 = new javax.swing.JPanel();
+        btn_tab_SanPham1 = new javax.swing.JButton();
+        btn_tab_DMSanPham1 = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        try {
+            frmHoaDonBanHang1 = new Gui.FrmHoaDonBanHang();
+        } catch (java.sql.SQLException e1) {
+            e1.printStackTrace();
+        }
+        try {
+            frmHoaDonNhapHang1 = new Gui.FrmHoaDonNhapHang();
+        } catch (java.sql.SQLException e1) {
+            e1.printStackTrace();
+        }
 
         setBackground(new java.awt.Color(243, 244, 237));
+        setPreferredSize(new java.awt.Dimension(1090, 708));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(java.awt.Color.white);
+        pnl_Tab.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_Tab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtSearchHD.setBackground(java.awt.Color.white);
-        txtSearchHD.setText("Nhập mã hóa đơn...");
-        txtSearchHD.setToolTipText("");
-        txtSearchHD.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtSearchHDFocusGained(evt);
-            }
-        });
+        lbl_text_SanPham1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 20)); // NOI18N
+        lbl_text_SanPham1.setForeground(new java.awt.Color(0, 153, 204));
+        lbl_text_SanPham1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_text_SanPham1.setText("Hóa Đơn");
+        pnl_Tab.add(lbl_text_SanPham1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 138, 30));
 
-        btnShowHD.setBackground(new java.awt.Color(21, 151, 229));
-        btnShowHD.setForeground(java.awt.Color.white);
-        btnShowHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/clipboard.png"))); // NOI18N
-        btnShowHD.setText("Hiển thị Hóa Đơn");
-        btnShowHD.setToolTipText("");
-        btnShowHD.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnShowHD.setEnabled(false);
-        btnShowHD.addMouseListener(new java.awt.event.MouseAdapter() {
+        pnl_menuTab_SanPham1.setBackground(new java.awt.Color(255, 255, 255));
+
+        btn_tab_SanPham1.setBackground(new java.awt.Color(255, 255, 255));
+        btn_tab_SanPham1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btn_tab_SanPham1.setForeground(new java.awt.Color(0, 0, 0));
+        btn_tab_SanPham1.setText("Hóa Đơn Bán Hàng");
+        btn_tab_SanPham1.setBorder(null);
+        btn_tab_SanPham1.setContentAreaFilled(false);
+        btn_tab_SanPham1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnShowHDMouseClicked(evt);
+                btn_tab_SanPham1MouseClicked(evt);
             }
         });
-
-        btnSearchHD.setBackground(new java.awt.Color(21, 151, 229));
-        btnSearchHD.setForeground(java.awt.Color.white);
-        btnSearchHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/search_1.png"))); // NOI18N
-        btnSearchHD.setText("Tìm Kiếm");
-        btnSearchHD.setToolTipText("");
-        btnSearchHD.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSearchHD.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                btnSearchHDMouseDragged(evt);
-            }
-        });
-        btnSearchHD.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSearchHDMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnSearchHDMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnSearchHDMouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnSearchHDMousePressed(evt);
-            }
-        });
-        btnSearchHD.addActionListener(new java.awt.event.ActionListener() {
+        btn_tab_SanPham1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchHDActionPerformed(evt);
+                btn_tab_SanPham1ActionPerformed(evt);
             }
         });
 
-        btnThemHD.setBackground(new java.awt.Color(21, 151, 229));
-        btnThemHD.setForeground(java.awt.Color.white);
-        btnThemHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/add.png"))); // NOI18N
-        btnThemHD.setText("Thêm Hóa Đơn");
-        btnThemHD.setToolTipText("");
-        btnThemHD.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnThemHD.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_tab_DMSanPham1.setBackground(new java.awt.Color(255, 255, 255));
+        btn_tab_DMSanPham1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btn_tab_DMSanPham1.setForeground(new java.awt.Color(153, 153, 153));
+        btn_tab_DMSanPham1.setText("Hóa Đơn Nhập Hàng");
+        btn_tab_DMSanPham1.setBorder(null);
+        btn_tab_DMSanPham1.setContentAreaFilled(false);
+        btn_tab_DMSanPham1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnThemHDMouseClicked(evt);
+                btn_tab_DMSanPham1MouseClicked(evt);
+            }
+        });
+        btn_tab_DMSanPham1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tab_DMSanPham1ActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Số Hóa Đơn: ");
-
-        lblNumHD.setText("2");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtSearchHD, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSearchHD, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 275, Short.MAX_VALUE)
-                        .addComponent(btnThemHD)
-                        .addGap(14, 14, 14))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnShowHD)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblNumHD)
-                        .addGap(19, 19, 19))))
+        javax.swing.GroupLayout pnl_menuTab_SanPham1Layout = new javax.swing.GroupLayout(pnl_menuTab_SanPham1);
+        pnl_menuTab_SanPham1.setLayout(pnl_menuTab_SanPham1Layout);
+        pnl_menuTab_SanPham1Layout.setHorizontalGroup(
+            pnl_menuTab_SanPham1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_menuTab_SanPham1Layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(btn_tab_SanPham1)
+                .addGap(59, 59, 59)
+                .addComponent(btn_tab_DMSanPham1)
+                .addContainerGap(689, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnShowHD, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                    .addComponent(jLabel1)
-                    .addComponent(lblNumHD))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnThemHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtSearchHD, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                    .addComponent(btnSearchHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        pnl_menuTab_SanPham1Layout.setVerticalGroup(
+            pnl_menuTab_SanPham1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_menuTab_SanPham1Layout.createSequentialGroup()
+                .addGroup(pnl_menuTab_SanPham1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_tab_SanPham1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(btn_tab_DMSanPham1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        tbHoaDon.setBackground(java.awt.Color.white);
-        tbHoaDon.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        pnl_Tab.add(pnl_menuTab_SanPham1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1090, 40));
 
-            },
-            new String [] {
+        add(pnl_Tab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-            }
-        ));
-        tbHoaDon.setRowHeight(28);
-        tbHoaDon.setShowGrid(true);
-        tbHoaDon.setUpdateSelectionOnSort(false);
-        tbHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbHoaDonMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tbHoaDon);
+        jTabbedPane1.setBackground(new java.awt.Color(102, 102, 102));
+        jTabbedPane1.addTab("tab1", frmHoaDonBanHang1);
+        jTabbedPane1.addTab("tab2", frmHoaDonNhapHang1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(26, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
+        add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 29, 1090, 910));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSearchHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchHDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSearchHDActionPerformed
-
-    private void txtSearchHDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchHDFocusGained
-            txtSearchHD.setText("");
-    }//GEN-LAST:event_txtSearchHDFocusGained
-
     
-    //tim kiem theo MaHoaDon
-    private void btnSearchHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchHDMouseClicked
-       String text = txtSearchHD.getText();
-        AtomicBoolean check = new AtomicBoolean();
-       	 HoaDonDao hoaDonDao = new HoaDonDao();
-               
-		 ArrayList<HoaDonBanHang> listHoaDon  = hoaDonDao.getDsHoaDon();
-               
-        listHoaDon.forEach(s ->{
-            if(s.getMaHD().toUpperCase().equals(text.toUpperCase())){
-                check.set(true);
-                 String[] title = { "MaHD", "Ngày Tạo", "Khách Hàng", "Số lượng", "Tổng Tiền", "Tiền Khách Đưa", "Nhân Viên", "Ghi Chú"};
-		 modelTBHoaDon = new DefaultTableModel(title,0);
-                 String[] rowData = {
-				s.getMaHD(),changeDateToString(s.getNgayLapHD()),s.getKhachHang().getTenKH(),String.valueOf(s.getSoLuong()),String.valueOf(s.getTongTien()),
-                            String.valueOf(s.getTienKhachDua()),s.getNhanVien().getTenNV(),s.getGhiChu()
-			};
-             modelTBHoaDon.addRow(rowData);
-                tbHoaDon.setModel(modelTBHoaDon);
-                btnShowHD.setEnabled(true);
-            }
-        });
-        if(!check.get()){
-           JOptionPane.showMessageDialog(btnSearchHD, "Không có Hóa Đơn có mã:" + text + " " );
-        }
-    }//GEN-LAST:event_btnSearchHDMouseClicked
-
     
-    //click vao Hien thi lai ds HoaDon
-    private void btnShowHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnShowHDMouseClicked
-        btnShowHD.setEnabled(false);
-        renderListHoaDon();
-    }//GEN-LAST:event_btnShowHDMouseClicked
-
     private void jDateChoiseHDInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jDateChoiseHDInputMethodTextChanged
         System.out.println(evt.getText());
     }//GEN-LAST:event_jDateChoiseHDInputMethodTextChanged
@@ -312,54 +263,33 @@ public class FrmHoaDon extends javax.swing.JPanel{
        
     }//GEN-LAST:event_jDateChoiseHDFocusLost
 
-    private void tbHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHoaDonMouseClicked
-        // lay ra row vua click
-        int row = tbHoaDon.getSelectedRow();
-       
-        //lay ra MaHD
-        String maHD = tbHoaDon.getValueAt(row, 0).toString();
-        //JOptionPane.showMessageDialog(jPanel1, maHD);
-        new FrmCT_HoaDon(maHD).setVisible(true);
-    }//GEN-LAST:event_tbHoaDonMouseClicked
+    private void btn_tab_SanPham1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tab_SanPham1MouseClicked
+        jTabbedPane1.setSelectedIndex(0);
+    }//GEN-LAST:event_btn_tab_SanPham1MouseClicked
 
-    private void btnThemHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemHDMouseClicked
-       
-        
-    }//GEN-LAST:event_btnThemHDMouseClicked
-
-    private void btnSearchHDMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchHDMouseExited
+    private void btn_tab_SanPham1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tab_SanPham1ActionPerformed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btnSearchHDMouseExited
+    }//GEN-LAST:event_btn_tab_SanPham1ActionPerformed
 
-    private void btnSearchHDMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchHDMousePressed
-        // TODO add your handling code here:
-       
-         btnShowHD.setBackground(new java.awt.Color(17, 60, 252));
-    }//GEN-LAST:event_btnSearchHDMousePressed
+    private void btn_tab_DMSanPham1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tab_DMSanPham1MouseClicked
+        jTabbedPane1.setSelectedIndex(1);
+    }//GEN-LAST:event_btn_tab_DMSanPham1MouseClicked
 
-    private void btnSearchHDMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchHDMouseEntered
+    private void btn_tab_DMSanPham1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tab_DMSanPham1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSearchHDMouseEntered
-
-    private void btnSearchHDMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchHDMouseDragged
-        // TODO add your handling code here:
-         btnShowHD.setBackground(new java.awt.Color(17, 60, 252));
-    }//GEN-LAST:event_btnSearchHDMouseDragged
+    }//GEN-LAST:event_btn_tab_DMSanPham1ActionPerformed
 
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSearchHD;
-    private javax.swing.JButton btnShowHD;
-    private javax.swing.JToggleButton btnThemHD;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblNumHD;
-    private javax.swing.JTable tbHoaDon;
-    private javax.swing.JTextField txtSearchHD;
+    private javax.swing.JButton btn_tab_DMSanPham1;
+    private javax.swing.JButton btn_tab_SanPham1;
+    private Gui.FrmHoaDonBanHang frmHoaDonBanHang1;
+    private Gui.FrmHoaDonNhapHang frmHoaDonNhapHang1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lbl_text_SanPham1;
+    private javax.swing.JPanel pnl_Tab;
+    private javax.swing.JPanel pnl_menuTab_SanPham1;
     // End of variables declaration//GEN-END:variables
 
     

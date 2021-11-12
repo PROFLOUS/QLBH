@@ -5,11 +5,12 @@
  */
 package Gui;
 
-
 import dao.PanelSearch;
 import dao.EventClick;
 import dao.BanHangDao;
+import dao.DanhMucSPDao;
 import dao.KhachHangDao;
+import entity.DanhMucSP;
 import entity.KhachHang;
 import entity.SanPham;
 import java.awt.Color;
@@ -17,37 +18,47 @@ import java.awt.geom.RoundRectangle2D;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.table.DefaultTableModel;
-
 
 /**
  *
  * @author HP
  */
 public class FrmNhapHang extends javax.swing.JPanel {
-   private JPopupMenu menu;
+
+    ArrayList<DanhMucSP> dsDmSP;
+    DanhMucSPDao dm_dao;
+    private JPopupMenu menu;
     private PanelSearch search;
     private JPopupMenu menu2;
     private PanelSearch search2;
     BanHangDao bhDao;
     KhachHangDao khDao;
     private DefaultTableModel dfbh_model;
-    private ArrayList<SanPham>dstt = null;
-    private ArrayList<SanPham>dssp;
+    private ArrayList<SanPham> dstt = null;
+    private ArrayList<SanPham> dssp;
     private int soLuongTon = 0;
-    private int soLuong =0;
+    private int soLuong = 0;
     SanPham sp = new SanPham();
     private int tong;
     private int r;
+    final JFileChooser fileDialog = new JFileChooser();
+    JFrame cha = new JFrame();
+
     public FrmNhapHang() {
         initComponents();
+        
+        dm_dao = new DanhMucSPDao();
         jPanel6.setVisible(false);
         bhDao = new BanHangDao();
         khDao = new KhachHangDao();
         dstt = new ArrayList<SanPham>();
-        dssp = new  ArrayList<SanPham>();
+        dssp = new ArrayList<SanPham>();
         SanPham sp = new SanPham();
         menu = new JPopupMenu();
         search = new PanelSearch();
@@ -59,34 +70,34 @@ public class FrmNhapHang extends javax.swing.JPanel {
         menu.setFocusable(false);
         search.addEventClick(new EventClick() {
             private double tongtien;
-            
+
             @Override
             public void itemClick(SanPham data) {
-               
+
                 dfbh_model = (DefaultTableModel) tbl_BanHang.getModel();
-                System.out.println("Click" +data.getTenSP());
+                System.out.println("Click" + data.getTenSP());
                 menu.setVisible(false);
                 String maSp = (data.getMaSP());
                 String tenSp = (data.getTenSP());
                 String mau = (data.getMauSac());
-                double donGia =( data.getDonGia());
+                double donGia = (data.getDonGia());
                 String size = (data.getSize());
                 int soLuong = 1;
                 double thanhTien = soLuong * donGia;
-                
+
                 SanPham sp = new SanPham(maSp, tenSp, donGia, soLuong, size, mau);
-                
+
                 //tao vi tri sp
                 int vitri = vitriSP(sp);
                 System.out.println(vitri);
-                
-                if(vitri >-1){
-                    Integer sl = dstt.get(vitri).getSoLuong()+1;
+
+                if (vitri > -1) {
+                    Integer sl = dstt.get(vitri).getSoLuong() + 1;
                     dstt.get(vitri).setSoLuong(sl);
                     tongtien = sl * sp.getDonGia();
                     dfbh_model.setValueAt(sl, vitri, 3);
                     dfbh_model.setValueAt(tongtien, vitri, 5);
-                }else{
+                } else {
                     try {
                         dstt.add(sp);
                     } catch (Exception e) {
@@ -94,25 +105,27 @@ public class FrmNhapHang extends javax.swing.JPanel {
                         e.printStackTrace();
                     }
                     dfbh_model.addRow(new Object[]{
-                        sp.getMaSP(),sp.getTenSP(),sp.getMauSac(),soLuong,sp.getDonGia(),thanhTien
+                        sp.getMaSP(), sp.getTenSP(), sp.getMauSac(), soLuong, sp.getDonGia(), thanhTien
                     });
                 }
                 TinhTong();
             }
+
             @Override
             public void itemClick(KhachHang data) {
             }
+
             private int vitriSP(SanPham sp) {
-                int i =-1;
-                try { 
-                if(dstt.contains(sp)){
-                    return dstt.indexOf(sp);
-                }
+                int i = -1;
+                try {
+                    if (dstt.contains(sp)) {
+                        return dstt.indexOf(sp);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     System.out.println("loi");
                 }
-                 return  i;
+                return i;
             }
         });
         //enven click chon khach hang
@@ -137,42 +150,41 @@ public class FrmNhapHang extends javax.swing.JPanel {
 //
 //            }
 //        });
-        
-        
-        
+
+        upCbo_DM();
     }
+
     //xóa sảm phảm từ dơn hàng
-    public void huy(int r){
-        
+    public void huy(int r) {
+
         String masp = dstt.get(r).getMaSP();
         int index = -1;
-        for(SanPham sp : dssp)
-        {
-            if(sp.getMaSP() == masp){
-                index=dssp.indexOf(sp);
-            break;
+        for (SanPham sp : dssp) {
+            if (sp.getMaSP() == masp) {
+                index = dssp.indexOf(sp);
+                break;
             }
         }
-        
-        
+
         dfbh_model.removeRow(r);
         dstt.remove(r);
     }
+
     //tính tổng tiền
-    public void TinhTong(){
+    public void TinhTong() {
         DecimalFormat x = new DecimalFormat("###,###,###");
-        tong =0;
-        for( int i = 0;i<tbl_BanHang.getRowCount();i++){
-            tong += Double.parseDouble( tbl_BanHang.getValueAt(i, 5).toString());
+        tong = 0;
+        for (int i = 0; i < tbl_BanHang.getRowCount(); i++) {
+            tong += Double.parseDouble(tbl_BanHang.getValueAt(i, 5).toString());
         }
-        System.out.println("tong"+tong);
+        System.out.println("tong" + tong);
         lbl_TongTien.setText(x.format(tong));
         lbl_TienPhaiTra.setText(x.format(tong));
 //        lbl_TongTien.setText(String.valueOf(tong));
 //        lbl_TienPhaiTra.setText(String.valueOf(tong));
-        
-        
+
     }
+
     //tính tiền thừ
 //    public void TinhTienThua(){
 //        DecimalFormat x = new DecimalFormat("###,###,###");
@@ -186,20 +198,23 @@ public class FrmNhapHang extends javax.swing.JPanel {
 //        lbl_TienThua.setText(x.format(tienThua));
 //    }
     //ẩn các nút chức năng
-    public void Hide(){
+    public void Hide() {
         btn_XoaMatHang.setVisible(false);
         lbl_TextSL.setVisible(false);
         lbl_GiamSL.setVisible(false);
         lbl_TangSL.setVisible(false);
-        
+
         txt_SuaSL.setVisible(false);
     }
-            
-        
-    
-    
-    
-    
+
+    //đọc dữ liệu lên combobox danh mục
+    public void upCbo_DM() {
+        dsDmSP = dm_dao.getAllDM();
+        for (DanhMucSP dm : dsDmSP) {
+            cbo_Dm.addItem(dm.getTenLoai());
+//           
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -215,13 +230,13 @@ public class FrmNhapHang extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         lbl_MauSac = new javax.swing.JLabel();
-        txt_MauSac = new javax.swing.JTextField();
+        txt_TenSp = new javax.swing.JTextField();
         lbl_Size = new javax.swing.JLabel();
         txt_Size = new javax.swing.JTextField();
         lbl_DonGia = new javax.swing.JLabel();
         txt_DonGia = new javax.swing.JTextField();
         lbl_TenSp = new javax.swing.JLabel();
-        txt_TenSp = new javax.swing.JTextField();
+        txt_MauSac = new javax.swing.JTextField();
         lbl_DanhMuc = new javax.swing.JLabel();
         cbo_Dm = new javax.swing.JComboBox<>();
         lbl_SlKho = new javax.swing.JLabel();
@@ -318,10 +333,10 @@ public class FrmNhapHang extends javax.swing.JPanel {
         lbl_MauSac.setForeground(new java.awt.Color(90, 103, 121));
         lbl_MauSac.setText("Màu Sắc ");
 
-        txt_MauSac.setBackground(new java.awt.Color(255, 255, 255));
-        txt_MauSac.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
-        txt_MauSac.setForeground(new java.awt.Color(0, 0, 0));
-        txt_MauSac.setToolTipText("");
+        txt_TenSp.setBackground(new java.awt.Color(255, 255, 255));
+        txt_TenSp.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        txt_TenSp.setForeground(new java.awt.Color(0, 0, 0));
+        txt_TenSp.setToolTipText("");
 
         lbl_Size.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         lbl_Size.setForeground(new java.awt.Color(90, 103, 121));
@@ -345,10 +360,10 @@ public class FrmNhapHang extends javax.swing.JPanel {
         lbl_TenSp.setForeground(new java.awt.Color(90, 103, 121));
         lbl_TenSp.setText("Tên Sản Phẩm ");
 
-        txt_TenSp.setBackground(new java.awt.Color(255, 255, 255));
-        txt_TenSp.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
-        txt_TenSp.setForeground(new java.awt.Color(0, 0, 0));
-        txt_TenSp.setToolTipText("");
+        txt_MauSac.setBackground(new java.awt.Color(255, 255, 255));
+        txt_MauSac.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        txt_MauSac.setForeground(new java.awt.Color(0, 0, 0));
+        txt_MauSac.setToolTipText("");
 
         lbl_DanhMuc.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         lbl_DanhMuc.setForeground(new java.awt.Color(90, 103, 121));
@@ -414,6 +429,11 @@ public class FrmNhapHang extends javax.swing.JPanel {
         lbl_HinhAnh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_HinhAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/image.png"))); // NOI18N
         lbl_HinhAnh.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(102, 153, 255)));
+        lbl_HinhAnh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_HinhAnhMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -430,7 +450,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
                             .addComponent(lbl_TenSp)
                             .addComponent(lbl_Size)
                             .addComponent(lbl_DonGia)
-                            .addComponent(txt_MauSac, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(txt_TenSp, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                             .addComponent(txt_Size)
                             .addComponent(txt_DonGia))
                         .addGap(37, 37, 37)
@@ -438,7 +458,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
                             .addComponent(lbl_SlKho)
                             .addComponent(lbl_MauSac)
                             .addComponent(lbl_DanhMuc)
-                            .addComponent(txt_TenSp)
+                            .addComponent(txt_MauSac)
                             .addComponent(cbo_Dm, 0, 300, Short.MAX_VALUE)
                             .addComponent(txt_SlKho)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -466,8 +486,8 @@ public class FrmNhapHang extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_TenSp, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_MauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_MauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_TenSp, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_Size)
@@ -506,7 +526,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
 
         jFrame2.setUndecorated(true);
         jFrame2.setPreferredSize(new java.awt.Dimension(747, 350));
-        jFrame2.setSize(new java.awt.Dimension(747, 350));
+        jFrame2.setSize(new java.awt.Dimension(747, 318));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 2, 1, new java.awt.Color(90, 103, 121)));
@@ -1312,14 +1332,14 @@ public class FrmNhapHang extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_Search_SPFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_Search_SPFocusGained
-        if(txt_Search_SP.getText().equals("Thêm Sản Phẩm Vào Đơn Hàng")){
+        if (txt_Search_SP.getText().equals("Thêm Sản Phẩm Vào Đơn Hàng")) {
             txt_Search_SP.setText("");
             txt_Search_SP.setForeground(Color.white);
         }
     }//GEN-LAST:event_txt_Search_SPFocusGained
 
     private void txt_Search_SPFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_Search_SPFocusLost
-        if(txt_Search_SP.getText().equals("")){
+        if (txt_Search_SP.getText().equals("")) {
             txt_Search_SP.setText("Thêm Sản Phẩm Vào Đơn Hàng");
             txt_Search_SP.setForeground(Color.white);
         }
@@ -1355,7 +1375,6 @@ public class FrmNhapHang extends javax.swing.JPanel {
 //        return list;
 //    }
 
-
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -1363,37 +1382,36 @@ public class FrmNhapHang extends javax.swing.JPanel {
     private void btn_XoaMatHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaMatHangMouseClicked
         System.out.println("ok ");
         r = tbl_BanHang.getSelectedRow();
-        if (r!=-1){
+        if (r != -1) {
             huy(r);
             txt_SuaSL.setText("");
-            
-        }else{
+
+        } else {
             JOptionPane.showMessageDialog(null, "Bạn chưa chọn dòng cần xóa!");
         }
-        
+
     }//GEN-LAST:event_btn_XoaMatHangMouseClicked
 
     private void btn_XoaMatHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaMatHangActionPerformed
-        
+
     }//GEN-LAST:event_btn_XoaMatHangActionPerformed
 
     private void tbl_BanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_BanHangMouseClicked
         r = tbl_BanHang.getSelectedRow();
         dfbh_model = (DefaultTableModel) tbl_BanHang.getModel();
-        
-        if (r!=-1){
-            String ssl= tbl_BanHang.getValueAt(r, 3).toString();
-                txt_SuaSL.setText(ssl);
-                btn_XoaMatHang.setVisible(true);
-                lbl_TextSL.setVisible(true);
-                lbl_GiamSL.setVisible(true);
-                lbl_TangSL.setVisible(true);
-                
-                txt_SuaSL.setVisible(true);
-                
-            
+
+        if (r != -1) {
+            String ssl = tbl_BanHang.getValueAt(r, 3).toString();
+            txt_SuaSL.setText(ssl);
+            btn_XoaMatHang.setVisible(true);
+            lbl_TextSL.setVisible(true);
+            lbl_GiamSL.setVisible(true);
+            lbl_TangSL.setVisible(true);
+
+            txt_SuaSL.setVisible(true);
+
         }
-        
+
     }//GEN-LAST:event_tbl_BanHangMouseClicked
 
     private void txt_SuaSLFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_SuaSLFocusGained
@@ -1409,12 +1427,12 @@ public class FrmNhapHang extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_SuaSLMouseClicked
 
     private void txt_SuaSLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_SuaSLActionPerformed
-        
+
         int sl = Integer.parseInt(txt_SuaSL.getText().toString());
 //        txt_SuaSL.setText(String.valueOf(plus));
         tbl_BanHang.setValueAt(sl, r, 3);
         lbl_GiamSL.setEnabled(true);
-        double donGia = Double.parseDouble( tbl_BanHang.getValueAt(r, 4).toString());
+        double donGia = Double.parseDouble(tbl_BanHang.getValueAt(r, 4).toString());
         tbl_BanHang.setValueAt(sl * donGia, r, 5);
         TinhTong();
     }//GEN-LAST:event_txt_SuaSLActionPerformed
@@ -1429,29 +1447,29 @@ public class FrmNhapHang extends javax.swing.JPanel {
 
     private void lbl_GiamSLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_GiamSLMouseClicked
         // TODO add your handling code here:
-        if(txt_SuaSL.getText().equals("0")){
+        if (txt_SuaSL.getText().equals("0")) {
             lbl_GiamSL.setEnabled(false);
-        }else{
+        } else {
             int minus = 0;
-        int sl = Integer.parseInt(txt_SuaSL.getText().toString());
-        minus = sl-1;
-        txt_SuaSL.setText(String.valueOf(minus));
-        tbl_BanHang.setValueAt(minus, r, 3);
-        double donGia = Double.parseDouble( tbl_BanHang.getValueAt(r, 4).toString());
-        tbl_BanHang.setValueAt(minus * donGia, r, 5);
-        lbl_GiamSL.setEnabled(true);
-        TinhTong();
+            int sl = Integer.parseInt(txt_SuaSL.getText().toString());
+            minus = sl - 1;
+            txt_SuaSL.setText(String.valueOf(minus));
+            tbl_BanHang.setValueAt(minus, r, 3);
+            double donGia = Double.parseDouble(tbl_BanHang.getValueAt(r, 4).toString());
+            tbl_BanHang.setValueAt(minus * donGia, r, 5);
+            lbl_GiamSL.setEnabled(true);
+            TinhTong();
         }
     }//GEN-LAST:event_lbl_GiamSLMouseClicked
 
     private void lbl_TangSLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_TangSLMouseClicked
         int plus = 0;
         int sl = Integer.parseInt(txt_SuaSL.getText().toString());
-        plus = sl+1; 
+        plus = sl + 1;
         txt_SuaSL.setText(String.valueOf(plus));
         tbl_BanHang.setValueAt(plus, r, 3);
         lbl_GiamSL.setEnabled(true);
-        double donGia = Double.parseDouble( tbl_BanHang.getValueAt(r, 4).toString());
+        double donGia = Double.parseDouble(tbl_BanHang.getValueAt(r, 4).toString());
         tbl_BanHang.setValueAt(plus * donGia, r, 5);
         TinhTong();
     }//GEN-LAST:event_lbl_TangSLMouseClicked
@@ -1571,7 +1589,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_LuuActionPerformed
 
     private void btn_XoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaMouseClicked
-         jFrame1.setVisible(false);
+        jFrame1.setVisible(false);
     }//GEN-LAST:event_btn_XoaMouseClicked
 
     private void btn_ThemSpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemSpMouseClicked
@@ -1583,7 +1601,8 @@ public class FrmNhapHang extends javax.swing.JPanel {
         jFrame1.setVisible(true);
         jFrame1.setResizable(false);
         jFrame1.setLocationRelativeTo(null);
-        jFrame1.setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 30, 30));
+        txt_TenSp.requestFocus();
+//        jFrame1.setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 30, 30));
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void btn_Luu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Luu1MouseClicked
@@ -1595,17 +1614,26 @@ public class FrmNhapHang extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_Luu1ActionPerformed
 
     private void btn_Xoa1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Xoa1MouseClicked
-        
+        jFrame2.setVisible(false);
     }//GEN-LAST:event_btn_Xoa1MouseClicked
 
     private void btn_ThemSp1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemSp1MouseClicked
-        jFrame2.setVisible(false);
+
     }//GEN-LAST:event_btn_ThemSp1MouseClicked
 
     private void txt_Search_KH2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_Search_KH2ActionPerformed
         jPanel7.setVisible(false);
         jPanel6.setVisible(true);
     }//GEN-LAST:event_txt_Search_KH2ActionPerformed
+
+    private void lbl_HinhAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_HinhAnhMouseClicked
+        int returnVal = fileDialog.showOpenDialog(cha);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            java.io.File file = fileDialog.getSelectedFile();
+            lbl_HinhAnh.setIcon(new ImageIcon(file.getPath()));
+            //System.out.println("file"+file.getPath());
+        }
+    }//GEN-LAST:event_lbl_HinhAnhMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
