@@ -151,6 +151,29 @@ public class SanPhamDao {
         }
         return false;
     }
+    //Thêm sản phẩm mới có mã
+    public  boolean  themSP2(SanPham sp){
+        
+        try {
+            java.sql.Connection con = connect.getInstance().getConnection();
+            PreparedStatement spAdd = con.prepareStatement("INSERT INTO SanPham\n" +
+"VALUES (?, ?, ?, ?, ?, ?, ?, ? )");
+            spAdd.setString(1, sp.getMaSP());
+            spAdd.setString(2, sp.getTenSP());
+            spAdd.setInt(3, sp.getSoLuong());
+            spAdd.setDouble(4, sp.getDonGia());
+            spAdd.setString(5, sp.getHinhAnh());
+            spAdd.setString(6, sp.getSize());
+            spAdd.setString(7, sp.getMauSac());
+            spAdd.setString(8, sp.getDmsp().getMaloai());
+            int n = spAdd.executeUpdate();
+            if(n>0){
+                return true;
+            }
+        } catch (Exception e) {
+        }
+        return false;
+    }
     //tìm sản phẩm theo tên
     public List<SanPham> SearchSp(String text){
             List<SanPham> list = new ArrayList<>();
@@ -300,6 +323,30 @@ public class SanPhamDao {
         public boolean updateSLSP(String maSP, int slSpDaBan){
             SanPham sp = findSPByMaSP(maSP);
             int newSL = sp.getSoLuong() - slSpDaBan;
+            int n = 0;
+            java.sql.Connection con = connect.getInstance().getConnection();
+			
+            PreparedStatement stmt = null;
+            try {
+		
+                stmt = con.prepareStatement("UPDATE SanPham SET  SoLuong = ?  WHERE MaSP = ?");
+		
+		stmt.setInt(1,newSL);
+		stmt.setString(2,maSP);
+		
+					
+		n = stmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+            return n > 0;
+        }
+        
+        //cap nhat so luong nhap
+        
+        public boolean updateSLNhapKho(String maSP, int slNhap){
+            SanPham sp = findSPByMaSP(maSP);
+            int newSL = sp.getSoLuong() + slNhap;
             int n = 0;
             java.sql.Connection con = connect.getInstance().getConnection();
 			

@@ -60,7 +60,7 @@ public class FrmDsSp extends javax.swing.JPanel {
         int slKho = Integer.parseInt(txt_SlKho.getText());
         double donGia = Double.parseDouble(txt_DonGia.getText());
         String hinh = lbl_HinhAnh.getIcon().toString();
-
+        
         return new SanPham(dm, maSp, tenSp, donGia, slKho, hinh, size, mau);
     }
 
@@ -586,11 +586,14 @@ public class FrmDsSp extends javax.swing.JPanel {
         if (kiemTraData()) {
             SanPham sp = restText();
             if (sp_dao.themSP(sp)) {
+                
                 dfSP_Model.addRow(new Object[]{
                     sp.getMaSP(), sp.getTenSP(), sp.getDmsp().getTenLoai(),
                     sp.getMauSac(), sp.getSize(), sp.getSoLuong(),
                     sp.getDonGia(), sp.getHinhAnh()
+                        
                 });
+                
                 dsSP.removeAll(dsSP);
                 xoaRongTextSp();
                 xoaModelSP();

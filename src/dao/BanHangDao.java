@@ -62,6 +62,7 @@ public class BanHangDao {
                 SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(4), rs.getInt(3), rs.getString(5), rs.getString(6), rs.getString(7));
                     
                 list.add(sp);
+                    
             }
             } catch (Exception e) {
             }

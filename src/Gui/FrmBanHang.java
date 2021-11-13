@@ -18,6 +18,7 @@ import dao.SanPhamDao;
 import entity.CT_HDBanHang;
 import entity.HoaDonBanHang;
 import entity.KhachHang;
+import entity.NhaCC;
 import entity.NhanVien;
 import entity.SanPham;
 import java.awt.Color;
@@ -105,7 +106,9 @@ public class FrmBanHang extends javax.swing.JPanel {
 
         search.addEventClick(new EventClick() {
             private double tongtien;
-            
+             @Override
+            public void itemClick(NhaCC data) {
+            }
             @Override
             public void itemClick(SanPham data) {
                
@@ -172,6 +175,9 @@ public class FrmBanHang extends javax.swing.JPanel {
             @Override
             public void itemClick(SanPham data) {
             
+            }
+            @Override
+            public void itemClick(NhaCC data) {
             }
 
             @Override
@@ -1085,8 +1091,6 @@ public class FrmBanHang extends javax.swing.JPanel {
        
         if(kiemTraTruocThanhToan()){
            taoHoaDon();
-
-
         }
         
         

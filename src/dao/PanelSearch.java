@@ -6,6 +6,7 @@
 package dao;
 
 import entity.KhachHang;
+import entity.NhaCC;
 import entity.SanPham;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -73,6 +74,26 @@ public class PanelSearch extends javax.swing.JPanel {
             this.add(kh, "wrap");
             //  wrap mean add to new row after this add
             //  this for miglayout option
+        }
+        repaint();
+        revalidate();
+        //  Refresh Component
+    }
+    
+    public void setDataNcc(List<NhaCC> data) {
+        this.removeAll();
+        for (NhaCC d : data) {
+            Search_NhaCC ncc = new Search_NhaCC(d);
+            //  add event
+            ncc.addEvent(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    //  when click
+                    event.itemClick(d);
+                }
+            });
+
+            this.add(ncc, "wrap");
         }
         repaint();
         revalidate();

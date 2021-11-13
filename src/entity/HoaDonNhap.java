@@ -43,6 +43,25 @@ public class HoaDonNhap {
         this.ghiChu = ghiChu;
     }
 
+    public HoaDonNhap(Date ngayLapHD, int soLuong, Double tongTien, String ghiChu, NhanVien nhanVien, NhaCC NCC) {
+        this.ngayLapHD = ngayLapHD;
+        this.soLuong = soLuong;
+        this.tongTien = tongTien;
+        this.ghiChu = ghiChu;
+        this.nhanVien = nhanVien;
+        this.NCC = NCC;
+    }
+
+    public HoaDonNhap(String maHDNhap, Date ngayLapHD, int soLuong, Double tongTien, String ghiChu, NhanVien nhanVien, NhaCC NCC) {
+        this.maHDNhap = maHDNhap;
+        this.ngayLapHD = ngayLapHD;
+        this.soLuong = soLuong;
+        this.tongTien = tongTien;
+        this.ghiChu = ghiChu;
+        this.nhanVien = nhanVien;
+        this.NCC = NCC;
+    }
+    
     public String getMaHDNhap() {
         return maHDNhap;
     }

@@ -683,6 +683,8 @@ public class GD_Chinh extends javax.swing.JFrame {
          try {
               FrmHoaDonBanHang fr = new FrmHoaDonBanHang();
               fr.renderListHoaDon();
+              FrmHoaDonNhapHang frn = new FrmHoaDonNhapHang();
+              frn.renderListHoaDon();
         } catch (Exception e) {
              JOptionPane.showMessageDialog(rootPane, "ERRO");
         }

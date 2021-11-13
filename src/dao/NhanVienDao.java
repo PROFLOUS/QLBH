@@ -104,7 +104,10 @@ public class NhanVienDao {
                                  Date ngayVaoLam = rs.getDate(6);
                                  String tinhTrang = rs.getString(7);
                                  String maCV = rs.getString(8);
+                                 ChucVuDao cv_dao = new ChucVuDao();
+                ChucVu cv = cv_dao.getCVByMaCV(maCV);
                                  nv = new NhanVien(maNhanVien, tenNV, sdt, diaChi, ngaySinh, ngayVaoLam, tinhTrang);
+                                 nv.setChucVu(cv);
 			}
             } catch (Exception e) {
                 e.printStackTrace();

@@ -29,6 +29,13 @@ public class NhaCC {
         this.diaChi = diaChi;
     }
 
+    public NhaCC(String tenNCC, String sdt, String mail, String diaChi) {
+        this.tenNCC = tenNCC;
+        this.sdt = sdt;
+        this.mail = mail;
+        this.diaChi = diaChi;
+    }
+    
     public String getMaNCC() {
         return maNCC;
     }
