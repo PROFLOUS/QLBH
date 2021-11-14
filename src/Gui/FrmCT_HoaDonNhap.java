@@ -151,9 +151,9 @@ public class FrmCT_HoaDonNhap extends javax.swing.JFrame {
         try {
             
             Hashtable map = new Hashtable();
-            JasperReport report = JasperCompileManager.compileReport("src\\Gui/rptHoaDon.jrxml");
+            JasperReport report = JasperCompileManager.compileReport("src\\Gui/rptHoaDonNhap.jrxml");
             
-            map.put("MaHD", maHD);
+            map.put("MaHDNhap", maHD);
                   
             JasperPrint p = JasperFillManager.fillReport(report,  map, connect.getConnection() );
             JasperViewer.viewReport(p, false);

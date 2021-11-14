@@ -83,7 +83,6 @@ private ArrayList<HoaDonNhap> listHoaDon ;
         txtSearchHD = new javax.swing.JTextField();
         btnShowHD = new javax.swing.JButton();
         btnSearchHD = new javax.swing.JButton();
-        btnThemHD = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
         lblNumHD = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -145,18 +144,6 @@ private ArrayList<HoaDonNhap> listHoaDon ;
             }
         });
 
-        btnThemHD.setBackground(new java.awt.Color(21, 151, 229));
-        btnThemHD.setForeground(java.awt.Color.white);
-        btnThemHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/add.png"))); // NOI18N
-        btnThemHD.setText("Thêm Hóa Đơn");
-        btnThemHD.setToolTipText("");
-        btnThemHD.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnThemHD.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnThemHDMouseClicked(evt);
-            }
-        });
-
         jLabel1.setText("Số Hóa Đơn: ");
 
         lblNumHD.setText("2");
@@ -185,11 +172,9 @@ private ArrayList<HoaDonNhap> listHoaDon ;
                         .addComponent(txtSearchHD, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSearchHD, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 375, Short.MAX_VALUE)
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnThemHD)
-                        .addGap(14, 14, 14))
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnShowHD)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -210,7 +195,6 @@ private ArrayList<HoaDonNhap> listHoaDon ;
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnThemHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtSearchHD)
                     .addComponent(btnSearchHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -245,16 +229,16 @@ private ArrayList<HoaDonNhap> listHoaDon ;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -319,10 +303,6 @@ private ArrayList<HoaDonNhap> listHoaDon ;
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSearchHDActionPerformed
 
-    private void btnThemHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemHDMouseClicked
-
-    }//GEN-LAST:event_btnThemHDMouseClicked
-
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         listHoaDon.removeAll(listHoaDon);
         xoaModel();
@@ -342,7 +322,6 @@ private ArrayList<HoaDonNhap> listHoaDon ;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSearchHD;
     private javax.swing.JButton btnShowHD;
-    private javax.swing.JToggleButton btnThemHD;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

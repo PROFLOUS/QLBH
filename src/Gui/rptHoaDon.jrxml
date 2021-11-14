@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_Letter" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9ad9413f-4276-4c7c-9731-00538bd2d8ba">
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_Letter" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bf55f203-16cf-40f9-af0c-f0b704c1593b">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="QLBH"/>
 	<property name="com.jaspersoft.studio.data.sql.tables">
 		<![CDATA[IktoYWNoSGFuZyIgLDQ4NCwxNSxkYzllMzY3My0xMTBlLTQ3ZTgtYWI3NS1lN2ExMDUwNzEyMTk7
@@ -68,28 +68,28 @@ where a.MaHD = $P{MaHD}]]>
 	<title>
 		<band height="150" splitType="Stretch">
 			<staticText>
-				<reportElement x="200" y="40" width="180" height="18" uuid="5ac0d35c-0563-4b39-a9c3-0e7ffea8d551"/>
+				<reportElement x="200" y="40" width="180" height="18" uuid="4a6ccf5c-edc7-4583-a77c-2956c3b4bd7c"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[01 Văn Bảo Gò Vấp HCM]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="150" y="100" width="270" height="50" uuid="58555958-7364-48a6-900c-7079d994f257"/>
+				<reportElement x="150" y="100" width="270" height="50" uuid="79a8b459-bd3b-4f80-bfea-dc0afa83f4dc"/>
 				<textElement>
 					<font size="25" isBold="true"/>
 				</textElement>
 				<text><![CDATA[HÓA ĐƠN BÁN HÀNG]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="229" y="70" width="114" height="20" uuid="4d76f03c-c556-4f91-8378-98aa9753f058"/>
+				<reportElement x="229" y="70" width="114" height="20" uuid="baa18d92-a437-4011-bbb0-eb9cca73eea8"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[ĐT: 0397530256]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="203" y="0" width="174" height="51" uuid="067387a5-8e0d-4051-8d4d-3d97a6993a53"/>
+				<reportElement x="203" y="0" width="174" height="51" uuid="b8e2a267-5eb7-4753-8e25-757b7ca79ee4"/>
 				<textElement>
 					<font size="30" isBold="true"/>
 				</textElement>
@@ -100,56 +100,56 @@ where a.MaHD = $P{MaHD}]]>
 	<pageHeader>
 		<band height="80" splitType="Stretch">
 			<staticText>
-				<reportElement x="80" y="10" width="100" height="30" uuid="148f2f8b-a1d0-4ce2-b354-0ddba3a679f4"/>
+				<reportElement x="80" y="10" width="100" height="30" uuid="7f5f6db6-f999-4cbd-ab5d-e563529b24d3"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[Số HD: ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="340" y="10" width="100" height="30" uuid="ea57e6c5-cb1c-43e2-8ad8-7cfeb404d680"/>
+				<reportElement x="340" y="10" width="100" height="30" uuid="b11e02b9-8e59-46fd-a5dd-e2fbc0f3972d"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[Ngày lập:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="160" y="12" width="100" height="18" uuid="528e31b7-a17e-4c10-9f0e-2a61fad53e65"/>
+				<reportElement x="160" y="12" width="100" height="18" uuid="370a972c-40e2-4849-99fe-4198885dbd9e"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{MaHD}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="430" y="12" width="100" height="18" uuid="9fa7930f-0588-4386-8cf3-d8afa35c9244"/>
+				<reportElement x="430" y="12" width="100" height="18" uuid="a6ee2999-970c-4759-a7a3-32f702470b86"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{NgayLapHD}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="80" y="50" width="100" height="30" uuid="c745af59-672d-4b53-bdb3-3ce85b170a6b"/>
+				<reportElement x="80" y="50" width="100" height="30" uuid="8e9e3102-b469-47cd-ae7a-435e50af4480"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[Nhân Viên]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="160" y="50" width="180" height="18" uuid="8ce822ee-7606-4d43-baa0-d72b951c739b"/>
+				<reportElement x="160" y="50" width="180" height="18" uuid="2d9722f5-129a-4e50-8d84-6b9bc9814dd8"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{TenNV}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="340" y="50" width="100" height="30" uuid="5d099e72-9837-4728-932c-892ee4ead206"/>
+				<reportElement x="340" y="50" width="100" height="30" uuid="decaf790-5290-4c3c-b149-05ac5dd94a6d"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[Khách hàng:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="430" y="50" width="100" height="18" uuid="c1baf44d-2029-4c39-8b75-996943dc31e5"/>
+				<reportElement x="430" y="50" width="100" height="18" uuid="0d7310f5-9681-420a-943e-f43586561fa3"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
@@ -160,129 +160,129 @@ where a.MaHD = $P{MaHD}]]>
 	<columnHeader>
 		<band height="62" splitType="Stretch">
 			<staticText>
-				<reportElement x="40" y="30" width="100" height="30" uuid="59009cce-09ff-4350-bd1b-7a38d5cdad67"/>
+				<reportElement x="40" y="30" width="100" height="30" uuid="dc634774-8156-4c34-a61e-bdaec8f658e8"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[Mã SP]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="120" y="30" width="100" height="30" uuid="49db8e78-a2df-4f4f-854d-3f8dd48e1d74"/>
+				<reportElement x="120" y="30" width="100" height="30" uuid="a851e570-5907-4988-8ba4-b37168577224"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[Tên SP]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="230" y="30" width="100" height="30" uuid="38cf22fb-878a-4d63-baf4-f0aa693eb463"/>
+				<reportElement x="230" y="30" width="100" height="30" uuid="82e83f05-4f64-4e7f-9c8f-8a7549fb9815"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[Số Lượng]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="340" y="30" width="100" height="30" uuid="44877489-70b7-46d6-b73e-6f0be576f5ee"/>
+				<reportElement x="340" y="30" width="100" height="30" uuid="1fb742ab-bb6f-4655-b3fa-b65ba85c6551"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[Đơn giá]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="440" y="30" width="100" height="30" uuid="1bb21222-b24f-4b9c-baee-679bcf01bbf6"/>
+				<reportElement x="440" y="30" width="100" height="30" uuid="00e74a36-2b1f-45f3-aa05-b8b1a5c1f873"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[Thành Tiền]]></text>
 			</staticText>
 			<line>
-				<reportElement x="20" y="59" width="541" height="1" uuid="cfaa9554-a542-4a57-9ed2-77251f0063eb"/>
+				<reportElement x="20" y="59" width="541" height="1" uuid="0d3b46bf-920e-485d-a4d1-92facce58810"/>
 			</line>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="70" splitType="Stretch">
 			<textField>
-				<reportElement x="26" y="28" width="100" height="18" uuid="4acaa3e7-5b70-4e13-a418-91ee86d22f8b"/>
+				<reportElement x="26" y="28" width="100" height="18" uuid="fcb321ad-c927-4531-b400-227f998aa72a"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{MaSP}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="120" y="30" width="100" height="18" uuid="a53d61ad-28de-438a-8be0-f1eef9fd912a"/>
+				<reportElement x="120" y="30" width="100" height="18" uuid="59543194-9c20-4e62-a97d-607c51ce8371"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{TenSP}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="230" y="30" width="100" height="18" uuid="d34e28fd-7112-4e9c-96a7-f4aae24dd92d"/>
+				<reportElement x="230" y="30" width="100" height="18" uuid="963050b0-c20a-44c7-98ae-29cddc415153"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{SoLuong}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="340" y="30" width="100" height="18" uuid="371f13f4-cdf7-469b-8383-94b5ef8378e1"/>
+				<reportElement x="340" y="30" width="100" height="18" uuid="778b3265-6c51-43de-b59a-7678c754c36a"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{DonGia}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="440" y="30" width="100" height="18" uuid="a596705b-fb30-4185-a720-1d36b99f79fb"/>
+				<reportElement x="440" y="30" width="100" height="18" uuid="7df7f89c-67f4-478c-847b-dfa091d7cc12"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{DonGia} * $F{SoLuong}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="26" y="69" width="539" height="1" uuid="764d11a5-9a24-4c81-b491-f199261f3eec"/>
+				<reportElement x="26" y="69" width="539" height="1" uuid="2f07569d-6fa9-4bba-8c63-7306255f4b2a"/>
 			</line>
 		</band>
 	</detail>
 	<columnFooter>
 		<band height="140" splitType="Stretch">
 			<staticText>
-				<reportElement x="20" y="30" width="100" height="30" uuid="17cbe4ef-91ea-4eea-8a22-42d9533a4542"/>
+				<reportElement x="20" y="30" width="100" height="30" uuid="75b8cca1-22a3-4973-87df-eeef5a4eee15"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[Tiền hàng]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="60" width="100" height="36" uuid="a78d3820-cc0e-4049-b3fd-ed7f140561e1"/>
+				<reportElement x="20" y="60" width="100" height="36" uuid="0cc2efb8-eba7-44f3-8179-19ee1c101bbe"/>
 				<textElement>
 					<font size="20" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tổng Tiền]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="20" y="110" width="100" height="30" uuid="ed01ec04-bd8d-47c0-883f-4a357603025c"/>
+				<reportElement x="20" y="110" width="100" height="30" uuid="c64030b6-f67d-4bf6-b9dd-0d9414ecbe5e"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[Khách trả]]></text>
 			</staticText>
 			<line>
-				<reportElement x="20" y="92" width="541" height="1" uuid="2d6c43f9-178b-4d39-b0af-5bc9befb5ce2"/>
+				<reportElement x="20" y="92" width="541" height="1" uuid="6e58d197-b20a-40f0-9cd7-5d2eb47b4c18"/>
 			</line>
 			<textField>
-				<reportElement x="470" y="30" width="100" height="20" uuid="51ad637f-8e92-4f2c-a5db-18be141750d8"/>
+				<reportElement x="470" y="30" width="100" height="20" uuid="2c388c36-9434-41ec-a52f-9f05024cf143"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{TongTien}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="470" y="60" width="100" height="30" uuid="969af946-d7a4-4e21-aa16-caedaa7e5560"/>
+				<reportElement x="470" y="60" width="100" height="30" uuid="22f80e33-a893-4f25-823b-d4cff1a20298"/>
 				<textElement>
 					<font size="16" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{TongTien}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="470" y="110" width="100" height="20" uuid="1a22da82-10fb-45db-818a-b1fc9ec2522b"/>
+				<reportElement x="470" y="110" width="100" height="20" uuid="5ef38950-43f3-43ed-8e20-18c146ebd5de"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -293,7 +293,7 @@ where a.MaHD = $P{MaHD}]]>
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<staticText>
-				<reportElement x="190" y="12" width="269" height="30" uuid="ca9562a6-6b37-46ad-9fa8-f855724f356c"/>
+				<reportElement x="190" y="12" width="269" height="30" uuid="02348024-9d54-495b-9419-55a9247a386d"/>
 				<textElement>
 					<font size="16"/>
 				</textElement>

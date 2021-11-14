@@ -68,7 +68,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
     private int soLuongTon = 0;
 
     SanPham sp = new SanPham();
-    private int tong;
+    private double tong;
     private int r;
     final JFileChooser fileDialog = new JFileChooser();
     JFrame cha = new JFrame();
@@ -135,7 +135,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
                         sp.getMaSP(), sp.getTenSP(), sp.getMauSac(), soLuong, sp.getDonGia(), thanhTien
                     });
                 }
-                TinhTong();
+                TinhTong3();
             }
 
             @Override
@@ -350,19 +350,18 @@ public class FrmNhapHang extends javax.swing.JPanel {
     }
 
     //tính tổng tiền
-    public void TinhTong() {
-        DecimalFormat x = new DecimalFormat("###,###,###");
-        tong = 0;
-        for (int i = 0; i < tbl_BanHang.getRowCount(); i++) {
-            tong += Double.parseDouble(tbl_BanHang.getValueAt(i, 5).toString());
-        }
-        System.out.println("tong" + tong);
-        lbl_TongTien.setText(x.format(tong));
-        lbl_TienPhaiTra.setText(x.format(tong));
-//        lbl_TongTien.setText(String.valueOf(tong));
-//        lbl_TienPhaiTra.setText(String.valueOf(tong));
-
-    }
+//    public void TinhTong() {
+//        DecimalFormat x = new DecimalFormat("###,###,###");
+//        tong = 0;
+//        for (int i = 0; i < tbl_BanHang.getRowCount(); i++) {
+//            tong += Double.parseDouble(tbl_BanHang.getValueAt(i, 5).toString());
+//        }
+//        System.out.println("tong" + tong);
+//        lbl_TongTien.setText(x.format(tong));
+//        lbl_TienPhaiTra.setText(x.format(tong));
+////        lbl_TongTien.setText(String.valueOf(tong));
+////        lbl_TienPhaiTra.setText(String.valueOf(tong));
+//    }
 
     //tính tổng tiền
     public void TinhTong2() {
@@ -377,6 +376,21 @@ public class FrmNhapHang extends javax.swing.JPanel {
 //        lbl_TongTien.setText(String.valueOf(tong));
 //        lbl_TienPhaiTra.setText(String.valueOf(tong));
 
+    }
+    //tính tổng tiền
+    public void TinhTong3(){        
+        // tạo 1 NumberFormat để định dạng tiền tệ theo tiêu chuẩn của Việt Nam
+        // đơn vị tiền tệ của Việt Nam là đồng
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+        
+        tong =0.0;
+        for( int i = 0;i<tbl_BanHang.getRowCount();i++){
+            tong += Double.parseDouble( tbl_BanHang.getValueAt(i, 5).toString());
+        }
+        lbl_TongTien.setText(currencyVN.format(tong));
+        lbl_TienPhaiTra.setText(currencyVN.format(tong));
+        
     }
 
     //tính tiền thừ
@@ -409,7 +423,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
     //@return 128000
     public Double changeMoney(String money) {
         if (money.length() > 1) {
-            String newMoney = money.substring(0, money.length() - 2).replace(",", "");
+            String newMoney = money.substring(0, money.length() - 2).replace(".", "");
             return Double.parseDouble(newMoney);
         }
         return 0.0;
@@ -474,9 +488,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
         lbl_TongTien.setText("");
         txt_TienDua1.setText("");
         lbl_TienPhaiTra.setText("");
-        txt_Ghichu.setText("Nhập ghi chú");
-        txt_Search_SP.setText("Thêm Sản Phẩm Vào Đơn Hàng");
-        txt_Search_KH2.setText("Thêm Khách Hàng Vào Đơn");
+        
         btn_XoaMatHang.setVisible(false);
         lbl_TextSL.setVisible(false);
         lbl_GiamSL.setVisible(false);
@@ -518,6 +530,8 @@ public class FrmNhapHang extends javax.swing.JPanel {
         }
         return list;
     }
+    
+    
 //    public String TaoMaHD(){
 //        Random rand = new Random();
 //         int ranNum = rand.nextInt(100000000)+ 1;
@@ -525,58 +539,9 @@ public class FrmNhapHang extends javax.swing.JPanel {
 //         
 //         return maHD;
 //    }
-
-    //tao hoa don nhap hang
-    public void taoDonNhap() {
-        //lay sp tu table
-        List<SanPham> listSp = getSpFromTB();
-        //lay so luong sp
-        int sl = 0;
-        for (int i = 0; i < listSp.size(); i++) {
-            sl += listSp.get(i).getSoLuong();
-        }
-        //lay tt nha cung cap
-        String maNcc = txtMaNCC1.getText();
-        NhaCC ncc = nccDao.getNccByMa(maNcc);
-        //lay nhan vien
-        NhanVienDao nvDao = new NhanVienDao();
-        NhanVien nv = nvDao.getNVByMaTrangThai("online");
-        System.out.println("nv" + nv);
-        //lay tong tien
-        Double tongTien = changeMoney(lbl_TienPhaiTra.getText());
-        System.out.println("Tong tien"+tongTien);
-        String ghiChu = txt_Ghichu.getText();
-        if (ghiChu.equals("Nhập ghi chú đơn hàng")) {
-            ghiChu = " ";
-        }
-        HoaDonNhap hdn = new HoaDonNhap(new java.util.Date(), sl, tongTien, ghiChu, nv, ncc);
-        //them vao database
-        HoaDonNhapDao hdnDao = new HoaDonNhapDao();
-        hdnDao.createHoaDonBH(hdn);
-        HoaDonNhap hn = new HoaDonNhap();
-        hn = hdnDao.findHDBySl(hdn.getSoLuong());
-        //them vao ct_HoaDonNhap
-        List<CT_HoaDonNhap> list_CTHDN = new ArrayList<CT_HoaDonNhap>();
-        for (int i = 0; i < listSp.size(); i++) {
-            int sll = listSp.get(i).getSoLuong();
-            Double donGia = listSp.get(i).getDonGia();
-            CT_HoaDonNhap ctn = new CT_HoaDonNhap(sll, donGia);
-            SanPhamDao spDao = new SanPhamDao();
-            SanPham sp = spDao.findSPByMaSP(listSp.get(i).getMaSP());
-            ctn.setSanPham(sp);
-            ctn.setHoaDonNhap(hn);
-            list_CTHDN.add(ctn);
-            //cap nhat sl
-            spDao.updateSLNhapKho(listSp.get(i).getMaSP(), sll);
-        }
-        //them cthd
-        CT_HoaDonNhapDao ctnDao = new CT_HoaDonNhapDao();
-        for (int i = 0; i < list_CTHDN.size(); i++) {
-            ctnDao.createCTHoaDonNH(list_CTHDN.get(i));
-        }
-        //in hoa don
-
-    }
+    
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -1852,7 +1817,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
         lbl_GiamSL.setEnabled(true);
         double donGia = Double.parseDouble(tbl_BanHang.getValueAt(r, 4).toString());
         tbl_BanHang.setValueAt(sl * donGia, r, 5);
-        TinhTong();
+        TinhTong3();
     }//GEN-LAST:event_txt_SuaSLActionPerformed
 
     private void txt_SuaSLKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_SuaSLKeyReleased
@@ -1876,7 +1841,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
             double donGia = Double.parseDouble(tbl_BanHang.getValueAt(r, 4).toString());
             tbl_BanHang.setValueAt(minus * donGia, r, 5);
             lbl_GiamSL.setEnabled(true);
-            TinhTong();
+            TinhTong3();
         }
     }//GEN-LAST:event_lbl_GiamSLMouseClicked
 
@@ -1889,7 +1854,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
         lbl_GiamSL.setEnabled(true);
         double donGia = Double.parseDouble(tbl_BanHang.getValueAt(r, 4).toString());
         tbl_BanHang.setValueAt(plus * donGia, r, 5);
-        TinhTong();
+        TinhTong3();
     }//GEN-LAST:event_lbl_TangSLMouseClicked
 
     private void txtMaNCC1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMaNCC1FocusGained
@@ -2034,7 +1999,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
 //                xoaRongTextSp();
 //                xoaModelSP();
 //                upTblSP();
-                TinhTong();
+                TinhTong3();
                 JOptionPane.showMessageDialog(null, "Thêm thành công");
                 jFrame1.setVisible(false);
             } else {
@@ -2107,8 +2072,10 @@ public class FrmNhapHang extends javax.swing.JPanel {
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         if (kiemTraTruocNhapHang()) {
+            
             taoDonNhap();
-            xoaRong();
+            
+            
         }
 
 
@@ -2140,7 +2107,79 @@ public class FrmNhapHang extends javax.swing.JPanel {
         xoaRongText();
         txt_MaSp.requestFocus();
     }//GEN-LAST:event_jButton5MouseClicked
+    
+    //tao hoa don nhap hang
+    public void taoDonNhap() {
+        //lay sp tu table
+        List<SanPham> listSp = getSpFromTB();
+        //lay so luong sp
+        int sl = 0;
+        for (int i = 0; i < listSp.size(); i++) {
+            sl += listSp.get(i).getSoLuong();
+        }
+        //lay tt nha cung cap
+        String maNcc = txtMaNCC1.getText();
+        NhaCC ncc = nccDao.getNccByMa(maNcc);
+        //lay nhan vien
+        NhanVienDao nvDao = new NhanVienDao();
+        NhanVien nv = nvDao.getNVByMaTrangThai("online");
+        System.out.println("nv" + nv);
+        //lay tong tien
+        Double tongTien = changeMoney(lbl_TienPhaiTra.getText());
+        System.out.println("Tong tien"+tongTien);
+        String ghiChu = txt_Ghichu.getText();
+        if (ghiChu.equals("Nhập ghi chú đơn hàng")) {
+            ghiChu = " ";
+        }
+        HoaDonNhap hdn = new HoaDonNhap(new java.util.Date(), sl, tongTien, ghiChu, nv, ncc);
+        //them vao database
+        HoaDonNhapDao hdnDao = new HoaDonNhapDao();
+        hdnDao.createHoaDonBH(hdn);
+        HoaDonNhap hn = new HoaDonNhap();
+        hn = hdnDao.findHDBySl(hdn.getSoLuong());
+        //them vao ct_HoaDonNhap
+        List<CT_HoaDonNhap> list_CTHDN = new ArrayList<CT_HoaDonNhap>();
+        for (int i = 0; i < listSp.size(); i++) {
+            int sll = listSp.get(i).getSoLuong();
+            Double donGia = listSp.get(i).getDonGia();
+            CT_HoaDonNhap ctn = new CT_HoaDonNhap(sll, donGia);
+            SanPhamDao spDao = new SanPhamDao();
+            SanPham sp = spDao.findSPByMaSP(listSp.get(i).getMaSP());
+            ctn.setSanPham(sp);
+            ctn.setHoaDonNhap(hn);
+            list_CTHDN.add(ctn);
+            //cap nhat sl
+            spDao.updateSLNhapKho(listSp.get(i).getMaSP(), sll);
+        }
+        //them cthd
+        CT_HoaDonNhapDao ctnDao = new CT_HoaDonNhapDao();
+        for (int i = 0; i < list_CTHDN.size(); i++) {
+            ctnDao.createCTHoaDonNH(list_CTHDN.get(i));
+        }
+        
+        
+        //in hoa don
+        printBillNhap(hn.getMaHDNhap());
+        xoaRong();
 
+    }
+    
+    public void printBillNhap(String maHD){
+        try {
+            
+            Hashtable map = new Hashtable();
+            JasperReport report = JasperCompileManager.compileReport("src\\Gui/rptHoaDonNhap.jrxml");
+            
+            map.put("MaHDNhap", maHD);
+                  
+            JasperPrint p = JasperFillManager.fillReport(report,  map, connect.getConnection() );
+            JasperViewer.viewReport(p, false);
+           // JasperExportManager.exportReportToPdfFile(p, "test.pdf");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+           
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Luu;

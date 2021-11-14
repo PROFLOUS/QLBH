@@ -230,8 +230,6 @@ public class FrmBanHang extends javax.swing.JPanel {
         for( int i = 0;i<tbl_BanHang.getRowCount();i++){
             tong += Double.parseDouble( tbl_BanHang.getValueAt(i, 5).toString());
         }
-        
-        
         lbl_TongTien.setText(currencyVN.format(tong));
         lbl_TienPhaiTra.setText(currencyVN.format(tong));
          txt_TienDua.setText(currencyVN.format(tong));              
