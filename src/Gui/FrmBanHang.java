@@ -957,8 +957,12 @@ public class FrmBanHang extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void txt_TienDuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_TienDuaActionPerformed
-       TinhTienThua();
-       btn_XoaMatHang.setEnabled(false);
+//       Locale localeVN = new Locale("vi", "VN");
+//        NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+//          Double money = Double.parseDouble(txt_TienDua.getText());
+//         txt_TienDua.setText(currencyVN.format(money));
+//        TinhTienThua();
+            txt_Ghichu.requestFocus();
     }//GEN-LAST:event_txt_TienDuaActionPerformed
 
     private void txt_Search_SPFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_Search_SPFocusGained
@@ -982,7 +986,12 @@ public class FrmBanHang extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_Search_SPMouseClicked
 
     private void txt_Search_SPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_Search_SPActionPerformed
-        // TODO add your handling code here:
+        //click enter neu khong co sp nao can tim hien thị thong bao
+        if (search.getItemSize() < 1){
+            JOptionPane.showMessageDialog(tbl_BanHang, "Không tìm thấy sản phẩm trong kho");
+        }
+        
+        
     }//GEN-LAST:event_txt_Search_SPActionPerformed
 
     private void txt_Search_SPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_Search_SPKeyReleased
@@ -1334,7 +1343,12 @@ public class FrmBanHang extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_KhuyenMaiMouseClicked
 
     private void txt_KhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_KhuyenMaiActionPerformed
-        // TODO add your handling code here:
+        //chuyen doi tien khuyenmai sang dinh dang tien te
+//        Locale localeVN = new Locale("vi", "VN");
+//        NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+//        Double money = Double.parseDouble(txt_KhuyenMai.getText());
+//        txt_KhuyenMai.setText(currencyVN.format(money));
+            txt_TienDua.requestFocus();
     }//GEN-LAST:event_txt_KhuyenMaiActionPerformed
 
     //nhap so tien khuyen mai
@@ -1342,13 +1356,27 @@ public class FrmBanHang extends javax.swing.JPanel {
     private void txt_KhuyenMaiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_KhuyenMaiKeyReleased
         // tạo 1 NumberFormat để định dạng tiền tệ theo tiêu chuẩn của Việt Nam
         // đơn vị tiền tệ của Việt Nam là đồng
-        Locale localeVN = new Locale("vi", "VN");
-        NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+//        Locale localeVN = new Locale("vi", "VN");
+//        NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
         
+        //kiem tra tienKM nhap vao co chu hoac ky dac biet( không phải là số) 
+       
+            String tienKM = txt_KhuyenMai.getText().substring(0,txt_KhuyenMai.getText().length()-2).replace(".","");
+                 
+            if (!tienKM.matches("^[0-9]*$")) {
+		JOptionPane.showMessageDialog(tbl_BanHang, "Không được nhập chữ hoặc ký tự đặc biệt");
+		
+            }
+            else{
+                Locale localeVN = new Locale("vi", "VN");
+                  NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+                 double tienKhuyenMai = Double.parseDouble(txt_KhuyenMai.getText());
+                lbl_TienPhaiTra.setText(currencyVN.format(tong-tienKhuyenMai));
+                txt_TienDua.setText(currencyVN.format(tong-tienKhuyenMai));
+            }
+           
+       
         
-        double tienKhuyenMai = Double.parseDouble(txt_KhuyenMai.getText());
-        lbl_TienPhaiTra.setText(currencyVN.format(tong-tienKhuyenMai));
-         txt_TienDua.setText(currencyVN.format(tong-tienKhuyenMai));
     }//GEN-LAST:event_txt_KhuyenMaiKeyReleased
 
     private void txt_KhuyenMaiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_KhuyenMaiKeyTyped

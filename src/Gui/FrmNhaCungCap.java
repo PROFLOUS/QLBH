@@ -644,6 +644,7 @@ public class FrmNhaCungCap extends javax.swing.JPanel {
         xoaRongInput();
         txtMaNCC1.setEnabled(true);
         btnLuu.setEnabled(true);
+        txtMaNCC1.requestFocus();
        
     }//GEN-LAST:event_btnThemMouseClicked
 

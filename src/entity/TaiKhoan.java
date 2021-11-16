@@ -73,6 +73,11 @@ public class TaiKhoan {
     public void setTenTaiKhoan(String tenTaiKhoan) {
         this.tenTaiKhoan = tenTaiKhoan;
     }
+
+    @Override
+    public String toString() {
+        return "TaiKhoan{" + "nhanVien=" + nhanVien + ", matKhau=" + matKhau + ", tenQuyen=" + tenQuyen + ", trangThai=" + trangThai + ", tenTaiKhoan=" + tenTaiKhoan + '}';
+    }
     
     
     

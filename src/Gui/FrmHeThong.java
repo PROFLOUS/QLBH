@@ -17,6 +17,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -34,7 +35,8 @@ public class FrmHeThong extends javax.swing.JPanel {
     private ArrayList<TaiKhoan> listTK = new ArrayList<TaiKhoan>();
     TaiKhoanDao tkDao = new TaiKhoanDao();
      private javax.swing.table.DefaultTableModel modelTbTK;
-
+     //chua ds  NV tuong ung tung chi so index trong jcomboNV
+     private List<NhanVien> listNV = new ArrayList<NhanVien>();
      
      
    public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, new Color(153,153,153));
@@ -45,7 +47,7 @@ public class FrmHeThong extends javax.swing.JPanel {
      */
     public FrmHeThong() {
         initComponents();
-          listTK = tkDao.getDsTaiKhoan();
+        listTK = tkDao.getDsTaiKhoan();
         try {
             connect.getInstance().connect();
         } catch (SQLException ex) {
@@ -370,6 +372,11 @@ public class FrmHeThong extends javax.swing.JPanel {
         btnLuu1.setText("Lưu");
         btnLuu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLuu1.setEnabled(false);
+        btnLuu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLuu1MouseClicked(evt);
+            }
+        });
 
         btnThem.setBackground(new java.awt.Color(21, 151, 229));
         btnThem.setForeground(java.awt.Color.white);
@@ -514,7 +521,7 @@ public class FrmHeThong extends javax.swing.JPanel {
                     
                      String TrangThai = tbTaiKhoan.getValueAt(row, 3).toString();
                 
-                    if(TrangThai.equals("Đã khóa")){
+                    if(TrangThai.toLowerCase().equals("đã khóa")){
                         jcbTrangThai.setSelectedIndex(1);
                     }
                     else if(TrangThai.toUpperCase().equals("Hoạt động".toUpperCase())){
@@ -542,7 +549,8 @@ public class FrmHeThong extends javax.swing.JPanel {
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
        txtTaiKhoan.setEnabled(true);
        btnLuu1.setEnabled(true);
-      xoaRong();
+       txtTaiKhoan.requestFocus();
+         xoaRong();
         
     }//GEN-LAST:event_btnThemMouseClicked
 
@@ -551,8 +559,8 @@ public class FrmHeThong extends javax.swing.JPanel {
                 if(checkValue()){
                     String username = txtTaiKhoan.getText();
                    String passWorld = txtMatKhau.getText();
-                   String tenQuyen = jcbTenQuyen.getSelectedItem().toString();
-                   String trangThai = jcbTrangThai.getSelectedItem().toString();
+                   String tenQuyen = jcbTenQuyen.getSelectedItem().toString().toLowerCase();
+                   String trangThai = jcbTrangThai.getSelectedItem().toString().toLowerCase();
                    
                    TaiKhoan tk = new TaiKhoan(passWorld, tenQuyen, trangThai, username);
                    if(tkDao.updateTaiKhoan(tk)){
@@ -579,17 +587,74 @@ public class FrmHeThong extends javax.swing.JPanel {
 				
 			}
     }//GEN-LAST:event_btnXoaMouseClicked
+
+    //click vao luu
+    private void btnLuu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLuu1MouseClicked
+        String tenTk = txtTaiKhoan.getText().trim();
+        String pass = txtMatKhau.getText().trim();
+        String tenQuyen = jcbTenQuyen.getSelectedItem().toString().toLowerCase();
+        String trangThai = jcbTrangThai.getSelectedItem().toString().toLowerCase();
+        int tenNvIdx = jcbNhanVien1.getSelectedIndex();
+        NhanVien nv = listNV.get(tenNvIdx);
+        
+        if(checkValue()){
+           TaiKhoan tk = new TaiKhoan(pass, tenQuyen, trangThai, tenTk);
+            tk.setNhanVien(nv);
+            if(tkDao.createTaiKhoan(tk)){
+               
+                
+                //cap nhat lai table
+                  Object[] row = {tk.getTenTaiKhoan(),
+                     tk.getMatKhau(), tk.getTenQuyen(), tk.getTrangThai(), tk.getNhanVien().getTenNV()};
+                    modelTbTK.addRow(row);
+                    xoaRong();
+                    btnLuu1.setEnabled(false);
+                     JOptionPane.showMessageDialog(btnThem, "Thêm thành công !!");
+            }
+        }
+     
+              
+    }//GEN-LAST:event_btnLuu1MouseClicked
         public boolean checkValue(){
+            
+            
+           
+              
             //check mật khẩu từ 6-18 ký tự và không có ký tự đặc biệt
             ///^[a-z0-9_-]{6,18}$/
-            String passWorld = txtMatKhau.getText();
+            String passWorld = txtMatKhau.getText().trim();
              String regexPasWorld = "^[a-z0-9_-]{6,18}$";//check mail
               if ( !passWorld.matches("^[a-z0-9_-]{6,18}$")) {
 		JOptionPane.showMessageDialog(btnThem, "Mật khẩu 6-18 ký tự và không chứa ký tự đặc biệt");
 		return false;
-            }
+                }
              
-             
+              //kiem tra ten ng dung
+             //  /^[a-z0-9_-]{3,16}$/
+             String tenTk = txtTaiKhoan.getText().trim();
+              if ( !tenTk.matches("^[a-z0-9_-]{3,16}$")) {
+		JOptionPane.showMessageDialog(btnThem, "Tên đăng nhập từ 3-16 ký tự và không chứa ký tự đặc biệt");
+		return false;
+                }
+              
+              //kiem tra ten dang nhap da ton tai chuwa
+              TaiKhoanDao tkDao = new TaiKhoanDao();
+              TaiKhoan tk = tkDao.findTKByUserName(tenTk);
+              if(tk!=null){
+                  JOptionPane.showMessageDialog(btnThem, "Tên đăng nhập đã tồn tài trong hệ thống.");
+                  return false;
+              }
+                //lay ra chi so index trong jcbNV
+                //kiem tra nv da co tk chua
+                //1 nv chi co 1 tk
+              int idxNV = jcbNhanVien1.getSelectedIndex();
+               TaiKhoan taikhoan = tkDao.findTKByMaNV(listNV.get(idxNV).getMaNV());
+               if(taikhoan!=null){
+                   JOptionPane.showMessageDialog(btnThem, "Nhân viên đã có tài khoản trong hệ thống.\n Mỗi nhân viên chỉ có thể đăng ký 1 tài khoản.");
+                   return false;
+               }
+              
+          
             return true;
         }
         
@@ -617,15 +682,19 @@ public class FrmHeThong extends javax.swing.JPanel {
                 //lay ra ds Ten nhan ven dua len jcombobox
                 try {
                     NhanVienDao nvDao = new NhanVienDao();
-                    ArrayList<NhanVien> listNV = nvDao.getAllNV();
+                    listNV = nvDao.getAllNV();
                      jcbNhanVien1.removeAllItems();
                      for(NhanVien nv : listNV) {
-				jcbNhanVien1.addItem(nv.getTenNV());
-			}
+                         
+                       
+			jcbNhanVien1.addItem(nv.getTenNV());
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
         }
+        
+      
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
