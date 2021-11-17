@@ -86,7 +86,28 @@ public class NhanVienDao {
         return listNV;
     }
     
-    
+    //cap nhat trang thai dang nhap cua nhanVien
+     public  boolean upadateTrangThai(String trangThai,String maNV){
+            int n = 0;
+            java.sql.Connection con = connect.getInstance().getConnection();
+			
+            PreparedStatement stmt = null;
+            try {
+		
+                stmt = con.prepareStatement("UPDATE NhanVien SET TRangThai = ? WHERE MaNV = ?");
+		
+		stmt.setString(1,trangThai );
+		stmt.setString(2,maNV );
+		
+					
+		n = stmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+            return n > 0;
+        }
+     
+     
      public NhanVien getNVByMaTrangThai(String trangThai){
          NhanVien nv = null;
             try {
@@ -105,8 +126,9 @@ public class NhanVienDao {
                                  String tinhTrang = rs.getString(7);
                                  String maCV = rs.getString(8);
                                  ChucVuDao cv_dao = new ChucVuDao();
-                ChucVu cv = cv_dao.getCVByMaCV(maCV);
+                                  ChucVu cv = cv_dao.getCVByMaCV(maCV);
                                  nv = new NhanVien(maNhanVien, tenNV, sdt, diaChi, ngaySinh, ngayVaoLam, tinhTrang);
+
                                  nv.setChucVu(cv);
 			}
             } catch (Exception e) {
@@ -114,6 +136,8 @@ public class NhanVienDao {
             }
                return nv;
     } 
+     
+     
      
      //tìm nhân viên biết mã, tên ,sdt 
     public java.util.List<NhanVien>SearchMaOrTenOrSdt(String text){
@@ -150,4 +174,6 @@ public class NhanVienDao {
         }
         return n > 0;
     }
+    
+    
 }

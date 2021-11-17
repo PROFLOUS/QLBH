@@ -100,4 +100,112 @@ public class TaiKhoanDao {
             }
                     return n > 0;
             }
+        
+        
+        //tim kiem tai khoan theo username
+        public TaiKhoan findTKByUserName(String username){
+             TaiKhoan tk = null;
+             try {
+                 
+                java.sql.Connection con = connect.getInstance().getConnection();
+                String sql = "select * from TaiKhoan where TenTaiKhoan  = '"+username+"' ";
+                Statement statement = con.createStatement();
+			ResultSet rs = statement.executeQuery(sql);
+			while(rs.next()) {
+				String tenDN = rs.getString(1);
+                                String matKhau = rs.getString(2);
+				String tenQuyen = rs.getString(3);
+                                String TrangThai = rs.getString(4);
+                                String maNV = rs.getString(5);
+                                  //set nhan Vien 
+                                  NhanVien nv = nvDao.getNVByMaNV(maNV);
+                                  
+                                  
+                                  tk = new TaiKhoan(matKhau, tenQuyen, TrangThai, tenDN);
+                                  tk.setNhanVien(nv);
+                                  
+                                
+			}
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+               
+            
+            return tk;
+        }
+        
+        //cap nhat lai trangThai
+        public boolean updateTrangThaiByUser(String userName, String trangThai){
+             int n = 0;
+            java.sql.Connection con = connect.getInstance().getConnection();
+			
+            PreparedStatement stmt = null;
+            try {
+		
+                stmt = con.prepareStatement("UPDATE TaiKhoan SET TrangThau = ?  WHERE TenTaiKhoan = ?");
+		
+		stmt.setString(1,trangThai );
+                stmt.setString(2,userName);
+               
+					
+		n = stmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+            return n > 0;
+        }
+        
+         //tim kiem tai khoan theo MaNV
+        public TaiKhoan findTKByMaNV(String maNV){
+             TaiKhoan tk = null;
+             try {
+                 
+                java.sql.Connection con = connect.getInstance().getConnection();
+                String sql = "select * from TaiKhoan where MaNV  = '"+maNV+"' ";
+                Statement statement = con.createStatement();
+			ResultSet rs = statement.executeQuery(sql);
+			while(rs.next()) {
+				String tenDN = rs.getString(1);
+                                String matKhau = rs.getString(2);
+				String tenQuyen = rs.getString(3);
+                                String TrangThai = rs.getString(4);
+                                String manv = rs.getString(5);
+                                  //set nhan Vien 
+                                  NhanVien nv = nvDao.getNVByMaNV(manv);
+                                  
+                                  
+                                  tk = new TaiKhoan(matKhau, tenQuyen, TrangThai, tenDN);
+                                  tk.setNhanVien(nv);
+                                  
+                                
+			}
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+               
+            
+            return tk;
+        }
+        
+          //them 1 taikhoan vao database
+			public boolean createTaiKhoan(TaiKhoan tk) {
+				java.sql.Connection con = connect.getInstance().getConnection();
+			
+				PreparedStatement stmt = null;
+				int n = 0;
+				try {
+					stmt = con.prepareStatement("Insert Into TaiKhoan values(?,?,?,?,?)");
+					stmt.setString(1, tk.getTenTaiKhoan());
+					stmt.setString(2, tk.getMatKhau());
+					stmt.setString(3, tk.getTenQuyen());
+					stmt.setString(4, tk.getTrangThai());
+                                        stmt.setString(5, tk.getNhanVien().getMaNV());
+					
+					n = stmt.executeUpdate();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+				
+				return n > 0;
+			}
 }

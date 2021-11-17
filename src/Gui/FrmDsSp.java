@@ -72,13 +72,13 @@ public class FrmDsSp extends javax.swing.JPanel {
         String slKho = txt_SlKho.getText().trim();
         String donGia = txt_DonGia.getText().trim();
         // Tên sản phẩm phải là chữ
-        if (!(tenSP.length() > 0 && tenSP.matches("[A-Za-z]+"))) {
-            JOptionPane.showMessageDialog(this, "Tên Sản Phẩm phải là chữ");
+        if (tenSP.length() <0 ) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập tên Sản Phẩm");
             return false;
         }
         //Mau phải là chữ
-        if (!(mau.length() > 0 && mau.matches("[A-Za-z]+"))) {
-            JOptionPane.showMessageDialog(this, "Mầu sắc phải là chữ");
+        if (mau.length() < 0) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập màu sắc");
             return false;
         }
         //size ko am

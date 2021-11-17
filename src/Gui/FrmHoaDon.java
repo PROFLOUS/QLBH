@@ -293,4 +293,8 @@ public class FrmHoaDon extends javax.swing.JPanel{
     // End of variables declaration//GEN-END:variables
 
     
+    public void renderAgian(){
+        frmHoaDonBanHang1.renderListHoaDon();
+    }
+    
 }
