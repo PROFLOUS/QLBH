@@ -208,4 +208,20 @@ public class TaiKhoanDao {
 				
 				return n > 0;
 			}
+                        
+           public  boolean updateMKByMaNV(String maNV, String mk){
+            int n = 0;
+            java.sql.Connection con = connect.getInstance().getConnection();
+			
+            PreparedStatement stmt = null;
+            try {
+		
+                stmt = con.prepareStatement("UPDATE TaiKhoan SET MatKhau = '"+mk+"' WHERE MaNV = '"+maNV+"'");
+					
+		n = stmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+            return n > 0;
+        }
 }

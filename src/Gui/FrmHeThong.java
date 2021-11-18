@@ -54,7 +54,7 @@ public class FrmHeThong extends javax.swing.JPanel {
             Logger.getLogger(FrmHeThong.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-          renderDsTK(listTK);
+         // renderDsTK(listTK);
           renderJCB();
           setButtonBorder(btn_tab_HeThong);
     }
@@ -65,6 +65,26 @@ public class FrmHeThong extends javax.swing.JPanel {
                  String[] title = { "Tên Tài Khoản", "Mật Khẩu", "Tên Quyền", "Trạng Thái", "Nhân Viên"};
 		 
                 modelTbTK = new DefaultTableModel(title,0);
+		for(TaiKhoan s : arr) {
+			String[] rowData = {
+				s.getTenTaiKhoan(),s.getMatKhau(),s.getTenQuyen(),s.getTrangThai(),s.getNhanVien().getTenNV()
+			};
+                       
+			modelTbTK.addRow(rowData);
+		}
+               
+		tbTaiKhoan.setModel(modelTbTK);
+           
+	}
+        
+        public void renderDsTKAgain() {
+		
+                 String[] title = { "Tên Tài Khoản", "Mật Khẩu", "Tên Quyền", "Trạng Thái", "Nhân Viên"};
+		 
+                modelTbTK = new DefaultTableModel(title,0);
+              modelTbTK.setRowCount(0);
+              TaiKhoanDao taiKhoanDao = new TaiKhoanDao();
+                ArrayList<TaiKhoan> arr = taiKhoanDao.getDsTaiKhoan();
 		for(TaiKhoan s : arr) {
 			String[] rowData = {
 				s.getTenTaiKhoan(),s.getMatKhau(),s.getTenQuyen(),s.getTrangThai(),s.getNhanVien().getTenNV()

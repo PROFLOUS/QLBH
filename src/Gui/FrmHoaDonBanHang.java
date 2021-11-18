@@ -214,7 +214,7 @@ private javax.swing.table.DefaultTableModel modelTBHoaDon;
 		 HoaDonDao hoaDonDao = new HoaDonDao();
                  String[] title = { "MaHD", "Ngày Tạo", "Khách Hàng", "Số lượng", "Tổng Tiền", "Tiền Khách Đưa", "Nhân Viên", "Ghi Chú"};
 		 ArrayList<HoaDonBanHang> listHoaDon  = hoaDonDao.getDsHoaDon();
-                System.out.print(listHoaDon.size());
+               // System.out.print(listHoaDon.size());
                  modelTBHoaDon = new DefaultTableModel(title,0);
                 int i = 0;
 		for(HoaDonBanHang s : listHoaDon) {
@@ -230,7 +230,7 @@ private javax.swing.table.DefaultTableModel modelTBHoaDon;
                
 		tbHoaDon.setModel(modelTBHoaDon);
                 lblNumHD.setText(String.valueOf(listHoaDon.size()));
-                System.out.print("render");
+               // System.out.print("render");
 	}
         
         /*

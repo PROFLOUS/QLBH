@@ -10,6 +10,8 @@ import com.formdev.flatlaf.intellijthemes.FlatLightFlatIJTheme;
 import dao.NhanVienDao;
 import dao.TaiKhoanDao;
 import entity.TaiKhoan;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,6 +20,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import java.awt.geom.RoundRectangle2D;
+import java.net.URL;
+import javax.swing.ImageIcon;
 /**
  *
  * @author tdat3
@@ -37,6 +41,8 @@ public class FrmDangNhap extends javax.swing.JFrame {
         }
         
         initComponents();
+       Image icon = Toolkit.getDefaultToolkit().getImage("C:\\Users\\GMT\\Desktop\\gitClone\\QLBH\\src\\imgVSicon\\logo.jpg");  
+    this.setIconImage(icon); 
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -349,7 +355,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
     //click vao dang nhap
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
         
-         login();
+        // login();
     }//GEN-LAST:event_btnLoginMouseClicked
 
     public void login(){

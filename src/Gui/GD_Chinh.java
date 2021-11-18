@@ -27,6 +27,7 @@ import javax.swing.JButton;
 import javax.swing.Timer;
 import javax.swing.border.Border;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -70,8 +71,9 @@ public class GD_Chinh extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         renderAccountGui();//render ten nhan vien dang dang nhap
-        
-        
+          Image icon = Toolkit.getDefaultToolkit().getImage("C:\\Users\\GMT\\Desktop\\gitClone\\QLBH\\src\\imgVSicon\\logo.jpg");  
+         this.setIconImage(icon); 
+        this.setTitle("DADSOFT");
 //        pnl_TranGDChinh1.display(new FrmTongQuan());
 
 //        setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 30, 30));
@@ -685,6 +687,9 @@ public class GD_Chinh extends javax.swing.JFrame {
 //        frmThongKe1.setVisible(false);
 //        frmThongTinTaiKhoan1.setVisible(false);
 //        frmNhaCungCap1.setVisible(false);
+        
+//render lai giaoDien
+        frmHeThong1.renderDsTKAgain();
         String quyen = lbl_title_TaiKhoan1.getText();
         if(quyen.equals("Nhân viên")){
             JOptionPane.showMessageDialog(rootPane, "Bạn đang đăng nhập quyền nhân viên nên không thể mở!\n Hãy đăng nhập quyển Quản lý!!");
