@@ -674,7 +674,7 @@ public class FrmHeThong extends javax.swing.JPanel {
               //kiem tra ten ng dung
              //  /^[a-z0-9_-]{3,16}$/
              String tenTk = txtTaiKhoan.getText().trim();
-              if ( !tenTk.matches("^[a-z0-9_-]{3,16}$")) {
+              if ( !tenTk.matches("^[a-zA-Z0-9_-]{3,16}$")) {
 		JOptionPane.showMessageDialog(btnThem, "Tên đăng nhập từ 3-16 ký tự và không chứa ký tự đặc biệt");
 		return false;
                 }
@@ -710,11 +710,12 @@ public class FrmHeThong extends javax.swing.JPanel {
                 try {
                     NhanVienDao nvDao = new NhanVienDao();
                     listNV = nvDao.getAllNV();
+                    System.out.println("Gui.FrmHeThong.renderJCB()"+listNV);
                      jcbNhanVien1.removeAllItems();
                      for(NhanVien nv : listNV) {
                          
-                       
 			jcbNhanVien1.addItem(nv.getTenNV());
+                       
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

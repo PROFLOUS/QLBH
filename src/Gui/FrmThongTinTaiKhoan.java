@@ -411,6 +411,7 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
     public void renderData(){
         NhanVienDao nvDao = new NhanVienDao();
         NhanVien nv = nvDao.getNVByMaTrangThai("online");
+        System.out.println("Gui.FrmThongTinTaiKhoan.renderData()"+nv);
         if(nv!=null){
             txtTen.setText(nv.getTenNV());
             txtMaNV.setText(nv.getMaNV());

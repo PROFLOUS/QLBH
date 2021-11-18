@@ -41,8 +41,8 @@ public class FrmDangNhap extends javax.swing.JFrame {
         }
         
         initComponents();
-       Image icon = Toolkit.getDefaultToolkit().getImage("C:\\Users\\GMT\\Desktop\\gitClone\\QLBH\\src\\imgVSicon\\logo.jpg");  
-    this.setIconImage(icon); 
+//       Image icon = Toolkit.getDefaultToolkit().getImage("C:\\Users\\GMT\\Desktop\\gitClone\\QLBH\\src\\imgVSicon\\logo.jpg");  
+//    this.setIconImage(icon); 
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

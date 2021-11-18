@@ -77,11 +77,12 @@ public class NhanVienDao {
             while (rs.next()) {
                 ChucVuDao cv_dao = new ChucVuDao();
                 ChucVu cv = cv_dao.getCVByMaCV(rs.getString("MaCV"));
-                NhanVien nv = new NhanVien(rs.getString("MaNV"), rs.getString("TenNV"), rs.getString("SDT"),rs.getString("DiaChi"), rs.getDate("NgaySinh"), rs.getDate("NgayVaoLam"), rs.getString("TinhTrang"));
+                NhanVien nv = new NhanVien(rs.getString("MaNV"), rs.getString("TenNV"), rs.getString("SDT"),rs.getString("DiaChi"), rs.getDate("NgaySinh"), rs.getDate("NgayVaoLam"), rs.getString("TrangThai"));
                 nv.setChucVu(cv);
                 listNV.add(nv);
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return listNV;
     }
@@ -124,7 +125,7 @@ public class NhanVienDao {
                                  String diaChi = rs.getString(5);
                                  Date ngayVaoLam = rs.getDate(6);
                                  String tinhTrang = rs.getString(7);
-                                 String maCV = rs.getString(8);
+                                 String maCV = rs.getString("MaCV");
                                  ChucVuDao cv_dao = new ChucVuDao();
                                   ChucVu cv = cv_dao.getCVByMaCV(maCV);
                                  nv = new NhanVien(maNhanVien, tenNV, sdt, diaChi, ngaySinh, ngayVaoLam, tinhTrang);

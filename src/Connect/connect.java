@@ -15,7 +15,7 @@ public class connect {
             
 		String url ="jdbc:sqlserver://localhost:1433;dataBaseName=QLBH";
 		String user="sa";
-		String password="sa";
+		String password="dang";
 		con = DriverManager.getConnection(url, user, password);
 		return con;
 	}
