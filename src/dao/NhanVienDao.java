@@ -19,7 +19,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -57,9 +57,11 @@ public class NhanVienDao {
                                  Date ngaySinh = rs.getDate(4);
                                  String diaChi = rs.getString(5);
                                  Date ngayVaoLam = rs.getDate(6);
-                                 String tinhTrang = rs.getString(7);
-                                 String maCV = rs.getString(8);
-                                 nv = new NhanVien(maNV, tenNV, sdt, diaChi, ngaySinh, ngayVaoLam, tinhTrang);
+                                 String trangthai = rs.getString(8);
+                                 String maCV = rs.getString(7);
+                                 ChucVuDao chucVuDao = new ChucVuDao();
+                                 ChucVu cv = chucVuDao.getCVByMaCV(maCV);
+                                 nv = new NhanVien(maNhanVien, tenNV, sdt, diaChi, ngaySinh, ngayVaoLam, trangthai, cv);
 			}
             } catch (Exception e) {
                 e.printStackTrace();
@@ -77,7 +79,7 @@ public class NhanVienDao {
             while (rs.next()) {
                 ChucVuDao cv_dao = new ChucVuDao();
                 ChucVu cv = cv_dao.getCVByMaCV(rs.getString("MaCV"));
-                NhanVien nv = new NhanVien(rs.getString("MaNV"), rs.getString("TenNV"), rs.getString("SDT"),rs.getString("DiaChi"), rs.getDate("NgaySinh"), rs.getDate("NgayVaoLam"), rs.getString("TinhTrang"));
+                NhanVien nv = new NhanVien(rs.getString("MaNV"), rs.getString("TenNV"), rs.getString("SDT"),rs.getString("DiaChi"), rs.getDate("NgaySinh"), rs.getDate("NgayVaoLam"), rs.getString("TrangThai"));
                 nv.setChucVu(cv);
                 listNV.add(nv);
             }
@@ -114,7 +116,6 @@ public class NhanVienDao {
             }
                return nv;
     } 
-     
      //tìm nhân viên biết mã, tên ,sdt 
     public java.util.List<NhanVien>SearchMaOrTenOrSdt(String text){
             java.util.List<NhanVien> list = new ArrayList<>();
@@ -136,7 +137,6 @@ public class NhanVienDao {
             
             return list;
         }
-    
     //xóa nhan vien khi biét mã
     public boolean xoaNV(String maNV) {
         int n = 0;
@@ -149,5 +149,52 @@ public class NhanVienDao {
         } catch (Exception e) {
         }
         return n > 0;
+    }
+    
+    //them nhan
+    public  boolean  themNV(NhanVien nv){
+        
+        try {
+            java.sql.Connection con = connect.getInstance().getConnection();
+            PreparedStatement nvAdd = con.prepareStatement("INSERT INTO NhanVien([TenNV],[SDT],[NgaySinh],[DiaChi],[NgayVaoLam],[MaCV],[TrangThai])\n" +
+"VALUES ( ? ,?, ?, ?, ?,?, ?)");
+            nvAdd.setString(1, nv.getTenNV());
+            nvAdd.setString(2,nv.getSdt() );
+            nvAdd.setDate(3,nv.getNgaySinh() );
+            nvAdd.setString(4,nv.getDiaChi() );
+            nvAdd.setDate(5,nv.getNgayVaoLam() );
+            nvAdd.setString(6,nv.getChucVu().getMaCV());
+            nvAdd.setString(7,nv.getTrangThai() );
+            int n = nvAdd.executeUpdate();
+            if(n>0){
+                return true;
+            }
+        } catch (Exception e) {
+        }
+        return false;
+    }
+    //cap nhat
+    public boolean updateNV(String maNV, NhanVien nv) {
+            java.sql.Connection con = connect.getInstance().getConnection();
+            String sql = "update NhanVien set TenNV = ?, SDT = ?, NgaySinh = ?, DiaChi = ? , NgayVaoLam = ? , MaCV = ?, TrangThai = ? where MaNV = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, nv.getTenNV());
+            ps.setString(2, nv.getSdt());
+            ps.setDate(3, nv.getNgaySinh());
+            ps.setString(4, nv.getDiaChi());
+            ps.setString(6, nv.getChucVu().getMaCV());
+            ps.setString(7, nv.getTrangThai());
+            ps.setDate(5, nv.getNgayVaoLam());
+          
+             int n = ps.executeUpdate();
+            if(n>0){
+                return true;
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

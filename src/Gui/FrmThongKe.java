@@ -238,11 +238,16 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
     private void btn_tab_TKeHBCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tab_TKeHBCMouseClicked
         // TODO add your handling code here:
          jTabbedPane1.setSelectedIndex(2);
+         FrmTkeHangBanChay fr = new FrmTkeHangBanChay();
+        fr.locBieuDo();
     }//GEN-LAST:event_btn_tab_TKeHBCMouseClicked
 
     private void btn_tab_TKeKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tab_TKeKHMouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(3);
+        FrmTkeKhachHang fr = new FrmTkeKhachHang();
+        fr.locBieuDo();
+        
     }//GEN-LAST:event_btn_tab_TKeKHMouseClicked
 
     private void btn_tab_TQTKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tab_TQTKMouseClicked

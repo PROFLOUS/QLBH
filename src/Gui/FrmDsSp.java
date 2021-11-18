@@ -239,7 +239,6 @@ public class FrmDsSp extends javax.swing.JPanel {
         btn_ThemSp.setForeground(new java.awt.Color(255, 255, 255));
         btn_ThemSp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/plus (2).png"))); // NOI18N
         btn_ThemSp.setText("Thêm ");
-        btn_ThemSp.setBorder(null);
         btn_ThemSp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_ThemSp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -252,7 +251,6 @@ public class FrmDsSp extends javax.swing.JPanel {
         btn_Luu.setForeground(new java.awt.Color(255, 255, 255));
         btn_Luu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/clipboard.png"))); // NOI18N
         btn_Luu.setText("Lưu ");
-        btn_Luu.setBorder(null);
         btn_Luu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_Luu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -270,7 +268,6 @@ public class FrmDsSp extends javax.swing.JPanel {
         btn_Sua.setForeground(new java.awt.Color(255, 255, 255));
         btn_Sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/system-update.png"))); // NOI18N
         btn_Sua.setText("Cập Nhật");
-        btn_Sua.setBorder(null);
         btn_Sua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_Sua.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -283,7 +280,6 @@ public class FrmDsSp extends javax.swing.JPanel {
         btn_Xoa.setForeground(new java.awt.Color(255, 255, 255));
         btn_Xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/close (1).png"))); // NOI18N
         btn_Xoa.setText("Xóa");
-        btn_Xoa.setBorder(null);
         btn_Xoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_Xoa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -324,13 +320,13 @@ public class FrmDsSp extends javax.swing.JPanel {
                 .addComponent(txtSearchsp, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnTimKiem)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
                 .addComponent(btn_ThemSp, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(36, 36, 36)
                 .addComponent(btn_Luu, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(btn_Sua, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(28, 28, 28)
+                .addComponent(btn_Sua)
+                .addGap(31, 31, 31)
                 .addComponent(btn_Xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
         );

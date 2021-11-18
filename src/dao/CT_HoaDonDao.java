@@ -91,5 +91,87 @@ public class CT_HoaDonDao {
 				
                     return n > 0;
 		}
+        
+     //Thống kê số lượng sản phẩm theo năm
+         public ArrayList<CT_HDBanHang>thongkeSpTheoNam(String year){
+        try {
+            java.sql.Connection con = connect.getInstance().getConnection();
+            String sql = "SELECT  sosp.sp AS 'Masp', sosp.ten AS 'Tensp',sosp.sl as'SoLuongBang' , sosp.dongia as'Gia Ban'  from\n" +
+"				(SELECT cthd.MaSP sp ,SUM (cthd.SoLuong)  sl, sp.TenSP ten ,sp.DonGia dongia\n" +
+"                					FROM [dbo].[CT_HoaDonBanHang] cthd, [dbo].[SanPham] sp ,[dbo].[HDBanHang] hdb\n" +
+"                					WHERE cthd.MaSP = sp.MaSP and cthd.MaHD =hdb.MaHD and year( hdb.NgayLapHD) ='"+year+"'\n" +
+"               					 GROUP BY cthd.MaSP , sp.TenSP,sp.DonGia ) sosp\n" +
+"								 order by sosp.sl desc";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                int soLuong = rs.getInt(3);
+                String maSP = rs.getString(1);
+                SanPham sp = sanPhamDao.findSPByMaSP(maSP);
+                Double donGia =rs.getDouble(4);
+                CT_HDBanHang ct = new CT_HDBanHang(soLuong,donGia);
+                ct.setSanPham(sp);
+                listCTHD.add(ct);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("loi day");
+        }
+        return listCTHD;
+    }
+         
+          public ArrayList<CT_HDBanHang>thongkeSpTheoThang(String month){
+        try {
+            java.sql.Connection con = connect.getInstance().getConnection();
+            String sql = "SELECT  sosp.sp AS 'Masp', sosp.ten AS 'Tensp',sosp.sl as'SoLuongBang' , sosp.dongia as'Gia Ban'  from\n" +
+"				(SELECT cthd.MaSP sp ,SUM (cthd.SoLuong)  sl, sp.TenSP ten ,sp.DonGia dongia\n" +
+"                					FROM [dbo].[CT_HoaDonBanHang] cthd, [dbo].[SanPham] sp ,[dbo].[HDBanHang] hdb\n" +
+"                					WHERE cthd.MaSP = sp.MaSP and cthd.MaHD =hdb.MaHD and Month( hdb.NgayLapHD) ='"+month+"'\n" +
+"               					 GROUP BY cthd.MaSP , sp.TenSP,sp.DonGia ) sosp\n" +
+"								 order by sosp.sl desc";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                int soLuong = rs.getInt(3);
+                String maSP = rs.getString(1);
+                SanPham sp = sanPhamDao.findSPByMaSP(maSP);
+                Double donGia =rs.getDouble(4);
+                CT_HDBanHang ct = new CT_HDBanHang(soLuong,donGia);
+                ct.setSanPham(sp);
+                listCTHD.add(ct);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("loi day");
+        }
+        return listCTHD;
+    }
+           public ArrayList<CT_HDBanHang>thongkeSpTheoNgay(String day){
+        try {
+            java.sql.Connection con = connect.getInstance().getConnection();
+            String sql = "SELECT  sosp.sp AS 'Masp', sosp.ten AS 'Tensp',sosp.sl as'SoLuongBang' , sosp.dongia as'Gia Ban'  from\n" +
+"				(SELECT cthd.MaSP sp ,SUM (cthd.SoLuong)  sl, sp.TenSP ten ,sp.DonGia dongia\n" +
+"                					FROM [dbo].[CT_HoaDonBanHang] cthd, [dbo].[SanPham] sp ,[dbo].[HDBanHang] hdb\n" +
+"                					WHERE cthd.MaSP = sp.MaSP and cthd.MaHD =hdb.MaHD and day( hdb.NgayLapHD) ='"+day+"'\n" +
+"               					 GROUP BY cthd.MaSP , sp.TenSP,sp.DonGia ) sosp\n" +
+"								 order by sosp.sl desc";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                int soLuong = rs.getInt(3);
+                String maSP = rs.getString(1);
+                
+                SanPham sp = sanPhamDao.findSPByMaSP(maSP);
+                Double donGia =rs.getDouble(4);
+                CT_HDBanHang ct = new CT_HDBanHang(soLuong,donGia);
+                ct.setSanPham(sp);
+                listCTHD.add(ct);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("loi day");
+        }
+        return listCTHD;
+    }
 
 }

@@ -63,7 +63,7 @@ public class FrmCT_HoaDonNhap extends javax.swing.JFrame {
     
     public void renderCTHD(){
                 CT_HoaDonNhapDao ctHoaDonNhapDao = new CT_HoaDonNhapDao();
-                 String[] title = { "Mã SP", "Tên SP", "Số Lượng", "Đơn Giá", "Thành Tiền"};
+                 String[] title = { "Mã SP", "Tên SP", "Số Lượng", "Giá Nhập", "Thành Tiền"};
                  modelTBHoaDon = new DefaultTableModel(title,0);
                 
 		 listCtHoaDon  = ctHoaDonNhapDao.getCTHoadDonByMaHD(this.maHD);
