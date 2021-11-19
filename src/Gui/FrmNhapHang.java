@@ -247,17 +247,17 @@ public class FrmNhapHang extends javax.swing.JPanel {
         String donGia = txt_GiaBan.getText().trim();
 
         // Tên sản phẩm phải là chữ
-        if (!(tenSP.length() > 0 && tenSP.matches("[A-Za-z]+"))) {
+        if (!(tenSP.length() > 0)) {
             JOptionPane.showMessageDialog(this, "Tên Sản Phẩm phải là chữ");
             return false;
         }
         //Mau phải là chữ
-        if (!(mau.length() > 0 && mau.matches("[A-Za-z]+"))) {
+        if (!(mau.length() > 0 )) {
             JOptionPane.showMessageDialog(this, "Mầu sắc phải là chữ");
             return false;
         }
         //size ko am
-        if (!(size.length() > 0 && size.matches("[A-Za-z0-9 ]+"))) {
+        if (!(size.length() > 0 )) {
             JOptionPane.showMessageDialog(this, "Size sản phẩm không được là số âm");
             return false;
         }
@@ -314,7 +314,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
         String mau = txt_MauSac.getText().toString();
         String size = txt_Size.getText().toString();
         slNhap = Integer.parseInt(txt_SlKho.getText().toString());
-        int slKho = -1;
+        int slKho =0;
         double donGia = Double.parseDouble(txt_GiaBan.getText());
         String hinh = lbl_HinhAnh.getIcon().toString();
         return new SanPham(dm, tenSp, donGia, slKho, hinh, size, mau, giaNhap);
@@ -575,7 +575,6 @@ public class FrmNhapHang extends javax.swing.JPanel {
         lbl_HinhAnh = new javax.swing.JLabel();
         lbl_TenSp2 = new javax.swing.JLabel();
         txt_GiaNhap = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
         jFrame2 = new javax.swing.JFrame();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -590,7 +589,6 @@ public class FrmNhapHang extends javax.swing.JPanel {
         txt_email = new javax.swing.JTextField();
         btn_Luu1 = new javax.swing.JButton();
         btn_Xoa1 = new javax.swing.JButton();
-        btn_ThemSp1 = new javax.swing.JButton();
         pnl_FormBanHang = new javax.swing.JPanel();
         lbl_text_BanHang = new javax.swing.JLabel();
         pnl_tab_Form_BangHang = new javax.swing.JPanel();
@@ -768,16 +766,6 @@ public class FrmNhapHang extends javax.swing.JPanel {
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(102, 204, 255));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/eraser.png"))); // NOI18N
-        jButton5.setToolTipText("Nhập lại");
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton5MouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -787,8 +775,6 @@ public class FrmNhapHang extends javax.swing.JPanel {
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton5)
-                        .addGap(18, 18, 18)
                         .addComponent(btn_Luu, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btn_Xoa))
@@ -857,11 +843,9 @@ public class FrmNhapHang extends javax.swing.JPanel {
                     .addComponent(txt_GiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_SlKho, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btn_Xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_Luu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_Xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_Luu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
         );
 
@@ -942,8 +926,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
         btn_Luu1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         btn_Luu1.setForeground(new java.awt.Color(255, 255, 255));
         btn_Luu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/clipboard.png"))); // NOI18N
-        btn_Luu1.setText("Nhập Sản Phẩm");
-        btn_Luu1.setBorder(null);
+        btn_Luu1.setText("Lưu");
         btn_Luu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_Luu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -961,24 +944,10 @@ public class FrmNhapHang extends javax.swing.JPanel {
         btn_Xoa1.setForeground(new java.awt.Color(255, 255, 255));
         btn_Xoa1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/close (1).png"))); // NOI18N
         btn_Xoa1.setText("Thoát");
-        btn_Xoa1.setBorder(null);
         btn_Xoa1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_Xoa1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_Xoa1MouseClicked(evt);
-            }
-        });
-
-        btn_ThemSp1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
-        btn_ThemSp1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_ThemSp1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/refresh (3).png"))); // NOI18N
-        btn_ThemSp1.setToolTipText("");
-        btn_ThemSp1.setBorder(null);
-        btn_ThemSp1.setContentAreaFilled(false);
-        btn_ThemSp1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_ThemSp1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_ThemSp1MouseClicked(evt);
             }
         });
 
@@ -991,12 +960,6 @@ public class FrmNhapHang extends javax.swing.JPanel {
                 .addGap(46, 46, 46)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(btn_ThemSp1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(btn_Luu1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(btn_Xoa1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lbl_TenSp1)
                             .addComponent(lbl_Size1)
@@ -1007,8 +970,13 @@ public class FrmNhapHang extends javax.swing.JPanel {
                             .addComponent(lbl_SlKho1)
                             .addComponent(lbl_MauSac1)
                             .addComponent(txt_sdt, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(txt_email))))
-                .addContainerGap(44, Short.MAX_VALUE))
+                            .addComponent(txt_email))
+                        .addContainerGap(44, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(btn_Luu1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(btn_Xoa1)
+                        .addGap(42, 42, 42))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1033,11 +1001,9 @@ public class FrmNhapHang extends javax.swing.JPanel {
                         .addGap(5, 5, 5)
                         .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_ThemSp1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btn_Xoa1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_Luu1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_Xoa1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_Luu1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
 
@@ -2063,10 +2029,6 @@ public class FrmNhapHang extends javax.swing.JPanel {
         jFrame2.setVisible(false);
     }//GEN-LAST:event_btn_Xoa1MouseClicked
 
-    private void btn_ThemSp1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemSp1MouseClicked
-
-    }//GEN-LAST:event_btn_ThemSp1MouseClicked
-
     private void txt_Search_KH2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_Search_KH2ActionPerformed
 //        jPanel7.setVisible(false);
 //        jPanel6.setVisible(true);
@@ -2113,11 +2075,6 @@ public class FrmNhapHang extends javax.swing.JPanel {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
-
-    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
-        xoaRongText();
-        txt_GiaNhap.requestFocus();
-    }//GEN-LAST:event_jButton5MouseClicked
 
     private void txt_GiaNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_GiaNhapActionPerformed
         // TODO add your handling code here:
@@ -2199,7 +2156,6 @@ public class FrmNhapHang extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Luu;
     private javax.swing.JButton btn_Luu1;
-    private javax.swing.JButton btn_ThemSp1;
     private javax.swing.JButton btn_Xoa;
     private javax.swing.JButton btn_Xoa1;
     private javax.swing.JButton btn_XoaMatHang;
@@ -2209,7 +2165,6 @@ public class FrmNhapHang extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JFrame jFrame1;

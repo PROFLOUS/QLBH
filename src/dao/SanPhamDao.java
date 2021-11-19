@@ -372,7 +372,8 @@ public class SanPhamDao {
             SanPham sp = null;
             try {
                 java.sql.Connection con = connect.getInstance().getConnection();
-                PreparedStatement stmt = con.prepareStatement("select * from SanPham where [SoLuong] = '"+sl+"'" );
+                PreparedStatement stmt = con.prepareStatement("select top 1  * from SanPham where SoLuong="+sl+"\n" +
+"order by MaSP desc" );
                 ResultSet rs = stmt.executeQuery();
                 while(rs.next()) {
                  DanhMucSPDao dm_dao = new DanhMucSPDao();

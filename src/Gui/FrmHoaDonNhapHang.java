@@ -99,6 +99,11 @@ private ArrayList<HoaDonNhap> listHoaDon ;
                 txtSearchHDFocusGained(evt);
             }
         });
+        txtSearchHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchHDActionPerformed(evt);
+            }
+        });
 
         btnShowHD.setBackground(new java.awt.Color(21, 151, 229));
         btnShowHD.setForeground(java.awt.Color.white);
@@ -317,6 +322,32 @@ private ArrayList<HoaDonNhap> listHoaDon ;
         //JOptionPane.showMessageDialog(jPanel1, maHD);
         new FrmCT_HoaDonNhap(maHD).setVisible(true);
     }//GEN-LAST:event_tbHoaDonMouseClicked
+
+    private void txtSearchHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchHDActionPerformed
+//         String text = txtSearchHD.getText();
+//        AtomicBoolean check = new AtomicBoolean();
+//        HoaDonNhapDao hoaDonDao = new HoaDonNhapDao();
+//
+//        ArrayList<HoaDonNhap> listHoaDon  = hoaDonDao.getDsHoaDonNhap();
+//
+//        listHoaDon.forEach(s ->{
+//            if(s.getMaHDNhap().toUpperCase().equals(text.toUpperCase())){
+//                check.set(true);
+//                String[] title = { "MaHD", "Ngày Tạo", "Khách Hàng", "Số lượng", "Tổng Tiền", "Tiền Khách Đưa", "Nhân Viên", "Ghi Chú"};
+//                modelTBHoaDon = new DefaultTableModel(title,0);
+//                String[] rowData = {
+//                    s.getMaHDNhap(),changeDateToString(s.getNgayLapHD()),s.getKhachHang().getTenKH(),String.valueOf(s.getSoLuong()),String.valueOf(s.getTongTien()),
+//                    String.valueOf(s.ge),s.getNhanVien().getTenNV(),s.getGhiChu()
+//                };
+//                modelTBHoaDon.addRow(rowData);
+//                tbHoaDon.setModel(modelTBHoaDon);
+//                btnShowHD.setEnabled(true);
+//            }
+//        });
+//        if(!check.get()){
+//            JOptionPane.showMessageDialog(btnSearchHD, "Không có Hóa Đơn có mã:" + text + " " );
+//        }
+    }//GEN-LAST:event_txtSearchHDActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

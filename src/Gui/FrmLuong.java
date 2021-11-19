@@ -53,6 +53,7 @@ private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
          Date date = new  Date();
          dt_From.setDate(date);
          dt_To.setDate(date);
+         jDateChooser3.setDate(date);
          JTextFieldDateEditor editor = (JTextFieldDateEditor) dt_From.getDateEditor();
         editor.setEditable(false);
         JTextFieldDateEditor editor2 = (JTextFieldDateEditor) dt_To.getDateEditor();
@@ -134,7 +135,6 @@ private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        btnInHD2 = new javax.swing.JButton();
         jToggleButton3 = new javax.swing.JToggleButton();
         btnExit2 = new javax.swing.JToggleButton();
         jDateChooser3 = new com.toedter.calendar.JDateChooser();
@@ -181,23 +181,6 @@ private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Lịch Sử Nhận Lương");
 
-        btnInHD2.setBackground(new java.awt.Color(21, 151, 229));
-        btnInHD2.setForeground(java.awt.Color.white);
-        btnInHD2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/bill.png"))); // NOI18N
-        btnInHD2.setText("In hóa đơn");
-        btnInHD2.setToolTipText("");
-        btnInHD2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnInHD2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnInHD2btnInHDMouseClicked(evt);
-            }
-        });
-        btnInHD2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInHD2btnInHDActionPerformed(evt);
-            }
-        });
-
         jToggleButton3.setBackground(new java.awt.Color(21, 151, 229));
         jToggleButton3.setForeground(java.awt.Color.white);
         jToggleButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/system-update.png"))); // NOI18N
@@ -227,8 +210,6 @@ private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(btnInHD2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnExit2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -250,8 +231,7 @@ private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnExit2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnInHD2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17))
         );
 
@@ -432,8 +412,8 @@ private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnl_tab_FormLuongLayout.createSequentialGroup()
                         .addComponent(btnTkLuong)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_CapNhat_Luong, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(btn_CapNhat_Luong, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btn_TinhLuong)
                         .addGap(26, 26, 26)
@@ -567,16 +547,6 @@ private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                
     }//GEN-LAST:event_jToggleButton1MouseClicked
 
-    private void btnInHD2btnInHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInHD2btnInHDMouseClicked
-        // TODO add your handling code here:
-
-        //        printBill(maHD);
-    }//GEN-LAST:event_btnInHD2btnInHDMouseClicked
-
-    private void btnInHD2btnInHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInHD2btnInHDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnInHD2btnInHDActionPerformed
-
     private void btnExit2btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExit2btnExitMouseClicked
         
         jFrame1.setVisible(false);
@@ -585,7 +555,6 @@ private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnExit2;
-    private javax.swing.JButton btnInHD2;
     private javax.swing.JButton btnTkLuong;
     private javax.swing.JToggleButton btn_CapNhat_Luong;
     private javax.swing.JButton btn_TinhLuong;

@@ -33,7 +33,7 @@ ChucVuDao cv_dao;
     public FrmDsNV() {
         initComponents();
         txtMaNV.setEditable(false);
-        txtTrangThai.setEditable(false);
+        
         nv_dao = new NhanVienDao();
         cv_dao = new ChucVuDao();
         dsNv = new ArrayList<NhanVien>();
@@ -129,7 +129,7 @@ ChucVuDao cv_dao;
         txtTenNV.setText("");
         txtSDTNV.setText("");
         txtDiaChiNV.setText("");
-        txtTrangThai.setText("");
+        
     }
     //láy dữ liệu từ textfiled
     public NhanVien restText(){
@@ -169,15 +169,12 @@ ChucVuDao cv_dao;
         lblDiaChi3 = new javax.swing.JLabel();
         lblDiaChi4 = new javax.swing.JLabel();
         cbo_CV = new javax.swing.JComboBox<>();
-        txtTrangThai = new javax.swing.JTextField();
-        lblDiaChi5 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tbl_NV = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         txtSearch1 = new javax.swing.JTextField();
         btnTimKiem1 = new javax.swing.JButton();
         btnXoa1 = new javax.swing.JButton();
-        btnCapNhat1 = new javax.swing.JButton();
         btnShow1 = new javax.swing.JButton();
         btnLuu1 = new javax.swing.JButton();
         btnThem1 = new javax.swing.JButton();
@@ -258,15 +255,6 @@ ChucVuDao cv_dao;
             }
         });
 
-        txtTrangThai.setForeground(new java.awt.Color(0, 0, 0));
-        txtTrangThai.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtTrangThaiFocusGained(evt);
-            }
-        });
-
-        lblDiaChi5.setText("Trạng Thái ");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -297,15 +285,9 @@ ChucVuDao cv_dao;
                     .addComponent(txtDiaChiNV)
                     .addComponent(dt_NgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(lblDiaChi4)
-                        .addGap(45, 45, 45)
-                        .addComponent(cbo_CV, 0, 190, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(lblDiaChi5)
-                        .addGap(29, 29, 29)
-                        .addComponent(txtTrangThai)))
+                .addComponent(lblDiaChi4)
+                .addGap(45, 45, 45)
+                .addComponent(cbo_CV, 0, 190, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -321,11 +303,7 @@ ChucVuDao cv_dao;
                                     .addComponent(txtDiaChiNV, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(70, 70, 70))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(lblDiaChi5)
-                                        .addComponent(txtTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(dt_NgaySinh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(dt_NgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dt_NgVaoLam, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -359,11 +337,11 @@ ChucVuDao cv_dao;
 
             },
             new String [] {
-                "Mã Nhân Viên", "Tên Nhân Viên", "Chức Vụ", "Số Điện Thoại", "Địa Chỉ", "Ngày Sinh", "Ngày Vào Làm", "Trạng Thái"
+                "Mã Nhân Viên", "Tên Nhân Viên", "Chức Vụ", "Số Điện Thoại", "Địa Chỉ", "Ngày Sinh", "Ngày Vào Làm"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -387,6 +365,9 @@ ChucVuDao cv_dao;
         txtSearch1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtSearch1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSearch1FocusLost(evt);
             }
         });
         txtSearch1.addActionListener(new java.awt.event.ActionListener() {
@@ -416,18 +397,6 @@ ChucVuDao cv_dao;
         btnXoa1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnXoa1MouseClicked(evt);
-            }
-        });
-
-        btnCapNhat1.setBackground(new java.awt.Color(21, 151, 229));
-        btnCapNhat1.setForeground(java.awt.Color.white);
-        btnCapNhat1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVsicon/system-update.png"))); // NOI18N
-        btnCapNhat1.setText("Cập nhật");
-        btnCapNhat1.setToolTipText("Chọn 1 NCC để cập nhập");
-        btnCapNhat1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCapNhat1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCapNhat1MouseClicked(evt);
             }
         });
 
@@ -476,13 +445,11 @@ ChucVuDao cv_dao;
                 .addComponent(btnTimKiem1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnShow1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
                 .addComponent(btnThem1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(31, 31, 31)
                 .addComponent(btnLuu1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCapNhat1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnXoa1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -493,9 +460,8 @@ ChucVuDao cv_dao;
                     .addComponent(txtSearch1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnShow1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                     .addComponent(btnTimKiem1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCapNhat1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLuu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnThem1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLuu1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnXoa1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -585,26 +551,25 @@ ChucVuDao cv_dao;
     }//GEN-LAST:event_cbo_CVActionPerformed
 
     private void txtSearch1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearch1FocusGained
-        // TODO add your handling code here:
-        //        txtSearch.setText("");
-        //        txtSearch.setForeground(new java.awt.Color(26, 25, 25));
-        //        btnTimKiem.setEnabled(true);
+        txtSearch1.setText("");
     }//GEN-LAST:event_txtSearch1FocusGained
 
     private void txtSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearch1ActionPerformed
-        dfNV_Model.setRowCount(0);
+        xoaModelNV();
+        xoaRongTextNv();
         String text = txtSearch1.getText().trim().toLowerCase();
         List<NhanVien> list = nv_dao.SearchMaOrTenOrSdt(text);
         for (NhanVien nv : list) {
                 dfNV_Model.addRow(new Object[]{
                 nv.getMaNV(), nv.getTenNV(),nv.getChucVu().getTenCV(), nv.getSdt(),
-                nv.getDiaChi(),nv.getNgaySinh(),nv.getNgayVaoLam()
+                nv.getDiaChi(),nv.getNgaySinh(),nv.getNgayVaoLam(),nv.getTrangThai()
             });
         }
     }//GEN-LAST:event_txtSearch1ActionPerformed
 
     private void btnTimKiem1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiem1MouseClicked
-        dfNV_Model.setRowCount(0);
+        xoaModelNV();
+        xoaRongTextNv();
         String text = txtSearch1.getText().trim().toLowerCase();
         List<NhanVien> list = nv_dao.SearchMaOrTenOrSdt(text);
         for (NhanVien nv : list) {
@@ -619,7 +584,7 @@ ChucVuDao cv_dao;
         int r = tbl_NV.getSelectedRow();
          String id = dfNV_Model.getValueAt(r, 0).toString();
          if (r != -1) {
-            int tb = JOptionPane.showConfirmDialog(null, "Bạn  chắc chắn muốn xóa dòng này không?", "Detele", JOptionPane.YES_NO_OPTION);
+            int tb = JOptionPane.showConfirmDialog(null, "Bạn  chắc chắn muốn xóa Nhân Viên này không?", "Detele", JOptionPane.YES_NO_OPTION);
             if (tb == JOptionPane.YES_OPTION) {
                 dfNV_Model.removeRow(r);
                 nv_dao.xoaNV(id);
@@ -632,42 +597,6 @@ ChucVuDao cv_dao;
             JOptionPane.showMessageDialog(null, "Bạn chưa chọn dòng cần xóa!");
         }
     }//GEN-LAST:event_btnXoa1MouseClicked
-
-    private void btnCapNhat1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCapNhat1MouseClicked
-        int r = tbl_NV.getSelectedRow();
-        if(r!=-1){
-            String maNV = dfNV_Model.getValueAt(r, 0).toString();
-            String tenNV =txtTenNV.getText().trim();
-            String sdt = txtSDTNV.getText().trim();
-        String diaChi = txtDiaChiNV.getText().trim();
-        String ngaySinh = (String) formatter.format(dt_NgaySinh.getDate());
-        String ngayLam = (String) formatter.format(dt_NgVaoLam.getDate());
-        String tenCv = cbo_CV.getSelectedItem().toString();
-        String trangThai=txtTrangThai.getText().trim();
-        ChucVu cv = cv_dao.getCVByTen(tenCv);
-            NhanVien nv = new NhanVien(maNV, tenNV, sdt, diaChi, java.sql.Date.valueOf(ngaySinh), java.sql.Date.valueOf(ngayLam), trangThai, cv);
-            if(nv_dao.updateNV(maNV, nv)){
-                xoaRongTextNv();
-                dfNV_Model.setRowCount(0);
-                dsNv = nv_dao.getAllNV();
-                for(NhanVien nvs : dsNv){
-                    dfNV_Model.addRow(new Object[]{
-                nv.getMaNV(), nv.getTenNV(),nv.getChucVu().getTenCV(), nv.getSdt(),
-                nv.getDiaChi(),nv.getNgaySinh(),nv.getNgayVaoLam()
-            });
-                }
-                dsNv.removeAll(dsNv);
-                xoaRongTextNv();
-                xoaModelNV();
-                upTblNV();
-                
-                upCbo_CV();
-                JOptionPane.showMessageDialog(this, "Cập nhật danh sách thành công");
-            }else {
-            JOptionPane.showMessageDialog(null, "Bạn chưa chọn dòng nào!");
-        }
-        }
-    }//GEN-LAST:event_btnCapNhat1MouseClicked
 
     private void btnShow1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnShow1MouseClicked
         dsNv.removeAll(dsNv);
@@ -698,10 +627,6 @@ ChucVuDao cv_dao;
         txtTenNV.requestFocus();
     }//GEN-LAST:event_btnThem1MouseClicked
 
-    private void txtTrangThaiFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTrangThaiFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTrangThaiFocusGained
-
     private void tbl_NVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_NVMouseClicked
          int r = tbl_NV.getSelectedRow();
          txtMaNV.setText(dfNV_Model.getValueAt(r, 0).toString());
@@ -719,14 +644,17 @@ ChucVuDao cv_dao;
          } catch (Exception e) {
              e.printStackTrace();
         }
-         txtTrangThai.setText(dfNV_Model.getValueAt(r, 7).toString());
+        
          
          
     }//GEN-LAST:event_tbl_NVMouseClicked
 
+    private void txtSearch1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearch1FocusLost
+        txtSearch1.setText("");
+    }//GEN-LAST:event_txtSearch1FocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCapNhat1;
     private javax.swing.JButton btnLuu1;
     private javax.swing.JButton btnShow1;
     private javax.swing.JButton btnThem1;
@@ -742,7 +670,6 @@ ChucVuDao cv_dao;
     private javax.swing.JLabel lblDiaChi2;
     private javax.swing.JLabel lblDiaChi3;
     private javax.swing.JLabel lblDiaChi4;
-    private javax.swing.JLabel lblDiaChi5;
     private javax.swing.JLabel lblMaNCC1;
     private javax.swing.JLabel lblSDT1;
     private javax.swing.JLabel lblTenNCC1;
@@ -753,6 +680,5 @@ ChucVuDao cv_dao;
     private javax.swing.JTextField txtSDTNV;
     private javax.swing.JTextField txtSearch1;
     private javax.swing.JTextField txtTenNV;
-    private javax.swing.JTextField txtTrangThai;
     // End of variables declaration//GEN-END:variables
 }

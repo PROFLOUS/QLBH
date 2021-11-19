@@ -139,7 +139,6 @@ ArrayList<DanhMucSP> dsDmSP;
         btn_ThemDm.setForeground(new java.awt.Color(255, 255, 255));
         btn_ThemDm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/plus (1).png"))); // NOI18N
         btn_ThemDm.setText("Thêm");
-        btn_ThemDm.setBorder(null);
         btn_ThemDm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_ThemDm.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -152,7 +151,6 @@ ArrayList<DanhMucSP> dsDmSP;
         btn_SuaDm.setForeground(new java.awt.Color(255, 255, 255));
         btn_SuaDm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/system-update.png"))); // NOI18N
         btn_SuaDm.setText("Cập Nhật");
-        btn_SuaDm.setBorder(null);
         btn_SuaDm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_SuaDm.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -165,7 +163,6 @@ ArrayList<DanhMucSP> dsDmSP;
         btn_XoaDm.setForeground(new java.awt.Color(255, 255, 255));
         btn_XoaDm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/close (1).png"))); // NOI18N
         btn_XoaDm.setText("Xóa");
-        btn_XoaDm.setBorder(null);
         btn_XoaDm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_XoaDm.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -178,7 +175,6 @@ ArrayList<DanhMucSP> dsDmSP;
         btn_LuuDm.setForeground(new java.awt.Color(255, 255, 255));
         btn_LuuDm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/clipboard.png"))); // NOI18N
         btn_LuuDm.setText("Lưu");
-        btn_LuuDm.setBorder(null);
         btn_LuuDm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_LuuDm.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

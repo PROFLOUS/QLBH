@@ -71,8 +71,8 @@ public class GD_Chinh extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         renderAccountGui();//render ten nhan vien dang dang nhap
-//          Image icon = Toolkit.getDefaultToolkit().getImage("C:\\Users\\GMT\\Desktop\\gitClone\\QLBH\\src\\imgVSicon\\logo.jpg");  
-//         this.setIconImage(icon); 
+          Image icon = Toolkit.getDefaultToolkit().getImage("src\\imgVSicon\\icon.png");  
+         this.setIconImage(icon); 
         this.setTitle("DADSOFT");
 //        pnl_TranGDChinh1.display(new FrmTongQuan());
 

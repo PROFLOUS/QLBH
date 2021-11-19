@@ -45,8 +45,6 @@
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jButton5" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                               <Component id="btn_Luu" min="-2" pref="166" max="-2" attributes="0"/>
                               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                               <Component id="btn_Xoa" min="-2" max="-2" attributes="0"/>
@@ -135,12 +133,9 @@
                           <Component id="txt_SlKho" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="30" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                              <Component id="btn_Xoa" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="btn_Luu" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jButton5" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btn_Xoa" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="btn_Luu" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
@@ -434,23 +429,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_GiaNhapActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton5">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="cc" red="66" type="rgb"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imgVSicon/eraser.png"/>
-                </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Nh&#x1ead;p l&#x1ea1;i"/>
-                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Hand Cursor"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton5MouseClicked"/>
-              </Events>
-            </Component>
           </SubComponents>
         </Container>
       </SubComponents>
@@ -497,14 +475,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="btn_ThemSp1" min="-2" pref="40" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="btn_Luu1" min="-2" pref="148" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="btn_Xoa1" min="-2" pref="94" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="lbl_TenSp1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lbl_Size1" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -518,9 +489,15 @@
                                   <Component id="txt_sdt" alignment="0" pref="300" max="32767" attributes="0"/>
                                   <Component id="txt_email" alignment="0" max="32767" attributes="0"/>
                               </Group>
+                              <EmptySpace pref="44" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="btn_Luu1" min="-2" pref="78" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                              <Component id="btn_Xoa1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="44" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -552,12 +529,9 @@
                           </Group>
                       </Group>
                       <EmptySpace pref="36" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btn_ThemSp1" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="btn_Xoa1" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="btn_Luu1" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btn_Xoa1" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="btn_Luu1" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
@@ -717,10 +691,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/imgVSicon/clipboard.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Nh&#x1ead;p S&#x1ea3;n Ph&#x1ea9;m"/>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="null"/>
-                </Property>
+                <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>
@@ -745,39 +716,12 @@
                   <Image iconType="3" name="/imgVSicon/close (1).png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Tho&#xe1;t"/>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="null"/>
-                </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_Xoa1MouseClicked"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btn_ThemSp1">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="15" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imgVSicon/refresh (3).png"/>
-                </Property>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="null"/>
-                </Property>
-                <Property name="contentAreaFilled" type="boolean" value="false"/>
-                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Hand Cursor"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_ThemSp1MouseClicked"/>
               </Events>
             </Component>
           </SubComponents>

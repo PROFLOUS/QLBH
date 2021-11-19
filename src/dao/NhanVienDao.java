@@ -153,14 +153,16 @@ public class NhanVienDao {
                 ResultSet rs = stmt.executeQuery();
                 while(rs.next()) {
                 ChucVuDao cv_dao = new ChucVuDao();
-                ChucVu cv = cv_dao.getCVByMaCV(rs.getString(8));
+                ChucVu cv = cv_dao.getCVByMaCV(rs.getString(7));
                 NhanVien nv = new NhanVien(rs.getString(1), rs.getString(2),
                         rs.getString(3), rs.getString(5),
-                        rs.getDate(4), rs.getDate(6), cv);
+                        rs.getDate(4), rs.getDate(6),rs.getString(8));
+                nv.setChucVu(cv);
            
                 list.add(nv);
             }
             } catch (Exception e) {
+                e.printStackTrace();
             }
             
             return list;

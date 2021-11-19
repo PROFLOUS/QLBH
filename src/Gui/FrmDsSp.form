@@ -304,26 +304,28 @@
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="lbl_MaSp" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="34" pref="34" max="-2" attributes="0"/>
-                              <Component id="lbl_GetSp" min="-2" pref="250" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lbl_MaSp" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="34" pref="34" max="-2" attributes="0"/>
+                                  <Component id="lbl_GetSp" min="-2" pref="250" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lbl_DonGia" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="77" pref="77" max="-2" attributes="0"/>
+                                  <Component id="txt_DonGia" min="-2" pref="250" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lbl_MauSac" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="69" pref="69" max="-2" attributes="0"/>
+                                  <Component id="txt_MauSac" min="-2" pref="250" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="lbl_MauSac" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="69" pref="69" max="-2" attributes="0"/>
-                              <Component id="txt_MauSac" min="-2" pref="250" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lbl_Size" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="104" pref="104" max="-2" attributes="0"/>
-                              <Component id="txt_Size" min="-2" pref="250" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="lbl_DonGia" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="77" pref="77" max="-2" attributes="0"/>
-                              <Component id="txt_DonGia" min="-2" pref="250" max="-2" attributes="0"/>
+                              <Component id="lbl_DonGia1" min="-2" pref="79" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                              <Component id="txt_DonGia1" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="55" max="32767" attributes="0"/>
@@ -336,10 +338,10 @@
                               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="lbl_DonGia1" min="-2" pref="79" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                                  <Component id="txt_DonGia1" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lbl_Size" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="txt_Size" min="-2" pref="250" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="lbl_TenSp" min="-2" max="-2" attributes="0"/>
@@ -362,11 +364,11 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lbl_MaSp" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Component id="lbl_GetSp" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Component id="lbl_DonGia1" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Component id="txt_DonGia1" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="lbl_MaSp" alignment="1" pref="31" max="32767" attributes="0"/>
+                                  <Component id="lbl_GetSp" alignment="1" pref="31" max="32767" attributes="0"/>
+                                  <Component id="lbl_Size" alignment="1" pref="31" max="32767" attributes="0"/>
+                                  <Component id="txt_Size" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -382,25 +384,33 @@
                                                   <Component id="lbl_MauSac" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
                                                   <Component id="txt_MauSac" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="lbl_Size" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                                                          <Component id="txt_Size" min="-2" pref="31" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Group type="102" alignment="0" attributes="0">
+                                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                                  <Group type="102" alignment="0" attributes="0">
+                                                                      <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
+                                                                      <Component id="lbl_DanhMuc" min="-2" pref="31" max="-2" attributes="0"/>
+                                                                  </Group>
+                                                                  <Component id="cbo_Dm" alignment="0" max="32767" attributes="0"/>
+                                                                  <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
+                                                              </Group>
+                                                          </Group>
+                                                          <Group type="102" attributes="0">
+                                                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                                              <Component id="lbl_DonGia1" min="-2" pref="31" max="-2" attributes="0"/>
+                                                          </Group>
                                                       </Group>
+                                                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-                                                          <Component id="lbl_DanhMuc" min="-2" pref="31" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Component id="cbo_Dm" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
+                                                  <Group type="102" alignment="1" attributes="0">
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="txt_DonGia1" min="-2" pref="31" max="-2" attributes="0"/>
+                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
-                                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Group type="103" groupAlignment="0" attributes="0">

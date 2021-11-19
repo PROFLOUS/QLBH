@@ -122,7 +122,6 @@ public class FrmCaLam extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         btn_ThemCa = new javax.swing.JButton();
         btn_LuuCa = new javax.swing.JButton();
-        btn_SuaCa = new javax.swing.JButton();
         btn_XoaCa = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -173,7 +172,6 @@ public class FrmCaLam extends javax.swing.JPanel {
         btn_ThemCa.setForeground(new java.awt.Color(255, 255, 255));
         btn_ThemCa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/plus (2).png"))); // NOI18N
         btn_ThemCa.setText("Thêm ");
-        btn_ThemCa.setBorder(null);
         btn_ThemCa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_ThemCa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -186,7 +184,6 @@ public class FrmCaLam extends javax.swing.JPanel {
         btn_LuuCa.setForeground(new java.awt.Color(255, 255, 255));
         btn_LuuCa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/clipboard.png"))); // NOI18N
         btn_LuuCa.setText("Lưu ");
-        btn_LuuCa.setBorder(null);
         btn_LuuCa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_LuuCa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -199,31 +196,11 @@ public class FrmCaLam extends javax.swing.JPanel {
             }
         });
 
-        btn_SuaCa.setBackground(new java.awt.Color(21, 151, 229));
-        btn_SuaCa.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
-        btn_SuaCa.setForeground(new java.awt.Color(255, 255, 255));
-        btn_SuaCa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/system-update.png"))); // NOI18N
-        btn_SuaCa.setText("Cập Nhật");
-        btn_SuaCa.setBorder(null);
-        btn_SuaCa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_SuaCa.setEnabled(false);
-        btn_SuaCa.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_SuaCaMouseClicked(evt);
-            }
-        });
-        btn_SuaCa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_SuaCaActionPerformed(evt);
-            }
-        });
-
         btn_XoaCa.setBackground(new java.awt.Color(255, 102, 102));
         btn_XoaCa.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         btn_XoaCa.setForeground(new java.awt.Color(255, 255, 255));
         btn_XoaCa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/close (1).png"))); // NOI18N
         btn_XoaCa.setText("Xóa");
-        btn_XoaCa.setBorder(null);
         btn_XoaCa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_XoaCa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -251,11 +228,9 @@ public class FrmCaLam extends javax.swing.JPanel {
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_ThemCa, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(44, 44, 44)
                 .addComponent(btn_LuuCa, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(btn_SuaCa, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addGap(27, 27, 27)
                 .addComponent(btn_XoaCa, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -264,7 +239,6 @@ public class FrmCaLam extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_ThemCa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_SuaCa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_LuuCa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_XoaCa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 6, Short.MAX_VALUE))
@@ -439,12 +413,12 @@ public class FrmCaLam extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbl_CaLamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_CaLamMouseClicked
-        int r = tbl_CaLam.getSelectedRow();
-        btn_SuaCa.setEnabled(true);
-        txt_MaCa.setText(dfCL_Model.getValueAt(r, 0).toString());
-        cbo_MaNv.setSelectedItem(dfCL_Model.getValueAt(r, 1).toString());
-        cbo_Buoi.setSelectedItem(dfCL_Model.getValueAt(r, 3));
-        jDateChooser1.setDate(java.sql.Date.valueOf(dfCL_Model.getValueAt(r, 4).toString()));
+//        int r = tbl_CaLam.getSelectedRow();
+//        btn_SuaCa.setEnabled(true);
+//        txt_MaCa.setText(dfCL_Model.getValueAt(r, 0).toString());
+//        cbo_MaNv.setSelectedItem(dfCL_Model.getValueAt(r, 1).toString());
+//        cbo_Buoi.setSelectedItem(dfCL_Model.getValueAt(r, 3));
+//        jDateChooser1.setDate(java.sql.Date.valueOf(dfCL_Model.getValueAt(r, 4).toString()));
 
     }//GEN-LAST:event_tbl_CaLamMouseClicked
 
@@ -489,54 +463,6 @@ public class FrmCaLam extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_LuuCaActionPerformed
 
-    private void btn_SuaCaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_SuaCaMouseClicked
-        //        int r = tbl_Sp.getSelectedRow();
-        //        btn_SuaAnh.setEnabled(true);
-        //        if (r != -1) {
-        //            btn_SuaAnh.setVisible(true);
-        //            String maSP = dfSP_Model.getValueAt(r, 0).toString();
-        //            System.out.println(maSP);
-        //            String tenSP = txt_TenSp.getText().trim();
-        //            String tenDm = cbo_Dm.getSelectedItem().toString();
-        //            String mau = txt_MauSac.getText().trim();
-        //            String hinh = lbl_HinhAnh.getIcon().toString();
-        //            //System.out.println(hinh);
-        //            String size = txt_Size.getText().trim();
-        //            int sl = Integer.parseInt(txt_SlKho.getText().trim());
-        //            double dg = Double.parseDouble(txt_DonGia.getText().trim());
-        //            DanhMucSP dm = dm_dao.getDMByTen(tenDm);
-        //            SanPham sp = new SanPham(dm, maSP, tenSP, dg, sl, hinh, size, mau);
-        //            //System.out.println(sp.toString());
-        //            if (sp_dao.updateSP(maSP, sp)) {
-        //                xoaRongTextSp();
-        //                dfSP_Model.setRowCount(0);
-        //                dsSP = sp_dao.getAllSP();
-        //                for (SanPham it : dsSP) {
-        //                    dfSP_Model.addRow(new Object[]{
-        //                        it.getMaSP(), it.getTenSP(), it.getDmsp().getTenLoai(),
-        //                        it.getMauSac(), it.getSize(), it.getSoLuong(),
-        //                        it.getDonGia(), it.getHinhAnh()
-        //                    });
-        //                }
-        //                dsSP.removeAll(dsSP);
-        //                xoaRongTextSp();
-        //                xoaModelSP();
-        //                upTblSP();
-        //                xoaModelTksp();
-        //                upTblTkSP();
-        //                upCbo_DM();
-        //                JOptionPane.showMessageDialog(this, "Cập nhật danh sách thành công");
-        //            }
-        //
-        //        } else {
-        //            JOptionPane.showMessageDialog(null, "Bạn chưa chọn dòng nào!");
-        //        }
-    }//GEN-LAST:event_btn_SuaCaMouseClicked
-
-    private void btn_SuaCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaCaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_SuaCaActionPerformed
-
     private void btn_XoaCaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaCaMouseClicked
         int r = tbl_CaLam.getSelectedRow();
         String id = dfCL_Model.getValueAt(r, 0).toString();
@@ -570,7 +496,6 @@ public class FrmCaLam extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_LuuCa;
-    private javax.swing.JButton btn_SuaCa;
     private javax.swing.JButton btn_ThemCa;
     private javax.swing.JButton btn_XoaCa;
     private javax.swing.JComboBox<String> cbo_Buoi;

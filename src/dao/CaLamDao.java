@@ -36,10 +36,11 @@ public class CaLamDao {
             while (rs.next()) {
                 NhanVienDao nv_dao = new NhanVienDao();
                 NhanVien nv = nv_dao.getNVByMaNV(rs.getString("MaNV"));
-                CaLam ca = new CaLam(rs.getString("MaCa"), nv, rs.getString("Buoi"));
+                CaLam ca = new CaLam(rs.getString("MaCa"), nv, rs.getString("Buoi"),rs.getDate("NgayLam"));
                 listCa.add(ca);
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return listCa;
     }
@@ -49,14 +50,16 @@ public class CaLamDao {
         boolean checkTrung = true;
         try {
             java.sql.Connection con = connect.getInstance().getConnection();
-            PreparedStatement caAdd = con.prepareStatement("INSERT INTO CaLam([Buoi],[MaNV])\n" +
-"VALUES (?, ? )");
+            PreparedStatement caAdd = con.prepareStatement("INSERT INTO CaLam([Buoi],[MaNV],NgayLam)\n" +
+"VALUES (?, ?, ? )");
             caAdd.setString(1, ca.getBuoi());
             caAdd.setString(2, ca.getNV().getMaNV());
+            caAdd.setDate(3, ca.getNgayLam());
             int n = caAdd.executeUpdate();
             if(n>0)
                 return true;
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }

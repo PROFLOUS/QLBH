@@ -53,6 +53,7 @@ public class FrmDoiMK extends javax.swing.JFrame {
         btnXacNhan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jLabel2.setText("Mật khẩu cũ:");
 

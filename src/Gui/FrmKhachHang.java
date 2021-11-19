@@ -224,6 +224,9 @@ public class FrmKhachHang extends javax.swing.JPanel {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtSearchFocusGained(evt);
             }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSearchFocusLost(evt);
+            }
         });
         txtSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -372,6 +375,9 @@ public class FrmKhachHang extends javax.swing.JPanel {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtMaKHFocusGained(evt);
             }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtMaKHFocusLost(evt);
+            }
         });
         txtMaKH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -444,7 +450,7 @@ public class FrmKhachHang extends javax.swing.JPanel {
                 .addGroup(pnl_tab_FormKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1016, Short.MAX_VALUE))
                 .addGap(52, 52, 52))
         );
         pnl_tab_FormKhachHangLayout.setVerticalGroup(
@@ -488,7 +494,7 @@ public class FrmKhachHang extends javax.swing.JPanel {
         String diaChi = txtDiaChiKH.getText().trim();
 
         //tên khách hàng 
-        if (!(tenKh.length() > 0 && tenKh.matches("[A-Za-z]+"))) {
+        if (!(tenKh.length() > 0 )) {
             JOptionPane.showMessageDialog(this, "Tên Khách Hàng phải là chữ");
             return false;
         }
@@ -531,10 +537,7 @@ public class FrmKhachHang extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_tab_KhachHangActionPerformed
 
     private void txtSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchFocusGained
-        // TODO add your handling code here:
-//        txtSearch.setText("");
-//        txtSearch.setForeground(new java.awt.Color(26, 25, 25));
-//        btnTimKiem.setEnabled(true);
+       txtSearch.setText("");
     }//GEN-LAST:event_txtSearchFocusGained
 
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
@@ -686,6 +689,14 @@ dfKH_Model.setRowCount(0);
         txtSDTKH.setText(dfKH_Model.getValueAt(r, 2).toString());
         txtDiaChiKH.setText(dfKH_Model.getValueAt(r, 3).toString());
     }//GEN-LAST:event_tbl_KHMouseClicked
+
+    private void txtMaKHFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMaKHFocusLost
+         txtSDTKH.setText("");
+    }//GEN-LAST:event_txtMaKHFocusLost
+
+    private void txtSearchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchFocusLost
+        txtSearch.setText("");
+    }//GEN-LAST:event_txtSearchFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
