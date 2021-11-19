@@ -292,6 +292,9 @@ public class FrmHoaDon extends javax.swing.JPanel{
     private javax.swing.JPanel pnl_menuTab_SanPham1;
     // End of variables declaration//GEN-END:variables
 
+    public void renderAgianHDnhap(){
+        frmHoaDonNhapHang1.renderListHoaDon();
+    }
     
     public void renderAgian(){
         frmHoaDonBanHang1.renderListHoaDon();

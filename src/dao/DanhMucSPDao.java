@@ -123,5 +123,25 @@ public class DanhMucSPDao {
         }
         return n > 0;
     }
+    
+    //tim danh muc biet masp
+     public DanhMucSP getDMmaSp(String maSP) {
+        DanhMucSP dm = null;
+        try {
+            java.sql.Connection con = connect.getInstance().getConnection();
+            String sql = "SELECT DanhMucSP.TenLoai,  DanhMucSP.MaLoai\n" +
+"FROM     SanPham INNER JOIN\n" +
+"                  DanhMucSP ON SanPham.MaLoai = DanhMucSP.MaLoai\n" +
+"				  where SanPham.MaSP = ? ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, maSP);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                dm = new DanhMucSP(rs.getString("MaLoai"), rs.getString("TenLoai"));
+            }
+        } catch (Exception e) {
+        }
+        return dm;
+    }
 
 }

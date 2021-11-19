@@ -25,7 +25,7 @@ public class FrmDoiMK extends javax.swing.JFrame {
      */
     public FrmDoiMK() {
         initComponents();
-               Image icon = Toolkit.getDefaultToolkit().getImage("C:\\Users\\GMT\\Desktop\\gitClone\\QLBH\\src\\imgVSicon\\logo.jpg");  
+               Image icon = Toolkit.getDefaultToolkit().getImage("src\\imgVSicon\\icon.png");  
          this.setIconImage(icon); 
         //setResizable(false);
         setLocationRelativeTo(null);

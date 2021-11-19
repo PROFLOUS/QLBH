@@ -116,27 +116,28 @@ public class FrmTongQuan extends javax.swing.JPanel {
 
         pnl_profile1.setBackground(new java.awt.Color(255, 255, 255));
 
-        lbl_Img_profile1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/user1.jpg"))); // NOI18N
+        lbl_Img_profile1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/user2.jpg"))); // NOI18N
 
         lbl_Name_profile1.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         lbl_Name_profile1.setForeground(new java.awt.Color(0, 0, 0));
         lbl_Name_profile1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_Name_profile1.setText("Lê Tấn Đăng");
+        lbl_Name_profile1.setText("Nguyễn Hoàng Anh");
 
         lbl_Title_profile1.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         lbl_Title_profile1.setForeground(new java.awt.Color(0, 0, 0));
         lbl_Title_profile1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_Title_profile1.setText("19526881");
+        lbl_Title_profile1.setText("19444531");
 
         javax.swing.GroupLayout pnl_profile1Layout = new javax.swing.GroupLayout(pnl_profile1);
         pnl_profile1.setLayout(pnl_profile1Layout);
         pnl_profile1Layout.setHorizontalGroup(
             pnl_profile1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl_Name_profile1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+            .addComponent(lbl_Name_profile1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
             .addComponent(lbl_Title_profile1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_profile1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lbl_Img_profile1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(lbl_Img_profile1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnl_profile1Layout.setVerticalGroup(
             pnl_profile1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,7 +151,7 @@ public class FrmTongQuan extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnl_FormTongQuan.add(pnl_profile1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 410, 150, 250));
+        pnl_FormTongQuan.add(pnl_profile1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 410, 180, 250));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
@@ -175,11 +176,11 @@ public class FrmTongQuan extends javax.swing.JPanel {
         pnl_profile4.setLayout(pnl_profile4Layout);
         pnl_profile4Layout.setHorizontalGroup(
             pnl_profile4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl_Name_profile4, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+            .addComponent(lbl_Name_profile4, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
             .addComponent(lbl_Title_profile4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_profile4Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lbl_Img_profile4, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(lbl_Img_profile4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
         pnl_profile4Layout.setVerticalGroup(
             pnl_profile4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,31 +194,32 @@ public class FrmTongQuan extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnl_FormTongQuan.add(pnl_profile4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 410, 150, 250));
+        pnl_FormTongQuan.add(pnl_profile4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 410, 180, 250));
 
         pnl_profile5.setBackground(new java.awt.Color(255, 255, 255));
 
-        lbl_Img_profile5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/user1.jpg"))); // NOI18N
+        lbl_Img_profile5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/user3.jpg"))); // NOI18N
 
         lbl_Name_profile5.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         lbl_Name_profile5.setForeground(new java.awt.Color(0, 0, 0));
         lbl_Name_profile5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_Name_profile5.setText("Lê Tấn Đăng");
+        lbl_Name_profile5.setText("Nguyễn Tiến Đạt");
 
         lbl_Title_profile5.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         lbl_Title_profile5.setForeground(new java.awt.Color(0, 0, 0));
         lbl_Title_profile5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_Title_profile5.setText("19526881");
+        lbl_Title_profile5.setText("19531201");
 
         javax.swing.GroupLayout pnl_profile5Layout = new javax.swing.GroupLayout(pnl_profile5);
         pnl_profile5.setLayout(pnl_profile5Layout);
         pnl_profile5Layout.setHorizontalGroup(
             pnl_profile5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl_Name_profile5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbl_Name_profile5, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
             .addComponent(lbl_Title_profile5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_profile5Layout.createSequentialGroup()
-                .addGap(0, 3, Short.MAX_VALUE)
-                .addComponent(lbl_Img_profile5, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pnl_profile5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_Img_profile5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnl_profile5Layout.setVerticalGroup(
             pnl_profile5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,7 +233,7 @@ public class FrmTongQuan extends javax.swing.JPanel {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        pnl_FormTongQuan.add(pnl_profile5, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 410, 150, 250));
+        pnl_FormTongQuan.add(pnl_profile5, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 410, 180, 250));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

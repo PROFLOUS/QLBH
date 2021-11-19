@@ -4,7 +4,8 @@
  */
 package entity;
 
-import java.util.Date;
+
+import java.sql.Date;
 import java.util.Objects;
 
 /**
@@ -37,26 +38,26 @@ public class NhanVien {
     public NhanVien() {
     }
 
-    public NhanVien(String maNV, String tenNV, String sdt, String diaChi, Date ngaySinh, Date ngayVaoLam, String tinhTrang, ChucVu chucVu) {
+    public NhanVien(String maNV, String tenNV, String sdt, String diaChi, Date ngaySinh, Date ngayVaoLam, String trangThai, ChucVu chucVu) {
         this.maNV = maNV;
         this.tenNV = tenNV;
         this.sdt = sdt;
         this.diaChi = diaChi;
         this.ngaySinh = ngaySinh;
         this.ngayVaoLam = ngayVaoLam;
-        this.tinhTrang = tinhTrang;
+        this.trangThai = trangThai;
         this.chucVu = chucVu;
     }
 
-    public NhanVien(String maNV, String tenNV, String sdt, String diaChi, Date ngaySinh, Date ngayVaoLam, String tinhTrang) {
-        this.maNV = maNV;
-        this.tenNV = tenNV;
-        this.sdt = sdt;
-        this.diaChi = diaChi;
-        this.ngaySinh = ngaySinh;
-        this.ngayVaoLam = ngayVaoLam;
-        this.tinhTrang = tinhTrang;
-    }
+//    public NhanVien(String maNV, String tenNV, String sdt, String diaChi, Date ngaySinh, Date ngayVaoLam, String tinhTrang) {
+//        this.maNV = maNV;
+//        this.tenNV = tenNV;
+//        this.sdt = sdt;
+//        this.diaChi = diaChi;
+//        this.ngaySinh = ngaySinh;
+//        this.ngayVaoLam = ngayVaoLam;
+//        this.tinhTrang = tinhTrang;
+//    }
     public NhanVien(String maNV, String tenNV, String sdt, String diaChi, Date ngaySinh, Date ngayVaoLam, ChucVu chucVu) {
         this.maNV = maNV;
         this.tenNV = tenNV;
@@ -65,6 +66,16 @@ public class NhanVien {
         this.ngaySinh = ngaySinh;
         this.ngayVaoLam = ngayVaoLam;
         this.chucVu = chucVu;
+    }
+
+    public NhanVien(String maNV, String tenNV, String sdt, String diaChi, Date ngaySinh, Date ngayVaoLam, String trangThai) {
+        this.maNV = maNV;
+        this.tenNV = tenNV;
+        this.sdt = sdt;
+        this.diaChi = diaChi;
+        this.ngaySinh = ngaySinh;
+        this.ngayVaoLam = ngayVaoLam;
+        this.trangThai = trangThai;
     }
     
 

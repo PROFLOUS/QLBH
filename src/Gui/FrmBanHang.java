@@ -1176,7 +1176,7 @@ public class FrmBanHang extends javax.swing.JPanel {
     }
     private void txt_Search_KHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_Search_KHKeyReleased
         String text = txt_Search_KH.getText().trim().toLowerCase();
-        search2.setDataKh(khDao.SearchKh(text));
+        search2.setDataKh(khDao.SearchMaOrTenOrSdt2(text));
         if (search2.getItemSize() > 0) {
             //  * 2 top and bot border
             menu2.show(txt_Search_KH, 0, txt_Search_KH.getHeight());

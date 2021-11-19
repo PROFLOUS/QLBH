@@ -130,12 +130,12 @@ public class SanPhamDao {
         return false;
     }
     //Thêm sản phẩm mới
-    public  boolean  themSP(SanPham sp){
+    public  boolean  themSP(SanPham sp){ 
         
         try {
             java.sql.Connection con = connect.getInstance().getConnection();
-            PreparedStatement spAdd = con.prepareStatement("INSERT INTO SanPham([TenSP],[SoLuong],[DonGia],[HinhAnh],[Size],[MauSac],[MaLoai])\n" +
-"VALUES (?, ?, ?, ?, ?, ?, ? )");
+            PreparedStatement spAdd = con.prepareStatement("INSERT [dbo].[SanPham] ( [TenSP], [SoLuong], [DonGia], [HinhAnh], [Size], [MauSac], [MaLoai], [GiaNhap])\n" +
+"VALUES (?,?,?,?,?,?,?,?)");
             spAdd.setString(1, sp.getTenSP());
             spAdd.setInt(2, sp.getSoLuong());
             spAdd.setDouble(3, sp.getDonGia());
@@ -143,11 +143,13 @@ public class SanPhamDao {
             spAdd.setString(5, sp.getSize());
             spAdd.setString(6, sp.getMauSac());
             spAdd.setString(7, sp.getDmsp().getMaloai());
+            spAdd.setDouble(8, sp.getGiaNhap());
             int n = spAdd.executeUpdate();
             if(n>0){
                 return true;
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }
@@ -156,16 +158,16 @@ public class SanPhamDao {
         
         try {
             java.sql.Connection con = connect.getInstance().getConnection();
-            PreparedStatement spAdd = con.prepareStatement("INSERT INTO SanPham\n" +
+            PreparedStatement spAdd = con.prepareStatement("INSERT INTO SanPham([TenSP],[SoLuong],[DonGia],[HinhAnh],[Size],[MauSac],[MaLoai],[GiaNhap])\n" +
 "VALUES (?, ?, ?, ?, ?, ?, ?, ? )");
-            spAdd.setString(1, sp.getMaSP());
-            spAdd.setString(2, sp.getTenSP());
-            spAdd.setInt(3, sp.getSoLuong());
-            spAdd.setDouble(4, sp.getDonGia());
-            spAdd.setString(5, sp.getHinhAnh());
-            spAdd.setString(6, sp.getSize());
-            spAdd.setString(7, sp.getMauSac());
-            spAdd.setString(8, sp.getDmsp().getMaloai());
+            spAdd.setString(1, sp.getTenSP());
+            spAdd.setInt(2, sp.getSoLuong());
+            spAdd.setDouble(3, sp.getDonGia());
+            spAdd.setString(4, sp.getHinhAnh());
+            spAdd.setString(5, sp.getSize());
+            spAdd.setString(6, sp.getMauSac());
+            spAdd.setString(7, sp.getDmsp().getMaloai());
+            spAdd.setDouble(8, sp.getGiaNhap());
             int n = spAdd.executeUpdate();
             if(n>0){
                 return true;
@@ -365,6 +367,24 @@ public class SanPhamDao {
 		}
             return n > 0;
         }
-        
+        //tim sp qua so luong
+         public SanPham SearchWithSl(int sl){
+            SanPham sp = null;
+            try {
+                java.sql.Connection con = connect.getInstance().getConnection();
+                PreparedStatement stmt = con.prepareStatement("select * from SanPham where [SoLuong] = '"+sl+"'" );
+                ResultSet rs = stmt.executeQuery();
+                while(rs.next()) {
+                 DanhMucSPDao dm_dao = new DanhMucSPDao();
+                DanhMucSP dm = null;
+                dm = dm_dao.getDMSP(rs.getString(8));
+                sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(4), rs.getInt(3), rs.getString(5), rs.getString(6), rs.getString(7),rs.getDouble(9));
+                sp.setDmsp(dm);
+                
+            }
+            } catch (Exception e) {
+            }
+            return sp;
+        }
         
 }

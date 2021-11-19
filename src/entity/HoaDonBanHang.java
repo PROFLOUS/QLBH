@@ -66,6 +66,12 @@ public class HoaDonBanHang {
         
     }
 
+    public HoaDonBanHang(int soLuong, Double tongTien) {
+        this.soLuong = soLuong;
+        this.tongTien = tongTien;
+    }
+      
+
   
 
     public void setMaHD(String maHD) {

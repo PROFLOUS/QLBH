@@ -33,6 +33,11 @@ public class CT_HDBanHang {
         this.donGia = donGia;
     }
 
+    public CT_HDBanHang(int soLuong) {
+        this.soLuong = soLuong;
+    }
+    
+
     public int getSoLuong() {
         return soLuong;
     }

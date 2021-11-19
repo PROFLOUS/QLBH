@@ -59,7 +59,7 @@ public class BanHangDao {
                 ResultSet rs = stmt.executeQuery();
                 while(rs.next()) {
                 
-                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(4), rs.getInt(3), rs.getString(5), rs.getString(6), rs.getString(7));
+                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(4), rs.getInt(3), rs.getString(5), rs.getString(6), rs.getString(7),rs.getDouble(9));
                     
                 list.add(sp);
                     
@@ -69,5 +69,6 @@ public class BanHangDao {
             
             return list;
         }
+        
     
 }

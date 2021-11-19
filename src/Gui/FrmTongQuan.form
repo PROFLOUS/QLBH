@@ -137,18 +137,19 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="490" y="410" width="150" height="250"/>
+              <AbsoluteConstraints x="490" y="410" width="180" height="250"/>
             </Constraint>
           </Constraints>
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lbl_Name_profile1" alignment="0" pref="150" max="32767" attributes="0"/>
+                  <Component id="lbl_Name_profile1" alignment="0" pref="180" max="32767" attributes="0"/>
                   <Component id="lbl_Title_profile1" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="lbl_Img_profile1" min="-2" pref="147" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lbl_Img_profile1" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -170,7 +171,7 @@
             <Component class="javax.swing.JLabel" name="lbl_Img_profile1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imgVSicon/user1.jpg"/>
+                  <Image iconType="3" name="/imgVSicon/user2.jpg"/>
                 </Property>
               </Properties>
             </Component>
@@ -183,7 +184,7 @@
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="L&#xea; T&#x1ea5;n &#x110;&#x103;ng"/>
+                <Property name="text" type="java.lang.String" value="Nguy&#x1ec5;n Ho&#xe0;ng Anh"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lbl_Title_profile1">
@@ -195,7 +196,7 @@
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="19526881"/>
+                <Property name="text" type="java.lang.String" value="19444531"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -224,18 +225,18 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="180" y="410" width="150" height="250"/>
+              <AbsoluteConstraints x="180" y="410" width="180" height="250"/>
             </Constraint>
           </Constraints>
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lbl_Name_profile4" alignment="0" pref="150" max="32767" attributes="0"/>
+                  <Component id="lbl_Name_profile4" alignment="0" pref="180" max="32767" attributes="0"/>
                   <Component id="lbl_Title_profile4" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="lbl_Img_profile4" min="-2" pref="147" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lbl_Img_profile4" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -295,18 +296,19 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="800" y="410" width="150" height="250"/>
+              <AbsoluteConstraints x="790" y="410" width="180" height="250"/>
             </Constraint>
           </Constraints>
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lbl_Name_profile5" alignment="0" max="32767" attributes="0"/>
+                  <Component id="lbl_Name_profile5" alignment="0" pref="180" max="32767" attributes="0"/>
                   <Component id="lbl_Title_profile5" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="3" max="32767" attributes="0"/>
-                      <Component id="lbl_Img_profile5" min="-2" pref="147" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lbl_Img_profile5" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -328,7 +330,7 @@
             <Component class="javax.swing.JLabel" name="lbl_Img_profile5">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imgVSicon/user1.jpg"/>
+                  <Image iconType="3" name="/imgVSicon/user3.jpg"/>
                 </Property>
               </Properties>
             </Component>
@@ -341,7 +343,7 @@
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="L&#xea; T&#x1ea5;n &#x110;&#x103;ng"/>
+                <Property name="text" type="java.lang.String" value="Nguy&#x1ec5;n Ti&#x1ebf;n &#x110;&#x1ea1;t"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lbl_Title_profile5">
@@ -353,7 +355,7 @@
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="19526881"/>
+                <Property name="text" type="java.lang.String" value="19531201"/>
               </Properties>
             </Component>
           </SubComponents>

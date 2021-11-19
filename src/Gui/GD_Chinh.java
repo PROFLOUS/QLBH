@@ -662,6 +662,8 @@ public class GD_Chinh extends javax.swing.JFrame {
 //        frmThongKe1.setVisible(true);
 //        frmThongTinTaiKhoan1.setVisible(false);
 //        frmNhaCungCap1.setVisible(false);
+        frmThongKe1.renderAgianTkKh();
+        frmThongKe1.renderAgianTkSp();
         jTabbedPane1.setSelectedIndex(8);
         pnl_button_TongQuan.setBackground(new Color(153, 204, 255));
         pnl_button_BanHang.setBackground(new Color(153, 204, 255));
@@ -714,6 +716,7 @@ public class GD_Chinh extends javax.swing.JFrame {
          try {
 
              frmHoaDon1.renderAgian();
+             frmHoaDon1.renderAgianHDnhap();
   
         } catch (Exception e) {
              JOptionPane.showMessageDialog(rootPane, "ERRO");

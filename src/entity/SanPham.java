@@ -12,7 +12,6 @@ import java.util.Objects;
  */
 public class SanPham {
     private DanhMucSP dmsp;
-    
     private String maSP;  
     private String tenSP;
     private Double donGia;
@@ -20,11 +19,16 @@ public class SanPham {
     private String hinhAnh;
     private String size;
     private String mauSac;
+    private Double giaNhap;
 
     public SanPham(){
         
     }
 
+    public SanPham(String maSP) {
+        this.maSP = maSP;
+    }
+    
     public SanPham(String maSP, String tenSP, Double donGia, int soLuong, String mauSac) {
         this.maSP = maSP;
         this.tenSP = tenSP;
@@ -70,9 +74,69 @@ public class SanPham {
         this.size = size;
         this.mauSac = mauSac;
     }
-    
-    
-    
+
+    public SanPham(DanhMucSP dmsp, String maSP, String tenSP, Double donGia, int soLuong, String hinhAnh, String size, String mauSac, Double giaNhap) {
+        this.dmsp = dmsp;
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.donGia = donGia;
+        this.soLuong = soLuong;
+        this.hinhAnh = hinhAnh;
+        this.size = size;
+        this.mauSac = mauSac;
+        this.giaNhap = giaNhap;
+    }
+
+    public SanPham(DanhMucSP dmsp, String tenSP, Double donGia, String hinhAnh, String size, String mauSac, Double giaNhap) {
+        this.dmsp = dmsp;
+        this.tenSP = tenSP;
+        this.donGia = donGia;
+        this.hinhAnh = hinhAnh;
+        this.size = size;
+        this.mauSac = mauSac;
+        this.giaNhap = giaNhap;
+    }
+
+    public SanPham(String maSP, String tenSP, Double donGia, int soLuong, String hinhAnh, String size, String mauSac, Double giaNhap) {
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.donGia = donGia;
+        this.soLuong = soLuong;
+        this.hinhAnh = hinhAnh;
+        this.size = size;
+        this.mauSac = mauSac;
+        this.giaNhap = giaNhap;
+    }
+
+    public SanPham(DanhMucSP dmsp, String tenSP, Double donGia, int soLuong, String hinhAnh, String size, String mauSac, Double giaNhap) {
+        this.dmsp = dmsp;
+        this.tenSP = tenSP;
+        this.donGia = donGia;
+        this.soLuong = soLuong;
+        this.hinhAnh = hinhAnh;
+        this.size = size;
+        this.mauSac = mauSac;
+        this.giaNhap = giaNhap;
+    }
+
+    public SanPham(String maSP, String tenSP, Double donGia, int soLuong, String mauSac, Double giaNhap) {
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.donGia = donGia;
+        this.soLuong = soLuong;
+        this.mauSac = mauSac;
+        this.giaNhap = giaNhap;
+    }
+
+    public SanPham(String maSP, String tenSP, Double donGia, int soLuong, String size, String mauSac, Double giaNhap) {
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.donGia = donGia;
+        this.soLuong = soLuong;
+        this.size = size;
+        this.mauSac = mauSac;
+        this.giaNhap = giaNhap;
+    }
     
 
     
@@ -140,6 +204,16 @@ public class SanPham {
     public void setMauSac(String mauSac) {
         this.mauSac = mauSac;
     }
+
+    public Double getGiaNhap() {
+        return giaNhap;
+    }
+
+    public void setGiaNhap(Double giaNhap) {
+        this.giaNhap = giaNhap;
+    }
+    
+    
 
     @Override
     public int hashCode() {

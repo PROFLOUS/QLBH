@@ -12,14 +12,18 @@
 		<parameterDescription><![CDATA[HDNH001]]></parameterDescription>
 	</parameter>
 	<queryString language="SQL">
-		<![CDATA[select a.MaHDNhap, a.NgayLapHD,b.SoLuong, a.TongTien, b.MaSP, c.TenSP, d.TenNCC, e.TenNV, c.DonGia,d.SDT,d.DiaChi from HDNhapHang a
+		<![CDATA[select (b.DonGia*b.SoLuong) as 'tongsl' , a.MaHDNhap, a.NgayLapHD,b.SoLuong, a.TongTien, b.MaSP, c.TenSP, d.TenNCC, e.TenNV, c.GiaNhap,d.SDT,d.DiaChi from HDNhapHang a
 
 inner join CT_HoaDonNhap b on a.MaHDNhap = b.MaHDNhap
 inner join SanPham c on b.MaSP = c.MaSP
 inner join NhaCC d on a.MaNCC = d.MaNCC
 inner join NhanVien e on a.MaNV = e.MaNV
-where a.MaHDNhap= $P{MaHDNhap} ]]>
+where a.MaHDNhap= $P{MaHDNhap}]]>
 	</queryString>
+	<field name="tongsl" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="tongsl"/>
+		<property name="com.jaspersoft.studio.field.label" value="tongsl"/>
+	</field>
 	<field name="MaHDNhap" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="MaHDNhap"/>
 		<property name="com.jaspersoft.studio.field.label" value="MaHDNhap"/>
@@ -52,9 +56,9 @@ where a.MaHDNhap= $P{MaHDNhap} ]]>
 		<property name="com.jaspersoft.studio.field.name" value="TenNV"/>
 		<property name="com.jaspersoft.studio.field.label" value="TenNV"/>
 	</field>
-	<field name="DonGia" class="java.lang.Double">
-		<property name="com.jaspersoft.studio.field.name" value="DonGia"/>
-		<property name="com.jaspersoft.studio.field.label" value="DonGia"/>
+	<field name="GiaNhap" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="GiaNhap"/>
+		<property name="com.jaspersoft.studio.field.label" value="GiaNhap"/>
 	</field>
 	<field name="SDT" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="SDT"/>
@@ -264,14 +268,14 @@ where a.MaHDNhap= $P{MaHDNhap} ]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{DonGia}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{GiaNhap}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="452" y="11" width="103" height="30" uuid="a59e4419-7d8c-4e68-aebb-b7ce7fd5aa75"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{TongTien}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{tongsl}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="3" y="11" width="27" height="30" uuid="cb5e5e3f-9e5b-4248-a71c-feb7e0cb4024"/>
