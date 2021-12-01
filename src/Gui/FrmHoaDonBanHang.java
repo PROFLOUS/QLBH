@@ -6,7 +6,11 @@
 package Gui;
 import Connect.connect;
 import dao.HoaDonDao;
+import dao.NhanVienDao;
+import dao.TaiKhoanDao;
 import entity.HoaDonBanHang;
+import entity.NhanVien;
+import entity.TaiKhoan;
 import java.awt.Color;
 import java.awt.List;
 import java.awt.event.MouseEvent;
@@ -210,11 +214,27 @@ private javax.swing.table.DefaultTableModel modelTBHoaDon;
         );
     }// </editor-fold>//GEN-END:initComponents
     //dua du lieu HoaDon len Table
+    //neu la nhan vien thi chi lay hoa don cua nhan vien da tao
+    //neu la quan ly thi lay het ds len
 	public void renderListHoaDon() {
 		 HoaDonDao hoaDonDao = new HoaDonDao();
                  String[] title = { "MaHD", "Ngày Tạo", "Khách Hàng", "Số lượng", "Tổng Tiền", "Tiền Khách Đưa", "Nhân Viên", "Ghi Chú"};
-		 ArrayList<HoaDonBanHang> listHoaDon  = hoaDonDao.getDsHoaDon();
-               // System.out.print(listHoaDon.size());
+		
+                 //lay ra nhanVien dang dang nhap
+                    NhanVienDao nvDao = new NhanVienDao();
+                    NhanVien NV = nvDao.getNVByMaTrangThai("online");
+                     TaiKhoanDao tkDao = new TaiKhoanDao();
+                     TaiKhoan tk = tkDao.findTKByMaNV(NV.getMaNV());
+                        ArrayList<HoaDonBanHang> listHoaDon  = null;
+                      if(tk.getTenQuyen().toLowerCase().equals("quản lý")){
+                       listHoaDon  = hoaDonDao.getDsHoaDon();
+                      }
+                      else{
+                          listHoaDon  = hoaDonDao.getDsHoaDonByMaNV(NV.getMaNV());
+                       }
+                     
+              
+              
                  modelTBHoaDon = new DefaultTableModel(title,0);
                 int i = 0;
 		for(HoaDonBanHang s : listHoaDon) {

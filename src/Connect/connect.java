@@ -13,9 +13,9 @@ public class connect {
 	}
 	public Connection connect() throws SQLException {
             
-		String url ="jdbc:sqlserver://localhost:1433;dataBaseName=QLTT";
+		String url ="jdbc:sqlserver://localhost:1433;dataBaseName=QLBHDAD";
 		String user="sa";
-		String password="dang";
+		String password="sa";
 		con = DriverManager.getConnection(url, user, password);
 		return con;
 	}

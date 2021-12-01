@@ -11,6 +11,7 @@ import java.awt.List;
 import Connect.connect;
 import java.awt.List;
 import  entity.*;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.ArrayList;
-
+import javax.sql.rowset.serial.SerialBlob;
 /**
  *
  * @author GMT
@@ -59,8 +60,11 @@ public class NhanVienDao {
                                  Date ngayVaoLam = rs.getDate(6);
                                  String trangthai = rs.getString(8);
                                  String maCV = rs.getString(7);
+
+                                 
                                  ChucVuDao chucVuDao = new ChucVuDao();
                                  ChucVu cv = chucVuDao.getCVByMaCV(maCV);
+                              
                                  nv = new NhanVien(maNhanVien, tenNV, sdt, diaChi, ngaySinh, ngayVaoLam, trangthai, cv);
 			}
             } catch (Exception e) {
@@ -76,11 +80,17 @@ public class NhanVienDao {
             Statement stmt = con.createStatement();
             String Sql = "select * from NhanVien";
             ResultSet rs = stmt.executeQuery(Sql);
+          
             while (rs.next()) {
                 ChucVuDao cv_dao = new ChucVuDao();
                 ChucVu cv = cv_dao.getCVByMaCV(rs.getString("MaCV"));
                 NhanVien nv = new NhanVien(rs.getString("MaNV"), rs.getString("TenNV"), rs.getString("SDT"),rs.getString("DiaChi"), rs.getDate("NgaySinh"), rs.getDate("NgayVaoLam"), rs.getString("TrangThai"));
                 nv.setChucVu(cv);
+                 Blob img = rs.getBlob("img");
+                if(img != null){
+                nv.setImg(img.getBytes(1, (int)img.length() ));
+               }
+               // System.out.println(nv.toString() + "\n");
                 listNV.add(nv);
             }
         } catch (Exception e) {
@@ -128,11 +138,17 @@ public class NhanVienDao {
                                  Date ngayVaoLam = rs.getDate(6);
                                  String tinhTrang = rs.getString(7);
                                  String maCV = rs.getString("MaCV");
+                                  Blob img = rs.getBlob("img");
+                                   
+                                 
                                  ChucVuDao cv_dao = new ChucVuDao();
                                   ChucVu cv = cv_dao.getCVByMaCV(maCV);
                                  nv = new NhanVien(maNhanVien, tenNV, sdt, diaChi, ngaySinh, ngayVaoLam, tinhTrang);
-
+                               
                                  nv.setChucVu(cv);
+                                  if(img != null){
+                                    nv.setImg(img.getBytes(1, (int)img.length() ));
+                                   }
 			}
             } catch (Exception e) {
                 e.printStackTrace();
@@ -187,8 +203,8 @@ public class NhanVienDao {
         
         try {
             java.sql.Connection con = connect.getInstance().getConnection();
-            PreparedStatement nvAdd = con.prepareStatement("INSERT INTO NhanVien([TenNV],[SDT],[NgaySinh],[DiaChi],[NgayVaoLam],[MaCV],[TrangThai])\n" +
-"VALUES ( ? ,?, ?, ?, ?,?, ?)");
+            PreparedStatement nvAdd = con.prepareStatement("INSERT INTO NhanVien([TenNV],[SDT],[NgaySinh],[DiaChi],[NgayVaoLam],[MaCV],[TrangThai], [img])\n" +
+"VALUES ( ? ,?, ?, ?, ?,?, ?, ?)");
             nvAdd.setString(1, nv.getTenNV());
             nvAdd.setString(2,nv.getSdt() );
             nvAdd.setDate(3,nv.getNgaySinh() );
@@ -196,6 +212,14 @@ public class NhanVienDao {
             nvAdd.setDate(5,nv.getNgayVaoLam() );
             nvAdd.setString(6,nv.getChucVu().getMaCV());
             nvAdd.setString(7,nv.getTrangThai() );
+           if(nv.getImg() != null){
+                   Blob hinh = new SerialBlob(nv.getImg());
+                   nvAdd.setBlob(8, hinh);
+           }
+           else{
+               Blob hinh = null;
+               nvAdd.setBlob(8, hinh);
+           }
             int n = nvAdd.executeUpdate();
             if(n>0){
                 return true;
@@ -207,7 +231,7 @@ public class NhanVienDao {
     //cap nhat
     public boolean updateNV(String maNV, NhanVien nv) {
             java.sql.Connection con = connect.getInstance().getConnection();
-            String sql = "update NhanVien set TenNV = ?, SDT = ?, NgaySinh = ?, DiaChi = ? , NgayVaoLam = ? , MaCV = ?, TrangThai = ? where MaNV = ?";
+            String sql = "update NhanVien set TenNV = ?, SDT = ?, NgaySinh = ?, DiaChi = ? , NgayVaoLam = ? , MaCV = ?, TrangThai = ?, img = ? where MaNV = '"+maNV+"'";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, nv.getTenNV());
@@ -217,7 +241,14 @@ public class NhanVienDao {
             ps.setString(6, nv.getChucVu().getMaCV());
             ps.setString(7, nv.getTrangThai());
             ps.setDate(5, nv.getNgayVaoLam());
-          
+           if(nv.getImg() != null){
+                   Blob hinh = new SerialBlob(nv.getImg());
+                   ps.setBlob(8, hinh);
+           }
+           else{
+               Blob hinh = null;
+               ps.setBlob(8, hinh);
+           }
              int n = ps.executeUpdate();
             if(n>0){
                 return true;

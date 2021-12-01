@@ -12,6 +12,7 @@ import com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatLightFlatIJTheme;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatGitHubIJTheme;
+import dao.ImageHelper;
 import dao.NhanVienDao;
 import dao.PanelSearch;
 import dao.TaiKhoanDao;
@@ -32,6 +33,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.geom.RoundRectangle2D;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -486,27 +488,25 @@ public class GD_Chinh extends javax.swing.JFrame {
         pnl_ThongTinTaiKhoanLayout.setHorizontalGroup(
             pnl_ThongTinTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_ThongTinTaiKhoanLayout.createSequentialGroup()
-                .addComponent(lbl_icon_TaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbl_icon_TaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_ThongTinTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_title_TaiKhoan)
                     .addComponent(lbl_title_TaiKhoan1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         pnl_ThongTinTaiKhoanLayout.setVerticalGroup(
             pnl_ThongTinTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_ThongTinTaiKhoanLayout.createSequentialGroup()
-                .addGroup(pnl_ThongTinTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnl_ThongTinTaiKhoanLayout.createSequentialGroup()
-                        .addGap(0, 8, Short.MAX_VALUE)
-                        .addComponent(lbl_title_TaiKhoan)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_title_TaiKhoan1))
-                    .addComponent(lbl_icon_TaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
             .addComponent(btnExit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_ThongTinTaiKhoanLayout.createSequentialGroup()
+                .addGap(0, 8, Short.MAX_VALUE)
+                .addComponent(lbl_title_TaiKhoan)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_title_TaiKhoan1)
+                .addContainerGap())
+            .addComponent(lbl_icon_TaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pnl_Menu_button.add(pnl_ThongTinTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 200, 60));
@@ -895,8 +895,8 @@ public class GD_Chinh extends javax.swing.JFrame {
         try {
              NhanVienDao  nvDao = new NhanVienDao();
             NhanVien nv = nvDao.getNVByMaTrangThai("online");
-      //  System.out.print(nv.toString());
-        lbl_title_TaiKhoan.setText(xuLyTen(nv.getTenNV()));
+     
+            lbl_title_TaiKhoan.setText(xuLyTen(nv.getTenNV()));
             TaiKhoanDao tkDao = new TaiKhoanDao();
             TaiKhoan tk = tkDao.findTKByMaNV(nv.getMaNV());
        
@@ -906,6 +906,24 @@ public class GD_Chinh extends javax.swing.JFrame {
         else{
              lbl_title_TaiKhoan1.setText("Nhân viên");
         }
+        
+         //set img cho phan dang nhap
+            if(nv.getImg() != null){
+                 try {
+                 
+                    Image img = ImageHelper.createImgFromByArray(nv.getImg(), "jpg");
+                    Image imgResize = ImageHelper.resize(img, 40, 40);
+                  
+                    lbl_icon_TaiKhoan.setIcon(new ImageIcon(imgResize));
+                  //  employeeImg = nv.getImg();
+                } catch (IOException ex) {
+                    Logger.getLogger(FrmDsNV.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else{
+                 lbl_icon_TaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/user.png"))); // NOI18N
+               //   employeeImg = nv.getImg();
+            }
         } catch (Exception e) {
             System.out.print("Gap loi roi");
         }

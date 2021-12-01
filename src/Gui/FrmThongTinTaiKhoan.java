@@ -5,15 +5,24 @@
  */
 package Gui;
 
+import dao.ImageHelper;
 import dao.NhanVienDao;
 import dao.TaiKhoanDao;
 import entity.NhanVien;
 import entity.TaiKhoan;
 import java.awt.Color;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
+import javax.swing.filechooser.FileFilter;
 
 /**
  *
@@ -49,7 +58,8 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
         btn_tab_TTTK = new javax.swing.JButton();
         pnl_tab_FormTTTK = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        jpImage = new javax.swing.JPanel();
+        lblImg = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lblSDT = new javax.swing.JLabel();
@@ -123,15 +133,15 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+        javax.swing.GroupLayout jpImageLayout = new javax.swing.GroupLayout(jpImage);
+        jpImage.setLayout(jpImageLayout);
+        jpImageLayout.setHorizontalGroup(
+            jpImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblImg, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
+        jpImageLayout.setVerticalGroup(
+            jpImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblImg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
         );
 
         jLabel2.setText("Tên nhân viên:");
@@ -224,7 +234,7 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(44, 44, 44)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jpImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(83, 83, 83)
                         .addComponent(btnTaiAnh)))
@@ -317,7 +327,7 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jpImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -390,7 +400,37 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
     }//GEN-LAST:event_btn_tab_TTTKActionPerformed
 
     private void btnTaiAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaiAnhActionPerformed
-       JOptionPane.showMessageDialog(btnTaiAnh, "Hệ thống đang nâng cập!!");
+        JFileChooser choose =new JFileChooser();
+        choose.setFileFilter(new FileFilter(){
+            @Override
+            public boolean accept(File f) {
+               if(f.isDirectory()){
+                   return true;
+               }
+               else{
+                   return f.getName().toLowerCase().endsWith(".jpg");
+               }
+            }
+
+            @Override
+            public String getDescription() {
+                return "Image File(*.jpg)";
+            }
+        });
+        if(choose.showOpenDialog(jpImage) == JFileChooser.CANCEL_OPTION){
+            return;
+        }
+        
+        File file = choose.getSelectedFile();
+        try {
+            ImageIcon icons = new ImageIcon(file.getPath());
+            Image img = ImageHelper.resize(icons.getImage(), 150, 190);
+            ImageIcon resizeIcon = new ImageIcon(img);
+            lblImg.setIcon(resizeIcon);
+            employeeImg = ImageHelper.toByteArr(img, "jpg");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(choose, "Chức năng đang lỗi");
+        }
     }//GEN-LAST:event_btnTaiAnhActionPerformed
 
     private void btnDoiMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMKActionPerformed
@@ -411,7 +451,7 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
     public void renderData(){
         NhanVienDao nvDao = new NhanVienDao();
         NhanVien nv = nvDao.getNVByMaTrangThai("online");
-        System.out.println("Gui.FrmThongTinTaiKhoan.renderData()"+nv);
+       // System.out.println("Gui.FrmThongTinTaiKhoan.renderData()"+nv);
         if(nv!=null){
             txtTen.setText(nv.getTenNV());
             txtMaNV.setText(nv.getMaNV());
@@ -429,10 +469,30 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
             txtMatKhau.setText(tk.getMatKhau());
 
             txtUser.setEnabled(false);
+            
+            //set img
+            if(nv.getImg() != null){
+                 try {
+                 
+                    Image img = ImageHelper.createImgFromByArray(nv.getImg(), "jpg");
+                    Image imgResize = ImageHelper.resize(img, 150, 200);
+                  
+                    lblImg.setIcon(new ImageIcon(imgResize));
+                    employeeImg = nv.getImg();
+                } catch (IOException ex) {
+                    Logger.getLogger(FrmDsNV.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else{
+                 lblImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/new-arrival.png"))); // NOI18N
+                  employeeImg = nv.getImg();
+            }
+            
         }
         
        
     }
+    private byte[] employeeImg;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDoiMK;
     private javax.swing.JButton btnTaiAnh;
@@ -444,8 +504,9 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jpImage;
     private javax.swing.JLabel lblDiaChi;
+    private javax.swing.JLabel lblImg;
     private javax.swing.JLabel lblNgaySinh;
     private javax.swing.JLabel lblNgayVaoLam;
     private javax.swing.JLabel lblSDT;

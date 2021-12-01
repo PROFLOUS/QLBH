@@ -120,6 +120,49 @@ public class HoaDonDao {
 
     }
 
+    //tim kiems hoa don theo ma NV
+    /*
+            @param maNV String
+            return hoaDon HoaDonBanHang
+     */
+     public ArrayList<HoaDonBanHang> getDsHoaDonByMaNV(String manv) {
+        try {
+            java.sql.Connection con = connect.getInstance().getConnection();
+            String sql = "select * from HDBanHang  where MaNV = '"+manv+"' order by NgayLapHD desc";
+
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                String maHD = rs.getString(1);
+                Date ngayLap = rs.getTimestamp(2);
+                //System.err.println(ngayLap);
+                int soLuong = rs.getInt(3);
+                Double tongTien = rs.getDouble(4);
+                Double tienKhachDua = rs.getDouble(5);
+                String ghiChu = rs.getString(6);
+                String maNV = rs.getString(7);
+                String maKH = rs.getString(8);
+
+                HoaDonBanHang hd = new HoaDonBanHang(maHD, ngayLap, soLuong, tongTien, tienKhachDua, ghiChu);
+
+                //set nhan Vien 
+                NhanVien nv = nvDao.getNVByMaNV(maNV);
+                hd.setNhanVien(nv);
+
+                //set KHachHang
+                KhachHang kh = khDao.getKHByMaKH(maKH);
+                hd.setKhachHang(kh);
+
+                listHD.add(hd);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("loi day");
+            // TODO: handle exception
+        }
+        return listHD;
+    }
     //them 1 HoaDon vao database
     public boolean createHoaDonBH(HoaDonBanHang hd) {
         java.sql.Connection con = connect.getInstance().getConnection();
