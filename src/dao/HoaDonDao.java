@@ -19,7 +19,9 @@ import java.util.ArrayList;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 
 /**
@@ -275,5 +277,113 @@ public class HoaDonDao {
             System.out.println("loi day");
         }
         return listHD;
+    }
+    
+    /*
+    *lấy ra số hóa đơn, số sản phẩm, tổng tiền trong 1 ngày
+     
+     */
+      public ArrayList<Double> getThongkeInDay(String date) {
+        ArrayList<Double> list = new ArrayList<Double>();
+        try {
+
+            java.sql.Connection con = connect.getInstance().getConnection();
+            String sql = "select count(*), sum(a.SoLuong), sum(TongTien) from HDBanHang a\n" +
+                        "where CAST(a.NgayLapHD AS DATE) = '"+date+"' ";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+               int soHD = rs.getInt(1);
+                int soLuong = rs.getInt(2);
+                Double tongTien = rs.getDouble(3);
+               
+               list.add((double)soHD);
+               list.add((double)soLuong);
+               list.add(tongTien);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+
+    }
+      /*Lay tong loi nhuan(chua tinh tien khuyen mai) trong 1 ngay
+      */
+        public double getLoiNhuanInDay(String date) {
+            double loiNhuan = 0.0;
+            try {
+
+            java.sql.Connection con = connect.getInstance().getConnection();
+            String sql = "select sum((b.DonGia-c.GiaNhap)*b.SoLuong )from HDBanHang a\n" +
+                            "inner join CT_HoaDonBanHang b on a.MaHD = b.MaHD\n" +
+                            "inner join SanPham c on b.MaSP = c.MaSP\n" +
+                            "where CAST(a.NgayLapHD AS DATE) = '"+date+"' ";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+             
+                 loiNhuan = rs.getDouble(1);
+              
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return loiNhuan;
+
+    }
+        /*Lay tong tien giam gia trong 1 ngay
+      */
+        public double getKhuyenMaiInDay(String date) {
+            double km = 0.0;
+            try {
+
+            java.sql.Connection con = connect.getInstance().getConnection();
+            String sql = "select SUM(PhanTramGiamGia) from HDBanHang a\n" +
+                        "where CAST(a.NgayLapHD AS DATE) = '"+date+"'";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+             
+                 km = rs.getDouble(1);
+              
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return km;
+
+    }
+          /*Tính tổng tiền từng ngày trong 1 khóng thời gian
+        */
+        public Map<Date, Double> getTongTienAboutDates(java.sql.Date date1, java.sql.Date date2) {
+            Map<Date, Double> map =new HashMap<>();
+            try {
+
+            java.sql.Connection con = connect.getInstance().getConnection();
+            String sql = "select  CAST(a.NgayLapHD AS DATE), sum(a.TongTien) from HDBanHang a\n" +
+            "where CAST(a.NgayLapHD AS DATE) between '"+date1+"' and '"+date2+"'\n" +
+            "group by CAST(a.NgayLapHD AS DATE)\n" +
+            "order by CAST(a.NgayLapHD AS DATE) asc";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+             Date d =  rs.getDate(1);
+             double m = rs.getDouble(2);
+                 map.put(d,m);
+              
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return map;
+
     }
 }

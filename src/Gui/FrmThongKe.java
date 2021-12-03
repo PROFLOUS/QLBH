@@ -261,6 +261,10 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
         frmTkeKhachHang1.locBieuDo();
         
     }
+     public void renderAgianTongQuan(){
+        frmTongQuanBaoCao1.renderData();
+        
+    }
     public void renderAgianTkSp(){
         frmTkeHangBanChay1.locBieuDo();
         

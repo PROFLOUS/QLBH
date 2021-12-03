@@ -34,6 +34,7 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
     /**
      * Creates new form FrmThongTinTaiKhoan
      */
+   NhanVienDao nhanvienDao = new NhanVienDao();
     public FrmThongTinTaiKhoan() {
         initComponents();
         renderData();
@@ -79,7 +80,6 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
         jLabel10 = new javax.swing.JLabel();
         txtChucVu = new javax.swing.JTextField();
         btnDoiMK = new javax.swing.JButton();
-        btnTaiAnh = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1090, 700));
@@ -180,6 +180,7 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
 
         lblNgayVaoLam.setText("Ngày vào làm:");
 
+        txtNgayVaoLam.setEditable(false);
         txtNgayVaoLam.setBackground(new java.awt.Color(211, 228, 205));
         txtNgayVaoLam.setText("20/10/2020");
 
@@ -202,18 +203,6 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
             }
         });
 
-        btnTaiAnh.setBackground(new java.awt.Color(21, 151, 229));
-        btnTaiAnh.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnTaiAnh.setForeground(java.awt.Color.white);
-        btnTaiAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/upload24.png"))); // NOI18N
-        btnTaiAnh.setText("Tải ảnh");
-        btnTaiAnh.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnTaiAnh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTaiAnhActionPerformed(evt);
-            }
-        });
-
         btnUpdate.setBackground(new java.awt.Color(21, 151, 229));
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnUpdate.setForeground(java.awt.Color.white);
@@ -231,13 +220,8 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jpImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addComponent(btnTaiAnh)))
+                .addGap(44, 44, 44)
+                .addComponent(jpImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(73, 73, 73)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -328,16 +312,11 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
                             .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jpImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnTaiAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNgayVaoLam, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNgayVaoLam, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -399,54 +378,56 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_tab_TTTKActionPerformed
 
-    private void btnTaiAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaiAnhActionPerformed
-        JFileChooser choose =new JFileChooser();
-        choose.setFileFilter(new FileFilter(){
-            @Override
-            public boolean accept(File f) {
-               if(f.isDirectory()){
-                   return true;
-               }
-               else{
-                   return f.getName().toLowerCase().endsWith(".jpg");
-               }
-            }
-
-            @Override
-            public String getDescription() {
-                return "Image File(*.jpg)";
-            }
-        });
-        if(choose.showOpenDialog(jpImage) == JFileChooser.CANCEL_OPTION){
-            return;
-        }
-        
-        File file = choose.getSelectedFile();
-        try {
-            ImageIcon icons = new ImageIcon(file.getPath());
-            Image img = ImageHelper.resize(icons.getImage(), 150, 190);
-            ImageIcon resizeIcon = new ImageIcon(img);
-            lblImg.setIcon(resizeIcon);
-            employeeImg = ImageHelper.toByteArr(img, "jpg");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(choose, "Chức năng đang lỗi");
-        }
-    }//GEN-LAST:event_btnTaiAnhActionPerformed
-
     private void btnDoiMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMKActionPerformed
        new FrmDoiMK().setVisible(true);
     }//GEN-LAST:event_btnDoiMKActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         //su kien cap nhat thong tin nhan vien
-        String tenNV = txtTen.getText().trim();
-        String maNV = txtMaNV.getText();
-        String DiaChi = txtDiaChi.getText().trim();
-        String sdt = txtSDT.getText().trim();
-        JOptionPane.showMessageDialog(txtMaNV, "Đang nâng cấp!!");
+          int tb = JOptionPane.showConfirmDialog(null, "Bạn  chắc chắn muốn xóa dòng này không?", "Detele", JOptionPane.YES_NO_OPTION);
+            if (tb == JOptionPane.YES_OPTION) {
+                  String tenNV = txtTen.getText().trim();
+                    String maNV = txtMaNV.getText();
+                    String DiaChi = txtDiaChi.getText().trim();
+                    String sdt = txtSDT.getText().trim();
+                    //JOptionPane.showMessageDialog(txtMaNV, "Đang nâng cấp!!");
+                    NhanVien nv = new NhanVien(tenNV, sdt,DiaChi);
+                     if(nhanvienDao.updateNhanVien(maNV, nv)){
+                         JOptionPane.showMessageDialog(txtMaNV, "Cập nhật thành công!!");
+                     }
+                     else{
+                         JOptionPane.showMessageDialog(txtMaNV, "Đang nâng cấp!!");
+                     }
+            }
+      
+        
         
     }//GEN-LAST:event_btnUpdateActionPerformed
+    public boolean checkValue(){
+               String tenNV = txtTen.getText().trim();
 
+               String DiaChi = txtDiaChi.getText().trim();
+               String sdt = txtSDT.getText().trim();
+               String regexMail = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";//check mail
+               String regexPhone = "^[0-9]{10}";
+
+
+
+
+              if(tenNV.length()<=0) {
+                   JOptionPane.showMessageDialog(txtDiaChi, "Tên Nhân viên không được để trống");			
+                   return false;
+               }
+              if(DiaChi.length() <=0){
+                   JOptionPane.showMessageDialog(txtDiaChi, "Địa chỉ NCC không được để trống");			
+                   return false;             
+              }
+            if(!sdt.matches(regexPhone)){
+                          JOptionPane.showMessageDialog(txtDiaChi, "Số điện thoại có 10 số");			
+                          return false;             
+                     }
+              return true;
+    }
 
     public void renderData(){
         NhanVienDao nvDao = new NhanVienDao();
@@ -495,7 +476,6 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
     private byte[] employeeImg;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDoiMK;
-    private javax.swing.JButton btnTaiAnh;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btn_tab_TTTK;
     private javax.swing.JLabel jLabel10;

@@ -218,6 +218,12 @@ public class NhanVien {
         this.img = img;
     }
 
+    public NhanVien(String tenNV, String sdt, String diaChi) {
+        this.tenNV = tenNV;
+        this.sdt = sdt;
+        this.diaChi = diaChi;
+    }
+
     
 
     

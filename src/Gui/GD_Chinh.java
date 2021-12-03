@@ -663,6 +663,7 @@ public class GD_Chinh extends javax.swing.JFrame {
 //        frmThongTinTaiKhoan1.setVisible(false);
 //        frmNhaCungCap1.setVisible(false);
         frmThongKe1.renderAgianTkKh();
+        frmThongKe1.renderAgianTongQuan();
         frmThongKe1.renderAgianTkSp();
         jTabbedPane1.setSelectedIndex(8);
         pnl_button_TongQuan.setBackground(new Color(153, 204, 255));

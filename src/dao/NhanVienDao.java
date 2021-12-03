@@ -260,4 +260,29 @@ public class NhanVienDao {
         return false;
     }
 
+    /*
+    * Cập nhật lại tên, sđt, địa chỉ của NhanVien, dùng trong FrmThongTinTaiKhoan
+        @param: maNV String, nv NhanVien
+        @return boolean
+    */
+      public boolean updateNhanVien(String maNV, NhanVien nv) {
+            java.sql.Connection con = connect.getInstance().getConnection();
+            String sql = "update NhanVien set TenNV = ?, SDT = ?,  DiaChi = ?  where MaNV = '"+maNV+"'";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, nv.getTenNV());
+            ps.setString(2, nv.getSdt());
+         
+            ps.setString(3, nv.getDiaChi());
+       
+             int n = ps.executeUpdate();
+            if(n>0){
+                return true;
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
