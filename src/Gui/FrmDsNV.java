@@ -73,7 +73,7 @@ ChucVuDao cv_dao;
             dfNV_Model.addRow(new Object[]{
                 nv.getMaNV(), nv.getTenNV(), nv.getChucVu().getTenCV(),
                 nv.getSdt(),nv.getDiaChi(),nv.getNgaySinh(),nv.getNgayVaoLam(),
-                nv.getTrangThai()
+                nv.getEmail()
             });
         }
     }
@@ -149,6 +149,7 @@ ChucVuDao cv_dao;
         txtTenNV.setText("");
         txtSDTNV.setText("");
         txtDiaChiNV.setText("");
+        txtEmail.setText("");
          lblImgNv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/new-arrival.png"))); // NOI18N
               employeeImg = null;
         
@@ -164,9 +165,9 @@ ChucVuDao cv_dao;
         String tenCv = cbo_CV.getSelectedItem().toString();
         String trangThai="offline";
         ChucVu cv = cv_dao.getCVByTen(tenCv);
-        
+        String email= txtEmail.getText();
         NhanVien nv = new NhanVien(maNv, tenNv, sdt, diaChi, java.sql.Date.valueOf(ngaySinh), java.sql.Date.valueOf(ngayLam), trangThai,employeeImg, cv);
-        
+        nv.setEmail(email);
         return nv;
 
     }
@@ -196,6 +197,8 @@ ChucVuDao cv_dao;
         jpImg = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         lblImgNv = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         tbl_NV = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
@@ -234,6 +237,11 @@ ChucVuDao cv_dao;
         txtDiaChiNV.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtDiaChiNVFocusGained(evt);
+            }
+        });
+        txtDiaChiNV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDiaChiNVActionPerformed(evt);
             }
         });
 
@@ -298,7 +306,7 @@ ChucVuDao cv_dao;
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblImgNv, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+            .addComponent(lblImgNv, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -316,6 +324,16 @@ ChucVuDao cv_dao;
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        jLabel1.setText("Email");
+
+        txtEmail.setForeground(new java.awt.Color(0, 0, 0));
+        txtEmail.setText("Nhập email...");
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmailActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -331,24 +349,30 @@ ChucVuDao cv_dao;
                     .addComponent(txtTenNV, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtMaNV, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtSDTNV, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE))
-                .addGap(39, 39, 39)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDiaChi2)
-                    .addComponent(lblDiaChi1)
-                    .addComponent(lblDiaChi3))
-                .addGap(12, 12, 12)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(dt_NgVaoLam, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtDiaChiNV)
-                        .addComponent(dt_NgaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
-                .addComponent(lblDiaChi4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbo_CV, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDiaChi3)
+                    .addComponent(lblDiaChi2)
+                    .addComponent(lblDiaChi1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dt_NgVaoLam, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dt_NgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDiaChiNV, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblDiaChi4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbo_CV, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(34, 34, 34)
                 .addComponent(jpImg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,11 +383,18 @@ ChucVuDao cv_dao;
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cbo_CV, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtDiaChiNV, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblDiaChi4)
-                                .addComponent(cbo_CV, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(24, 24, 24)
-                            .addComponent(dt_NgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblDiaChi4))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addGap(21, 21, 21)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel1)))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addGap(18, 18, 18)
+                                    .addComponent(dt_NgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(dt_NgVaoLam, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel3Layout.createSequentialGroup()
@@ -389,11 +420,11 @@ ChucVuDao cv_dao;
 
             },
             new String [] {
-                "Mã Nhân Viên", "Tên Nhân Viên", "Chức Vụ", "Số Điện Thoại", "Địa Chỉ", "Ngày Sinh", "Ngày Vào Làm"
+                "Mã Nhân Viên", "Tên Nhân Viên", "Chức Vụ", "Số Điện Thoại", "Địa Chỉ", "Ngày Sinh", "Ngày Vào Làm", "Email"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -570,7 +601,7 @@ ChucVuDao cv_dao;
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1096, Short.MAX_VALUE)
+            .addGap(0, 1108, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -648,10 +679,11 @@ ChucVuDao cv_dao;
         xoaRongTextNv();
         String text = txtSearch1.getText().trim().toLowerCase();
         List<NhanVien> list = nv_dao.SearchMaOrTenOrSdt(text);
+        System.out.println("Gui.FrmDsNV.btnTimKiem1MouseClicked()"+list);
         for (NhanVien nv : list) {
                 dfNV_Model.addRow(new Object[]{
                 nv.getMaNV(), nv.getTenNV(),nv.getChucVu().getTenCV(), nv.getSdt(),
-                nv.getDiaChi(),nv.getNgaySinh(),nv.getNgayVaoLam()
+                nv.getDiaChi(),nv.getNgaySinh(),nv.getNgayVaoLam(),nv.getEmail()
             });
         }
     }//GEN-LAST:event_btnTimKiem1MouseClicked
@@ -683,6 +715,7 @@ ChucVuDao cv_dao;
     private void btnLuu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLuu1MouseClicked
         if(kiemTraData()){
             NhanVien nv = restText();
+            System.out.println("Gui.FrmDsNV.btnLuu1MouseClicked()"+nv);
             if(nv_dao.themNV(nv)){
                 dfNV_Model.addRow(new Object[]{
                 nv.getMaNV(), nv.getTenNV(),nv.getChucVu().getTenCV(), nv.getSdt(),
@@ -710,6 +743,7 @@ ChucVuDao cv_dao;
          txtSDTNV.setText(dfNV_Model.getValueAt(r, 3).toString());
          cbo_CV.setSelectedItem(dfNV_Model.getValueAt(r, 2).toString());
          txtDiaChiNV.setText(dfNV_Model.getValueAt(r, 4).toString());
+           txtEmail.setText(dfNV_Model.getValueAt(r, 7).toString());
          try {
             Date ngaySinh=new SimpleDateFormat("yyyy-MM-dd").parse(dfNV_Model.getValueAt(r, 5).toString() );
             // System.out.println("ngay sinh "+ngaySinh);
@@ -797,7 +831,7 @@ ChucVuDao cv_dao;
             if(nv_dao.updateNV(nv.getMaNV(), nv)){
                 dfNV_Model.addRow(new Object[]{
                 nv.getMaNV(), nv.getTenNV(),nv.getChucVu().getTenCV(), nv.getSdt(),
-                nv.getDiaChi(),nv.getNgaySinh(),nv.getNgayVaoLam(),nv.getTrangThai()
+                nv.getDiaChi(),nv.getNgaySinh(),nv.getNgayVaoLam(),nv.getEmail()
                 });
                 dsNv.removeAll(dsNv);
                 xoaRongTextNv();
@@ -811,6 +845,14 @@ ChucVuDao cv_dao;
         
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
+    private void txtDiaChiNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiaChiNVActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDiaChiNVActionPerformed
+
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailActionPerformed
+
      private byte[] employeeImg;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
@@ -822,6 +864,7 @@ ChucVuDao cv_dao;
     private javax.swing.JComboBox<String> cbo_CV;
     private com.toedter.calendar.JDateChooser dt_NgVaoLam;
     private com.toedter.calendar.JDateChooser dt_NgaySinh;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
@@ -838,6 +881,7 @@ ChucVuDao cv_dao;
     private javax.swing.JPanel pnl_tab_FormTTNhanVien;
     private javax.swing.JTable tbl_NV;
     private javax.swing.JTextField txtDiaChiNV;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtMaNV;
     private javax.swing.JTextField txtSDTNV;
     private javax.swing.JTextField txtSearch1;

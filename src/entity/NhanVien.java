@@ -33,6 +33,7 @@ public class NhanVien {
     private Date ngayVaoLam;
     private String tinhTrang;
     private String trangThai;
+    private String email;
     private byte[] img;
     private ChucVu chucVu;
 
@@ -60,6 +61,33 @@ public class NhanVien {
         this.ngaySinh = ngaySinh;
         this.ngayVaoLam = ngayVaoLam;
         this.trangThai = trangThai;
+        this.chucVu = chucVu;
+    }
+
+    public NhanVien(String maNV, String tenNV, String sdt, String diaChi, Date ngaySinh, Date ngayVaoLam, String tinhTrang, String trangThai, String email, ChucVu chucVu) {
+        this.maNV = maNV;
+        this.tenNV = tenNV;
+        this.sdt = sdt;
+        this.diaChi = diaChi;
+        this.ngaySinh = ngaySinh;
+        this.ngayVaoLam = ngayVaoLam;
+        this.tinhTrang = tinhTrang;
+        this.trangThai = trangThai;
+        this.email = email;
+        this.chucVu = chucVu;
+    }
+
+    public NhanVien(String maNV, String tenNV, String sdt, String diaChi, Date ngaySinh, Date ngayVaoLam, String tinhTrang, String trangThai, String email, byte[] img, ChucVu chucVu) {
+        this.maNV = maNV;
+        this.tenNV = tenNV;
+        this.sdt = sdt;
+        this.diaChi = diaChi;
+        this.ngaySinh = ngaySinh;
+        this.ngayVaoLam = ngayVaoLam;
+        this.tinhTrang = tinhTrang;
+        this.trangThai = trangThai;
+        this.email = email;
+        this.img = img;
         this.chucVu = chucVu;
     }
 
@@ -180,8 +208,10 @@ public class NhanVien {
 
     @Override
     public String toString() {
-        return "NhanVien{" + "maNV=" + maNV + ", tenNV=" + tenNV + ", sdt=" + sdt + ", diaChi=" + diaChi + ", ngaySinh=" + ngaySinh + ", ngayVaoLam=" + ngayVaoLam + ", tinhTrang=" + tinhTrang + ", trangThai=" + trangThai + ", img=" + img + '}';
+        return "NhanVien{" + "maNV=" + maNV + ", tenNV=" + tenNV + ", sdt=" + sdt + ", diaChi=" + diaChi + ", ngaySinh=" + ngaySinh + ", ngayVaoLam=" + ngayVaoLam + ", tinhTrang=" + tinhTrang + ", trangThai=" + trangThai + ", email=" + email + ", img=" + img + ", chucVu=" + chucVu + '}';
     }
+
+  
 
   
 
@@ -222,6 +252,26 @@ public class NhanVien {
         this.tenNV = tenNV;
         this.sdt = sdt;
         this.diaChi = diaChi;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public NhanVien(String maNV, String tenNV, String sdt, String diaChi, Date ngaySinh, Date ngayVaoLam, String tinhTrang, String trangThai, String email) {
+        this.maNV = maNV;
+        this.tenNV = tenNV;
+        this.sdt = sdt;
+        this.diaChi = diaChi;
+        this.ngaySinh = ngaySinh;
+        this.ngayVaoLam = ngayVaoLam;
+        this.tinhTrang = tinhTrang;
+        this.trangThai = trangThai;
+        this.email = email;
     }
 
     

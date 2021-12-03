@@ -60,13 +60,14 @@ public class NhanVienDao {
                                  Date ngayVaoLam = rs.getDate(6);
                                  String trangthai = rs.getString(8);
                                  String maCV = rs.getString(7);
-
+                                  String email = rs.getString("email");
                                  
                                  ChucVuDao chucVuDao = new ChucVuDao();
                                  ChucVu cv = chucVuDao.getCVByMaCV(maCV);
                               
-                                 nv = new NhanVien(maNhanVien, tenNV, sdt, diaChi, ngaySinh, ngayVaoLam, trangthai, cv);
-			}
+                                 nv = new NhanVien(maNV, tenNV, sdt, diaChi, ngaySinh, ngayVaoLam, trangthai, trangthai, email, cv);
+                             
+                        }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -86,6 +87,7 @@ public class NhanVienDao {
                 ChucVu cv = cv_dao.getCVByMaCV(rs.getString("MaCV"));
                 NhanVien nv = new NhanVien(rs.getString("MaNV"), rs.getString("TenNV"), rs.getString("SDT"),rs.getString("DiaChi"), rs.getDate("NgaySinh"), rs.getDate("NgayVaoLam"), rs.getString("TrangThai"));
                 nv.setChucVu(cv);
+                nv.setEmail(rs.getString("email"));
                  Blob img = rs.getBlob("img");
                 if(img != null){
                 nv.setImg(img.getBytes(1, (int)img.length() ));
@@ -174,7 +176,7 @@ public class NhanVienDao {
                         rs.getString(3), rs.getString(5),
                         rs.getDate(4), rs.getDate(6),rs.getString(8));
                 nv.setChucVu(cv);
-           
+                nv.setEmail(rs.getString("email"));
                 list.add(nv);
             }
             } catch (Exception e) {
@@ -203,8 +205,8 @@ public class NhanVienDao {
         
         try {
             java.sql.Connection con = connect.getInstance().getConnection();
-            PreparedStatement nvAdd = con.prepareStatement("INSERT INTO NhanVien([TenNV],[SDT],[NgaySinh],[DiaChi],[NgayVaoLam],[MaCV],[TrangThai], [img])\n" +
-"VALUES ( ? ,?, ?, ?, ?,?, ?, ?)");
+            PreparedStatement nvAdd = con.prepareStatement("INSERT INTO NhanVien([TenNV],[SDT],[NgaySinh],[DiaChi],[NgayVaoLam],[MaCV],[TrangThai], [img], [email])\n" +
+"VALUES ( ? ,?, ?, ?, ?,?, ?, ?, ?)");
             nvAdd.setString(1, nv.getTenNV());
             nvAdd.setString(2,nv.getSdt() );
             nvAdd.setDate(3,nv.getNgaySinh() );
@@ -212,6 +214,7 @@ public class NhanVienDao {
             nvAdd.setDate(5,nv.getNgayVaoLam() );
             nvAdd.setString(6,nv.getChucVu().getMaCV());
             nvAdd.setString(7,nv.getTrangThai() );
+              nvAdd.setString(9,nv.getEmail());
            if(nv.getImg() != null){
                    Blob hinh = new SerialBlob(nv.getImg());
                    nvAdd.setBlob(8, hinh);
@@ -231,7 +234,7 @@ public class NhanVienDao {
     //cap nhat
     public boolean updateNV(String maNV, NhanVien nv) {
             java.sql.Connection con = connect.getInstance().getConnection();
-            String sql = "update NhanVien set TenNV = ?, SDT = ?, NgaySinh = ?, DiaChi = ? , NgayVaoLam = ? , MaCV = ?, TrangThai = ?, img = ? where MaNV = '"+maNV+"'";
+            String sql = "update NhanVien set TenNV = ?, SDT = ?, NgaySinh = ?, DiaChi = ? , NgayVaoLam = ? , MaCV = ?, TrangThai = ?, img = ?, email = ? where MaNV = '"+maNV+"'";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, nv.getTenNV());
@@ -241,6 +244,7 @@ public class NhanVienDao {
             ps.setString(6, nv.getChucVu().getMaCV());
             ps.setString(7, nv.getTrangThai());
             ps.setDate(5, nv.getNgayVaoLam());
+             ps.setString(9, nv.getEmail());
            if(nv.getImg() != null){
                    Blob hinh = new SerialBlob(nv.getImg());
                    ps.setBlob(8, hinh);
