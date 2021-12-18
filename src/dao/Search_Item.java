@@ -22,8 +22,6 @@ import javax.swing.table.DefaultTableModel;
  * @author RAVEN
  */
 public class Search_Item extends javax.swing.JPanel {
-    private DefaultTableModel dfsp_model;
-  
     public Search_Item(SanPham data) {
         initComponents();
         setData(data);
@@ -31,17 +29,8 @@ public class Search_Item extends javax.swing.JPanel {
 
     private void setData(SanPham data) {
         addEventMouse(this);
-        addEventMouse(lbl_TenSp);
-//        addEventMouse(lbRemove);
-//        ImageIcon image = new ImageIcon(data.getHinhAnh());
-////        lbl_ImgSp = new JLabel( image, JLabel.CENTER);
-//        Image img = image.getImage();
-//        Image newImg = img.getScaledInstance(lbl_ImgSp.getWidth(), lbl_ImgSp.getHeight(), Image.SCALE_SMOOTH);
-//        ImageIcon newImc = new ImageIcon(newImg);
-//        lbl_ImgSp.setIcon(newImc);
-//        lbl_ImgSp.setIcon(new ImageIcon(getClass().getResource("D:ImgSp\\quanJean_daibang.jpg")));
-        
-//        lbl_ImgSp.setIcon(new javax.swing.ImageIcon(getClass().getResource(data.getHinhAnh()))); // NOI18N
+//        addEventMouse(lbl_TenSp);
+
         lbl_ImgSp.setIcon(new ImageIcon(new ImageIcon(data.getHinhAnh()).getImage().getScaledInstance(77, 73, Image.SCALE_DEFAULT)));
         lbl_TenSp.setText(data.getTenSP());
         lbl_MauSac.setText(data.getMauSac());
@@ -49,9 +38,8 @@ public class Search_Item extends javax.swing.JPanel {
         lbl_SoLuong.setText("sl: "+Integer.toString(data.getSoLuong()));
         lbl_size.setText(data.getSize());
         lbl_MaSp.setText(data.getMaSP());
-        lbl_SoLuong1.setText(data.getGiaNhap().toString());
-        
-        
+        lbl_GiaNhap.setText(data.getGiaNhap().toString());
+
     }
 
     private void addEventMouse(Component com) {
@@ -72,8 +60,7 @@ public class Search_Item extends javax.swing.JPanel {
     }
 
     private ActionListener eventClick;
-    
-
+   
     public void addEvent(ActionListener eventClick) {
         this.eventClick = eventClick;
     }
@@ -98,7 +85,7 @@ public class Search_Item extends javax.swing.JPanel {
         lbl_MauSac = new javax.swing.JLabel();
         lbl_size = new javax.swing.JLabel();
         lbl_MaSp = new javax.swing.JLabel();
-        lbl_SoLuong1 = new javax.swing.JLabel();
+        lbl_GiaNhap = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 153, 255)));
@@ -142,10 +129,10 @@ public class Search_Item extends javax.swing.JPanel {
 
         lbl_MaSp.setForeground(new java.awt.Color(255, 255, 255));
 
-        lbl_SoLuong1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        lbl_SoLuong1.setForeground(new java.awt.Color(51, 51, 51));
-        lbl_SoLuong1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbl_SoLuong1.setText("99");
+        lbl_GiaNhap.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        lbl_GiaNhap.setForeground(new java.awt.Color(51, 51, 51));
+        lbl_GiaNhap.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl_GiaNhap.setText("99");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -168,7 +155,7 @@ public class Search_Item extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(lbl_Gia, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lbl_SoLuong1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lbl_GiaNhap, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(24, 24, 24)
                                 .addComponent(lbl_SoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -185,7 +172,7 @@ public class Search_Item extends javax.swing.JPanel {
                                 .addComponent(lbl_Gia))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(lbl_SoLuong1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lbl_GiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_MauSac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -211,11 +198,11 @@ public class Search_Item extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lbl_Gia;
+    private javax.swing.JLabel lbl_GiaNhap;
     private javax.swing.JLabel lbl_ImgSp;
     private javax.swing.JLabel lbl_MaSp;
     private javax.swing.JLabel lbl_MauSac;
     private javax.swing.JLabel lbl_SoLuong;
-    private javax.swing.JLabel lbl_SoLuong1;
     private javax.swing.JLabel lbl_TenSp;
     private javax.swing.JLabel lbl_size;
     // End of variables declaration//GEN-END:variables

@@ -29,6 +29,15 @@ public class KhachHang {
         this.tenKH = tenKH;
         this.sdt = sdt;
     }
+    
+//    public KhachHang( String tenKH, String sdt, String diaChi) {
+//   
+//        this.tenKH = tenKH;
+//        this.sdt = sdt;
+//        this.diaChi = diaChi;
+//    }
+    
+    
 
    
 

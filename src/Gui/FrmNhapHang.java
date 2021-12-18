@@ -92,6 +92,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
         search = new PanelSearch();
         menu2 = new JPopupMenu();
         search2 = new PanelSearch();
+        lbl_TienPhaiTra.setEnabled(false);
         menu2.add(search2);
         menu2.setFocusable(false);
         menu.add(search);
@@ -123,7 +124,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
                     Integer sl = dstt.get(vitri).getSoLuong() + 1;
                     dstt.get(vitri).setSoLuong(sl);
                     tongtien = sl * sp.getGiaNhap();
-                    dfbh_model.setValueAt(sl, vitri, 4);
+                    dfbh_model.setValueAt(sl, vitri, 3);
                     dfbh_model.setValueAt(tongtien, vitri, 6);
                 } else {
                     try {
@@ -379,7 +380,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
             tong += Double.parseDouble(tbl_BanHang.getValueAt(i, 6).toString());
         }
         System.out.println("tong" + tong);
-        lbl_TongTien.setText(x.format(tong));
+//        lbl_TongTien.setText(x.format(tong));
         lbl_TienPhaiTra.setText(x.format(tong));
 //        lbl_TongTien.setText(String.valueOf(tong));
 //        lbl_TienPhaiTra.setText(String.valueOf(tong));
@@ -395,7 +396,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
         for( int i = 0;i<tbl_BanHang.getRowCount();i++){
             tong += Double.parseDouble( tbl_BanHang.getValueAt(i, 6).toString());
         }
-        lbl_TongTien.setText(currencyVN.format(tong));
+//        lbl_TongTien.setText(currencyVN.format(tong));
         lbl_TienPhaiTra.setText(currencyVN.format(tong));
         
     }
@@ -449,11 +450,11 @@ public class FrmNhapHang extends javax.swing.JPanel {
 //      Double tienThua = changeMoney(tienKhachDua) - changeMoney(tienPhaiTra);
 //       lbl_TienPhaiTra.setText(currencyVN.format(tienThua));
 
-        Double tienNhap = Double.valueOf(lbl_TongTien.getText().toString());
-        Double tienThue = Double.valueOf(txt_TienDua1.getText().toString());
+//        Double tienNhap = Double.valueOf(lbl_TongTien.getText().toString());
+//        Double tienThue = Double.valueOf(txt_TienDua1.getText().toString());
 
-        Double togTien = tienNhap + tienThue;
-        lbl_TienPhaiTra.setText(togTien.toString());
+//        Double togTien = tienNhap + tienThue;
+//        lbl_TienPhaiTra.setText(togTien.toString());
 
     }
 
@@ -492,8 +493,8 @@ public class FrmNhapHang extends javax.swing.JPanel {
         jPanel6.setVisible(false);
         jPanel7.setVisible(true);
         dfbh_model.setRowCount(0);
-        lbl_TongTien.setText("");
-        txt_TienDua1.setText("");
+//        lbl_TongTien.setText("");
+//        txt_TienDua1.setText("");
         lbl_TienPhaiTra.setText("");
         
         btn_XoaMatHang.setVisible(false);
@@ -593,13 +594,9 @@ public class FrmNhapHang extends javax.swing.JPanel {
         lbl_text_BanHang = new javax.swing.JLabel();
         pnl_tab_Form_BangHang = new javax.swing.JPanel();
         pnl_ThanhToan = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        lbl_TongTien = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         lbl_TienPhaiTra = new javax.swing.JLabel();
         lbl_maKh = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        txt_TienDua1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         txt_Ghichu = new javax.swing.JTextField();
@@ -1035,66 +1032,25 @@ public class FrmNhapHang extends javax.swing.JPanel {
 
         pnl_ThanhToan.setBackground(new java.awt.Color(255, 255, 255));
         pnl_ThanhToan.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 3, 0, 0, new java.awt.Color(102, 153, 255)));
-
-        jLabel5.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Tổng Tiền:");
-
-        lbl_TongTien.setBackground(new java.awt.Color(255, 255, 255));
-        lbl_TongTien.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
-        lbl_TongTien.setForeground(new java.awt.Color(0, 0, 0));
-        lbl_TongTien.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbl_TongTien.setBorder(new javax.swing.border.MatteBorder(null));
+        pnl_ThanhToan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Tổng Tiền Hóa Đơn:");
+        pnl_ThanhToan.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, 30));
 
         lbl_TienPhaiTra.setBackground(new java.awt.Color(255, 255, 255));
         lbl_TienPhaiTra.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         lbl_TienPhaiTra.setForeground(new java.awt.Color(0, 102, 204));
         lbl_TienPhaiTra.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_TienPhaiTra.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(102, 153, 255)));
+        pnl_ThanhToan.add(lbl_TienPhaiTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 298, 30));
 
         lbl_maKh.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         lbl_maKh.setForeground(new java.awt.Color(255, 255, 255));
         lbl_maKh.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-
-        jLabel14.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel14.setText("Thuế GTGT:");
-
-        txt_TienDua1.setBackground(new java.awt.Color(255, 255, 255));
-        txt_TienDua1.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
-        txt_TienDua1.setForeground(new java.awt.Color(0, 0, 0));
-        txt_TienDua1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txt_TienDua1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(102, 153, 255)));
-        txt_TienDua1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txt_TienDua1FocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txt_TienDua1FocusLost(evt);
-            }
-        });
-        txt_TienDua1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txt_TienDua1MouseClicked(evt);
-            }
-        });
-        txt_TienDua1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_TienDua1ActionPerformed(evt);
-            }
-        });
-        txt_TienDua1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_TienDua1KeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_TienDua1KeyTyped(evt);
-            }
-        });
+        pnl_ThanhToan.add(lbl_maKh, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 66, 18, 46));
+        pnl_ThanhToan.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1043, 6, -1, 40));
 
         jButton4.setBackground(new java.awt.Color(102, 153, 255));
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -1105,6 +1061,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
                 jButton4MouseClicked(evt);
             }
         });
+        pnl_ThanhToan.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(804, 84, 190, 46));
 
         txt_Ghichu.setBackground(new java.awt.Color(255, 255, 255));
         txt_Ghichu.setFont(new java.awt.Font("Consolas", 0, 15)); // NOI18N
@@ -1124,6 +1081,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
                 txt_GhichuActionPerformed(evt);
             }
         });
+        pnl_ThanhToan.add(txt_Ghichu, new org.netbeans.lib.awtextra.AbsoluteConstraints(713, 10, 324, 30));
 
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/pencil1.png"))); // NOI18N
         jButton9.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(102, 153, 255)));
@@ -1133,75 +1091,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
                 jButton9ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout pnl_ThanhToanLayout = new javax.swing.GroupLayout(pnl_ThanhToan);
-        pnl_ThanhToan.setLayout(pnl_ThanhToanLayout);
-        pnl_ThanhToanLayout.setHorizontalGroup(
-            pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel14))
-                .addGap(81, 81, 81)
-                .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
-                        .addComponent(lbl_TongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(90, 90, 90)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(txt_Ghichu, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
-                        .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_TienPhaiTra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
-                                .addComponent(txt_TienDua1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_maKh, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(190, 190, 190)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(276, 276, 276))))
-        );
-        pnl_ThanhToanLayout.setVerticalGroup(
-            pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(lbl_TongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_Ghichu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(lbl_maKh, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
-                            .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel14))
-                                .addGroup(pnl_ThanhToanLayout.createSequentialGroup()
-                                    .addGap(6, 6, 6)
-                                    .addComponent(txt_TienDua1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(18, 18, 18)
-                            .addGroup(pnl_ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lbl_TienPhaiTra, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(10, Short.MAX_VALUE))
-        );
+        pnl_ThanhToan.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(681, 10, 32, 30));
 
         pnl_tab_Form_BangHang.add(pnl_ThanhToan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 1070, 140));
 
@@ -1918,30 +1808,6 @@ public class FrmNhapHang extends javax.swing.JPanel {
         jPanel6.setVisible(false);
     }//GEN-LAST:event_jButton3MouseClicked
 
-    private void txt_TienDua1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_TienDua1KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_TienDua1KeyTyped
-
-    private void txt_TienDua1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_TienDua1KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_TienDua1KeyReleased
-
-    private void txt_TienDua1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_TienDua1ActionPerformed
-        TinhTienThua();
-    }//GEN-LAST:event_txt_TienDua1ActionPerformed
-
-    private void txt_TienDua1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_TienDua1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_TienDua1MouseClicked
-
-    private void txt_TienDua1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_TienDua1FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_TienDua1FocusLost
-
-    private void txt_TienDua1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_TienDua1FocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_TienDua1FocusGained
-
     private void btn_LuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_LuuMouseClicked
         if (kiemTraDataSp()) {
             SanPhamDao spDao = new SanPhamDao();
@@ -2080,6 +1946,24 @@ public class FrmNhapHang extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_GiaNhapActionPerformed
     
+    public void printBillNhap(String maHD){
+        try {
+            
+            Hashtable map = new Hashtable();
+            JasperReport report = JasperCompileManager.compileReport("src\\Gui/rptHoaDonNhap.jrxml");
+            
+            map.put("MaHDNhap", maHD);
+                  
+            JasperPrint p = JasperFillManager.fillReport(report,  map, connect.getConnection() );
+            JasperViewer.viewReport(p, false);
+           // JasperExportManager.exportReportToPdfFile(p, "test.pdf");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+           
+        }
+    }
+    
+    
     //tao hoa don nhap hang
     public void taoDonNhap() {
         //lay sp tu table
@@ -2128,30 +2012,14 @@ public class FrmNhapHang extends javax.swing.JPanel {
         for (int i = 0; i < list_CTHDN.size(); i++) {
             ctnDao.createCTHoaDonNH(list_CTHDN.get(i));
         }
-        
-        
+         xoaRong();
         //in hoa don
         printBillNhap(hn.getMaHDNhap());
-        xoaRong();
+       
 
     }
     
-    public void printBillNhap(String maHD){
-        try {
-            
-            Hashtable map = new Hashtable();
-            JasperReport report = JasperCompileManager.compileReport("src\\Gui/rptHoaDonNhap.jrxml");
-            
-            map.put("MaHDNhap", maHD);
-                  
-            JasperPrint p = JasperFillManager.fillReport(report,  map, connect.getConnection() );
-            JasperViewer.viewReport(p, false);
-           // JasperExportManager.exportReportToPdfFile(p, "test.pdf");
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-           
-        }
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Luu;
@@ -2170,11 +2038,9 @@ public class FrmNhapHang extends javax.swing.JPanel {
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
@@ -2207,7 +2073,6 @@ public class FrmNhapHang extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_TenSp2;
     private javax.swing.JLabel lbl_TextSL;
     private javax.swing.JLabel lbl_TienPhaiTra;
-    private javax.swing.JLabel lbl_TongTien;
     private javax.swing.JLabel lbl_maKh;
     private javax.swing.JLabel lbl_text_BanHang;
     private javax.swing.JPanel pnl_FormBanHang;
@@ -2230,7 +2095,6 @@ public class FrmNhapHang extends javax.swing.JPanel {
     private javax.swing.JTextField txt_SlKho;
     private javax.swing.JTextField txt_SuaSL;
     private javax.swing.JTextField txt_TenSp;
-    public javax.swing.JTextField txt_TienDua1;
     private javax.swing.JTextField txt_email;
     private javax.swing.JTextField txt_sdt;
     private javax.swing.JTextField txt_tenNcc;

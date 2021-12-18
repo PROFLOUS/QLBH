@@ -5,7 +5,7 @@
 package dao;
 
 import Connect.connect;
-import java.awt.List;
+
 import entity.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,8 +19,10 @@ import java.util.ArrayList;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+import org.jfree.data.jdbc.JDBCCategoryDataset;
 
 /**
  *
@@ -32,6 +34,8 @@ public class HoaDonDao {
     HoaDonBanHang hoaDon;
     NhanVienDao nvDao = new NhanVienDao();
     KhachHangDao khDao = new KhachHangDao();
+    SimpleDateFormat originalFormat = new SimpleDateFormat("dd");
+    SimpleDateFormat originalFormatYear = new SimpleDateFormat("yyyy");
 
     public HoaDonDao() {
         listHD = new ArrayList<HoaDonBanHang>();
@@ -56,8 +60,9 @@ public class HoaDonDao {
                 String ghiChu = rs.getString(6);
                 String maNV = rs.getString(7);
                 String maKH = rs.getString(8);
+                String tinhTrang = rs.getString(10);
 
-                HoaDonBanHang hd = new HoaDonBanHang(maHD, ngayLap, soLuong, tongTien, tienKhachDua, ghiChu);
+                HoaDonBanHang hd = new HoaDonBanHang(maHD, ngayLap, soLuong, tongTien, tienKhachDua, ghiChu,tinhTrang);
 
                 //set nhan Vien 
                 NhanVien nv = nvDao.getNVByMaNV(maNV);
@@ -77,6 +82,23 @@ public class HoaDonDao {
         }
         return listHD;
     }
+    
+    public boolean updateTrangThai(String maHD, String trangThai){
+        int n =0;
+            java.sql.Connection con = connect.getInstance().getConnection();	
+            PreparedStatement stmt = null;
+            try {
+                stmt = con.prepareStatement("update HDBanHang set [TrangThai] =? where MaHD=?");
+		
+		stmt.setString(1,trangThai);
+		stmt.setString(2,maHD);
+					
+		n = stmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+            return n > 0;
+        }
 
     //tim kiems hoa don theo ma hoadon
     /*
@@ -101,7 +123,8 @@ public class HoaDonDao {
                 String maNV = rs.getString(7);
                 String maKH = rs.getString(8);
                 Double giaGiam = rs.getDouble(9);
-                hd = new HoaDonBanHang(maHD, ngayLap, soLuong, tongTien, tienKhachDua, ghiChu, giaGiam);
+                String tinhTrang = rs.getString(10);
+                hd = new HoaDonBanHang(maHD, ngayLap, soLuong, tongTien, tienKhachDua, ghiChu, giaGiam,tinhTrang);
 
                 //set nhan Vien 
                 NhanVien nv = nvDao.getNVByMaNV(maNV);
@@ -127,7 +150,7 @@ public class HoaDonDao {
         PreparedStatement stmt = null;
         int n = 0;
         try {
-            stmt = con.prepareStatement("Insert Into HDBanHang values(?,getdate(),?,?,?,?,?,?,?)");
+            stmt = con.prepareStatement("Insert Into HDBanHang values(?,getdate(),?,?,?,?,?,?,?,?)");
 
             //  java.time.
             stmt.setString(1, hd.getMaHD());
@@ -139,7 +162,7 @@ public class HoaDonDao {
             stmt.setString(6, hd.getNhanVien().getMaNV());
             stmt.setString(7, hd.getKhachHang().getMaKH());
             stmt.setDouble(8, hd.getTienKhuyenMai());
-
+            stmt.setString(9, hd.getTinhTrang());
             n = stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -230,6 +253,153 @@ public class HoaDonDao {
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("loi day");
+        }
+        return listHD;
+    }
+    
+    public ArrayList<HoaDonBanHang>CT_thongkeDoanhThuTheoNgay(String dayFrom, String dayTo,String month, String year){
+        ArrayList<HoaDonBanHang> dstk = new ArrayList<HoaDonBanHang>();
+        try {
+            java.sql.Connection con = connect.getInstance().getConnection();
+            String sql = "select MaHD,NgayLapHD,SoLuong,TongTien from [dbo].[HDBanHang]\n" +
+"where day([NgayLapHD])<='"+dayTo+"' and day([NgayLapHD])>='"+dayFrom+"' and MONTH([NgayLapHD])='"+month+"' and YEAR([NgayLapHD])='"+year+"'";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                int soLuong = rs.getInt(3);
+                Double tongTien = rs.getDouble(4);
+                String maHd = rs.getString(1);
+                Date date = rs.getDate(2);
+                HoaDonBanHang hd = new HoaDonBanHang(maHd, soLuong, tongTien, date);
+                dstk.add(hd);
+                System.out.println("ct nagy"+listHD);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("loi day");
+        }
+        return dstk;
+    }
+    
+    public ArrayList<HoaDonBanHang>CT_thongkeDoanhThuTheoThang(String monthFrom, String monthTo, String year){
+         ArrayList<HoaDonBanHang> dstk = new ArrayList<HoaDonBanHang>();
+        try {
+            java.sql.Connection con = connect.getInstance().getConnection();
+            String sql = "select MaHD,NgayLapHD,SoLuong,TongTien from [dbo].[HDBanHang]\n" +
+"where MONTH([NgayLapHD])<='"+monthTo+"' and MONTH([NgayLapHD])>='"+monthFrom+"' and YEAR([NgayLapHD])='"+year+"'";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                int soLuong = rs.getInt(3);
+                Double tongTien = rs.getDouble(4);
+                String maHd = rs.getString(1);
+                Date date = rs.getDate(2);
+                HoaDonBanHang hd = new HoaDonBanHang(maHd, soLuong, tongTien, date);
+
+                dstk.add(hd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("loi day");
+        }
+        return dstk;
+    }
+    
+    public ArrayList<HoaDonBanHang>CT_thongkeDoanhThuTheoNam(String yearFrom, String yearTo){
+        ArrayList<HoaDonBanHang> dstk = new ArrayList<HoaDonBanHang>();
+        try {
+            java.sql.Connection con = connect.getInstance().getConnection();
+            String sql = "select MaHD,NgayLapHD,SoLuong,TongTien from [dbo].[HDBanHang]\n" +
+"where year([NgayLapHD])<='"+yearTo+"' and year([NgayLapHD])>='"+yearFrom+"'";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                int soLuong = rs.getInt(3);
+                Double tongTien = rs.getDouble(4);
+                String maHd = rs.getString(1);
+                Date date = rs.getDate(2);
+                HoaDonBanHang hd = new HoaDonBanHang(maHd, soLuong, tongTien, date);
+                dstk.add(hd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("loi day");
+        }
+        return dstk;
+    }
+    
+    public ArrayList<HoaDonBanHang> thongkeDoanhThuTheoNgay(String dayFrom, String dayTo,String month, String year){
+        try {
+            
+            java.sql.Connection con = connect.getInstance().getConnection();
+            String sql = "select day(b.NgayLapHD), sum(b.TongTien) from [dbo].[HDBanHang] b\n" +
+"where day([NgayLapHD])<='"+dayTo+"' and day([NgayLapHD])>='"+dayFrom+"' and MONTH([NgayLapHD])='"+month+"' and YEAR([NgayLapHD])='"+year+"'\n" +
+"group by day(b.NgayLapHD)";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                  int ngayInt= rs.getInt(1);
+                  String ngay = String.valueOf(ngayInt);
+                  Date date = originalFormat.parse(ngay);
+                  System.out.println("ngay la"+date);
+                  Double tongTien = rs.getDouble(2);
+                  HoaDonBanHang hd = new HoaDonBanHang( tongTien,date);
+                listHD.add(hd);
+            }
+            System.out.println("dataset la"+listHD);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("loi day aa");
+        }
+        return listHD;
+    }
+    
+    public ArrayList<HoaDonBanHang> thongkeDoanhThuTheoThang(String monthFrom, String monthTo, String year){
+        try {
+            java.sql.Connection con = connect.getInstance().getConnection();
+            String sql = "select sum(b.TongTien) as'doanh thu' ,MONTH(b.NgayLapHD) as 'thang' from [dbo].[HDBanHang] b\n" +
+"where MONTH([NgayLapHD])<='"+monthTo+"' and MONTH([NgayLapHD])>='"+monthFrom+"' and YEAR([NgayLapHD])='"+year+"'\n" +
+"group by MONTH(b.NgayLapHD)";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                  int ngayInt= rs.getInt(2);
+                  String ngay = String.valueOf(ngayInt);
+                  Date date = originalFormat.parse(ngay);
+                  System.out.println("ngay la"+date);
+                  Double tongTien = rs.getDouble(1);
+                  HoaDonBanHang hd = new HoaDonBanHang( tongTien,date);
+                listHD.add(hd);
+            }
+            System.out.println("dataset la"+listHD);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("loi day aa");
+        }
+        return listHD;
+    }
+    public ArrayList<HoaDonBanHang> thongkeDoanhThuTheoNam(String yearFrom, String yearTo){
+        try {
+            
+            java.sql.Connection con = connect.getInstance().getConnection();
+            String sql = "select sum(b.TongTien) as'doanh thu' ,year(b.NgayLapHD) as 'nam' from [dbo].[HDBanHang] b\n" +
+"where year([NgayLapHD])<='"+yearTo+"' and year([NgayLapHD])>='"+yearFrom+"'\n" +
+"group by year(b.NgayLapHD)";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                  int ngayInt= rs.getInt(2);
+                  String ngay = String.valueOf(ngayInt);
+                  Date date = originalFormatYear.parse(ngay);
+                  System.out.println("ngay sql la"+date);
+                  Double tongTien = rs.getDouble(1);
+                  HoaDonBanHang hd = new HoaDonBanHang( tongTien,date);
+                listHD.add(hd);
+            }
+            System.out.println("dataset la"+listHD);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("loi day aa");
         }
         return listHD;
     }

@@ -293,7 +293,7 @@ where a.MaHD = $P{MaHD}]]>
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<staticText>
-				<reportElement x="190" y="12" width="269" height="30" uuid="02348024-9d54-495b-9419-55a9247a386d"/>
+				<reportElement x="146" y="12" width="269" height="30" uuid="02348024-9d54-495b-9419-55a9247a386d"/>
 				<textElement>
 					<font size="16"/>
 				</textElement>

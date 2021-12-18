@@ -1,4 +1,7 @@
 eclipse.preferences.version=1
+encoding//src/BaoCao/rptThongKeDoanhThuTheoNam.jrxml=UTF-8
+encoding//src/BaoCao/rptThongKeDoanhThuTheoNgay.jrxml=UTF-8
+encoding//src/BaoCao/rptThongKeDoanhThuTheoThang.jrxml=UTF-8
 encoding//src/BaoCao/rptThongKeKhachHangNam.jrxml=UTF-8
 encoding//src/BaoCao/rptThongKeKhachHangNamNgay.jrxml=UTF-8
 encoding//src/BaoCao/rptThongKeKhachHangNamThang.jrxml=UTF-8
@@ -6,4 +9,5 @@ encoding//src/BaoCao/rptThongKeSamPhamNam.jrxml=UTF-8
 encoding//src/BaoCao/rptThongKeSamPhamNgay.jrxml=UTF-8
 encoding//src/BaoCao/rptThongKeSamPhamThang.jrxml=UTF-8
 encoding//src/Gui/rptHoaDon.jrxml=UTF-8
+encoding//src/Gui/rptHoaDonDatHang.jrxml=UTF-8
 encoding//src/Gui/rptHoaDonNhap.jrxml=UTF-8

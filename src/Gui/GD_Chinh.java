@@ -114,9 +114,6 @@ public class GD_Chinh extends javax.swing.JFrame {
         pnl_button_HeThong = new javax.swing.JPanel();
         lbl_logo_HeThong = new javax.swing.JLabel();
         lbl_title_HeThong = new javax.swing.JLabel();
-        pnl_button_ThongKe = new javax.swing.JPanel();
-        lbl_logo_ThongKe = new javax.swing.JLabel();
-        lbl_title_ThongKe = new javax.swing.JLabel();
         pnl_ThongTinTaiKhoan = new javax.swing.JPanel();
         btnExit = new javax.swing.JButton();
         lbl_icon_TaiKhoan = new javax.swing.JLabel();
@@ -126,6 +123,12 @@ public class GD_Chinh extends javax.swing.JFrame {
         lbl_logo_NCC = new javax.swing.JLabel();
         lbl_title_NCC = new javax.swing.JLabel();
         btn_active_TTTK = new javax.swing.JButton();
+        pnl_button_ThongKe1 = new javax.swing.JPanel();
+        lbl_logo_ThongKe1 = new javax.swing.JLabel();
+        lbl_title_ThongKe1 = new javax.swing.JLabel();
+        pnl_button_DatHang = new javax.swing.JPanel();
+        lbl_logo_BanHang1 = new javax.swing.JLabel();
+        lbl_title_BanHang1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         frmTongQuan1 = new Gui.FrmTongQuan();
         frmSanPham1 = new Gui.FrmSanPham();
@@ -145,6 +148,7 @@ public class GD_Chinh extends javax.swing.JFrame {
         frmHeThong1 = new Gui.FrmHeThong();
         frmThongKe1 = new Gui.FrmThongKe();
         frmThongTinTaiKhoan1 = new Gui.FrmThongTinTaiKhoan();
+        frmDatHang1 = new Gui.FrmDatHang();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(0, 700));
@@ -286,7 +290,7 @@ public class GD_Chinh extends javax.swing.JFrame {
             .addComponent(lbl_title_SanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pnl_Menu_button.add(pnl_button_SanPham, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 210, 50));
+        pnl_Menu_button.add(pnl_button_SanPham, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 210, 50));
 
         pnl_button_KhachHang.setBackground(new java.awt.Color(153, 204, 255));
         pnl_button_KhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -318,7 +322,7 @@ public class GD_Chinh extends javax.swing.JFrame {
             .addComponent(lbl_title_KhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pnl_Menu_button.add(pnl_button_KhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 210, 50));
+        pnl_Menu_button.add(pnl_button_KhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 210, 50));
 
         pnl_button_NhanVien.setBackground(new java.awt.Color(153, 204, 255));
         pnl_button_NhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -350,7 +354,7 @@ public class GD_Chinh extends javax.swing.JFrame {
             .addComponent(lbl_title_NhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pnl_Menu_button.add(pnl_button_NhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 210, 50));
+        pnl_Menu_button.add(pnl_button_NhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 210, 50));
 
         pnl_button_HoaDon.setBackground(new java.awt.Color(153, 204, 255));
         pnl_button_HoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -382,7 +386,7 @@ public class GD_Chinh extends javax.swing.JFrame {
             .addComponent(lbl_title_HoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pnl_Menu_button.add(pnl_button_HoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 210, 50));
+        pnl_Menu_button.add(pnl_button_HoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 210, 50));
 
         pnl_button_HeThong.setBackground(new java.awt.Color(153, 204, 255));
         pnl_button_HeThong.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -414,39 +418,7 @@ public class GD_Chinh extends javax.swing.JFrame {
             .addComponent(lbl_title_HeThong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pnl_Menu_button.add(pnl_button_HeThong, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 210, 50));
-
-        pnl_button_ThongKe.setBackground(new java.awt.Color(153, 204, 255));
-        pnl_button_ThongKe.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnl_button_ThongKeMouseClicked(evt);
-            }
-        });
-
-        lbl_logo_ThongKe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_logo_ThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/analytics.png"))); // NOI18N
-
-        lbl_title_ThongKe.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lbl_title_ThongKe.setForeground(new java.awt.Color(0, 0, 0));
-        lbl_title_ThongKe.setText("Thống Kê");
-
-        javax.swing.GroupLayout pnl_button_ThongKeLayout = new javax.swing.GroupLayout(pnl_button_ThongKe);
-        pnl_button_ThongKe.setLayout(pnl_button_ThongKeLayout);
-        pnl_button_ThongKeLayout.setHorizontalGroup(
-            pnl_button_ThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_button_ThongKeLayout.createSequentialGroup()
-                .addComponent(lbl_logo_ThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_title_ThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pnl_button_ThongKeLayout.setVerticalGroup(
-            pnl_button_ThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl_logo_ThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-            .addComponent(lbl_title_ThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        pnl_Menu_button.add(pnl_button_ThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 210, 50));
+        pnl_Menu_button.add(pnl_button_HeThong, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 210, 50));
 
         pnl_ThongTinTaiKhoan.setBackground(new java.awt.Color(153, 204, 255));
         pnl_ThongTinTaiKhoan.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -509,7 +481,7 @@ public class GD_Chinh extends javax.swing.JFrame {
             .addComponent(btnExit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pnl_Menu_button.add(pnl_ThongTinTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 200, 60));
+        pnl_Menu_button.add(pnl_ThongTinTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 200, 60));
 
         pnl_button_NhaCungCap.setBackground(new java.awt.Color(153, 204, 255));
         pnl_button_NhaCungCap.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -541,7 +513,7 @@ public class GD_Chinh extends javax.swing.JFrame {
             .addComponent(lbl_title_NCC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pnl_Menu_button.add(pnl_button_NhaCungCap, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 210, 50));
+        pnl_Menu_button.add(pnl_button_NhaCungCap, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 210, 50));
 
         btn_active_TTTK.setContentAreaFilled(false);
         btn_active_TTTK.addActionListener(new java.awt.event.ActionListener() {
@@ -549,7 +521,71 @@ public class GD_Chinh extends javax.swing.JFrame {
                 btn_active_TTTKActionPerformed(evt);
             }
         });
-        pnl_Menu_button.add(btn_active_TTTK, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 20, 50));
+        pnl_Menu_button.add(btn_active_TTTK, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, 20, 50));
+
+        pnl_button_ThongKe1.setBackground(new java.awt.Color(153, 204, 255));
+        pnl_button_ThongKe1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnl_button_ThongKe1MouseClicked(evt);
+            }
+        });
+
+        lbl_logo_ThongKe1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_logo_ThongKe1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/analytics.png"))); // NOI18N
+
+        lbl_title_ThongKe1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lbl_title_ThongKe1.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_title_ThongKe1.setText("Thống Kê");
+
+        javax.swing.GroupLayout pnl_button_ThongKe1Layout = new javax.swing.GroupLayout(pnl_button_ThongKe1);
+        pnl_button_ThongKe1.setLayout(pnl_button_ThongKe1Layout);
+        pnl_button_ThongKe1Layout.setHorizontalGroup(
+            pnl_button_ThongKe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_button_ThongKe1Layout.createSequentialGroup()
+                .addComponent(lbl_logo_ThongKe1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_title_ThongKe1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnl_button_ThongKe1Layout.setVerticalGroup(
+            pnl_button_ThongKe1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl_logo_ThongKe1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+            .addComponent(lbl_title_ThongKe1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pnl_Menu_button.add(pnl_button_ThongKe1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 210, 50));
+
+        pnl_button_DatHang.setBackground(new java.awt.Color(153, 204, 255));
+        pnl_button_DatHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnl_button_DatHangMouseClicked(evt);
+            }
+        });
+
+        lbl_logo_BanHang1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_logo_BanHang1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/smartphone (1).png"))); // NOI18N
+
+        lbl_title_BanHang1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lbl_title_BanHang1.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_title_BanHang1.setText("Đặt Hàng");
+
+        javax.swing.GroupLayout pnl_button_DatHangLayout = new javax.swing.GroupLayout(pnl_button_DatHang);
+        pnl_button_DatHang.setLayout(pnl_button_DatHangLayout);
+        pnl_button_DatHangLayout.setHorizontalGroup(
+            pnl_button_DatHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_button_DatHangLayout.createSequentialGroup()
+                .addComponent(lbl_logo_BanHang1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_title_BanHang1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+        pnl_button_DatHangLayout.setVerticalGroup(
+            pnl_button_DatHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl_logo_BanHang1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+            .addComponent(lbl_title_BanHang1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pnl_Menu_button.add(pnl_button_DatHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 210, 50));
 
         pnl_Menu_main.add(pnl_Menu_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 210, 570));
 
@@ -565,6 +601,7 @@ public class GD_Chinh extends javax.swing.JFrame {
         jTabbedPane1.addTab("tab8", frmHeThong1);
         jTabbedPane1.addTab("tab9", frmThongKe1);
         jTabbedPane1.addTab("tab10", frmThongTinTaiKhoan1);
+        jTabbedPane1.addTab("tab11", frmDatHang1);
 
         pnl_Main.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, -32, 1090, 730));
 
@@ -616,7 +653,8 @@ public class GD_Chinh extends javax.swing.JFrame {
         pnl_button_NhanVien.setBackground(new Color(153, 204, 255));
         pnl_button_HoaDon.setBackground(new Color(153, 204, 255));
         pnl_button_HeThong.setBackground(new Color(153, 204, 255));
-        pnl_button_ThongKe.setBackground(new Color(153, 204, 255));
+        pnl_button_ThongKe1.setBackground(new Color(153, 204, 255));
+        pnl_button_DatHang.setBackground(new Color(153, 204, 255));
         pnl_button_NhaCungCap.setBackground(Color.white);
 
         btn_active_TTTK.setBorder(null);
@@ -642,40 +680,14 @@ public class GD_Chinh extends javax.swing.JFrame {
         pnl_button_NhanVien.setBackground(new Color(153, 204, 255));
         pnl_button_HoaDon.setBackground(new Color(153, 204, 255));
         pnl_button_HeThong.setBackground(new Color(153, 204, 255));
-        pnl_button_ThongKe.setBackground(new Color(153, 204, 255));
+        pnl_button_ThongKe1.setBackground(new Color(153, 204, 255));
+        pnl_button_DatHang.setBackground(new Color(153, 204, 255));
         pnl_button_NhaCungCap.setBackground(new Color(153, 204, 255));
         btn_active_TTTK.setBorder(BorderFactory.createMatteBorder(0, 8, 0, 0, new Color(3, 65, 143)));
         //        pnl_ThongTinTaiKhoan.setBackground(Color.white);
 
         //new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160))
     }//GEN-LAST:event_pnl_ThongTinTaiKhoanMouseClicked
-
-    private void pnl_button_ThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_button_ThongKeMouseClicked
-        // TODO add your handling code here:
-//        pnl_FormTongQuan.setVisible(false);
-//        frmBanHang1.setVisible(false);
-//        frmKhachHang1.setVisible(false);
-//        frmSanPham2.setVisible(false);
-//        frmNhanVien1.setVisible(false);
-//        pnl_FormHoaDon.setVisible(false);
-//        frmHeThong1.setVisible(false);
-//        frmThongKe1.setVisible(true);
-//        frmThongTinTaiKhoan1.setVisible(false);
-//        frmNhaCungCap1.setVisible(false);
-        frmThongKe1.renderAgianTkKh();
-        frmThongKe1.renderAgianTkSp();
-        jTabbedPane1.setSelectedIndex(8);
-        pnl_button_TongQuan.setBackground(new Color(153, 204, 255));
-        pnl_button_BanHang.setBackground(new Color(153, 204, 255));
-        pnl_button_SanPham.setBackground(new Color(153, 204, 255));
-        pnl_button_KhachHang.setBackground(new Color(153, 204, 255));
-        pnl_button_NhanVien.setBackground(new Color(153, 204, 255));
-        pnl_button_HoaDon.setBackground(new Color(153, 204, 255));
-        pnl_button_HeThong.setBackground(new Color(153, 204, 255));
-        pnl_button_ThongKe.setBackground(Color.white);
-        pnl_button_NhaCungCap.setBackground(new Color(153, 204, 255));
-        btn_active_TTTK.setBorder(null);
-    }//GEN-LAST:event_pnl_button_ThongKeMouseClicked
 
     private void pnl_button_HeThongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_button_HeThongMouseClicked
         // TODO add your handling code here:
@@ -705,8 +717,9 @@ public class GD_Chinh extends javax.swing.JFrame {
         pnl_button_NhanVien.setBackground(new Color(153, 204, 255));
         pnl_button_HoaDon.setBackground(new Color(153, 204, 255));
         pnl_button_HeThong.setBackground(Color.white);
-        pnl_button_ThongKe.setBackground(new Color(153, 204, 255));
+        pnl_button_ThongKe1.setBackground(new Color(153, 204, 255));
         pnl_button_NhaCungCap.setBackground(new Color(153, 204, 255));
+        pnl_button_DatHang.setBackground(new Color(153, 204, 255));
         btn_active_TTTK.setBorder(null);
         }
       
@@ -717,6 +730,7 @@ public class GD_Chinh extends javax.swing.JFrame {
 
              frmHoaDon1.renderAgian();
              frmHoaDon1.renderAgianHDnhap();
+             frmHoaDon1.renderAgianHD();
   
         } catch (Exception e) {
              JOptionPane.showMessageDialog(rootPane, "ERRO");
@@ -731,8 +745,9 @@ public class GD_Chinh extends javax.swing.JFrame {
         pnl_button_NhanVien.setBackground(new Color(153, 204, 255));
         pnl_button_HoaDon.setBackground(Color.white);
         pnl_button_HeThong.setBackground(new Color(153, 204, 255));
-        pnl_button_ThongKe.setBackground(new Color(153, 204, 255));
+        pnl_button_ThongKe1.setBackground(new Color(153, 204, 255));
         pnl_button_NhaCungCap.setBackground(new Color(153, 204, 255));
+        pnl_button_DatHang.setBackground(new Color(153, 204, 255));
         btn_active_TTTK.setBorder(null);
     }//GEN-LAST:event_pnl_button_HoaDonMouseClicked
 
@@ -750,8 +765,9 @@ public class GD_Chinh extends javax.swing.JFrame {
             pnl_button_NhanVien.setBackground(Color.white);
             pnl_button_HoaDon.setBackground(new Color(153, 204, 255));
             pnl_button_HeThong.setBackground(new Color(153, 204, 255));
-            pnl_button_ThongKe.setBackground(new Color(153, 204, 255));
+            pnl_button_ThongKe1.setBackground(new Color(153, 204, 255));
             pnl_button_NhaCungCap.setBackground(new Color(153, 204, 255));
+            pnl_button_DatHang.setBackground(new Color(153, 204, 255));
             btn_active_TTTK.setBorder(null);
         }
        
@@ -767,13 +783,14 @@ public class GD_Chinh extends javax.swing.JFrame {
         pnl_button_NhanVien.setBackground(new Color(153, 204, 255));
         pnl_button_HoaDon.setBackground(new Color(153, 204, 255));
         pnl_button_HeThong.setBackground(new Color(153, 204, 255));
-        pnl_button_ThongKe.setBackground(new Color(153, 204, 255));
+        pnl_button_ThongKe1.setBackground(new Color(153, 204, 255));
         pnl_button_NhaCungCap.setBackground(new Color(153, 204, 255));
+        pnl_button_DatHang.setBackground(new Color(153, 204, 255));
         btn_active_TTTK.setBorder(null);
     }//GEN-LAST:event_pnl_button_KhachHangMouseClicked
 
     private void pnl_button_SanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_button_SanPhamMouseClicked
-
+        frmSanPham1.renderAgian();
         pnl_button_TongQuan.setBackground(new Color(153, 204, 255));
         pnl_button_BanHang.setBackground(new Color(153, 204, 255));
         pnl_button_SanPham.setBackground(Color.white);
@@ -781,8 +798,9 @@ public class GD_Chinh extends javax.swing.JFrame {
         pnl_button_NhanVien.setBackground(new Color(153, 204, 255));
         pnl_button_HoaDon.setBackground(new Color(153, 204, 255));
         pnl_button_HeThong.setBackground(new Color(153, 204, 255));
-        pnl_button_ThongKe.setBackground(new Color(153, 204, 255));
+        pnl_button_ThongKe1.setBackground(new Color(153, 204, 255));
         pnl_button_NhaCungCap.setBackground(new Color(153, 204, 255));
+        pnl_button_DatHang.setBackground(new Color(153, 204, 255));
         btn_active_TTTK.setBorder(null);
         jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_pnl_button_SanPhamMouseClicked
@@ -797,8 +815,9 @@ public class GD_Chinh extends javax.swing.JFrame {
         pnl_button_NhanVien.setBackground(new Color(153, 204, 255));
         pnl_button_HoaDon.setBackground(new Color(153, 204, 255));
         pnl_button_HeThong.setBackground(new Color(153, 204, 255));
-        pnl_button_ThongKe.setBackground(new Color(153, 204, 255));
+        pnl_button_ThongKe1.setBackground(new Color(153, 204, 255));
         pnl_button_NhaCungCap.setBackground(new Color(153, 204, 255));
+        pnl_button_DatHang.setBackground(new Color(153, 204, 255));
         btn_active_TTTK.setBorder(null);
     }//GEN-LAST:event_pnl_button_BanHangMouseClicked
 
@@ -806,13 +825,14 @@ public class GD_Chinh extends javax.swing.JFrame {
 
         jTabbedPane1.setSelectedIndex(0);
         pnl_button_TongQuan.setBackground(Color.white);
+        pnl_button_DatHang.setBackground(new Color(153, 204, 255));
         pnl_button_BanHang.setBackground(new Color(153, 204, 255));
         pnl_button_SanPham.setBackground(new Color(153, 204, 255));
         pnl_button_KhachHang.setBackground(new Color(153, 204, 255));
         pnl_button_NhanVien.setBackground(new Color(153, 204, 255));
         pnl_button_HoaDon.setBackground(new Color(153, 204, 255));
         pnl_button_HeThong.setBackground(new Color(153, 204, 255));
-        pnl_button_ThongKe.setBackground(new Color(153, 204, 255));
+        pnl_button_ThongKe1.setBackground(new Color(153, 204, 255));
         pnl_button_NhaCungCap.setBackground(new Color(153, 204, 255));
         btn_active_TTTK.setBorder(null);
 
@@ -849,6 +869,37 @@ public class GD_Chinh extends javax.swing.JFrame {
             System.out.print("Loi ngoai le. khong sao");
         }
     }//GEN-LAST:event_formWindowClosing
+
+    private void pnl_button_ThongKe1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_button_ThongKe1MouseClicked
+        jTabbedPane1.setSelectedIndex(8);
+        pnl_button_DatHang.setBackground(new Color(153, 204, 255));
+        pnl_button_TongQuan.setBackground(new Color(153, 204, 255));
+        pnl_button_BanHang.setBackground(new Color(153, 204, 255));
+        pnl_button_SanPham.setBackground(new Color(153, 204, 255));
+        pnl_button_KhachHang.setBackground(new Color(153, 204, 255));
+        pnl_button_NhanVien.setBackground(new Color(153, 204, 255));
+        pnl_button_HoaDon.setBackground(new Color(153, 204, 255));
+        pnl_button_HeThong.setBackground(new Color(153, 204, 255));
+        pnl_button_ThongKe1.setBackground(Color.white);
+        pnl_button_NhaCungCap.setBackground(new Color(153, 204, 255));
+        btn_active_TTTK.setBorder(null);
+    }//GEN-LAST:event_pnl_button_ThongKe1MouseClicked
+
+    private void pnl_button_DatHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_button_DatHangMouseClicked
+        jTabbedPane1.setSelectedIndex(10);
+        pnl_button_DatHang.setBackground(Color.white);
+        pnl_button_TongQuan.setBackground(new Color(153, 204, 255));
+        pnl_button_BanHang.setBackground(new Color(153, 204, 255));
+        pnl_button_SanPham.setBackground(new Color(153, 204, 255));
+        pnl_button_KhachHang.setBackground(new Color(153, 204, 255));
+        pnl_button_NhanVien.setBackground(new Color(153, 204, 255));
+        pnl_button_HoaDon.setBackground(new Color(153, 204, 255));
+        pnl_button_HeThong.setBackground(new Color(153, 204, 255));
+        pnl_button_ThongKe1.setBackground(new Color(153, 204, 255));
+        pnl_button_NhaCungCap.setBackground(new Color(153, 204, 255));
+        btn_active_TTTK.setBorder(null);
+
+    }//GEN-LAST:event_pnl_button_DatHangMouseClicked
 
     /**
      * @param args the command line arguments
@@ -953,6 +1004,7 @@ public class GD_Chinh extends javax.swing.JFrame {
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btn_active_TTTK;
     private Gui.FrmBanHang frmBanHang1;
+    private Gui.FrmDatHang frmDatHang1;
     private Gui.FrmHeThong frmHeThong1;
     private Gui.FrmHoaDon frmHoaDon1;
     private Gui.FrmKhachHang frmKhachHang1;
@@ -963,19 +1015,21 @@ public class GD_Chinh extends javax.swing.JFrame {
     private Gui.FrmThongTinTaiKhoan frmThongTinTaiKhoan1;
     private Gui.FrmTongQuan frmTongQuan1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    public static javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbl_icon_TaiKhoan;
     private javax.swing.JLabel lbl_logo;
     private javax.swing.JLabel lbl_logo_BanHang;
+    private javax.swing.JLabel lbl_logo_BanHang1;
     private javax.swing.JLabel lbl_logo_HeThong;
     private javax.swing.JLabel lbl_logo_HoaDon;
     private javax.swing.JLabel lbl_logo_KhachHang;
     private javax.swing.JLabel lbl_logo_NCC;
     private javax.swing.JLabel lbl_logo_NhanVien;
     private javax.swing.JLabel lbl_logo_SanPham;
-    private javax.swing.JLabel lbl_logo_ThongKe;
+    private javax.swing.JLabel lbl_logo_ThongKe1;
     private javax.swing.JLabel lbl_logo_TongQuan;
     private javax.swing.JLabel lbl_title_BanHang;
+    private javax.swing.JLabel lbl_title_BanHang1;
     private javax.swing.JLabel lbl_title_HeThong;
     private javax.swing.JLabel lbl_title_HoaDon;
     private javax.swing.JLabel lbl_title_KhachHang;
@@ -984,7 +1038,7 @@ public class GD_Chinh extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_title_SanPham;
     private javax.swing.JLabel lbl_title_TaiKhoan;
     private javax.swing.JLabel lbl_title_TaiKhoan1;
-    private javax.swing.JLabel lbl_title_ThongKe;
+    private javax.swing.JLabel lbl_title_ThongKe1;
     private javax.swing.JLabel lbl_title_TongQuan;
     private javax.swing.JPanel pnl_Main;
     private javax.swing.JPanel pnl_Menu_button;
@@ -992,13 +1046,14 @@ public class GD_Chinh extends javax.swing.JFrame {
     private javax.swing.JPanel pnl_Menu_main;
     private javax.swing.JPanel pnl_ThongTinTaiKhoan;
     private javax.swing.JPanel pnl_button_BanHang;
+    private javax.swing.JPanel pnl_button_DatHang;
     private javax.swing.JPanel pnl_button_HeThong;
     private javax.swing.JPanel pnl_button_HoaDon;
     private javax.swing.JPanel pnl_button_KhachHang;
     private javax.swing.JPanel pnl_button_NhaCungCap;
     private javax.swing.JPanel pnl_button_NhanVien;
     private javax.swing.JPanel pnl_button_SanPham;
-    private javax.swing.JPanel pnl_button_ThongKe;
+    private javax.swing.JPanel pnl_button_ThongKe1;
     private javax.swing.JPanel pnl_button_TongQuan;
     // End of variables declaration//GEN-END:variables
 }

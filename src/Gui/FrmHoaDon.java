@@ -39,21 +39,13 @@ public class FrmHoaDon extends javax.swing.JPanel{
     public FrmHoaDon() throws SQLException  {
         initComponents();
         addBorder();
-        
-//        try {
-//            connect.getInstance().connect();
-//        
-//            renderListHoaDon();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
-    
         public void addBorder() {
         buttons = new JButton[2];
         //Form san pham
         buttons[0] = btn_tab_SanPham1;
         buttons[1] = btn_tab_DMSanPham1;
+//        buttons[2] = btn_tab_DMSanPham2;
         
         
         setButtonBorder(btn_tab_SanPham1);
@@ -166,6 +158,11 @@ public class FrmHoaDon extends javax.swing.JPanel{
         } catch (java.sql.SQLException e1) {
             e1.printStackTrace();
         }
+        try {
+            frmHoaDonDatHang1 = new Gui.FrmHoaDonDatHang();
+        } catch (java.sql.SQLException e1) {
+            e1.printStackTrace();
+        }
 
         setBackground(new java.awt.Color(243, 244, 237));
         setPreferredSize(new java.awt.Dimension(1090, 708));
@@ -243,6 +240,7 @@ public class FrmHoaDon extends javax.swing.JPanel{
         jTabbedPane1.setBackground(new java.awt.Color(102, 102, 102));
         jTabbedPane1.addTab("tab1", frmHoaDonBanHang1);
         jTabbedPane1.addTab("tab2", frmHoaDonNhapHang1);
+        jTabbedPane1.addTab("tab3", frmHoaDonDatHang1);
 
         add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 29, 1090, 910));
     }// </editor-fold>//GEN-END:initComponents
@@ -264,7 +262,7 @@ public class FrmHoaDon extends javax.swing.JPanel{
     }//GEN-LAST:event_jDateChoiseHDFocusLost
 
     private void btn_tab_SanPham1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tab_SanPham1MouseClicked
-        jTabbedPane1.setSelectedIndex(0);
+        jTabbedPane1.setSelectedIndex(2);
     }//GEN-LAST:event_btn_tab_SanPham1MouseClicked
 
     private void btn_tab_SanPham1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tab_SanPham1ActionPerformed
@@ -285,6 +283,7 @@ public class FrmHoaDon extends javax.swing.JPanel{
     private javax.swing.JButton btn_tab_DMSanPham1;
     private javax.swing.JButton btn_tab_SanPham1;
     private Gui.FrmHoaDonBanHang frmHoaDonBanHang1;
+    private Gui.FrmHoaDonDatHang frmHoaDonDatHang1;
     private Gui.FrmHoaDonNhapHang frmHoaDonNhapHang1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbl_text_SanPham1;
@@ -299,5 +298,10 @@ public class FrmHoaDon extends javax.swing.JPanel{
     public void renderAgian(){
         frmHoaDonBanHang1.renderListHoaDon();
     }
+    
+    public void renderAgianHD(){
+        frmHoaDonDatHang1.renderListHoaDon();
+    }
+    
     
 }

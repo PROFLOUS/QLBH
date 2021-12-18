@@ -47,6 +47,14 @@ public class SanPham {
         this.mauSac = mauSac;
     }
 
+    public SanPham(String maSP, String tenSP, Double donGia, int soLuong) {
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.donGia = donGia;
+        this.soLuong = soLuong;
+    }
+    
+
     public SanPham(String maSP, String tenSP, Double donGia, String size, String mauSac) {
         this.maSP = maSP;
         this.tenSP = tenSP;

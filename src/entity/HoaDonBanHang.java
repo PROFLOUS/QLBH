@@ -16,26 +16,70 @@ import java.util.Date;
 //●       MaNV – varchar(30) - Foreign Key
 //●       NgayLapHD – date - not null
 //●       SoLuongSP – interger – not null - Không âm ( >= 0)
-//●       TongTien – double – not null - Không âm ( >= 0)
-//●       TienKhachDua – double – not null
+//●       TongTien –  – not null - Không âm ( >= 0)
+//●       TienKhachDua –  – not null
 //●       GhiChu – varchar(255)
 
 public class HoaDonBanHang {
     private String maHD;
    
     private int soLuong;
-    private Double tongTien;
-    private Double tienKhachDua;
+    private double tongTien;
+    private double tienKhachDua;
     private String ghiChu;
-    private Double tienKhuyenMai;
+    private double tienKhuyenMai;
     private Date ngayLap;
     private KhachHang khachHang;
     private NhanVien nhanVien;
+    private String trangThai;
+   
 
     public HoaDonBanHang() {
     }
 
-    public HoaDonBanHang(String maHD, int soLuong, Double tongTien, Double tienKhachDua, String ghiChu, Double tienKhuyenMai ) {
+    public HoaDonBanHang(String maHD) {
+        this.maHD = maHD;
+    }
+
+    public HoaDonBanHang(String maHD, int soLuong, double tongTien, Date ngayLap) {
+        this.maHD = maHD;
+        this.soLuong = soLuong;
+        this.tongTien = tongTien;
+        this.ngayLap = ngayLap;
+    }
+
+    public HoaDonBanHang(int soLuong, double tongTien, String ghiChu, String trangThai) {
+        this.soLuong = soLuong;
+        this.tongTien = tongTien;
+        this.ghiChu = ghiChu;
+        this.trangThai = trangThai;
+    }
+
+    public HoaDonBanHang(String maHD, int soLuong, double tongTien, String ghiChu, Date ngayLap, String trangThai) {
+        this.maHD = maHD;
+        this.soLuong = soLuong;
+        this.tongTien = tongTien;
+        this.ghiChu = ghiChu;
+        this.ngayLap = ngayLap;
+        this.trangThai = trangThai;
+    }
+
+    public HoaDonBanHang(String maHD, int soLuong, double tongTien, double tienKhachDua, String ghiChu, double tienKhuyenMai, String trangThai) {
+        this.maHD = maHD;
+        this.soLuong = soLuong;
+        this.tongTien = tongTien;
+        this.tienKhachDua = tienKhachDua;
+        this.ghiChu = ghiChu;
+        this.tienKhuyenMai = tienKhuyenMai;
+        this.trangThai = trangThai;
+    }
+    
+
+    
+    
+
+    
+    public HoaDonBanHang(String maHD, int soLuong, double tongTien, double tienKhachDua, String ghiChu, double tienKhuyenMai ) {
         this.maHD = maHD;
         this.soLuong = soLuong;
         this.tongTien = tongTien;
@@ -46,7 +90,7 @@ public class HoaDonBanHang {
     }
     
 
-    public HoaDonBanHang(String maHD,Date ngayLap,  int soLuong, Double tongTien, Double tienKhachDua, String ghiChu, Double KhuyenMai) {
+    public HoaDonBanHang(String maHD,Date ngayLap,  int soLuong, double tongTien, double tienKhachDua, String ghiChu, double KhuyenMai) {
         this.maHD = maHD;
         this.ngayLap = ngayLap;
         this.soLuong = soLuong;
@@ -56,7 +100,7 @@ public class HoaDonBanHang {
         this.tienKhuyenMai = KhuyenMai;
     }
     
-      public HoaDonBanHang(String maHD,Date ngayLap,  int soLuong, Double tongTien, Double tienKhachDua, String ghiChu) {
+      public HoaDonBanHang(String maHD,Date ngayLap,  int soLuong, double tongTien, double tienKhachDua, String ghiChu) {
         this.maHD = maHD;
         this.ngayLap = ngayLap;
         this.soLuong = soLuong;
@@ -66,12 +110,69 @@ public class HoaDonBanHang {
         
     }
 
-    public HoaDonBanHang(int soLuong, Double tongTien) {
+    public HoaDonBanHang(String maHD,Date ngayLap, int soLuong, double tongTien, double tienKhachDua, String ghiChu,  String trangThai) {
+        this.maHD = maHD;
+        this.soLuong = soLuong;
+        this.tongTien = tongTien;
+        this.tienKhachDua = tienKhachDua;
+        this.ghiChu = ghiChu;
+        this.ngayLap = ngayLap;
+        this.trangThai = trangThai;
+    }
+    public HoaDonBanHang(String maHD,Date ngayLap,  int soLuong, double tongTien, double tienKhachDua, String ghiChu, double KhuyenMai,String trangThai) {
+        this.maHD = maHD;
+        this.ngayLap = ngayLap;
+        this.soLuong = soLuong;
+        this.tongTien = tongTien;
+        this.tienKhachDua = tienKhachDua;
+        this.ghiChu = ghiChu;
+        this.tienKhuyenMai = KhuyenMai;
+        this.trangThai = trangThai;
+    }
+    
+      
+
+    public HoaDonBanHang(int soLuong, double tongTien) {
         this.soLuong = soLuong;
         this.tongTien = tongTien;
     }
-      
 
+    
+
+    public HoaDonBanHang(double tongTien, Date ngayLap) {
+        this.tongTien = tongTien;
+        this.ngayLap = ngayLap;
+    }
+    
+    
+
+    public Date getNgayLap() {
+        return ngayLap;
+    }
+
+    
+
+    public void setTienKhuyenMai(double tienKhuyenMai) {
+        this.tienKhuyenMai = tienKhuyenMai;
+    }
+
+    public void setNgayLap(Date ngayLap) {
+        this.ngayLap = ngayLap;
+    }
+
+    public String getTinhTrang() {
+        return trangThai;
+    }
+
+    public void setTinhTrang(String trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    
+
+    
+      
+    
   
 
     public void setMaHD(String maHD) {
@@ -84,11 +185,11 @@ public class HoaDonBanHang {
         this.soLuong = soLuong;
     }
 
-    public void setTongTien(Double tongTien) {
+    public void setTongTien(double tongTien) {
         this.tongTien = tongTien;
     }
 
-    public void setTienKhachDua(Double tienKhachDua) {
+    public void setTienKhachDua(double tienKhachDua) {
         this.tienKhachDua = tienKhachDua;
     }
 
@@ -112,11 +213,11 @@ public class HoaDonBanHang {
         return soLuong;
     }
 
-    public Double getTongTien() {
+    public double getTongTien() {
         return tongTien;
     }
 
-    public Double getTienKhachDua() {
+    public double getTienKhachDua() {
         return tienKhachDua;
     }
 
@@ -134,10 +235,12 @@ public class HoaDonBanHang {
 
     @Override
     public String toString() {
-        return "HoaDonBanHang{" + "maHD=" + maHD +  ", soLuong=" + soLuong + ", tongTien=" + tongTien + ", tienKhachDua=" + tienKhachDua + ", ghiChu=" + ghiChu + ", khachHang=" + khachHang + ", nhanVien=" + nhanVien + '}';
+        return "HoaDonBanHang{" + "maHD=" + maHD + ", soLuong=" + soLuong + ", tongTien=" + tongTien + ", tienKhachDua=" + tienKhachDua + ", ghiChu=" + ghiChu + ", tienKhuyenMai=" + tienKhuyenMai + ", ngayLap=" + ngayLap + ", khachHang=" + khachHang + ", nhanVien=" + nhanVien + ", tinhTrang=" + trangThai + '}';
     }
 
-    public Double getTienKhuyenMai() {
+    
+
+    public  double getTienKhuyenMai() {
         return tienKhuyenMai;
     }
 

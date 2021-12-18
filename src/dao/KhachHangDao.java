@@ -103,11 +103,6 @@ public class KhachHangDao {
             int n = 0;
             try {
 		stmt = con.prepareStatement("Insert Into KhachHang values(?,?,?,?)");
-                
-             
-
-            
-                
 		stmt.setString(1, kh.getMaKH());
                 stmt.setString(2, kh.getTenKH());
                 stmt.setString(3, kh.getSdt());
@@ -224,8 +219,24 @@ public class KhachHangDao {
         }
         return false;
     }
-      
-      
+      /*
+      *Tìm khách hàng mới thêm
+      */
+      public KhachHang getKhNew(){
+             KhachHang kh = null;
+            try {
+                PreparedStatement stmt = con.prepareStatement("select  top 1 * from [dbo].[KhachHang] \n" +
+"order by MaKH desc");
+                ResultSet rs = stmt.executeQuery();
+                while(rs.next()) {
+                 kh = new KhachHang(rs.getString(1), rs.getString(2), rs.getString(3),rs.getString(4));
+               
+            }
+            } catch (Exception e) {
+            }
+            
+            return kh;
+        }
       
       
 }

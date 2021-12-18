@@ -10,6 +10,7 @@ import com.formdev.flatlaf.intellijthemes.FlatLightFlatIJTheme;
 import dao.NhanVienDao;
 import dao.TaiKhoanDao;
 import entity.TaiKhoan;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 
@@ -22,32 +23,38 @@ import javax.swing.JOptionPane;
 import java.awt.geom.RoundRectangle2D;
 import java.net.URL;
 import javax.swing.ImageIcon;
+
 /**
  *
  * @author tdat3
  */
 public class FrmDangNhap extends javax.swing.JFrame {
+
     //dem so lan dang nhap sai
     //neu sai 3 lan se bi khoa tai khoan
     private int countErroLogin = 0;
+
     /**
      * Creates new form FrmDangNhap
      */
     public FrmDangNhap() {
-          try {
+        try {
             connect.getInstance().connect();
         } catch (SQLException ex) {
             Logger.getLogger(FrmDangNhap.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         initComponents();
-       Image icon = Toolkit.getDefaultToolkit().getImage("src\\imgVSicon\\icon.png");  
-    this.setIconImage(icon); 
+        Image icon = Toolkit.getDefaultToolkit().getImage("src\\imgVSicon\\icon.png");
+//       jProgressBar1.setBackground(new Color(255, 255, 255, 0));
+//       jProgressBar1.setForeground(new Color(74,136,199));
+        this.setIconImage(icon);
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("Đăng Nhập");
 //        jLabel2.setIcon(new ImageIcon("src\\imgVSicon\\icon.png"));
+
     }
 
     /**
@@ -69,6 +76,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         FrmMatKhau = new javax.swing.JFrame();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
@@ -208,6 +216,11 @@ public class FrmDangNhap extends javax.swing.JFrame {
                 lblQuenMKMouseMoved(evt);
             }
         });
+        lblQuenMK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblQuenMKMouseClicked(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -303,20 +316,35 @@ public class FrmDangNhap extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(lblQuenMK)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
+        );
+
+        jLayeredPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 594, Short.MAX_VALUE)
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 328, Short.MAX_VALUE)
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLayeredPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -344,77 +372,72 @@ public class FrmDangNhap extends javax.swing.JFrame {
 
     private void lblQuenMKMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenMKMouseMoved
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_lblQuenMKMouseMoved
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-         login();
+        login();
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
         // TODO add your handling code here:
         System.exit(0);
-                
+
     }//GEN-LAST:event_btnExitMouseClicked
 
     //click vao dang nhap
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
-        
+
         // login();
     }//GEN-LAST:event_btnLoginMouseClicked
 
-    public void login(){
-           String user = txtUser.getText().trim();
+    private void lblQuenMKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenMKMouseClicked
+        
+    }//GEN-LAST:event_lblQuenMKMouseClicked
+
+    public void login() {
+        String user = txtUser.getText().trim();
         String passText = new String(passMK.getPassword());
-    
+
         TaiKhoanDao tkDao = new TaiKhoanDao();
         TaiKhoan tk = tkDao.findTKByUserName(user);
         String khoa = "đã khóa";
-      
-       
-        if(tk!=null){
-            String mk = tk.getMatKhau();
-            
-            if(passText.length()==0){
-                JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập mật khẩu!!");
-            }
-            else{
-                  if(tk.getTrangThai().toLowerCase().equals(khoa)){
-                 
-                    JOptionPane.showMessageDialog(rootPane, "Tài khoản của bạn đang bị khóa.\n Liên hệ quản lý để mở khóa tài khoản.");
-            }
-            else{
-                if(passText.equals(mk) && !tk.getTrangThai().toLowerCase().equals("đã khóa")){
-                             
-                    NhanVienDao nvDao = new NhanVienDao();
-                    nvDao.upadateTrangThai("online", tk.getNhanVien().getMaNV());
-                       
-                   
-                      
-                       new GD_Chinh().setVisible(true);
-                        this.setVisible(false);
-                }
-                 else if(!passText.equals(mk)){
-                      countErroLogin++;
-                    JOptionPane.showMessageDialog(rootPane, "Mật khẩu không chính xác!!\n Đăng nhập sai 3 lần tài khoản sẽ bị khóa.\n Bạn đã nhập sai "+countErroLogin+" lần.");
 
-                    if(countErroLogin==3){
-                        JOptionPane.showMessageDialog(rootPane, "Tài khoản đã bị khóa do đăng nhập sai quá 3 lần.\n Liên hệ quản lý để mở lại Tài khoản.");
-                        //cap nhat lai trangthai thanh đã khóa.
-                        tk.setTrangThai("đã khóa");
-                        tkDao.updateTaiKhoan(tk);
+        if (tk != null) {
+            String mk = tk.getMatKhau();
+
+            if (passText.length() == 0) {
+                JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập mật khẩu!!");
+            } else {
+                if (tk.getTrangThai().toLowerCase().equals(khoa)) {
+
+                    JOptionPane.showMessageDialog(rootPane, "Tài khoản của bạn đang bị khóa.\n Liên hệ quản lý để mở khóa tài khoản.");
+                } else {
+                    if (passText.equals(mk) && !tk.getTrangThai().toLowerCase().equals("đã khóa")) {
+
+                        NhanVienDao nvDao = new NhanVienDao();
+                        nvDao.upadateTrangThai("online", tk.getNhanVien().getMaNV());
+                        this.setVisible(false);
+                        FrmLoading ld = new FrmLoading();
+                        ld.setVisible(true);
+
+                    } else if (!passText.equals(mk)) {
+                        countErroLogin++;
+                        JOptionPane.showMessageDialog(rootPane, "Mật khẩu không chính xác!!\n Đăng nhập sai 3 lần tài khoản sẽ bị khóa.\n Bạn đã nhập sai " + countErroLogin + " lần.");
+
+                        if (countErroLogin == 3) {
+                            JOptionPane.showMessageDialog(rootPane, "Tài khoản đã bị khóa do đăng nhập sai quá 3 lần.\n Liên hệ quản lý để mở lại Tài khoản.");
+                            //cap nhat lai trangthai thanh đã khóa.
+                            tk.setTrangThai("đã khóa");
+                            tkDao.updateTaiKhoan(tk);
+                        }
                     }
                 }
             }
-            }
-          
-          
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(rootPane, "Tên đăng nhập không chính xác!!");
         }
     }
-    
     /**
      * @param args the command line arguments
      */
@@ -445,13 +468,12 @@ public class FrmDangNhap extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-              
+
                 new FrmDangNhap().setVisible(true);
             }
         });
     }
-    
-   
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFrame FrmMatKhau;
@@ -465,6 +487,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -474,7 +497,7 @@ public class FrmDangNhap extends javax.swing.JFrame {
     private javax.swing.JPasswordField passMK;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
-     
+
 // // function to increase progress
 //    public  void fill()
 //    {
