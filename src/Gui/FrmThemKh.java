@@ -209,6 +209,7 @@ public class FrmThemKh extends javax.swing.JFrame {
         
        
             if(checkValu()){
+               
                             String TenKH = txt_TenKh.getText();
                 String sdt = txt_Sdt.getText();
                 String diaChi = txt_DiaChi.getText();

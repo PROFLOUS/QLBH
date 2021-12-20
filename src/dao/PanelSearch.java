@@ -38,7 +38,6 @@ public class PanelSearch extends javax.swing.JPanel {
             item.addEvent(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    //  when click
                     event.itemClick(d);
                 }
             });
@@ -47,7 +46,7 @@ public class PanelSearch extends javax.swing.JPanel {
         }
         repaint();
         revalidate();
-        //  Refresh Component
+       
     }
     
     public void setDataKh(List<KhachHang> data) {
@@ -59,25 +58,14 @@ public class PanelSearch extends javax.swing.JPanel {
             kh.addEvent(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    //  when click
+                    
                     event.itemClick(d);
                 }
             });
-//, new ActionListener() {
-//                @Override
-//                public void actionPerformed(ActionEvent ae) {
-//                    //  when remove
-//                    event.itemRemove(item, d);
-//
-//                }
-//            });
             this.add(kh, "wrap");
-            //  wrap mean add to new row after this add
-            //  this for miglayout option
         }
         repaint();
         revalidate();
-        //  Refresh Component
     }
     
     public void setDataNcc(List<NhaCC> data) {
@@ -88,7 +76,7 @@ public class PanelSearch extends javax.swing.JPanel {
             ncc.addEvent(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    //  when click
+                   
                     event.itemClick(d);
                 }
             });
@@ -97,7 +85,6 @@ public class PanelSearch extends javax.swing.JPanel {
         }
         repaint();
         revalidate();
-        //  Refresh Component
     }
 
     public int getItemSize() {

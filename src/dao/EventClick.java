@@ -9,7 +9,6 @@ public interface EventClick {
 
     public void itemClick(SanPham data);
 
-    
     public void itemClick(KhachHang data);
     
     public void itemClick(NhaCC data);

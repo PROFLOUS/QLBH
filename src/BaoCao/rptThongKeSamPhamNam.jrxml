@@ -3,6 +3,8 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ThongKeHangBan" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4bf60512-5407-4bc1-8f97-eb7614ea7f35">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="223"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="768"/>
 	<parameter name="date" class="java.lang.String">
 		<parameterDescription><![CDATA[2021]]></parameterDescription>
 	</parameter>
@@ -10,7 +12,7 @@
 		<![CDATA[SELECT top 10  sosp.sp AS 'Masp', sosp.ten AS 'Tensp',sosp.sl as'SoLuongBang' , sosp.dongia as'Gia Ban' ,sosp.TenLoai as'Danh Muc' , GETDATE() as'ngaytao'from
 				(SELECT cthd.MaSP sp ,SUM (cthd.SoLuong)  sl, sp.TenSP ten ,sp.DonGia dongia ,dm.TenLoai
                 					FROM [dbo].[CT_HoaDonBanHang] cthd, [dbo].[SanPham] sp ,[dbo].[HDBanHang] hdb,[dbo].[DanhMucSP] dm
-                					WHERE  cthd.MaSP = sp.MaSP and cthd.MaHD =hdb.MaHD and sp.MaLoai = dm.MaLoai and year( hdb.NgayLapHD) = $P{date} 
+                					WHERE  cthd.MaSP = sp.MaSP and cthd.MaHD =hdb.MaHD and sp.MaLoai = dm.MaLoai and hdb.[TrangThai]='Hoàn Thành'  and year( hdb.NgayLapHD) = $P{date} 
                					 GROUP BY cthd.MaSP , sp.TenSP,sp.DonGia,dm.TenLoai ) sosp
 								 order by sosp.sl desc]]>
 	</queryString>

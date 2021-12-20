@@ -11,7 +11,8 @@ import entity.CT_HDBanHang;
 import entity.HoaDonBanHang;
 import java.awt.Color;
 import java.awt.List;
-import java.text.DateFormat;import java.util.Date;
+import java.text.DateFormat;
+import java.util.Date;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,149 +30,136 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author GMT
  */
 public class FrmCT_HoaDon extends javax.swing.JFrame {
-    DefaultTableModel modelTBHoaDon ;
-     ArrayList<CT_HDBanHang> listCtHoaDon = new ArrayList<CT_HDBanHang>();
+
+    DefaultTableModel modelTBHoaDon;
+    ArrayList<CT_HDBanHang> listCtHoaDon = new ArrayList<CT_HDBanHang>();
     private String maHD;
+
     /**
      * Creates new form FrmCT_HoaDon
      */
-    public FrmCT_HoaDon(){
-         initComponents();
+    public FrmCT_HoaDon() {
+        initComponents();
         // this.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.5f));
-         jpParent.setBackground(new Color(0,0,0,120));
-         this.setLocationRelativeTo(null);
+        jpParent.setBackground(new Color(0, 0, 0, 120));
+        this.setLocationRelativeTo(null);
     }
+
     public FrmCT_HoaDon(String maHD) {
         this.maHD = maHD;
         initComponents();
         this.setLocationRelativeTo(null);
-         jpParent.setBackground(new Color(0,0,0,64));
-        this.setBackground(new Color(0,0,0,64));
-          try {
+        jpParent.setBackground(new Color(0, 0, 0, 64));
+        this.setBackground(new Color(0, 0, 0, 64));
+        try {
             connect.getInstance().connect();
             renderInfoHD();
             renderCTHD();
-           
+
         } catch (Exception e) {
         }
     }
-    
-    
-    public void renderCTHD(){
-                CT_HoaDonDao ctHoaDonDao = new CT_HoaDonDao();
-                 String[] title = { "Mã SP", "Tên SP", "Số Lượng", "Đơn Giá", "Thành Tiền"};
-                 modelTBHoaDon = new DefaultTableModel(title,0);
-                
-		 listCtHoaDon  = ctHoaDonDao.getCTHoadDonByMaHD(this.maHD);
-                
 
-		for(CT_HDBanHang s : listCtHoaDon) {
-			String[] rowData = {
-				s.getSanPham().getMaSP(),
-                                String.valueOf(s.getSanPham().getTenSP()),
-                                String.valueOf(s.getSoLuong()),
-                                String.valueOf(s.getDonGia()),
-                                String.valueOf(handleMoney(s.getSoLuong(), s.getDonGia()))
-			};
-                       
-			modelTBHoaDon.addRow(rowData);
-		}
-              
-             tbCTHD.setModel(modelTBHoaDon);
+    public void renderCTHD() {
+        CT_HoaDonDao ctHoaDonDao = new CT_HoaDonDao();
+        String[] title = {"Mã SP", "Tên SP", "Số Lượng", "Đơn Giá", "Thành Tiền"};
+        modelTBHoaDon = new DefaultTableModel(title, 0);
+
+        listCtHoaDon = ctHoaDonDao.getCTHoadDonByMaHD(this.maHD);
+
+        for (CT_HDBanHang s : listCtHoaDon) {
+            String[] rowData = {
+                s.getSanPham().getMaSP(),
+                String.valueOf(s.getSanPham().getTenSP()),
+                String.valueOf(s.getSoLuong()),
+                String.valueOf(s.getDonGia()),
+                String.valueOf(handleMoney(s.getSoLuong(), s.getDonGia()))
+            };
+
+            modelTBHoaDon.addRow(rowData);
+        }
+
+        tbCTHD.setModel(modelTBHoaDon);
     }
-    
-    public void renderInfoHD(){
+
+    public void renderInfoHD() {
         HoaDonDao hoaDonDao = new HoaDonDao();
-        HoaDonBanHang hd =  hoaDonDao.findHDByMaHD(maHD);
+        HoaDonBanHang hd = hoaDonDao.findHDByMaHD(maHD);
         //System.out.print(hd.toString());
         lbHoaDon.setText(hd.getMaHD());
         lbGhiChu.setText(hd.getGhiChu());
         lbNV.setText(hd.getNhanVien().getTenNV());
         lbDate.setText(changeDateToString(hd.getNgayLapHD()));
-        
-        String name = sliderString(hd.getKhachHang().getTenKH())+ " - " + hd.getKhachHang().getSdt();
+
+        String name = sliderString(hd.getKhachHang().getTenKH()) + " - " + hd.getKhachHang().getSdt();
         lbKhachHang.setText(name);
         lbTienKhachDua.setText(String.valueOf(hd.getTienKhachDua()));
         lbTongTien.setText(String.valueOf(hd.getTongTien()));
         lbSoLuong.setText(String.valueOf(hd.getSoLuong()));
         lbGiamGia.setText(String.valueOf(hd.getTienKhuyenMai()));
     }
-    
+
     //lấy ra tên đệm và tên
     /*
         Nguyen hoang anh -> hoang anh
-    */
-    public String sliderString(String str){
-       int countSpace = 0;
-       for(int i = 0; i < str.trim().length(); i++){
-           if(str.charAt(i)==32){
-               countSpace++;
-           }
-       }
-       if(countSpace >= 2){
-         int pos = str.indexOf(" ");
-            String s = str.substring(pos + 1);   
+     */
+    public String sliderString(String str) {
+        int countSpace = 0;
+        for (int i = 0; i < str.trim().length(); i++) {
+            if (str.charAt(i) == 32) {
+                countSpace++;
+            }
+        }
+        if (countSpace >= 2) {
+            int pos = str.indexOf(" ");
+            String s = str.substring(pos + 1);
             return s;
-       }
-       
-        
+        }
+
         return str;
     }
-        /*
+
+    /*
             Chuyen tu date sang String
             @param date Date
             return String
-        */
-         public String changeDateToString(Date date){
-            
-                DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+     */
+    public String changeDateToString(Date date) {
 
-                String dateString  = df.format(date);
-                return dateString;
-          }
-    
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+        String dateString = df.format(date);
+        return dateString;
+    }
+
     /*
         @param sl int - so luong san pham
         @param DonGia Double - đơn giá trên 1 sản phẩm
     
         return sl * DonGia;
-    */
-    public Double handleMoney(int sl, Double DonGia){
+     */
+    public Double handleMoney(int sl, Double DonGia) {
         return sl * DonGia;
     }
-    
-    
-    
-      //Tạo hàm xuất hóa đơn
-    public void printBill(String maHD){
+
+    //Tạo hàm xuất hóa đơn
+    public void printBill(String maHD) {
         try {
-            
+
             Hashtable map = new Hashtable();
             JasperReport report = JasperCompileManager.compileReport("src\\Gui/rptHoaDon.jrxml");
-            
+
             map.put("MaHD", maHD);
-                  
-            JasperPrint p = JasperFillManager.fillReport(report,  map, connect.getConnection() );
+
+            JasperPrint p = JasperFillManager.fillReport(report, map, connect.getConnection());
             JasperViewer.viewReport(p, false);
-           // JasperExportManager.exportReportToPdfFile(p, "test.pdf");
+            // JasperExportManager.exportReportToPdfFile(p, "test.pdf");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-           
+
         }
     }
-    
-    
-    
-    
-    
-    
-    
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -604,7 +592,7 @@ public class FrmCT_HoaDon extends javax.swing.JFrame {
 
     private void btnInHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInHDMouseClicked
         // TODO add your handling code here:
-        
+
         printBill(maHD);
     }//GEN-LAST:event_btnInHDMouseClicked
 

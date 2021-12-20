@@ -79,7 +79,7 @@ public class SanPhamDao {
             while (rs.next()) {
                 DanhMucSPDao dm_dao = new DanhMucSPDao();
                 DanhMucSP dm = dm_dao.getDMSP(rs.getString("MaLoai"));
-                SanPham sp = new SanPham(dm, rs.getString("MaSP"), rs.getString("TenSP"), rs.getDouble("DonGia"), rs.getInt("SoLuong"), rs.getString("HinhAnh"), rs.getString("Size"), rs.getString("MauSac"));
+                SanPham sp = new SanPham(dm, rs.getString("MaSP"), rs.getString("TenSP"), rs.getDouble("DonGia"), rs.getInt("SoLuong"), rs.getString("HinhAnh"), rs.getString("Size"), rs.getString("MauSac"),rs.getDouble("GiaNhap"));
                 listSP.add(sp);
             }
         } catch (Exception e) {
@@ -188,7 +188,7 @@ public class SanPhamDao {
                 DanhMucSPDao dm_dao = new DanhMucSPDao();
                 DanhMucSP dm = null;
                 dm = dm_dao.getDMSP(rs.getString(8));
-                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(4), rs.getInt(3), rs.getString(5), rs.getString(6), rs.getString(7));
+                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(4), rs.getInt(3), rs.getString(5), rs.getString(6), rs.getString(7),rs.getDouble(9));
                 sp.setDmsp(dm);
                 list.add(sp);
             }
@@ -305,7 +305,7 @@ public class SanPhamDao {
                 DanhMucSPDao dm_dao = new DanhMucSPDao();
                 DanhMucSP dm = null;
                 dm = dm_dao.getDMSP(rs.getString(8));
-                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(4), rs.getInt(3), rs.getString(5), rs.getString(6), rs.getString(7));
+                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(4), rs.getInt(3), rs.getString(5), rs.getString(6), rs.getString(7),rs.getDouble(9));
                 sp.setDmsp(dm);
                 list.add(sp);
             }

@@ -40,14 +40,21 @@ public class MailDao {
 //	}
 
 	public void sendEmail() throws MessagingException {
-		String fromUser = "hoanganh1410tb@gmail.com";  //Enter sender email id
-		String fromUserPassword = "14102000k";  //Enter sender gmail password , this will be authenticated by gmail smtp server
-		String emailHost = "smtp.gmail.com";
+		          try {
+//                String fromUser = "hoanganh1410tb@gmail.com";  //Enter sender email id
+//		String fromUserPassword = "14102000k";  //Enter sender gmail password , this will be authenticated by gmail smtp server
+		String fromUser = "letandang01062001@gmail.com";  //Enter sender email id
+		String fromUserPassword = "gtnajdbkfcyudevz";
+                
+                String emailHost = "smtp.gmail.com";
 		Transport transport = newSession.getTransport("smtp");
 		transport.connect(emailHost, fromUser, fromUserPassword);
 		transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
 		transport.close();
 		System.out.println("Email successfully sent!!!");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 	}
 
 	public MimeMessage draftEmail(String mail, String mess) throws AddressException, MessagingException, IOException {

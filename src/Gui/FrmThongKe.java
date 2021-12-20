@@ -120,7 +120,7 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
 
         btn_tab_TKeDT.setBackground(new java.awt.Color(255, 255, 255));
         btn_tab_TKeDT.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btn_tab_TKeDT.setForeground(new java.awt.Color(0, 0, 0));
+        btn_tab_TKeDT.setForeground(new java.awt.Color(153, 153, 153));
         btn_tab_TKeDT.setText("Thống Kê Doanh Thu");
         btn_tab_TKeDT.setBorder(null);
         btn_tab_TKeDT.setContentAreaFilled(false);
@@ -245,7 +245,7 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
     private void btn_tab_TKeKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tab_TKeKHMouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(3);
-        FrmTkeKhachHang fr = new FrmTkeKhachHang();
+        FrmTkeKhachHang fr = new FrmTkeKhachHang(); 
         fr.locBieuDo();
         
     }//GEN-LAST:event_btn_tab_TKeKHMouseClicked
@@ -262,11 +262,16 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
         
     }
      public void renderAgianTongQuan(){
-        frmTongQuanBaoCao1.renderData();
+//        frmTongQuanBaoCao1.renderData();
         
     }
     public void renderAgianTkSp(){
         frmTkeHangBanChay1.locBieuDo();
+        
+    }
+    
+    public void renderAgianTkDt(){
+        frmTkeDoanhThu1.loadAgain();
         
     }
     

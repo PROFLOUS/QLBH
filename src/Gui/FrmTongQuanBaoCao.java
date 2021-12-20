@@ -43,10 +43,47 @@ public class FrmTongQuanBaoCao extends javax.swing.JPanel {
     /**
      * Creates new form FrmTkeDoanhThu
      */
-    public FrmTongQuanBaoCao() {
+    public FrmTongQuanBaoCao() { 
         initComponents();
         renderData();
         
+    }
+    public String dinhDangString(String str){
+        String newString = str.substring(0, str.length()-2);
+        return newString;
+    }
+    
+    
+    public void renderData(){
+        Date date = new Date();
+	DateFormat dateFormat = null;
+	     dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+	      String nowString = dateFormat.format(date);
+              Locale localeVN = new Locale("vi", "VN");
+	    NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+	    //String str1 = currencyVN.format(vnd);
+        ArrayList<Double> list = hdDao.getThongkeInDay(nowString);
+        //System.out.println("Gui.FrmTongQuanBaoCao.renderData()"+list);
+        
+        lblSoHD.setText(dinhDangString(list.get(0).toString()));
+        lblSumDoanhThu.setText(currencyVN.format(list.get(2)));
+        lblSLKH.setText(dinhDangString(list.get(0).toString()));
+        lblSoSP.setText(dinhDangString(list.get(1).toString()));
+        
+        //lay ra tong nhoi nhuan
+        double loiNhuan = hdDao.getLoiNhuanInDay(nowString) - hdDao.getKhuyenMaiInDay(nowString);
+        lblTongLoiNhuan.setText(currencyVN.format(loiNhuan));
+        
+        
+        DecimalFormat df= new DecimalFormat("0.000");// làm tròn với 3 chữ số thập phân, muốn bao nhiêu chữ số sau dấu phẩy //thì thêm bấy nhiêu số 0.
+      //    Double tySuat= df.Format((loiNhuan/list.get(2)*100 ));
+    
+        lblTySuat.setText(df.format((loiNhuan/list.get(2)*100 ))+ "%");
+        
+        //render bar chart
+          //lay ngay hien tai la sql date
+         java.sql.Date date2 = new java.sql.Date(System.currentTimeMillis());
+         bar_chart(date2,7);
     }
 
     /**
@@ -513,43 +550,10 @@ public class FrmTongQuanBaoCao extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLocActionPerformed
 
     
-    public void renderData(){
-        Date date = new Date();
-	DateFormat dateFormat = null;
-	     dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-	      String nowString = dateFormat.format(date);
-              Locale localeVN = new Locale("vi", "VN");
-	    NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
-	    //String str1 = currencyVN.format(vnd);
-        ArrayList<Double> list = hdDao.getThongkeInDay(nowString);
-        //System.out.println("Gui.FrmTongQuanBaoCao.renderData()"+list);
-        
-        lblSoHD.setText(dinhDangString(list.get(0).toString()));
-        lblSumDoanhThu.setText(currencyVN.format(list.get(2)));
-        lblSLKH.setText(dinhDangString(list.get(0).toString()));
-        lblSoSP.setText(dinhDangString(list.get(1).toString()));
-        
-        //lay ra tong nhoi nhuan
-        double loiNhuan = hdDao.getLoiNhuanInDay(nowString) - hdDao.getKhuyenMaiInDay(nowString);
-        lblTongLoiNhuan.setText(currencyVN.format(loiNhuan));
-        
-        
-        DecimalFormat df= new DecimalFormat("0.000");// làm tròn với 3 chữ số thập phân, muốn bao nhiêu chữ số sau dấu phẩy //thì thêm bấy nhiêu số 0.
-      //    Double tySuat= df.Format((loiNhuan/list.get(2)*100 ));
     
-        lblTySuat.setText(df.format((loiNhuan/list.get(2)*100 ))+ "%");
-        
-        //render bar chart
-          //lay ngay hien tai la sql date
-         java.sql.Date date2 = new java.sql.Date(System.currentTimeMillis());
-         bar_chart(date2,7);
-    }
 
     //vd 5.0 -> 5
-    public String dinhDangString(String str){
-        String newString = str.substring(0, str.length()-2);
-        return newString;
-    }
+    
     
     
     private CategoryDataset createDataset(java.sql.Date date, int soNgay, Map<Date, Double> map) {  

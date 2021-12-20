@@ -12,7 +12,7 @@
 		<parameterDescription><![CDATA[HDNH001]]></parameterDescription>
 	</parameter>
 	<queryString language="SQL">
-		<![CDATA[select (b.DonGia*b.SoLuong) as 'tongsl' , a.MaHDNhap, a.NgayLapHD,b.SoLuong, a.TongTien, b.MaSP, c.TenSP, d.TenNCC, e.TenNV, c.GiaNhap,d.SDT,d.DiaChi from HDNhapHang a
+		<![CDATA[select (b.SoLuong*c.GiaNhap) as 'tongsl' , a.MaHDNhap, a.NgayLapHD,b.SoLuong, a.TongTien, b.MaSP, c.TenSP, d.TenNCC, e.TenNV, c.GiaNhap ,d.SDT,d.DiaChi from HDNhapHang a
 
 inner join CT_HoaDonNhap b on a.MaHDNhap = b.MaHDNhap
 inner join SanPham c on b.MaSP = c.MaSP

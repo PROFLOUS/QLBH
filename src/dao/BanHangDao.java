@@ -55,7 +55,7 @@ public class BanHangDao {
         public List<SanPham> SearchMaSpOrTenSp(String text){
             List<SanPham> list = new ArrayList<>();
             try {
-                PreparedStatement stmt = con.prepareStatement("select top 4 * from SanPham where SoLuong > 0 and [TenSP] like N'%"+text+"%' or [MaSP]='"+text+"'");
+                PreparedStatement stmt = con.prepareStatement("select top 4 * from SanPham where [TenSP] like N'%"+text+"%' or [MaSP]='"+text+"' and SoLuong > 0");
                 ResultSet rs = stmt.executeQuery();
                 while(rs.next()) {
                 

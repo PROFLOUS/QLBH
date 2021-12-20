@@ -6,6 +6,9 @@
 package Gui;
 
 import Connect.connect;
+import static Gui.FrmDangNhap.quyen;
+import static Gui.GD_Chinh.lbl_title_TaiKhoan1;
+
 import dao.HoaDonDao;
 import entity.HoaDonBanHang;
 import entity.SanPham;
@@ -39,20 +42,21 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-
 /**
  *
  * @author HP
  */
 public class FrmTkeKhachHang extends javax.swing.JPanel {
-private DefaultTableModel dftkKH_Model;
-ArrayList<HoaDonBanHang> dstkKH;
-private Date date = new Date();
-private Date date2 = new Date(2021,11,15);
-private SimpleDateFormat formatterYear = new SimpleDateFormat("yyyy");
-private SimpleDateFormat formatterMonth = new SimpleDateFormat("MM");
-private SimpleDateFormat formatterday = new SimpleDateFormat("dd");
+
+    private DefaultTableModel dftkKH_Model;
+    ArrayList<HoaDonBanHang> dstkKH;
+    private Date date = new Date();
+    private Date date2 = new Date(2021, 11, 15);
+    private SimpleDateFormat formatterYear = new SimpleDateFormat("yyyy");
+    private SimpleDateFormat formatterMonth = new SimpleDateFormat("MM");
+    private SimpleDateFormat formatterday = new SimpleDateFormat("dd");
     HoaDonDao hdDao;
+
     public FrmTkeKhachHang() {
         initComponents();
         dstkKH = new ArrayList<HoaDonBanHang>();
@@ -64,103 +68,115 @@ private SimpleDateFormat formatterday = new SimpleDateFormat("dd");
             System.out.println("loll");
             e.printStackTrace();
         }
-       
+      
+        if(quyen.equals("Nhân viên")){
+            cb2.removeAllItems();
+            cb2.addItem("Ngày");
+            cb2.setEnabled(false);
+        }
+
     }
-        //lọc thôngn kê theo ngày, thang , năm
-    public void locBieuDo(){
-        if(jComboBox1.getSelectedIndex()==2){
-           String year = (String) formatterYear.format(date);
+    //lọc thôngn kê theo ngày, thang , năm
+
+    public void locBieuDo() {
+        if (cb2.getSelectedIndex() == 2) {
+            System.out.println("okkk");
+            String year = (String) formatterYear.format(date);
             dstkKH.removeAll(dstkKH);
             xoaModelChiTiet();
             upTblChiTietTheoNam(year);
             xoaBieuDo();
             bieuDo(1000000000);
-             jLabel7.setText("50.000.000");
-        jLabel11.setText("300.000.000");
-        jLabel12.setText("500.000.000");
-        jLabel13.setText("1.000.000.000");
-        jLabel14.setText("800.000.000");
-        jLabel17.setText("trong Năm");
-        }else if(jComboBox1.getSelectedIndex()==1){
+            jLabel7.setText("50.000.000");
+            jLabel11.setText("300.000.000");
+            jLabel12.setText("500.000.000");
+            jLabel13.setText("1.000.000.000");
+            jLabel14.setText("800.000.000");
+            jLabel17.setText("trong Năm");
+        } else if (cb2.getSelectedIndex() == 1) {
             String month = (String) formatterMonth.format(date);
+            String year = (String) formatterYear.format(date);
             dstkKH.removeAll(dstkKH);
             xoaModelChiTiet();
-            upTblChiTietTheoThang(month);
+            upTblChiTietTheoThang(month, year);
             xoaBieuDo();
             bieuDo(100000000);
             jLabel7.setText("5.000.000");
-        jLabel11.setText("30.000.000");
-        jLabel12.setText("50.000.000");
-        jLabel13.setText("100.000.000");
-        jLabel14.setText("80.000.000");
-        jLabel17.setText("trong Tháng");
-        }else if(jComboBox1.getSelectedIndex()==0){
-             String day = (String) formatterday.format(date);
+            jLabel11.setText("30.000.000");
+            jLabel12.setText("50.000.000");
+            jLabel13.setText("100.000.000");
+            jLabel14.setText("80.000.000");
+            jLabel17.setText("trong Tháng");
+        } else if (cb2.getSelectedIndex() == 0) {
+            String day = (String) formatterday.format(date);
+            String month = (String) formatterMonth.format(date);
+            String year = (String) formatterYear.format(date);
             dstkKH.removeAll(dstkKH);
             xoaModelChiTiet();
-            upTblChiTietTheoNgay(day);
+            upTblChiTietTheoNgay(day, month, year);
             xoaBieuDo();
             bieuDo(10000000);
             jLabel7.setText("500.000");
-        jLabel11.setText("3.000.000");
-        jLabel12.setText("5.000.000");
-        jLabel13.setText("10.000.000");
-        jLabel14.setText("8.000.000");
-        jLabel17.setText("trong Ngày");
+            jLabel11.setText("3.000.000");
+            jLabel12.setText("5.000.000");
+            jLabel13.setText("10.000.000");
+            jLabel14.setText("8.000.000");
+            jLabel17.setText("trong Ngày");
         }
-    
+
     }
-     public void exportDataToExcel() {
-        
-        try{
-           JFileChooser jFileChooser = new JFileChooser("C:\\\\Users\\\\HP\\\\OneDrive\\\\Máy tính\\\\QLBH");
-           jFileChooser.showSaveDialog(this);
-           File saveFile = jFileChooser.getSelectedFile();
-           if(saveFile != null){
-               saveFile = new File(saveFile.toString()+".xlsx");
-               Workbook wb = new XSSFWorkbook();
-               Sheet sheet = wb.createSheet("Khách Hàng");
-               
-               Row rowCol = sheet.createRow(0);
-               for(int i=0;i<jTable1.getColumnCount();i++){
-                   Cell cell = rowCol.createCell(i);
-                   cell.setCellValue(jTable1.getColumnName(i));
-               }
-               
-               for(int j=0;j<jTable1.getRowCount();j++){
-                   Row row = sheet.createRow(j);
-                   for(int k=0;k<jTable1.getColumnCount();k++){
-                       Cell cell = row.createCell(k);
-                       if(jTable1.getValueAt(j, k)!=null){
-                           cell.setCellValue(jTable1.getValueAt(j, k).toString());
-                       }
-                   }
-               }
-               FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
-               wb.write(out);
-               wb.close();
-               out.close();
-               JOptionPane.showMessageDialog(this,"Xuất Thành Công");
-               openFile(saveFile.toString());
-           }else{
-               JOptionPane.showMessageDialog(null,"Error");
-           }
-       }catch(FileNotFoundException e){
-           System.out.println(e);
-       }catch(IOException io){
-           System.out.println(io);
-       }
-    } 
-     public void openFile(String file){
-        try{
+
+    public void exportDataToExcel() {
+
+        try {
+            JFileChooser jFileChooser = new JFileChooser("C:\\\\Users\\\\HP\\\\OneDrive\\\\Máy tính\\\\QLBH");
+            jFileChooser.showSaveDialog(this);
+            File saveFile = jFileChooser.getSelectedFile();
+            if (saveFile != null) {
+                saveFile = new File(saveFile.toString() + ".xlsx");
+                Workbook wb = new XSSFWorkbook();
+                Sheet sheet = wb.createSheet("Khách Hàng");
+
+                Row rowCol = sheet.createRow(0);
+                for (int i = 0; i < jTable1.getColumnCount(); i++) {
+                    Cell cell = rowCol.createCell(i);
+                    cell.setCellValue(jTable1.getColumnName(i));
+                }
+
+                for (int j = 0; j < jTable1.getRowCount(); j++) {
+                    Row row = sheet.createRow(j);
+                    for (int k = 0; k < jTable1.getColumnCount(); k++) {
+                        Cell cell = row.createCell(k);
+                        if (jTable1.getValueAt(j, k) != null) {
+                            cell.setCellValue(jTable1.getValueAt(j, k).toString());
+                        }
+                    }
+                }
+                FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
+                wb.write(out);
+                wb.close();
+                out.close();
+                JOptionPane.showMessageDialog(this, "Xuất Thành Công");
+                openFile(saveFile.toString());
+            } else {
+                JOptionPane.showMessageDialog(null, "Error");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        } catch (IOException io) {
+            System.out.println(io);
+        }
+    }
+
+    public void openFile(String file) {
+        try {
             File path = new File(file);
             Desktop.getDesktop().open(path);
-        }catch(IOException ioe){
+        } catch (IOException ioe) {
             System.out.println(ioe);
         }
     }
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -196,7 +212,7 @@ private SimpleDateFormat formatterday = new SimpleDateFormat("dd");
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cb2 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -502,12 +518,16 @@ private SimpleDateFormat formatterday = new SimpleDateFormat("dd");
 
         jTabbedPane1.addTab("Chi Tiết", jPanel2);
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ngày", "Tháng", "Năm" }));
-        jComboBox1.setSelectedIndex(2);
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cb2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cb2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ngày", "Tháng", "Năm" }));
+        cb2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cb2MouseClicked(evt);
+            }
+        });
+        cb2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cb2ActionPerformed(evt);
             }
         });
 
@@ -541,7 +561,7 @@ private SimpleDateFormat formatterday = new SimpleDateFormat("dd");
                 .addGap(45, 45, 45)
                 .addGroup(pnl_tab_FormTKkhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnl_tab_FormTKkhLayout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -554,7 +574,7 @@ private SimpleDateFormat formatterday = new SimpleDateFormat("dd");
                 .addContainerGap(22, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cb2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(pnl_tab_FormTKkhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -579,153 +599,167 @@ private SimpleDateFormat formatterday = new SimpleDateFormat("dd");
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb2ActionPerformed
         locBieuDo();
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_cb2ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         exportDataToExcel();
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        if(jComboBox1.getSelectedIndex()==2){
-           String year = (String) formatterYear.format(date);
-           String source = "src\\BaoCao/rptThongKeKhachHangNam.jrxml";
-           printBill(year, source);
-        }else if(jComboBox1.getSelectedIndex()==1){
-            String month = (String) formatterMonth.format(date);
+         String year = (String) formatterYear.format(date);
+         String month = (String) formatterMonth.format(date);
+         String day = (String) formatterday.format(date);
+        if (cb2.getSelectedIndex() == 2) {
+            String source = "src\\BaoCao/rptThongKeKhachHangNam.jrxml";
+            printBill(year,day,month, source);
+        } else if (cb2.getSelectedIndex() == 1) {
+            
             String source = "src\\BaoCao/rptThongKeKhachHangNamThang.jrxml";
-           printBill(month, source);
+            printBill(month,day,year, source);
+
+        } else if (cb2.getSelectedIndex() == 0) {
             
-        }else if(jComboBox1.getSelectedIndex()==0){
-             String day = (String) formatterday.format(date);
             String source = "src\\BaoCao/rptThongKeKhachHangNamNgay.jrxml";
-           printBill(day, source);
-            
+            printBill(day,month,year, source);
+
         }
     }//GEN-LAST:event_jButton3MouseClicked
+
+    private void cb2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cb2MouseClicked
+//        locBieuDo();
+    }//GEN-LAST:event_cb2MouseClicked
     //đọc dữ liệu lene chi tiet
     public void upTblChiTietTheoNam(String year) {
         dftkKH_Model = (DefaultTableModel) jTable1.getModel();
         dstkKH = hdDao.thongkeKhachHangTheoNam(year);
         for (HoaDonBanHang hd : dstkKH) {
             dftkKH_Model.addRow(new Object[]{
-                hd.getKhachHang().getMaKH(),hd.getKhachHang().getTenKH(),hd.getKhachHang().getSdt(),
-                hd.getKhachHang().getDiaChi(),hd.getSoLuong(),hd.getTongTien()
+                hd.getKhachHang().getMaKH(), hd.getKhachHang().getTenKH(), hd.getKhachHang().getSdt(),
+                hd.getKhachHang().getDiaChi(), hd.getSoLuong(), hd.getTongTien()
             });
         }
     }
-    public void upTblChiTietTheoThang(String month) {
+
+    public void upTblChiTietTheoThang(String month, String year) {
         dftkKH_Model = (DefaultTableModel) jTable1.getModel();
-        dstkKH = hdDao.thongkeKhachHangTheoThang(month);
+        dstkKH = hdDao.thongkeKhachHangTheoThang(month, year);
         for (HoaDonBanHang hd : dstkKH) {
             dftkKH_Model.addRow(new Object[]{
-                hd.getKhachHang().getMaKH(),hd.getKhachHang().getTenKH(),hd.getKhachHang().getSdt(),
-                hd.getKhachHang().getDiaChi(),hd.getSoLuong(),hd.getTongTien()
+                hd.getKhachHang().getMaKH(), hd.getKhachHang().getTenKH(), hd.getKhachHang().getSdt(),
+                hd.getKhachHang().getDiaChi(), hd.getSoLuong(), hd.getTongTien()
             });
         }
     }
-    public void upTblChiTietTheoNgay(String day) {
+
+    public void upTblChiTietTheoNgay(String day, String month, String year) {
         dftkKH_Model = (DefaultTableModel) jTable1.getModel();
-        dstkKH = hdDao.thongkeKhachHangTheoNgay(day);
+        dstkKH = hdDao.thongkeKhachHangTheoNgay(day, month, year);
         for (HoaDonBanHang hd : dstkKH) {
             dftkKH_Model.addRow(new Object[]{
-                hd.getKhachHang().getMaKH(),hd.getKhachHang().getTenKH(),hd.getKhachHang().getSdt(),
-                hd.getKhachHang().getDiaChi(),hd.getSoLuong(),hd.getTongTien()
+                hd.getKhachHang().getMaKH(), hd.getKhachHang().getTenKH(), hd.getKhachHang().getSdt(),
+                hd.getKhachHang().getDiaChi(), hd.getSoLuong(), hd.getTongTien()
             });
         }
     }
+
     //xóa model bảng chi tiết
-    public void xoaModelChiTiet(){
+    public void xoaModelChiTiet() {
         DefaultTableModel del = (DefaultTableModel) jTable1.getModel();
         del.getDataVector().removeAllElements();
     }
+
     //xoa bieu do 
-    public void xoaBieuDo(){
-            jLabel3.setText("");
-            jProgressBar2.setValue(0);
-            jProgressBar2.setString("");
-            jLabel4.setText("");
-            jProgressBar1.setValue(0);
-            jProgressBar1.setString("");
-            jLabel5.setText("");
-            jProgressBar3.setValue(0);
-            jProgressBar3.setString("");
-            jLabel6.setText("");
-            jProgressBar4.setValue(0);
-            jProgressBar4.setString("");
-            jLabel8.setText("");
-            jProgressBar5.setValue(0);
-            jProgressBar5.setString("");
-            jLabel9.setText("");
-            jProgressBar6.setValue(0);
-            jProgressBar6.setString("");
-            jLabel10.setText("");
-            jProgressBar7.setValue(0);
-            jProgressBar7.setString("");
+    public void xoaBieuDo() {
+        jLabel3.setText("");
+        jProgressBar2.setValue(0);
+        jProgressBar2.setString("");
+        jLabel4.setText("");
+        jProgressBar1.setValue(0);
+        jProgressBar1.setString("");
+        jLabel5.setText("");
+        jProgressBar3.setValue(0);
+        jProgressBar3.setString("");
+        jLabel6.setText("");
+        jProgressBar4.setValue(0);
+        jProgressBar4.setString("");
+        jLabel8.setText("");
+        jProgressBar5.setValue(0);
+        jProgressBar5.setString("");
+        jLabel9.setText("");
+        jProgressBar6.setValue(0);
+        jProgressBar6.setString("");
+        jLabel10.setText("");
+        jProgressBar7.setValue(0);
+        jProgressBar7.setString("");
     }
+
     //thống kê khach hang có tong tien cao nhat
-    public void bieuDo(int max){
-            try {
-                jLabel3.setText(jTable1.getValueAt(0, 0).toString());
-                  jLabel3.setToolTipText(jTable1.getValueAt(0, 1).toString());
-        jProgressBar2.setMaximum(max);
-        jProgressBar2.setForeground(new  Color(74,136,199));
-        int tk1= (int) Double.parseDouble(jTable1.getValueAt(0, 5).toString());
-        jProgressBar2.setValue(tk1);
-        jProgressBar2.setToolTipText(String.valueOf(tk1));
-        
-                jLabel4.setText(jTable1.getValueAt(1, 0).toString());
-        jLabel4.setToolTipText(jTable1.getValueAt(1, 1).toString());
-                jProgressBar1.setMaximum(max);
-        int tk2= (int) Double.parseDouble(jTable1.getValueAt(1, 5).toString());
-        jProgressBar1.setValue(tk2);
-        jProgressBar1.setToolTipText(String.valueOf(tk2));
-        
-        jLabel5.setText(jTable1.getValueAt(2, 0).toString());
-        jLabel5.setToolTipText(jTable1.getValueAt(2, 1).toString());
-        jProgressBar3.setMaximum(max);
-        int tk3= (int) Double.parseDouble(jTable1.getValueAt(2, 5).toString());
-        jProgressBar3.setValue(tk3);
-        jProgressBar3.setToolTipText(String.valueOf(tk3));
-        
-        jLabel6.setText(jTable1.getValueAt(3, 0).toString());
-        jLabel6.setToolTipText(jTable1.getValueAt(3, 1).toString());
-        jProgressBar4.setMaximum(max);
-        int tk4= (int) Double.parseDouble(jTable1.getValueAt(3, 5).toString());
-        jProgressBar4.setValue(tk4);
-        jProgressBar4.setToolTipText(String.valueOf(tk4));
-        
-        jLabel8.setText(jTable1.getValueAt(4, 0).toString());
-         jLabel8.setToolTipText(jTable1.getValueAt(4, 1).toString());
-        jProgressBar5.setMaximum(max);
-        int tk5= (int) Double.parseDouble(jTable1.getValueAt(4, 5).toString());
-        jProgressBar5.setValue(tk5);
-        jProgressBar5.setToolTipText(String.valueOf(tk5));
-        
-        jLabel9.setText(jTable1.getValueAt(5, 0).toString());
-        jLabel9.setToolTipText(jTable1.getValueAt(5, 1).toString());
-        jProgressBar6.setMaximum(max);
-        int tk6= (int) Double.parseDouble(jTable1.getValueAt(5, 5).toString());
-        jProgressBar6.setValue(tk6);
-        jProgressBar6.setToolTipText(String.valueOf(tk6));
-        
-        jLabel10.setText(jTable1.getValueAt(6, 0).toString());
-         jLabel10.setToolTipText(jTable1.getValueAt(6, 1).toString());
-        jProgressBar7.setMaximum(max);
-        int tk7= (int) Double.parseDouble(jTable1.getValueAt(6, 5).toString());
-        jProgressBar7.setValue(tk7);
-        jProgressBar7.setToolTipText(String.valueOf(tk7));
-            } catch (Exception e) {
-            }
+    public void bieuDo(int max) {
+        try {
+            jLabel3.setText(jTable1.getValueAt(0, 0).toString());
+            jLabel3.setToolTipText(jTable1.getValueAt(0, 1).toString());
+            jProgressBar2.setMaximum(max);
+            jProgressBar2.setForeground(new Color(74, 136, 199));
+            int tk1 = (int) Double.parseDouble(jTable1.getValueAt(0, 5).toString());
+            jProgressBar2.setValue(tk1);
+            jProgressBar2.setToolTipText(String.valueOf(tk1));
+
+            jLabel4.setText(jTable1.getValueAt(1, 0).toString());
+            jLabel4.setToolTipText(jTable1.getValueAt(1, 1).toString());
+            jProgressBar1.setMaximum(max);
+            int tk2 = (int) Double.parseDouble(jTable1.getValueAt(1, 5).toString());
+            jProgressBar1.setValue(tk2);
+            jProgressBar1.setToolTipText(String.valueOf(tk2));
+
+            jLabel5.setText(jTable1.getValueAt(2, 0).toString());
+            jLabel5.setToolTipText(jTable1.getValueAt(2, 1).toString());
+            jProgressBar3.setMaximum(max);
+            int tk3 = (int) Double.parseDouble(jTable1.getValueAt(2, 5).toString());
+            jProgressBar3.setValue(tk3);
+            jProgressBar3.setToolTipText(String.valueOf(tk3));
+
+            jLabel6.setText(jTable1.getValueAt(3, 0).toString());
+            jLabel6.setToolTipText(jTable1.getValueAt(3, 1).toString());
+            jProgressBar4.setMaximum(max);
+            int tk4 = (int) Double.parseDouble(jTable1.getValueAt(3, 5).toString());
+            jProgressBar4.setValue(tk4);
+            jProgressBar4.setToolTipText(String.valueOf(tk4));
+
+            jLabel8.setText(jTable1.getValueAt(4, 0).toString());
+            jLabel8.setToolTipText(jTable1.getValueAt(4, 1).toString());
+            jProgressBar5.setMaximum(max);
+            int tk5 = (int) Double.parseDouble(jTable1.getValueAt(4, 5).toString());
+            jProgressBar5.setValue(tk5);
+            jProgressBar5.setToolTipText(String.valueOf(tk5));
+
+            jLabel9.setText(jTable1.getValueAt(5, 0).toString());
+            jLabel9.setToolTipText(jTable1.getValueAt(5, 1).toString());
+            jProgressBar6.setMaximum(max);
+            int tk6 = (int) Double.parseDouble(jTable1.getValueAt(5, 5).toString());
+            jProgressBar6.setValue(tk6);
+            jProgressBar6.setToolTipText(String.valueOf(tk6));
+
+            jLabel10.setText(jTable1.getValueAt(6, 0).toString());
+            jLabel10.setToolTipText(jTable1.getValueAt(6, 1).toString());
+            jProgressBar7.setMaximum(max);
+            int tk7 = (int) Double.parseDouble(jTable1.getValueAt(6, 5).toString());
+            jProgressBar7.setValue(tk7);
+            jProgressBar7.setToolTipText(String.valueOf(tk7));
+        } catch (Exception e) {
+        }
     }
-      //Tạo hàm xuất hóa đơn
-    public void printBill(String date,String source){
+    //Tạo hàm xuất hóa đơn
+
+    public void printBill(String date,String month, String year, String source) {
         try {
             Hashtable map = new Hashtable();
             JasperReport report = JasperCompileManager.compileReport(source);
             map.put("date", date);
-            JasperPrint p = JasperFillManager.fillReport(report,  map, connect.getConnection() );
+            map.put("month", month);
+            map.put("year", year);
+            JasperPrint p = JasperFillManager.fillReport(report, map, connect.getConnection());
             JasperViewer.viewReport(p, false);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -734,9 +768,9 @@ private SimpleDateFormat formatterday = new SimpleDateFormat("dd");
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cb2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -8,11 +8,17 @@
 	<parameter name="date" class="java.lang.String">
 		<parameterDescription><![CDATA[17]]></parameterDescription>
 	</parameter>
+	<parameter name="month" class="java.lang.String">
+		<parameterDescription><![CDATA[12]]></parameterDescription>
+	</parameter>
+	<parameter name="year" class="java.lang.String">
+		<parameterDescription><![CDATA[2021]]></parameterDescription>
+	</parameter>
 	<queryString language="SQL">
 		<![CDATA[SELECT top 10  sosp.sp AS 'Masp', sosp.ten AS 'Tensp',sosp.sl as'SoLuongBang' , sosp.dongia as'Gia Ban' ,sosp.TenLoai as'Danh Muc', GETDATE() as'ngaytao' from
 				(SELECT cthd.MaSP sp ,SUM (cthd.SoLuong)  sl, sp.TenSP ten ,sp.DonGia dongia ,dm.TenLoai
                 					FROM [dbo].[CT_HoaDonBanHang] cthd, [dbo].[SanPham] sp ,[dbo].[HDBanHang] hdb,[dbo].[DanhMucSP] dm
-                					WHERE  cthd.MaSP = sp.MaSP and cthd.MaHD =hdb.MaHD and sp.MaLoai = dm.MaLoai and day( hdb.NgayLapHD) = $P{date} 
+                					WHERE  cthd.MaSP = sp.MaSP and cthd.MaHD =hdb.MaHD and sp.MaLoai = dm.MaLoai and hdb.[TrangThai]='Hoàn Thành' and day( hdb.NgayLapHD) = $P{date} and month( hdb.NgayLapHD) = $P{month}  and year( hdb.NgayLapHD) = $P{year}  
                					 GROUP BY cthd.MaSP , sp.TenSP,sp.DonGia,dm.TenLoai ) sosp
 								 order by sosp.sl desc]]>
 	</queryString>
