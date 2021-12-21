@@ -400,6 +400,9 @@
                       <Color blue="cd" green="e4" red="d3" type="rgb"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                  </AuxValues>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblDiaChi">
                   <Properties>

@@ -7,7 +7,6 @@ package Gui;
 
 import Connect.connect;
 import static Gui.FrmDangNhap.quyen;
-import static Gui.GD_Chinh.lbl_title_TaiKhoan1;
 
 import dao.CT_HoaDonDao;
 import dao.DanhMucSPDao;
@@ -39,269 +38,300 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
+ * Hiển thị Giao diện Form Thống kê các mặt hàng bán chạy
  *
- * @author HP
  */
 public class FrmTkeHangBanChay extends javax.swing.JPanel {
-private DefaultTableModel dftkSp_Model;
-ArrayList<CT_HDBanHang> dstkSp;
+
+    private DefaultTableModel dftkSp_Model;
+    ArrayList<CT_HDBanHang> dstkSp;
     CT_HoaDonDao cthdDao;
-DanhMucSPDao dmDao ;
-private Date date = new Date();
-private Date date2 = new Date(2021,11,15);
-private SimpleDateFormat formatterYear = new SimpleDateFormat("yyyy");
-private SimpleDateFormat formatterMonth = new SimpleDateFormat("MM");
-private SimpleDateFormat formatterday = new SimpleDateFormat("dd");
+    DanhMucSPDao dmDao;
+    private Date date = new Date();
+    private Date date2 = new Date(2021, 11, 15);
+    private SimpleDateFormat formatterYear = new SimpleDateFormat("yyyy");
+    private SimpleDateFormat formatterMonth = new SimpleDateFormat("MM");
+    private SimpleDateFormat formatterday = new SimpleDateFormat("dd");
+
     public FrmTkeHangBanChay() {
         initComponents();
         dstkSp = new ArrayList<CT_HDBanHang>();
         cthdDao = new CT_HoaDonDao();
         locBieuDo();
-
-
-        if(quyen.equals("Nhân viên")){
+        if (quyen.equals("Nhân viên")) {
             jComboBox1_2.removeAllItems();
             jComboBox1_2.addItem("Ngày");
             jComboBox1_2.setEnabled(false);
         }
-        
     }
-    
-        //lọc thôngn kê theo ngày, thang , năm
-    public void locBieuDo(){
-        if(jComboBox1_2.getSelectedIndex()==2){
-           String year = (String) formatterYear.format(date);
+
+    /**
+     * Lọc biểu đồ theo ngày, tháng, năm
+     *
+     */
+    public void locBieuDo() {
+        if (jComboBox1_2.getSelectedIndex() == 2) {
+            String year = (String) formatterYear.format(date);
             dstkSp.removeAll(dstkSp);
             xoaModelChiTiet();
             upTblChiTietTheoNam(year);
             xoaBieuDo();
             bieuDo(10000);
             jLabel7.setText("500");
-        jLabel11.setText("3.000");
-        jLabel12.setText("5.000");
-        jLabel13.setText("10.000");
-        jLabel14.setText("8.000");
-        jLabel17.setText("trong Năm");
-        }else if(jComboBox1_2.getSelectedIndex()==1){
+            jLabel11.setText("3.000");
+            jLabel12.setText("5.000");
+            jLabel13.setText("10.000");
+            jLabel14.setText("8.000");
+            jLabel17.setText("trong Năm");
+        } else if (jComboBox1_2.getSelectedIndex() == 1) {
             String month = (String) formatterMonth.format(date);
             String year = (String) formatterYear.format(date);
             dstkSp.removeAll(dstkSp);
             xoaModelChiTiet();
-            upTblChiTietTheoThang(month,year);
+            upTblChiTietTheoThang(month, year);
             xoaBieuDo();
             bieuDo(1000);
             jLabel7.setText("50");
-        jLabel11.setText("300");
-        jLabel12.setText("500");
-        jLabel13.setText("1.000");
-        jLabel14.setText("800");
-        jLabel17.setText("trong Tháng");
-        }else if(jComboBox1_2.getSelectedIndex()==0){
-             String day = (String) formatterday.format(date);
-             String month = (String) formatterMonth.format(date);
+            jLabel11.setText("300");
+            jLabel12.setText("500");
+            jLabel13.setText("1.000");
+            jLabel14.setText("800");
+            jLabel17.setText("trong Tháng");
+        } else if (jComboBox1_2.getSelectedIndex() == 0) {
+            String day = (String) formatterday.format(date);
+            String month = (String) formatterMonth.format(date);
             String year = (String) formatterYear.format(date);
             dstkSp.removeAll(dstkSp);
             xoaModelChiTiet();
-            upTblChiTietTheoNgay(day,month,year);
+            upTblChiTietTheoNgay(day, month, year);
             xoaBieuDo();
             bieuDo(100);
             jLabel7.setText("5");
-        jLabel11.setText("30");
-        jLabel12.setText("50");
-        jLabel13.setText("100");
-        jLabel14.setText("80");
-        jLabel17.setText("trong Ngày");
+            jLabel11.setText("30");
+            jLabel12.setText("50");
+            jLabel13.setText("100");
+            jLabel14.setText("80");
+            jLabel17.setText("trong Ngày");
         }
-    
+
     }
-    
-    //đọc dữ liệu lene chi tiet
+
+    /**
+     * đọc dữ liệu lên bảng chi tiet theo năm
+     */
     public void upTblChiTietTheoNam(String year) {
         dmDao = new DanhMucSPDao();
         dftkSp_Model = (DefaultTableModel) jTable1.getModel();
         dstkSp = cthdDao.thongkeSpTheoNam(year);
         for (CT_HDBanHang ct : dstkSp) {
-            DanhMucSP dm =dmDao.getDMmaSp(ct.getSanPham().getMaSP());
+            DanhMucSP dm = dmDao.getDMmaSp(ct.getSanPham().getMaSP());
             dftkSp_Model.addRow(new Object[]{
-                ct.getSanPham().getMaSP(),ct.getSanPham().getTenSP(),dm.getTenLoai(),
-                ct.getDonGia(),ct.getSoLuong()
+                ct.getSanPham().getMaSP(), ct.getSanPham().getTenSP(), dm.getTenLoai(),
+                ct.getDonGia(), ct.getSoLuong()
             });
         }
     }
-    public void upTblChiTietTheoThang(String month,String year) {
+
+    /**
+     * đọc dữ liệu lên bảng chi tiet theo tháng
+     */
+    public void upTblChiTietTheoThang(String month, String year) {
         dmDao = new DanhMucSPDao();
         dftkSp_Model = (DefaultTableModel) jTable1.getModel();
-        dstkSp = cthdDao.thongkeSpTheoThang(month,year);
+        dstkSp = cthdDao.thongkeSpTheoThang(month, year);
         for (CT_HDBanHang ct : dstkSp) {
-            DanhMucSP dm =dmDao.getDMmaSp(ct.getSanPham().getMaSP());
+            DanhMucSP dm = dmDao.getDMmaSp(ct.getSanPham().getMaSP());
             dftkSp_Model.addRow(new Object[]{
-                ct.getSanPham().getMaSP(),ct.getSanPham().getTenSP(),dm.getTenLoai(),
-                ct.getDonGia(),ct.getSoLuong()
+                ct.getSanPham().getMaSP(), ct.getSanPham().getTenSP(), dm.getTenLoai(),
+                ct.getDonGia(), ct.getSoLuong()
             });
         }
     }
-    public void upTblChiTietTheoNgay(String day,String month, String year) {
+
+    /**
+     * đọc dữ liệu lên bảng chi tiet theo ngày
+     */
+    public void upTblChiTietTheoNgay(String day, String month, String year) {
         dmDao = new DanhMucSPDao();
         dftkSp_Model = (DefaultTableModel) jTable1.getModel();
-        dstkSp = cthdDao.thongkeSpTheoNgay(day,month,year);
+        dstkSp = cthdDao.thongkeSpTheoNgay(day, month, year);
         for (CT_HDBanHang ct : dstkSp) {
-            DanhMucSP dm =dmDao.getDMmaSp(ct.getSanPham().getMaSP());
+            DanhMucSP dm = dmDao.getDMmaSp(ct.getSanPham().getMaSP());
             dftkSp_Model.addRow(new Object[]{
-                ct.getSanPham().getMaSP(),ct.getSanPham().getTenSP(),dm.getTenLoai(),
-                ct.getDonGia(),ct.getSoLuong()
+                ct.getSanPham().getMaSP(), ct.getSanPham().getTenSP(), dm.getTenLoai(),
+                ct.getDonGia(), ct.getSoLuong()
             });
         }
     }
-    //xóa model bảng chi tiết
-    public void xoaModelChiTiet(){
+
+    /**
+     * xóa model chi tiết
+     */
+    public void xoaModelChiTiet() {
         DefaultTableModel del = (DefaultTableModel) jTable1.getModel();
         del.getDataVector().removeAllElements();
     }
-    //xoa bieu do 
-    public void xoaBieuDo(){
+
+    /**
+     * Xóa dữ liệu biểu đồ
+     */
+    public void xoaBieuDo() {
         jLabel3.setText("");
-            jProgressBar2.setValue(0);
-            jProgressBar2.setString("");
-            jLabel4.setText("");
-            jProgressBar1.setValue(0);
-            jProgressBar1.setString("");
-            jLabel5.setText("");
-            jProgressBar3.setValue(0);
-            jProgressBar3.setString("");
-            jLabel6.setText("");
-            jProgressBar4.setValue(0);
-            jProgressBar4.setString("");
-            jLabel8.setText("");
-            jProgressBar5.setValue(0);
-            jProgressBar5.setString("");
-            jLabel9.setText("");
-            jProgressBar6.setValue(0);
-            jProgressBar6.setString("");
-            jLabel10.setText("");
-            jProgressBar7.setValue(0);
-            jProgressBar7.setString("");
+        jProgressBar2.setValue(0);
+        jProgressBar2.setString("");
+        jLabel4.setText("");
+        jProgressBar1.setValue(0);
+        jProgressBar1.setString("");
+        jLabel5.setText("");
+        jProgressBar3.setValue(0);
+        jProgressBar3.setString("");
+        jLabel6.setText("");
+        jProgressBar4.setValue(0);
+        jProgressBar4.setString("");
+        jLabel8.setText("");
+        jProgressBar5.setValue(0);
+        jProgressBar5.setString("");
+        jLabel9.setText("");
+        jProgressBar6.setValue(0);
+        jProgressBar6.setString("");
+        jLabel10.setText("");
+        jProgressBar7.setValue(0);
+        jProgressBar7.setString("");
     }
-    //thống kê khach hang có tong tien cao nhat
-    public void bieuDo(int max){
+
+    /**
+     * Tạo biểu đồ thóng kê
+     *
+     * @param max int
+     *
+     */
+    public void bieuDo(int max) {
         try {
-        jLabel3.setText(jTable1.getValueAt(0, 0).toString());
-        jLabel3.setToolTipText(jTable1.getValueAt(0, 1).toString());
-        jProgressBar2.setMaximum(max);
-        int tk1= (int) Double.parseDouble(jTable1.getValueAt(0, 4).toString());
-        jProgressBar2.setValue(tk1);
-        jProgressBar2.setToolTipText(String.valueOf(tk1));
-        
-        jLabel4.setText(jTable1.getValueAt(1, 0).toString());
-        jLabel4.setToolTipText(jTable1.getValueAt(1, 1).toString());
-        jProgressBar1.setMaximum(max);
-        int tk2= (int) Double.parseDouble(jTable1.getValueAt(1, 4).toString());
-        jProgressBar1.setValue(tk2);
-        jProgressBar1.setToolTipText(String.valueOf(tk2));
-        
-        jLabel5.setText(jTable1.getValueAt(2, 0).toString());
-        jLabel5.setToolTipText(jTable1.getValueAt(2, 1).toString());
-        jProgressBar3.setMaximum(max);
-        int tk3= (int) Double.parseDouble(jTable1.getValueAt(2, 4).toString());
-        jProgressBar3.setValue(tk3);
-        jProgressBar3.setToolTipText(String.valueOf(tk3));
-        
-        jLabel6.setText(jTable1.getValueAt(3, 0).toString());
-        jLabel6.setToolTipText(jTable1.getValueAt(3, 1).toString());
-        jProgressBar4.setMaximum(max);
-        int tk4= (int) Double.parseDouble(jTable1.getValueAt(3, 4).toString());
-        jProgressBar4.setValue(tk4);
-        jProgressBar4.setToolTipText(String.valueOf(tk4));
-        
-        jLabel8.setText(jTable1.getValueAt(4, 0).toString());
-        jLabel8.setToolTipText(jTable1.getValueAt(4, 1).toString());
-        jProgressBar5.setMaximum(max);
-        int tk5= (int) Double.parseDouble(jTable1.getValueAt(4, 4).toString());
-        jProgressBar5.setValue(tk5);
-        jProgressBar5.setToolTipText(String.valueOf(tk5));
-        
-        jLabel9.setText(jTable1.getValueAt(5, 0).toString());
-        jLabel9.setToolTipText(jTable1.getValueAt(5, 1).toString());
-        jProgressBar6.setMaximum(max);
-        int tk6= (int) Double.parseDouble(jTable1.getValueAt(5, 4).toString());
-        jProgressBar6.setValue(tk6);
-        jProgressBar6.setToolTipText(String.valueOf(tk6));
-        
-        jLabel10.setText(jTable1.getValueAt(6, 0).toString());
-        jLabel10.setToolTipText(jTable1.getValueAt(6, 1).toString());
-        jProgressBar7.setMaximum(max);
-        int tk7= (int) Double.parseDouble(jTable1.getValueAt(6, 4).toString());
-        jProgressBar7.setValue(tk7);
-        jProgressBar7.setToolTipText(String.valueOf(tk7));
+            jLabel3.setText(jTable1.getValueAt(0, 0).toString());
+            jLabel3.setToolTipText(jTable1.getValueAt(0, 1).toString());
+            jProgressBar2.setMaximum(max);
+            int tk1 = (int) Double.parseDouble(jTable1.getValueAt(0, 4).toString());
+            jProgressBar2.setValue(tk1);
+            jProgressBar2.setToolTipText(String.valueOf(tk1));
+
+            jLabel4.setText(jTable1.getValueAt(1, 0).toString());
+            jLabel4.setToolTipText(jTable1.getValueAt(1, 1).toString());
+            jProgressBar1.setMaximum(max);
+            int tk2 = (int) Double.parseDouble(jTable1.getValueAt(1, 4).toString());
+            jProgressBar1.setValue(tk2);
+            jProgressBar1.setToolTipText(String.valueOf(tk2));
+
+            jLabel5.setText(jTable1.getValueAt(2, 0).toString());
+            jLabel5.setToolTipText(jTable1.getValueAt(2, 1).toString());
+            jProgressBar3.setMaximum(max);
+            int tk3 = (int) Double.parseDouble(jTable1.getValueAt(2, 4).toString());
+            jProgressBar3.setValue(tk3);
+            jProgressBar3.setToolTipText(String.valueOf(tk3));
+
+            jLabel6.setText(jTable1.getValueAt(3, 0).toString());
+            jLabel6.setToolTipText(jTable1.getValueAt(3, 1).toString());
+            jProgressBar4.setMaximum(max);
+            int tk4 = (int) Double.parseDouble(jTable1.getValueAt(3, 4).toString());
+            jProgressBar4.setValue(tk4);
+            jProgressBar4.setToolTipText(String.valueOf(tk4));
+
+            jLabel8.setText(jTable1.getValueAt(4, 0).toString());
+            jLabel8.setToolTipText(jTable1.getValueAt(4, 1).toString());
+            jProgressBar5.setMaximum(max);
+            int tk5 = (int) Double.parseDouble(jTable1.getValueAt(4, 4).toString());
+            jProgressBar5.setValue(tk5);
+            jProgressBar5.setToolTipText(String.valueOf(tk5));
+
+            jLabel9.setText(jTable1.getValueAt(5, 0).toString());
+            jLabel9.setToolTipText(jTable1.getValueAt(5, 1).toString());
+            jProgressBar6.setMaximum(max);
+            int tk6 = (int) Double.parseDouble(jTable1.getValueAt(5, 4).toString());
+            jProgressBar6.setValue(tk6);
+            jProgressBar6.setToolTipText(String.valueOf(tk6));
+
+            jLabel10.setText(jTable1.getValueAt(6, 0).toString());
+            jLabel10.setToolTipText(jTable1.getValueAt(6, 1).toString());
+            jProgressBar7.setMaximum(max);
+            int tk7 = (int) Double.parseDouble(jTable1.getValueAt(6, 4).toString());
+            jProgressBar7.setValue(tk7);
+            jProgressBar7.setToolTipText(String.valueOf(tk7));
         } catch (Exception e) {
         }
-        
+
     }
-    //xuất ra file ex
+
+    /**
+     * Xuất dữ liệu ra file excel
+     */
     public void exportDataToExcel() {
-        try{
-           JFileChooser jFileChooser = new JFileChooser("C:\\\\Users\\\\HP\\\\OneDrive\\\\Máy tính\\\\QLBH");
-           jFileChooser.showSaveDialog(this);
-           File saveFile = jFileChooser.getSelectedFile();
-           
-           if(saveFile != null){
-               saveFile = new File(saveFile.toString()+".xlsx");
-               Workbook wb = new XSSFWorkbook();
-               Sheet sheet = wb.createSheet("Sảm Phẩm");
-               
-               Row rowCol = sheet.createRow(0);
-               for(int i=0;i<jTable1.getColumnCount();i++){
-                   Cell cell = rowCol.createCell(i);
-                   cell.setCellValue(jTable1.getColumnName(i));
-               }
-               
-               for(int j=0;j<jTable1.getRowCount();j++){
-                   Row row = sheet.createRow(j);
-                   for(int k=0;k<jTable1.getColumnCount();k++){
-                       Cell cell = row.createCell(k);
-                       if(jTable1.getValueAt(j, k)!=null){
-                           cell.setCellValue(jTable1.getValueAt(j, k).toString());
-                       }
-                   }
-               }
-               FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
-               wb.write(out);
-               wb.close();
-               out.close();
-               JOptionPane.showMessageDialog(null,"Xuất Thành Công");
-               openFile(saveFile.toString());
-           }else{
-               JOptionPane.showMessageDialog(null,"Error");
-           }
-       }catch(FileNotFoundException e){
-           System.out.println(e);
-       }catch(IOException io){
-           System.out.println(io);
-       }
-    } 
-     public void openFile(String file){
-        try{
+        try {
+            JFileChooser jFileChooser = new JFileChooser("C:\\\\Users\\\\HP\\\\OneDrive\\\\Máy tính\\\\QLBH");
+            jFileChooser.showSaveDialog(this);
+            File saveFile = jFileChooser.getSelectedFile();
+
+            if (saveFile != null) {
+                saveFile = new File(saveFile.toString() + ".xlsx");
+                Workbook wb = new XSSFWorkbook();
+                Sheet sheet = wb.createSheet("Sảm Phẩm");
+
+                Row rowCol = sheet.createRow(0);
+                for (int i = 0; i < jTable1.getColumnCount(); i++) {
+                    Cell cell = rowCol.createCell(i);
+                    cell.setCellValue(jTable1.getColumnName(i));
+                }
+
+                for (int j = 0; j < jTable1.getRowCount(); j++) {
+                    Row row = sheet.createRow(j);
+                    for (int k = 0; k < jTable1.getColumnCount(); k++) {
+                        Cell cell = row.createCell(k);
+                        if (jTable1.getValueAt(j, k) != null) {
+                            cell.setCellValue(jTable1.getValueAt(j, k).toString());
+                        }
+                    }
+                }
+                FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
+                wb.write(out);
+                wb.close();
+                out.close();
+                JOptionPane.showMessageDialog(null, "Xuất Thành Công");
+                openFile(saveFile.toString());
+            } else {
+                JOptionPane.showMessageDialog(null, "Error");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        } catch (IOException io) {
+            System.out.println(io);
+        }
+    }
+
+    public void openFile(String file) {
+        try {
             File path = new File(file);
             Desktop.getDesktop().open(path);
-        }catch(IOException ioe){
+        } catch (IOException ioe) {
             System.out.println(ioe);
         }
     }
-      //Tạo hàm xuất hóa đơn
-    public void printBill(String date,String month,String year,String source){
+
+    /**
+     * Xuất hóa đơn
+     */
+    public void printBill(String date, String month, String year, String source) {
         try {
             Hashtable map = new Hashtable();
             JasperReport report = JasperCompileManager.compileReport(source);
             map.put("date", date);
             map.put("month", month);
             map.put("year", year);
-            JasperPrint p = JasperFillManager.fillReport(report,  map, connect.getConnection() );
+            JasperPrint p = JasperFillManager.fillReport(report, map, connect.getConnection());
             JasperViewer.viewReport(p, false);
-           // JasperExportManager.exportReportToPdfFile(p, "test.pdf");
+            // JasperExportManager.exportReportToPdfFile(p, "test.pdf");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
-     
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -657,35 +687,35 @@ private SimpleDateFormat formatterday = new SimpleDateFormat("dd");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-       exportDataToExcel();
+        exportDataToExcel();
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        
+
         String year = (String) formatterYear.format(date);
         String month = (String) formatterMonth.format(date);
         String day = (String) formatterday.format(date);
-        if(jComboBox1_2.getSelectedIndex()==2){
-           
-           String source = "src\\BaoCao/rptThongKeSamPhamNam.jrxml";
-           printBill(year,month,day, source);
-        }else if(jComboBox1_2.getSelectedIndex()==1){
+        if (jComboBox1_2.getSelectedIndex() == 2) {
+
+            String source = "src\\BaoCao/rptThongKeSamPhamNam.jrxml";
+            printBill(year, month, day, source);
+        } else if (jComboBox1_2.getSelectedIndex() == 1) {
             String source = "src\\BaoCao/rptThongKeSamPhamThang.jrxml";
-           printBill(month,day,year, source);
-            
-        }else if(jComboBox1_2.getSelectedIndex()==0){
+            printBill(month, day, year, source);
+
+        } else if (jComboBox1_2.getSelectedIndex() == 0) {
             String source = "src\\BaoCao/rptThongKeSamPhamNgay.jrxml";
-           printBill(day,month,year, source);
-            
+            printBill(day, month, year, source);
+
         }
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jProgressBar2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProgressBar2MouseEntered
-        jProgressBar2.setForeground(new  Color(4,220,220));
+        jProgressBar2.setForeground(new Color(4, 220, 220));
     }//GEN-LAST:event_jProgressBar2MouseEntered
 
     private void jProgressBar2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProgressBar2MouseExited
-        jProgressBar2.setForeground(new  Color(0,204,204));
+        jProgressBar2.setForeground(new Color(0, 204, 204));
     }//GEN-LAST:event_jProgressBar2MouseExited
 
     private void jComboBox1_2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1_2MouseClicked
@@ -693,8 +723,8 @@ private SimpleDateFormat formatterday = new SimpleDateFormat("dd");
     }//GEN-LAST:event_jComboBox1_2MouseClicked
 
     private void jComboBox1_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1_2ActionPerformed
-       locBieuDo();
-       
+        locBieuDo();
+
     }//GEN-LAST:event_jComboBox1_2ActionPerformed
 
 

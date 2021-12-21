@@ -14,17 +14,18 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * Hiển thị Giao diện Form Danh Mục Sản Phẩm
  *
- * @author HP
  */
 public class FrmDmSp extends javax.swing.JPanel {
-ArrayList<DanhMucSP> dsDmSP;
+
+    ArrayList<DanhMucSP> dsDmSP;
     ArrayList<SanPham> dsSP;
     DanhMucSPDao dm_dao;
     SanPhamDao sp_dao;
     private DefaultTableModel dfSP_Model;
-    
     private DefaultTableModel dfDmSP_Model;
+
     /**
      * Creates new form FrmDmSp
      */
@@ -32,22 +33,28 @@ ArrayList<DanhMucSP> dsDmSP;
         initComponents();
         dsSP = new ArrayList<SanPham>();
         dsDmSP = new ArrayList<DanhMucSP>();
-       
+
         dm_dao = new DanhMucSPDao();
         sp_dao = new SanPhamDao();
         upTblDM();
-        
+
     }
 
+    /**
+     * Láy thông tin danh mục từ ô nhập liệu
+     *
+     */
     public DanhMucSP restTextDM() {
         String maDm = txt_MaDm.getText().toString();
         String tenDm = txt_TenDm.getText().toString();
-
         return new DanhMucSP(maDm, tenDm);
 
     }
-    
-    //kiểm tra du liệu nhập danh mục
+
+    /**
+     * Kiểm tra dữ liệu có hợp lệ hay không
+     *
+     */
     public boolean kiemTraDataDM() {
         String tenDM = txt_TenDm.getText().trim();
         // Tên danh mục phải là chữ
@@ -57,20 +64,31 @@ ArrayList<DanhMucSP> dsDmSP;
         }
         return true;
     }
-    
-    //xóa model danh mục
+
+    /**
+     * Xóa model bản danh mục sản phẩm
+     *
+     */
     public void xoaModelDM() {
         DefaultTableModel del = (DefaultTableModel) tbl_DanhMuc.getModel();
         del.getDataVector().removeAllElements();
     }
-    //xóa rong textfield danh mục
+
+    /**
+     * Xóa trắng các textfield
+     *
+     */
     public void xoaRongTextDm() {
 
         txt_MaDm.setText("");
         txt_TenDm.setText("");
         txt_TenDm.requestFocus();
     }
-    //đọc dữ liệu lên bảng danh mục
+
+    /**
+     * Đọc dữ liệu lên bảng danh mục sản phẩm
+     *
+     */
     public void upTblDM() {
         dfDmSP_Model = (DefaultTableModel) tbl_DanhMuc.getModel();
 
@@ -81,7 +99,7 @@ ArrayList<DanhMucSP> dsDmSP;
             });
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -194,10 +212,10 @@ ArrayList<DanhMucSP> dsDmSP;
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_ThemDm, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(28, 28, 28)
                 .addComponent(btn_LuuDm, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(btn_SuaDm, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(btn_SuaDm, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(btn_XoaDm, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -333,7 +351,7 @@ ArrayList<DanhMucSP> dsDmSP;
                 xoaRongTextDm();
                 xoaModelDM();
                 upTblDM();
-                
+
                 JOptionPane.showMessageDialog(this, "Cập nhật danh sách thành công");
             }
         }

@@ -5,8 +5,6 @@
  */
 package Gui;
 
-
-
 import Connect.connect;
 import dao.HoaDonDao;
 import entity.HoaDonBanHang;
@@ -49,8 +47,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.jdbc.JDBCCategoryDataset;
 
 /**
+ * Hiển thị Giao diện Form Thống kê danh thu của cửa hàng
  *
- * @author HP
  */
 public class FrmTkeDoanhThu extends javax.swing.JPanel {
 
@@ -60,19 +58,20 @@ public class FrmTkeDoanhThu extends javax.swing.JPanel {
     private SimpleDateFormat formatterDay = new SimpleDateFormat("dd");
     private SimpleDateFormat formatterMonth = new SimpleDateFormat("MM");
     private SimpleDateFormat formatterYear = new SimpleDateFormat("yyyy");
-    private String ngayStart ;
-    private String ngayEnd ;
-    private String thang ;
-    private String nam ;
-    private String thangDef ;
-    private String namDef ;
-    private java.sql.Date date ;
-    List<HoaDonBanHang>list;
-    List<HoaDonBanHang>list2;
-    List<HoaDonBanHang>list3;
-    List<HoaDonBanHang>dsct1;
-    List<HoaDonBanHang>dsct2;
-    List<HoaDonBanHang>dsct3;
+    private String ngayStart;
+    private String ngayEnd;
+    private String thang;
+    private String nam;
+    private String thangDef;
+    private String namDef;
+    private java.sql.Date date;
+    List<HoaDonBanHang> list;
+    List<HoaDonBanHang> list2;
+    List<HoaDonBanHang> list3;
+    List<HoaDonBanHang> dsct1;
+    List<HoaDonBanHang> dsct2;
+    List<HoaDonBanHang> dsct3;
+
     public FrmTkeDoanhThu() {
         initComponents();
         list = new ArrayList<HoaDonBanHang>();
@@ -86,8 +85,8 @@ public class FrmTkeDoanhThu extends javax.swing.JPanel {
         dsct1 = new ArrayList<HoaDonBanHang>();
         dsct2 = new ArrayList<HoaDonBanHang>();
         dsct3 = new ArrayList<HoaDonBanHang>();
-        long millis=System.currentTimeMillis();
-        date=new java.sql.Date(millis);
+        long millis = System.currentTimeMillis();
+        date = new java.sql.Date(millis);
         thangDef = (String) formatterMonth.format(date);
         namDef = (String) formatterYear.format(date);
         tkNgay("01", "31", thangDef, namDef, jPanel3);
@@ -96,76 +95,84 @@ public class FrmTkeDoanhThu extends javax.swing.JPanel {
         jDateChooser1.setDate(date);
         jDateChooser2.setDate(date);
     }
-    public void loadAgain(){
+
+    /**
+     * Tải lại chi tiết doanh thu
+     *
+     */
+    public void loadAgain() {
         tkNgay("01", "31", thangDef, namDef, jPanel3);
         upTblChiTietTheoNgay("01", "31", thangDef, namDef);
         upTblChiTietTheoNgay2();
     }
 
     /**
-     * xóa chi model chi tiết ngay 1
+     * xóa model bảng chi tiết thống kê doanh theo ngay 1
      */
-    public void xoaModelChiTiet1(){
+    public void xoaModelChiTiet1() {
         DefaultTableModel del = (DefaultTableModel) jTable1.getModel();
         del.getDataVector().removeAllElements();
     }
+
     /**
-     * xóa chi model chi tiết ngay 2
+     * xóa model bảng chi tiết thống kê doanh theo ngay 1
      */
-    public void xoaModelChiTiet2(){
+    public void xoaModelChiTiet2() {
         DefaultTableModel del = (DefaultTableModel) jTable2.getModel();
         del.getDataVector().removeAllElements();
     }
-    
+
     /**
-     * đọc dữ liệu lên bảng chi tiet theo ngày 
+     * đọc dữ liệu lên bảng chi tiet thống kê doanh theo ngày
      */
     public void upTblChiTietTheoNgay(String ngayStart, String ngayEnd, String thang, String nam) {
 
         dsct1 = hdDao.CT_thongkeDoanhThuTheoNgay(ngayStart, ngayEnd, thang, nam);
         for (HoaDonBanHang hd : dsct1) {
             dftkdt1_Model.addRow(new Object[]{
-                hd.getMaHD(),hd.getNgayLapHD(),hd.getSoLuong(),hd.getTongTien()
+                hd.getMaHD(), hd.getNgayLapHD(), hd.getSoLuong(), hd.getTongTien()
             });
         }
     }
+
     /**
-     * đọc dữ liệu lên bảng chi tiet tong quan theo ngày
+     * đọc dữ liệu lên bảng chi tiet tổng quan thống kê doanh theo ngày
      */
     public void upTblChiTietTheoNgay2() {
         for (HoaDonBanHang hd : list) {
             Date ngay = hd.getNgayLapHD();
             String day = (String) formatterDay.format(ngay);
             dftkdt2_Model.addRow(new Object[]{
-               day,hd.getTongTien()
+                day, hd.getTongTien()
             });
         }
     }
-    
+
     /**
-     * đọc dữ liệu lên bảng chi tiet theo ngày 
+     * đọc dữ liệu lên bảng chi tiet theo tháng
      */
     public void upTblChiTietTheoThang(String thangStart, String thangEnd, String nam) {
         dsct2 = hdDao.CT_thongkeDoanhThuTheoThang(thangStart, thangEnd, nam);
         for (HoaDonBanHang hd : dsct2) {
             dftkdt1_Model.addRow(new Object[]{
-                hd.getMaHD(),hd.getNgayLapHD(),hd.getSoLuong(),hd.getTongTien()
+                hd.getMaHD(), hd.getNgayLapHD(), hd.getSoLuong(), hd.getTongTien()
             });
         }
     }
+
     /**
-     * đọc dữ liệu lên bảng chi tiet tong quan theo ngày
+     * đọc dữ liệu lên bảng chi tiet tong quan theo tháng
      */
     public void upTblChiTietTheoThang2() {
         for (HoaDonBanHang hd : list2) {
             Date thang = hd.getNgayLapHD();
             String month = (String) formatterDay.format(thang);
             dftkdt2_Model.addRow(new Object[]{
-               month,hd.getTongTien()
+                month, hd.getTongTien()
             });
         }
     }
-    
+
     /**
      * đọc dữ liệu lên bảng chi tiet theo năm
      */
@@ -174,10 +181,11 @@ public class FrmTkeDoanhThu extends javax.swing.JPanel {
         dsct3 = hdDao.CT_thongkeDoanhThuTheoNam(namStart, namEnd);
         for (HoaDonBanHang hd : dsct3) {
             dftkdt1_Model.addRow(new Object[]{
-                hd.getMaHD(),hd.getNgayLapHD(),hd.getSoLuong(),hd.getTongTien()
+                hd.getMaHD(), hd.getNgayLapHD(), hd.getSoLuong(), hd.getTongTien()
             });
         }
     }
+
     /**
      * đọc dữ liệu lên bảng chi tiet tong quan theo năm
      */
@@ -186,160 +194,160 @@ public class FrmTkeDoanhThu extends javax.swing.JPanel {
             Date nam = hd.getNgayLapHD();
             String year = (String) formatterYear.format(nam);
             dftkdt2_Model.addRow(new Object[]{
-               year,hd.getTongTien()
+                year, hd.getTongTien()
             });
         }
     }
-    
+
     /**
-     * Biểu đồ thống kê theo ngày
+     * Biểu đồ thống kê doanh thu theo ngày
      */
-    public void tkNgay(String ngayStart, String ngayEnd, String thang, String nam ,JPanel pnItem){
+    public void tkNgay(String ngayStart, String ngayEnd, String thang, String nam, JPanel pnItem) {
         list = hdDao.thongkeDoanhThuTheoNgay(ngayStart, ngayEnd, thang, nam);
-        if(list != null){
+        if (list != null) {
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-            for(HoaDonBanHang hd : list){
+            for (HoaDonBanHang hd : list) {
                 Date ngay = hd.getNgayLapHD();
                 String day = (String) formatterDay.format(ngay);
-                
-               
+
                 dataset.addValue(hd.getTongTien(), "Tổng Tiền",
                         String.valueOf(day)
-                        );
+                );
             }
-            JFreeChart chart = ChartFactory.createBarChart("Biểu đồ doanh thu theo Ngày trong tháng "+thang+", năm "+nam+"", "Ngày", "Tổng Tiền(VND)", dataset,PlotOrientation.VERTICAL, true, true, false);
-            
+            JFreeChart chart = ChartFactory.createBarChart("Biểu đồ doanh thu theo Ngày trong tháng " + thang + ", năm " + nam + "", "Ngày", "Tổng Tiền(VND)", dataset, PlotOrientation.VERTICAL, true, true, false);
+
 //            chart.setBackgroundPaint(Color.white);
             CategoryPlot plot = chart.getCategoryPlot();
-            plot.getRenderer().setSeriesPaint(0, new Color(98,157,221));
+            plot.getRenderer().setSeriesPaint(0, new Color(98, 157, 221));
             ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(pnItem.getWidth(),pnItem.getHeight()));
+            chartPanel.setPreferredSize(new Dimension(pnItem.getWidth(), pnItem.getHeight()));
             pnItem.removeAll();
             pnItem.setLayout(new CardLayout());
             pnItem.add(chartPanel);
             pnItem.repaint();
             pnItem.revalidate();
-            
+
         }
     }
-    
+
     /**
-     * Biểu đồ thống kê theo tháng
+     * Biểu đồ thống kê doanh thu theo tháng
      */
-    public void tkThang(String monthStart, String monthEnd,String nam ,JPanel pnItem){
+    public void tkThang(String monthStart, String monthEnd, String nam, JPanel pnItem) {
         list2 = hdDao.thongkeDoanhThuTheoThang(monthStart, monthEnd, nam);
-        if(list2 != null){
+        if (list2 != null) {
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-            for(HoaDonBanHang hd : list2){
+            for (HoaDonBanHang hd : list2) {
                 Date thang = hd.getNgayLapHD();
-               
+
                 String month = (String) formatterDay.format(thang);
-              
+
                 dataset.addValue(hd.getTongTien(), "Tổng Tiền",
                         String.valueOf(month)
-                        );
+                );
             }
-            JFreeChart chart = ChartFactory.createBarChart("Biểu đồ doanh thu theo Tháng trong năm "+nam+" ", "Tháng", "Tổng Tiền(VND)", dataset,PlotOrientation.VERTICAL, true, true, false);
-            
+            JFreeChart chart = ChartFactory.createBarChart("Biểu đồ doanh thu theo Tháng trong năm " + nam + " ", "Tháng", "Tổng Tiền(VND)", dataset, PlotOrientation.VERTICAL, true, true, false);
+
             chart.setBackgroundPaint(Color.white);
             CategoryPlot plot = chart.getCategoryPlot();
-            plot.getRenderer().setSeriesPaint(0, new Color(98,157,221));
+            plot.getRenderer().setSeriesPaint(0, new Color(98, 157, 221));
             ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(pnItem.getWidth(),pnItem.getHeight()));
+            chartPanel.setPreferredSize(new Dimension(pnItem.getWidth(), pnItem.getHeight()));
             pnItem.removeAll();
             pnItem.setLayout(new CardLayout());
             pnItem.add(chartPanel);
             pnItem.repaint();
             pnItem.revalidate();
-            
+
         }
     }
-    
+
     /**
-     * Biểu đồ thống kê theo năm
+     * Biểu đồ thống kê doanh thu theo năm
      */
-    public void tkNam(String yearStart, String yearEnd,JPanel pnItem){
+    public void tkNam(String yearStart, String yearEnd, JPanel pnItem) {
         list3 = hdDao.thongkeDoanhThuTheoNam(yearStart, yearEnd);
-        if(list3 != null){
+        if (list3 != null) {
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-            for(HoaDonBanHang hd : list3){
+            for (HoaDonBanHang hd : list3) {
                 Date nam = hd.getNgayLapHD();
                 String year = (String) formatterYear.format(nam);
-               
+
                 dataset.addValue(hd.getTongTien(), "Tổng Tiền",
                         String.valueOf(year)
-                        );
+                );
             }
-            JFreeChart chart = ChartFactory.createBarChart("Biểu đồ doanh thu theo Năm", "Năm", "Tổng Tiền(VND)", dataset,PlotOrientation.VERTICAL, true, true, false);
-            
+            JFreeChart chart = ChartFactory.createBarChart("Biểu đồ doanh thu theo Năm", "Năm", "Tổng Tiền(VND)", dataset, PlotOrientation.VERTICAL, true, true, false);
+
             chart.setBackgroundPaint(Color.white);
             CategoryPlot plot = chart.getCategoryPlot();
-            plot.getRenderer().setSeriesPaint(0, new Color(98,157,221));
+            plot.getRenderer().setSeriesPaint(0, new Color(98, 157, 221));
             ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(pnItem.getWidth(),pnItem.getHeight()));
+            chartPanel.setPreferredSize(new Dimension(pnItem.getWidth(), pnItem.getHeight()));
             pnItem.removeAll();
             pnItem.setLayout(new CardLayout());
             pnItem.add(chartPanel);
             pnItem.repaint();
             pnItem.revalidate();
-            
+
         }
     }
-    
-    //xuất ra file ex
+
+    /**
+     * Xuất dữ liệu ra file excel
+     */
     public void exportDataToExcel(String title) {
-        try{
-           JFileChooser jFileChooser = new JFileChooser("C:\\\\Users\\\\HP\\\\OneDrive\\\\Máy tính\\\\QLBH");
-           jFileChooser.showSaveDialog(this);
-           File saveFile = jFileChooser.getSelectedFile();
-           
-           if(saveFile != null){
-               saveFile = new File(saveFile.toString()+".xlsx");
-               Workbook wb = new XSSFWorkbook();
-               Sheet sheet = wb.createSheet(title);
-               
-               Row rowCol = sheet.createRow(3);
-               
-               
-               for(int i=0;i<jTable2.getColumnCount();i++){
-                   Cell cell = rowCol.createCell(i,CellType.NUMERIC);
-                   cell.setCellValue(jTable2.getColumnName(i));
-               }
-               
-               for(int j=0;j<jTable2.getRowCount();j++){
-                   Row row = sheet.createRow(j);
-                   for(int k=0;k<jTable2.getColumnCount();k++){
-                       Cell cell = row.createCell(k,CellType.NUMERIC);
-                       if(jTable2.getValueAt(j, k)!=null){
-                           cell.setCellValue(jTable2.getValueAt(j, k).toString());
-                       }
-                   }
-               }
-               FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
-               wb.write(out);
-               wb.close();
-               out.close();
-               JOptionPane.showMessageDialog(null,"Xuất Thành Công");
-               openFile(saveFile.toString());
-           }else{
+        try {
+            JFileChooser jFileChooser = new JFileChooser("C:\\\\Users\\\\HP\\\\OneDrive\\\\Máy tính\\\\QLBH");
+            jFileChooser.showSaveDialog(this);
+            File saveFile = jFileChooser.getSelectedFile();
+
+            if (saveFile != null) {
+                saveFile = new File(saveFile.toString() + ".xlsx");
+                Workbook wb = new XSSFWorkbook();
+                Sheet sheet = wb.createSheet(title);
+
+                Row rowCol = sheet.createRow(3);
+
+                for (int i = 0; i < jTable2.getColumnCount(); i++) {
+                    Cell cell = rowCol.createCell(i, CellType.NUMERIC);
+                    cell.setCellValue(jTable2.getColumnName(i));
+                }
+
+                for (int j = 0; j < jTable2.getRowCount(); j++) {
+                    Row row = sheet.createRow(j);
+                    for (int k = 0; k < jTable2.getColumnCount(); k++) {
+                        Cell cell = row.createCell(k, CellType.NUMERIC);
+                        if (jTable2.getValueAt(j, k) != null) {
+                            cell.setCellValue(jTable2.getValueAt(j, k).toString());
+                        }
+                    }
+                }
+                FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
+                wb.write(out);
+                wb.close();
+                out.close();
+                JOptionPane.showMessageDialog(null, "Xuất Thành Công");
+                openFile(saveFile.toString());
+            } else {
 //               JOptionPane.showMessageDialog(null,"Error");
-           }
-       }catch(FileNotFoundException e){
-           System.out.println(e);
-       }catch(IOException io){
-           System.out.println(io);
-       }
-    } 
-     public void openFile(String file){
-        try{
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        } catch (IOException io) {
+            System.out.println(io);
+        }
+    }
+
+    public void openFile(String file) {
+        try {
             File path = new File(file);
             Desktop.getDesktop().open(path);
-        }catch(IOException ioe){
+        } catch (IOException ioe) {
             System.out.println(ioe);
         }
     }
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -733,108 +741,108 @@ public class FrmTkeDoanhThu extends javax.swing.JPanel {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
 //        locBieuDo();
-            if(jComboBox1.getSelectedIndex()==0){
-                jTable2.getColumnModel().getColumn(0).setHeaderValue("Ngày");
-                jPanel5.setVisible(true);
-                jPanel6.setVisible(false);
-                jPanel7.setVisible(false);
-                dsct1.removeAll(dsct1);
-                list.removeAll(list);
-                list2.removeAll(list2);
-                list3.removeAll(list3);
-                xoaModelChiTiet1();
-                xoaModelChiTiet2();
-                tkNgay("01", "31", thangDef, namDef, jPanel3);
-                upTblChiTietTheoNgay("01", "31", thangDef, namDef);
-                upTblChiTietTheoNgay2();
-            }else if(jComboBox1.getSelectedIndex()==1){
-                jTable2.getColumnModel().getColumn(0).setHeaderValue("Tháng");
-                jPanel6.setVisible(true);
-                jPanel5.setVisible(false);
-                jPanel7.setVisible(false);
-                dsct1.removeAll(dsct1);
-                list.removeAll(list);
-                list2.removeAll(list2);
-                list3.removeAll(list3);
-                xoaModelChiTiet1();
-                xoaModelChiTiet2();
-                tkThang("01", "12", namDef, jPanel3);
-                upTblChiTietTheoThang("01", "12", namDef);
-                upTblChiTietTheoThang2();
-            }else if(jComboBox1.getSelectedIndex()==2){
-                jTable2.getColumnModel().getColumn(0).setHeaderValue("Năm");
-                jPanel6.setVisible(false);
-                jPanel5.setVisible(false);
-                jPanel7.setVisible(true);
-                dsct1.removeAll(dsct1);
-                list.removeAll(list);
-                list2.removeAll(list2);
-                list3.removeAll(list3);
-                xoaModelChiTiet1();
-                xoaModelChiTiet2();
-                tkNam("2010", "2021", jPanel3);
-                upTblChiTietTheoNam("2010", "2021");
-                upTblChiTietTheoNam2();
-                
-            }
+        if (jComboBox1.getSelectedIndex() == 0) {
+            jTable2.getColumnModel().getColumn(0).setHeaderValue("Ngày");
+            jPanel5.setVisible(true);
+            jPanel6.setVisible(false);
+            jPanel7.setVisible(false);
+            dsct1.removeAll(dsct1);
+            list.removeAll(list);
+            list2.removeAll(list2);
+            list3.removeAll(list3);
+            xoaModelChiTiet1();
+            xoaModelChiTiet2();
+            tkNgay("01", "31", thangDef, namDef, jPanel3);
+            upTblChiTietTheoNgay("01", "31", thangDef, namDef);
+            upTblChiTietTheoNgay2();
+        } else if (jComboBox1.getSelectedIndex() == 1) {
+            jTable2.getColumnModel().getColumn(0).setHeaderValue("Tháng");
+            jPanel6.setVisible(true);
+            jPanel5.setVisible(false);
+            jPanel7.setVisible(false);
+            dsct1.removeAll(dsct1);
+            list.removeAll(list);
+            list2.removeAll(list2);
+            list3.removeAll(list3);
+            xoaModelChiTiet1();
+            xoaModelChiTiet2();
+            tkThang("01", "12", namDef, jPanel3);
+            upTblChiTietTheoThang("01", "12", namDef);
+            upTblChiTietTheoThang2();
+        } else if (jComboBox1.getSelectedIndex() == 2) {
+            jTable2.getColumnModel().getColumn(0).setHeaderValue("Năm");
+            jPanel6.setVisible(false);
+            jPanel5.setVisible(false);
+            jPanel7.setVisible(true);
+            dsct1.removeAll(dsct1);
+            list.removeAll(list);
+            list2.removeAll(list2);
+            list3.removeAll(list3);
+            xoaModelChiTiet1();
+            xoaModelChiTiet2();
+            tkNam("2010", "2021", jPanel3);
+            upTblChiTietTheoNam("2010", "2021");
+            upTblChiTietTheoNam2();
+
+        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
 //        exportDataToExcel();
-            if(jComboBox1.getSelectedIndex()==0){
-                exportDataToExcel("Tổng Doanh Thu Theo Ngày");
-            }else if(jComboBox1.getSelectedIndex()==1){
-                exportDataToExcel("Tổng Doanh Thu Theo Tháng");
-            }else if(jComboBox1.getSelectedIndex()==2){
-                exportDataToExcel("Tổng Doanh Thu Theo Năm");
-            }
+        if (jComboBox1.getSelectedIndex() == 0) {
+            exportDataToExcel("Tổng Doanh Thu Theo Ngày");
+        } else if (jComboBox1.getSelectedIndex() == 1) {
+            exportDataToExcel("Tổng Doanh Thu Theo Tháng");
+        } else if (jComboBox1.getSelectedIndex() == 2) {
+            exportDataToExcel("Tổng Doanh Thu Theo Năm");
+        }
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        if(jComboBox1.getSelectedIndex()==0){
+        if (jComboBox1.getSelectedIndex() == 0) {
             Date date1 = jDateChooser1.getDate();
             Date date2 = jDateChooser2.getDate();
             try {
-            Hashtable map = new Hashtable();
-            JasperReport report = JasperCompileManager.compileReport("C:\\Users\\HP\\OneDrive\\Máy tính\\QLBH\\src\\BaoCao\\rptThongKeDoanhThuTheoNgay.jrxml");
-            String ngayS =(String) formatterDay.format(date1);
-            String ngayE =(String) formatterDay.format(date2);
-            String thang =String.valueOf(jMonthChooser1.getMonth()+1);
-            String nam =String.valueOf(jYearChooser1.getYear());
-                
-            map.put("dayStart", ngayS);
-            map.put("dayEnd", ngayE);
-            map.put("month", thang);
-            map.put("year", nam);
-            JasperPrint p = JasperFillManager.fillReport(report,  map, connect.getConnection() );
-            JasperViewer.viewReport(p, false);
+                Hashtable map = new Hashtable();
+                JasperReport report = JasperCompileManager.compileReport("C:\\Users\\HP\\OneDrive\\Máy tính\\QLBH\\src\\BaoCao\\rptThongKeDoanhThuTheoNgay.jrxml");
+                String ngayS = (String) formatterDay.format(date1);
+                String ngayE = (String) formatterDay.format(date2);
+                String thang = String.valueOf(jMonthChooser1.getMonth() + 1);
+                String nam = String.valueOf(jYearChooser1.getYear());
+
+                map.put("dayStart", ngayS);
+                map.put("dayEnd", ngayE);
+                map.put("month", thang);
+                map.put("year", nam);
+                JasperPrint p = JasperFillManager.fillReport(report, map, connect.getConnection());
+                JasperViewer.viewReport(p, false);
             } catch (Exception e) {
             }
-        }else if(jComboBox1.getSelectedIndex()==1){
+        } else if (jComboBox1.getSelectedIndex() == 1) {
             try {
-            Hashtable map = new Hashtable();
-            JasperReport report = JasperCompileManager.compileReport("C:\\Users\\HP\\OneDrive\\Máy tính\\QLBH\\src\\BaoCao\\rptThongKeDoanhThuTheoThang.jrxml");
-            String thangStart = String.valueOf(jMonthChooser3.getMonth()+1);
-           String thangEnd = String.valueOf(jMonthChooser2.getMonth()+1);
-           String nam = String.valueOf(jYearChooser2.getYear());
-            map.put("thangStart", thangStart);
-            map.put("thangEnd", thangEnd);
-            map.put("year", nam);
-            JasperPrint p = JasperFillManager.fillReport(report,  map, connect.getConnection() );
-            JasperViewer.viewReport(p, false);
+                Hashtable map = new Hashtable();
+                JasperReport report = JasperCompileManager.compileReport("C:\\Users\\HP\\OneDrive\\Máy tính\\QLBH\\src\\BaoCao\\rptThongKeDoanhThuTheoThang.jrxml");
+                String thangStart = String.valueOf(jMonthChooser3.getMonth() + 1);
+                String thangEnd = String.valueOf(jMonthChooser2.getMonth() + 1);
+                String nam = String.valueOf(jYearChooser2.getYear());
+                map.put("thangStart", thangStart);
+                map.put("thangEnd", thangEnd);
+                map.put("year", nam);
+                JasperPrint p = JasperFillManager.fillReport(report, map, connect.getConnection());
+                JasperViewer.viewReport(p, false);
             } catch (Exception e) {
             }
 
-        }else if(jComboBox1.getSelectedIndex()==2){
+        } else if (jComboBox1.getSelectedIndex() == 2) {
             try {
-            Hashtable map = new Hashtable();
-            JasperReport report = JasperCompileManager.compileReport("C:\\Users\\HP\\OneDrive\\Máy tính\\QLBH\\src\\BaoCao\\rptThongKeDoanhThuTheoNam.jrxml");
-            String namStart = String.valueOf(jYearChooser4.getYear());
-           String namEnd = String.valueOf(jYearChooser3.getYear());
-            map.put("namStart", namStart);
-            map.put("namEnd", namEnd);
-            JasperPrint p = JasperFillManager.fillReport(report,  map, connect.getConnection() );
-            JasperViewer.viewReport(p, false);
+                Hashtable map = new Hashtable();
+                JasperReport report = JasperCompileManager.compileReport("C:\\Users\\HP\\OneDrive\\Máy tính\\QLBH\\src\\BaoCao\\rptThongKeDoanhThuTheoNam.jrxml");
+                String namStart = String.valueOf(jYearChooser4.getYear());
+                String namEnd = String.valueOf(jYearChooser3.getYear());
+                map.put("namStart", namStart);
+                map.put("namEnd", namEnd);
+                JasperPrint p = JasperFillManager.fillReport(report, map, connect.getConnection());
+                JasperViewer.viewReport(p, false);
             } catch (Exception e) {
             }
 
@@ -842,47 +850,47 @@ public class FrmTkeDoanhThu extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        if(jComboBox1.getSelectedIndex()==0){
+        if (jComboBox1.getSelectedIndex() == 0) {
             list.removeAll(list);
-        dsct1.removeAll(dsct1);
-        xoaModelChiTiet1();
-        xoaModelChiTiet2();
-        Date date1 = jDateChooser1.getDate();
-        Date date2 = jDateChooser2.getDate();
-        ngayStart =(String) formatterDay.format(date1);
-        ngayEnd = (String) formatterDay.format(date2);
-        thang = String.valueOf(jMonthChooser1.getMonth()+1);
-        nam = String.valueOf(jYearChooser1.getYear());
-        
-        tkNgay(ngayStart, ngayEnd, thang, nam, jPanel3);
-        upTblChiTietTheoNgay(ngayStart, ngayEnd, thang, nam);
-        upTblChiTietTheoNgay2();
-        }else if(jComboBox1.getSelectedIndex()==1){
-           list2.removeAll(list2);
-           dsct2.removeAll(dsct2);
-           xoaModelChiTiet1();
-           xoaModelChiTiet2();
-           String thangStart = String.valueOf(jMonthChooser3.getMonth()+1);
-           String thangEnd = String.valueOf(jMonthChooser2.getMonth()+1);
-           String nam = String.valueOf(jYearChooser2.getYear());
-          
+            dsct1.removeAll(dsct1);
+            xoaModelChiTiet1();
+            xoaModelChiTiet2();
+            Date date1 = jDateChooser1.getDate();
+            Date date2 = jDateChooser2.getDate();
+            ngayStart = (String) formatterDay.format(date1);
+            ngayEnd = (String) formatterDay.format(date2);
+            thang = String.valueOf(jMonthChooser1.getMonth() + 1);
+            nam = String.valueOf(jYearChooser1.getYear());
+
+            tkNgay(ngayStart, ngayEnd, thang, nam, jPanel3);
+            upTblChiTietTheoNgay(ngayStart, ngayEnd, thang, nam);
+            upTblChiTietTheoNgay2();
+        } else if (jComboBox1.getSelectedIndex() == 1) {
+            list2.removeAll(list2);
+            dsct2.removeAll(dsct2);
+            xoaModelChiTiet1();
+            xoaModelChiTiet2();
+            String thangStart = String.valueOf(jMonthChooser3.getMonth() + 1);
+            String thangEnd = String.valueOf(jMonthChooser2.getMonth() + 1);
+            String nam = String.valueOf(jYearChooser2.getYear());
+
             tkThang(thangStart, thangEnd, nam, jPanel3);
             upTblChiTietTheoThang(thangStart, thangEnd, nam);
             upTblChiTietTheoThang2();
-        }else if(jComboBox1.getSelectedIndex()==2){
+        } else if (jComboBox1.getSelectedIndex() == 2) {
             list3.removeAll(list3);
-           dsct3.removeAll(dsct3);
-           xoaModelChiTiet1();
-           xoaModelChiTiet2();
-           String namStart = String.valueOf(jYearChooser4.getYear());
-           String namEnd = String.valueOf(jYearChooser3.getYear());
-           
+            dsct3.removeAll(dsct3);
+            xoaModelChiTiet1();
+            xoaModelChiTiet2();
+            String namStart = String.valueOf(jYearChooser4.getYear());
+            String namEnd = String.valueOf(jYearChooser3.getYear());
+
             tkNam(namStart, namEnd, jPanel3);
             upTblChiTietTheoNam(namStart, namEnd);
             upTblChiTietTheoNam2();
         }
-        
-        
+
+
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -890,7 +898,7 @@ public class FrmTkeDoanhThu extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jDateChooser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDateChooser1MouseClicked
-        
+
     }//GEN-LAST:event_jDateChooser1MouseClicked
 
 

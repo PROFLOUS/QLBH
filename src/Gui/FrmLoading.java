@@ -9,10 +9,10 @@ import java.awt.Color;
 import java.awt.geom.RoundRectangle2D;
 
 /**
+ * Hiển thị Giao diện Form trạng thái đăng nhập vào hệ thống
  *
- * @author HP
  */
-public class FrmLoading extends javax.swing.JFrame implements Runnable{
+public class FrmLoading extends javax.swing.JFrame implements Runnable {
 
     /**
      * Creates new form FrmLoading
@@ -23,22 +23,24 @@ public class FrmLoading extends javax.swing.JFrame implements Runnable{
         setLocationRelativeTo(null);
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 30, 30));
         jProgressBar1.setBackground(new Color(255, 255, 255, 0));
-       jProgressBar1.setForeground(new Color(153,204,255));
-       Thread t = new Thread(this);
-       t.start();
+        jProgressBar1.setForeground(new Color(153, 204, 255));
+        Thread t = new Thread(this);
+        t.start();
     }
+
     @Override
     public void run() {
         for (int i = 1; i <= 100; i++) {
-                            try {
-                                Thread.sleep(50);
-                            } catch (Exception e) {
-                            }
-                            jProgressBar1.setValue(i);
-                    }
+            try {
+                Thread.sleep(50);
+            } catch (Exception e) {
+            }
+            jProgressBar1.setValue(i);
+        }
         new GD_Chinh().setVisible(true);
-                        dispose();
+        dispose();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -119,5 +121,4 @@ public class FrmLoading extends javax.swing.JFrame implements Runnable{
     private javax.swing.JProgressBar jProgressBar1;
     // End of variables declaration//GEN-END:variables
 
-    
 }

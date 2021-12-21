@@ -33,22 +33,23 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
+ * Hiển thị Giao diện Form Danh sách thông tin luơng của nhân viên
  *
- * @author HP
  */
 public class FrmLuong extends javax.swing.JPanel {
-private DefaultTableModel dfLuong_Model;
-private DefaultTableModel dfLsLuong_Model;
-private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-   ArrayList<CaLam> dsCa;
-   ArrayList<NhanVien> dsNv;
+
+    private DefaultTableModel dfLuong_Model;
+    private DefaultTableModel dfLsLuong_Model;
+    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    ArrayList<CaLam> dsCa;
+    ArrayList<NhanVien> dsNv;
     ArrayList<Luong> dsLuong;
     ArrayList<ChucVu> dsCv;
     CaLamDao ca_dao;
     NhanVienDao nv_dao;
     LuongDao l_dao;
     ChucVuDao cv_dao;
-  
+
     public FrmLuong() {
         initComponents();
         dsCa = new ArrayList<CaLam>();
@@ -61,134 +62,153 @@ private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         l_dao = new LuongDao();
         upTblLuong();
         upCbo_CV();
-         Date date = new  Date();
-         dt_From.setDate(date);
-         dt_To.setDate(date);
-         jDateChooser3.setDate(date);
-         JTextFieldDateEditor editor = (JTextFieldDateEditor) dt_From.getDateEditor();
+        Date date = new Date();
+        dt_From.setDate(date);
+        dt_To.setDate(date);
+        jDateChooser3.setDate(date);
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) dt_From.getDateEditor();
         editor.setEditable(false);
         JTextFieldDateEditor editor2 = (JTextFieldDateEditor) dt_To.getDateEditor();
         editor2.setEditable(false);
-        
+
     }
-    
-    //doc du lieu len cbo chuc vu
-    public  void upCbo_CV(){
+
+    /**
+     * Đọc dữ liệu Chức vụ từ database lên Combobox
+     */
+    public void upCbo_CV() {
         dsCv = cv_dao.getAllCV();
         for (ChucVu cv : dsCv) {
             cbo_TkCv_Luong.addItem(cv.getTenCV());
         }
     }
 
+    /**
+     * Đọc dữ liệu lương nhân viên từ database
+     */
     public void upTblLuong() {
         dfLuong_Model = (DefaultTableModel) tbl_Luong.getModel();
         dsLuong = l_dao.getAllLuong();
         for (Luong luong : dsLuong) {
             dfLuong_Model.addRow(new Object[]{
-                luong.getMaNV().getMaNV(),luong.getMaNV().getTenNV(),luong.getMaCV().getTenCV(),
-                luong.getMaCV().getHsLuong(),luong.getSoCa(),luong.getLuong()
+                luong.getMaNV().getMaNV(), luong.getMaNV().getTenNV(), luong.getMaCV().getTenCV(),
+                luong.getMaCV().getHsLuong(), luong.getSoCa(), luong.getLuong()
             });
         }
 
     }
-    
-    public void xoaModelLuong(){
+
+    /**
+     * Xóa model bảng lương
+     */
+    public void xoaModelLuong() {
         DefaultTableModel del = (DefaultTableModel) tbl_Luong.getModel();
         del.getDataVector().removeAllElements();
     }
-    //tìm thoe ngày
-    public  void TkNgayLam(){
+
+    /**
+     * Tìm ca làm của nhân viên theo ngày
+     */
+    public void TkNgayLam() {
         l_dao = new LuongDao();
-        
+
         String from = (String) formatter.format(dt_From.getDate());
         String to = (String) formatter.format(dt_To.getDate());
-        ArrayList<Luong> list = l_dao.searchNgayLam(from,to);
-        System.out.println("Gui.FrmLuong.TkNgayLam()"+list);
+        ArrayList<Luong> list = l_dao.searchNgayLam(from, to);
+        System.out.println("Gui.FrmLuong.TkNgayLam()" + list);
         for (Luong luong : list) {
-                dfLuong_Model.addRow(new Object[]{
-                    luong.getMaNV().getMaNV(),luong.getMaNV().getTenNV(),luong.getMaCV().getTenCV(),
-                    luong.getMaCV().getHsLuong(),luong.getSoCa(),luong.getLuong()
-                });
-            }
-        
+            dfLuong_Model.addRow(new Object[]{
+                luong.getMaNV().getMaNV(), luong.getMaNV().getTenNV(), luong.getMaCV().getTenCV(),
+                luong.getMaCV().getHsLuong(), luong.getSoCa(), luong.getLuong()
+            });
+        }
+
     }
-    
-    //tìm tên chúc vụ trong bảng lương
-    public  void TKCV(){
+
+    /**
+     * Tìm chưc vụ nhân viên
+     */
+    public void TKCV() {
         l_dao = new LuongDao();
         String ten = cbo_TkCv_Luong.getSelectedItem().toString();
-        if(ten.equals("Tất Cả")){
+        if (ten.equals("Tất Cả")) {
             dsLuong.removeAll(dsLuong);
             xoaModelLuong();
             upTblLuong();
-        }else{
+        } else {
             ArrayList<Luong> list = l_dao.searchTenCV(ten);
-        
-        if(!list.isEmpty()){
-            for (Luong luong : list) {
-                dfLuong_Model.addRow(new Object[]{
-                    luong.getMaNV().getMaNV(),luong.getMaNV().getTenNV(),luong.getMaCV().getTenCV(),
-                    luong.getMaCV().getHsLuong(),luong.getSoCa(),luong.getLuong()
-                });
-            }
+
+            if (!list.isEmpty()) {
+                for (Luong luong : list) {
+                    dfLuong_Model.addRow(new Object[]{
+                        luong.getMaNV().getMaNV(), luong.getMaNV().getTenNV(), luong.getMaCV().getTenCV(),
+                        luong.getMaCV().getHsLuong(), luong.getSoCa(), luong.getLuong()
+                    });
+                }
 //            JOptionPane.showMessageDialog(this, "Đã tìm thấy ");
-        }else{
-            JOptionPane.showMessageDialog(this, " Khống có chức vụ nào ");
-        }
+            } else {
+                JOptionPane.showMessageDialog(this, " Khống có chức vụ nào ");
+            }
         }
     }
-    
-    //xuất ra file ex
+
+    /**
+     * Xuất dữ liệu ra file excel
+     */
     public void exportDataToExcel() {
-        try{
-           JFileChooser jFileChooser = new JFileChooser("C:\\\\Users\\\\HP\\\\OneDrive\\\\Máy tính\\\\QLBH");
-           jFileChooser.showSaveDialog(this);
-           File saveFile = jFileChooser.getSelectedFile();
-           
-           if(saveFile != null){
-               saveFile = new File(saveFile.toString()+".xlsx");
-               Workbook wb = new XSSFWorkbook();
-               Sheet sheet = wb.createSheet("Tính Lương Nhân Viên");
-               
-               Row rowCol = sheet.createRow(0);
-               for(int i=0;i<jTable3.getColumnCount();i++){
-                   Cell cell = rowCol.createCell(i);
-                   cell.setCellValue(jTable3.getColumnName(i));
-               }
-               
-               for(int j=0;j<jTable3.getRowCount();j++){
-                   Row row = sheet.createRow(j);
-                   for(int k=0;k<jTable3.getColumnCount();k++){
-                       Cell cell = row.createCell(k);
-                       if(jTable3.getValueAt(j, k)!=null){
-                           cell.setCellValue(jTable3.getValueAt(j, k).toString());
-                       }
-                   }
-               }
-               FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
-               wb.write(out);
-               wb.close();
-               out.close();
-               JOptionPane.showMessageDialog(null,"Xuất Thành Công");
-               openFile(saveFile.toString());
-           }else{
-               JOptionPane.showMessageDialog(null,"Error");
-           }
-       }catch(FileNotFoundException e){
-           System.out.println(e);
-       }catch(IOException io){
-           System.out.println(io);
-       }
-    } 
-     public void openFile(String file){
-        try{
+        try {
+            JFileChooser jFileChooser = new JFileChooser("C:\\\\Users\\\\HP\\\\OneDrive\\\\Máy tính\\\\QLBH");
+            jFileChooser.showSaveDialog(this);
+            File saveFile = jFileChooser.getSelectedFile();
+
+            if (saveFile != null) {
+                saveFile = new File(saveFile.toString() + ".xlsx");
+                Workbook wb = new XSSFWorkbook();
+                Sheet sheet = wb.createSheet("Tính Lương Nhân Viên");
+
+                Row rowCol = sheet.createRow(0);
+                for (int i = 0; i < jTable3.getColumnCount(); i++) {
+                    Cell cell = rowCol.createCell(i);
+                    cell.setCellValue(jTable3.getColumnName(i));
+                }
+
+                for (int j = 0; j < jTable3.getRowCount(); j++) {
+                    Row row = sheet.createRow(j);
+                    for (int k = 0; k < jTable3.getColumnCount(); k++) {
+                        Cell cell = row.createCell(k);
+                        if (jTable3.getValueAt(j, k) != null) {
+                            cell.setCellValue(jTable3.getValueAt(j, k).toString());
+                        }
+                    }
+                }
+                FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
+                wb.write(out);
+                wb.close();
+                out.close();
+                JOptionPane.showMessageDialog(null, "Xuất Thành Công");
+                openFile(saveFile.toString());
+            } else {
+                JOptionPane.showMessageDialog(null, "Error");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        } catch (IOException io) {
+            System.out.println(io);
+        }
+    }
+
+    /**
+     * Mở file excel sau khi lưu thành công
+     */
+    public void openFile(String file) {
+        try {
             File path = new File(file);
             Desktop.getDesktop().open(path);
-        }catch(IOException ioe){
+        } catch (IOException ioe) {
             System.out.println(ioe);
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -566,20 +586,19 @@ private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String id = dfLuong_Model.getValueAt(r, 0).toString();
         if (r != -1) {
             System.out.println(id);
-             ArrayList<Luong> list = l_dao.searchByMaNV(id);
-             for (Luong luong : list) {
-                 dfLsLuong_Model = (DefaultTableModel) jTable3.getModel();
+            ArrayList<Luong> list = l_dao.searchByMaNV(id);
+            for (Luong luong : list) {
+                dfLsLuong_Model = (DefaultTableModel) jTable3.getModel();
                 dfLsLuong_Model.addRow(new Object[]{
-                    luong.getMaNV().getMaNV(),luong.getMaNV().getTenNV(),luong.getMaCV().getTenCV(), new Date(),
-                    luong.getSoCa(),luong.getLuong()
+                    luong.getMaNV().getMaNV(), luong.getMaNV().getTenNV(), luong.getMaCV().getTenCV(), new Date(),
+                    luong.getSoCa(), luong.getLuong()
                 });
             }
             dfLuong_Model.removeRow(r);
             l_dao.tinhLuong(id);
             dsCa.removeAll(dsCa);
-            
-            
-            JOptionPane.showMessageDialog(null, "Nhân viên "+id+" đã nhận lương");
+
+            JOptionPane.showMessageDialog(null, "Nhân viên " + id + " đã nhận lương");
         } else {
             //JOptionPane.showMessageDialog(null, "Bạn chưa chọn dòng cần xóa!");
         }
@@ -626,20 +645,20 @@ private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     private void btnTkLuongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTkLuongMouseClicked
         dfLuong_Model.setRowCount(0);
         TkNgayLam();
-        
-        
+
+
     }//GEN-LAST:event_btnTkLuongMouseClicked
 
     private void jToggleButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton1MouseClicked
-        
+
         jFrame1.setVisible(true);
         jFrame1.setResizable(false);
         jFrame1.setLocationRelativeTo(null);
-               
+
     }//GEN-LAST:event_jToggleButton1MouseClicked
 
     private void btnExit2btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExit2btnExitMouseClicked
-        
+
         jFrame1.setVisible(false);
     }//GEN-LAST:event_btnExit2btnExitMouseClicked
 
@@ -655,8 +674,8 @@ private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         exportDataToExcel();
         dfLsLuong_Model.setRowCount(0);
         jFrame1.setVisible(false);
-        
-        
+
+
     }//GEN-LAST:event_jButton1MouseClicked
 
 

@@ -20,8 +20,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * Hiển thị Giao diện Form danh sách thông tin sản phẩm
  *
- * @author HP
  */
 public class FrmDsSp extends javax.swing.JPanel {
 
@@ -50,7 +50,9 @@ public class FrmDsSp extends javax.swing.JPanel {
         }
     }
 
-    //láy thông tin trên textfield sản phẩm
+    /**
+     * Lấy dữ liệu nhập từ cái ô textfield
+     */
     public SanPham restText() {
         String maSp = lbl_GetSp.getText().toString();
         String tenSp = txt_TenSp.getText().toString();
@@ -62,11 +64,13 @@ public class FrmDsSp extends javax.swing.JPanel {
         int slKho = Integer.parseInt(txt_SlKho.getText());
         double donGia = Double.parseDouble(txt_DonGia.getText());
         String hinh = lbl_HinhAnh.getIcon().toString();
-        
-        return new SanPham(dm, tenSp, donGia, slKho, hinh, size, mau,giaNhap);
+
+        return new SanPham(dm, tenSp, donGia, slKho, hinh, size, mau, giaNhap);
     }
 
-    //Kiểm tra dữ liệu nhập
+    /**
+     * Kiểm tra dữ liệu nhập
+     */
     public boolean kiemTraData() {
         String tenSP = txt_TenSp.getText().trim();
         String mau = txt_MauSac.getText().trim();
@@ -75,7 +79,7 @@ public class FrmDsSp extends javax.swing.JPanel {
         String donGia = txt_DonGia.getText().trim();
         String giaNhap = txt_DonGia1.getText().trim();
         // Tên sản phẩm phải là chữ
-        if (tenSP.length() <0 ) {
+        if (tenSP.length() < 0) {
             JOptionPane.showMessageDialog(this, "Bạn chưa nhập tên Sản Phẩm");
             return false;
         }
@@ -116,7 +120,7 @@ public class FrmDsSp extends javax.swing.JPanel {
                 return false;
             }
         }
-         // giá nhap số ko âm
+        // giá nhap số ko âm
         if (giaNhap.length() > 0) {
             try {
                 int x = Integer.parseInt(giaNhap);
@@ -129,16 +133,21 @@ public class FrmDsSp extends javax.swing.JPanel {
                 return false;
             }
         }
-        
+
         return true;
     }
 
-    //xoa model sản phẩm
+    /**
+     * Xóa model bảng thông tin sản phẩm
+     */
     public void xoaModelSP() {
         DefaultTableModel del = (DefaultTableModel) tbl_Sp.getModel();
         del.getDataVector().removeAllElements();
     }
 
+    /**
+     * xóa trắng các ổ textfield
+     */
     public void xoaRongTextSp() {
         txt_SlKho.setText("");
         txt_TenSp.setText("");
@@ -146,12 +155,14 @@ public class FrmDsSp extends javax.swing.JPanel {
         txt_Size.setText("");
         txt_MauSac.setText("");
         lbl_GetSp.setText("");
-        lbl_HinhAnh.setIcon( new ImageIcon("src\\imgVSicon\\image.png"));
+        lbl_HinhAnh.setIcon(new ImageIcon("src\\imgVSicon\\image.png"));
         txt_TenSp.requestFocus();
         txt_DonGia1.setText("");
     }
-    
-    //xoa combobox
+
+    /**
+     * Xóa dữ liệu danh mục sản phẩm trên combobox
+     */
     public void xoaCBB() {
         int itCount = cbo_Dm.getItemCount();
         for (int i = 0; i < itCount; i++) {
@@ -160,7 +171,9 @@ public class FrmDsSp extends javax.swing.JPanel {
 
     }
 
-    //đọc dữ liệu lên combobox danh mục
+    /**
+     * Đọc dữ liệu Danh mục từ database lên Combobox
+     */
     public void upCbo_DM() {
         dsDmSP = dm_dao.getAllDM();
         for (DanhMucSP dm : dsDmSP) {
@@ -169,30 +182,35 @@ public class FrmDsSp extends javax.swing.JPanel {
         }
     }
 
-    //đọc dữ liệu lên bảng sản phẩm
+    /**
+     * Đọc dữ liệu sản phẩm từ database lên bảng thông tin
+     */
     public void upTblSP() {
         //bang san pham
         dfSP_Model = (DefaultTableModel) tbl_Sp.getModel();
         dsSP = sp_dao.getAllSP();
-        
+
         for (SanPham sp : dsSP) {
             dfSP_Model.addRow(new Object[]{
                 sp.getMaSP(), sp.getTenSP(), sp.getDmsp().getTenLoai(),
                 sp.getMauSac(), sp.getSize(), sp.getSoLuong(),
-                sp.getDonGia(),sp.getGiaNhap(), sp.getHinhAnh()
+                sp.getDonGia(), sp.getGiaNhap(), sp.getHinhAnh()
             });
         }
 
     }
-    //tai lại ds sp
-    public void reLoad(){
+
+    /**
+     * Tải lại dữ liệu danh sách sản phẩm
+     */
+    public void reLoad() {
         dsSP.removeAll(dsSP);
         xoaModelSP();
         upTblSP();
         dsDmSP.removeAll(dsDmSP);
         xoaCBB();
         upCbo_DM();
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -571,9 +589,6 @@ public class FrmDsSp extends javax.swing.JPanel {
         txt_SlKho.setText(dfSP_Model.getValueAt(r, 5).toString());
         txt_DonGia.setText(dfSP_Model.getValueAt(r, 6).toString());
         String img = dfSP_Model.getValueAt(r, 8).toString();
-        //System.out.println(img);
-        //lbl_HinhAnh.setIcon(new ImageIcon(new ImageIcon(img).getImage().getScaledInstance(150, 170, Image.SCALE_DEFAULT)));
-        //lbl_HinhAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource(img)));
         lbl_HinhAnh.setIcon(new ImageIcon(img));
     }//GEN-LAST:event_tbl_SpMouseClicked
 
@@ -653,10 +668,10 @@ public class FrmDsSp extends javax.swing.JPanel {
         for (SanPham sp : list) {
             dfSP_Model.addRow(new Object[]{
                 sp.getMaSP(), sp.getTenSP(), sp.getDmsp().getTenLoai(),
-                    sp.getMauSac(), sp.getSize(), sp.getSoLuong(),
-                    sp.getDonGia(),sp.getGiaNhap(), sp.getHinhAnh()});
+                sp.getMauSac(), sp.getSize(), sp.getSoLuong(),
+                sp.getDonGia(), sp.getGiaNhap(), sp.getHinhAnh()});
         }
-        
+
     }//GEN-LAST:event_txtSearchspActionPerformed
 
     private void btnTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemMouseClicked
@@ -667,8 +682,8 @@ public class FrmDsSp extends javax.swing.JPanel {
         for (SanPham sp : list) {
             dfSP_Model.addRow(new Object[]{
                 sp.getMaSP(), sp.getTenSP(), sp.getDmsp().getTenLoai(),
-                    sp.getMauSac(), sp.getSize(), sp.getSoLuong(),
-                    sp.getDonGia(),sp.getGiaNhap(), sp.getHinhAnh()});
+                sp.getMauSac(), sp.getSize(), sp.getSoLuong(),
+                sp.getDonGia(), sp.getGiaNhap(), sp.getHinhAnh()});
         }
     }//GEN-LAST:event_btnTimKiemMouseClicked
 

@@ -325,6 +325,27 @@ public class HoaDonDao {
         }
         return list;
     }
+    /*
+    *lấy ra số hóa đơn, số sản phẩm, tổng tiền trong 1 ngày
+     
+     */
+    public int getHoaDonTraInDay(String date) {
+       int i =0;
+        try {
+
+            java.sql.Connection con = connect.getInstance().getConnection();
+            String sql = "select count(MaHD) from [dbo].[HDBanHang] where [TrangThai]=N'Trả Hàng' and CAST(NgayLapHD AS DATE) = '" + date + "' ";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                i=rs.getInt(1);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return i;
+    }
 
     /*Lay tong loi nhuan(chua tinh tien khuyen mai) trong 1 ngay
      */

@@ -117,6 +117,7 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
         pnl_FormThongKe.add(lbl_text_ThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 138, 30));
 
         pnl_menuTab_ThongKe.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_menuTab_ThongKe.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_tab_TKeDT.setBackground(new java.awt.Color(255, 255, 255));
         btn_tab_TKeDT.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -134,6 +135,7 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
                 btn_tab_TKeDTActionPerformed(evt);
             }
         });
+        pnl_menuTab_ThongKe.add(btn_tab_TKeDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 0, -1, 36));
 
         btn_tab_TKeHBC.setBackground(new java.awt.Color(255, 255, 255));
         btn_tab_TKeHBC.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -146,6 +148,7 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
                 btn_tab_TKeHBCMouseClicked(evt);
             }
         });
+        pnl_menuTab_ThongKe.add(btn_tab_TKeHBC, new org.netbeans.lib.awtextra.AbsoluteConstraints(469, 0, -1, 36));
 
         btn_tab_TKeKH.setBackground(new java.awt.Color(255, 255, 255));
         btn_tab_TKeKH.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -158,6 +161,7 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
                 btn_tab_TKeKHMouseClicked(evt);
             }
         });
+        pnl_menuTab_ThongKe.add(btn_tab_TKeKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(697, 0, -1, 36));
 
         btn_tab_TQTK.setBackground(new java.awt.Color(255, 255, 255));
         btn_tab_TQTK.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -175,32 +179,7 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
                 btn_tab_TQTKActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout pnl_menuTab_ThongKeLayout = new javax.swing.GroupLayout(pnl_menuTab_ThongKe);
-        pnl_menuTab_ThongKe.setLayout(pnl_menuTab_ThongKeLayout);
-        pnl_menuTab_ThongKeLayout.setHorizontalGroup(
-            pnl_menuTab_ThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_menuTab_ThongKeLayout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(btn_tab_TQTK)
-                .addGap(63, 63, 63)
-                .addComponent(btn_tab_TKeDT)
-                .addGap(61, 61, 61)
-                .addComponent(btn_tab_TKeHBC)
-                .addGap(52, 52, 52)
-                .addComponent(btn_tab_TKeKH)
-                .addContainerGap(239, Short.MAX_VALUE))
-        );
-        pnl_menuTab_ThongKeLayout.setVerticalGroup(
-            pnl_menuTab_ThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_menuTab_ThongKeLayout.createSequentialGroup()
-                .addGroup(pnl_menuTab_ThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btn_tab_TQTK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_tab_TKeDT, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                    .addComponent(btn_tab_TKeHBC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_tab_TKeKH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        pnl_menuTab_ThongKe.add(btn_tab_TQTK, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 0, -1, 36));
 
         pnl_FormThongKe.add(pnl_menuTab_ThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1090, 40));
 
@@ -262,7 +241,7 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
         
     }
      public void renderAgianTongQuan(){
-//        frmTongQuanBaoCao1.renderData();
+        frmTongQuanBaoCao1.renderData();
         
     }
     public void renderAgianTkSp(){
@@ -277,9 +256,9 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_tab_TKeDT;
-    private javax.swing.JButton btn_tab_TKeHBC;
-    private javax.swing.JButton btn_tab_TKeKH;
+    public static javax.swing.JButton btn_tab_TKeDT;
+    public static javax.swing.JButton btn_tab_TKeHBC;
+    public static javax.swing.JButton btn_tab_TKeKH;
     private javax.swing.JButton btn_tab_TQTK;
     private Gui.FrmTkeDoanhThu frmTkeDoanhThu1;
     private Gui.FrmTkeHangBanChay frmTkeHangBanChay1;
@@ -288,6 +267,6 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbl_text_ThongKe;
     private javax.swing.JPanel pnl_FormThongKe;
-    private javax.swing.JPanel pnl_menuTab_ThongKe;
+    public static javax.swing.JPanel pnl_menuTab_ThongKe;
     // End of variables declaration//GEN-END:variables
 }

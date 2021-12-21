@@ -9,7 +9,7 @@ import Connect.connect;
 import dao.HoaDonDao;
 
 import entity.HoaDonBanHang;
-import entity.HoaDonDatHang;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.MouseEvent;
@@ -31,14 +31,15 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 /**
+ * Hiển thị Giao diện Form Danh sách thông tin hóa đơn đặt hàng
  *
- * @author HP
  */
 public class FrmHoaDonDatHang extends javax.swing.JPanel {
 
     private javax.swing.table.DefaultTableModel modelTBHoaDon;
-     String tt =null;
-     ArrayList<HoaDonBanHang> listHoaDon;
+    String tt = null;
+    ArrayList<HoaDonBanHang> listHoaDon;
+
     /**
      * Creates new form FrmHoaDonBanHang
      */
@@ -225,12 +226,13 @@ public class FrmHoaDonDatHang extends javax.swing.JPanel {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-    //dua du lieu HoaDon len Table
-
+/**
+     * Đọc dữ liệu hóa đơn từ database lên bảng
+     */
     public void renderListHoaDon() {
         HoaDonDao hoaDonDao = new HoaDonDao();
         String[] title = {"MaHD", "Ngày Tạo", "Số lượng", "Tổng Tiền", "Tình Trạng", "Khách Hàng", "Nhân Viên", "Ghi Chú"};
-         listHoaDon = hoaDonDao.getDsHoaDon();
+        listHoaDon = hoaDonDao.getDsHoaDon();
         // System.out.print(listHoaDon.size());
         modelTBHoaDon = new DefaultTableModel(title, 0);
         for (HoaDonBanHang s : listHoaDon) {
@@ -250,13 +252,10 @@ public class FrmHoaDonDatHang extends javax.swing.JPanel {
         col.setCellRenderer(render);
         lblNumHD.setText(String.valueOf(listHoaDon.size()));
 
-
     }
 
-    /*
-            Chuyen tu date sang String
-            @param date Date
-            return String
+    /**
+     * Chuyển kiêu dữ liệu Date sang String
      */
     public String changeDateToString(Date date) {
 
@@ -264,12 +263,15 @@ public class FrmHoaDonDatHang extends javax.swing.JPanel {
         String dateString = df.format(date);
         return dateString;
     }
-    
+
+    /**
+     * Xóa model bảng đặt hàng
+     */
     public void xoaModel() {
         DefaultTableModel del = (DefaultTableModel) tbHoaDon.getModel();
         del.getDataVector().removeAllElements();
     }
-    
+
     private void txtSearchHDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchHDFocusGained
         txtSearchHD.setText("");
     }//GEN-LAST:event_txtSearchHDFocusGained
@@ -280,8 +282,7 @@ public class FrmHoaDonDatHang extends javax.swing.JPanel {
     }//GEN-LAST:event_btnShowHDMouseClicked
 
     private void btnSearchHDMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchHDMouseDragged
-        // TODO add your handling code here:
-//        btnShowHD.setBackground(new java.awt.Color(17, 60, 252));
+
     }//GEN-LAST:event_btnSearchHDMouseDragged
 
     private void btnSearchHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchHDMouseClicked
@@ -304,7 +305,7 @@ public class FrmHoaDonDatHang extends javax.swing.JPanel {
                 };
                 modelTBHoaDon.addRow(rowData);
                 tbHoaDon.setModel(modelTBHoaDon);
-                
+
             }
         });
         if (!check.get()) {
@@ -361,27 +362,34 @@ public class FrmHoaDonDatHang extends javax.swing.JPanel {
     private javax.swing.JTable tbHoaDon;
     private javax.swing.JTextField txtSearchHD;
     // End of variables declaration//GEN-END:variables
-
+    /**
+     * Thêm màu vào bảng hóa đơn để biết trạng thái của hóa đơn
+     *
+     */
     public class MyRenderer extends DefaultTableCellRenderer {
+
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             Component cell = super.getTableCellRendererComponent(table, value,
                     isSelected, hasFocus, row, column);
-             if(tbHoaDon.getModel().getValueAt(row, 4).equals("Đang Giao")){
-                 cell.setForeground(new Color(228, 156, 6));
-                 cell.setBackground(new Color(255, 247, 231));
-                 
-             }else if(tbHoaDon.getModel().getValueAt(row, 4).equals("Hoàn Thành")){
-                 cell.setBackground(new Color(231, 251, 243));
-                 cell.setForeground(new Color(13, 180, 115));
-             }else if(tbHoaDon.getModel().getValueAt(row, 4).equals("Trả Hàng")){
-                 cell.setBackground(new Color(251, 233, 231));
-                 cell.setForeground(new Color(220, 53, 69));
-             }
+            if (tbHoaDon.getModel().getValueAt(row, 4).equals("Đang Giao")) {
+                cell.setForeground(new Color(228, 156, 6));
+                cell.setBackground(new Color(255, 247, 231));
+
+            } else if (tbHoaDon.getModel().getValueAt(row, 4).equals("Hoàn Thành")) {
+                cell.setBackground(new Color(231, 251, 243));
+                cell.setForeground(new Color(13, 180, 115));
+            } else if (tbHoaDon.getModel().getValueAt(row, 4).equals("Trả Hàng")) {
+                cell.setBackground(new Color(251, 233, 231));
+                cell.setForeground(new Color(220, 53, 69));
+            }
             return cell;
         }
     }
-    
-    public void rederAgain(){
+
+    /**
+     * Tải lại danh sách hóa đơn
+     */
+    public void rederAgain() {
         listHoaDon.removeAll(listHoaDon);
         xoaModel();
         renderListHoaDon();

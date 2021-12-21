@@ -1,21 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package entity;
 
 /**
  *
  * @author GMT
  */
-
-//●       MaSP – varchar(30) – Foreign Key
-//●       MaHD – varchar(30) – Foreign Key
-//●       SoLuong – interger – not null - Không âm ( >= 0)
-//●       DonGia – double – not null - Không âm ( >= 0)
-
-
 public class CT_HoaDonNhap {
+
     private SanPham sanPham;
     private HoaDonNhap hoaDonNhap;
     private int soLuong;
@@ -61,8 +51,4 @@ public class CT_HoaDonNhap {
         this.donGia = donGia;
     }
 
-   
-    
-    
-    
 }

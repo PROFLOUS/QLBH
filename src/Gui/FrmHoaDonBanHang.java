@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Gui;
+
 import Connect.connect;
 import dao.HoaDonDao;
 import dao.NhanVienDao;
@@ -26,20 +27,23 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
+
 /**
+ * Hiển thị Giao diện Form danh sách hóa đơn bán hàng
  *
- * @author HP
  */
 public class FrmHoaDonBanHang extends javax.swing.JPanel {
-private javax.swing.table.DefaultTableModel modelTBHoaDon;
+
+    private javax.swing.table.DefaultTableModel modelTBHoaDon;
+
     /**
      * Creates new form FrmHoaDonBanHang
      */
-    public FrmHoaDonBanHang()throws SQLException {
+    public FrmHoaDonBanHang() throws SQLException {
         initComponents();
         try {
             connect.getInstance().connect();
-        
+
             renderListHoaDon();
         } catch (Exception e) {
             e.printStackTrace();
@@ -216,54 +220,49 @@ private javax.swing.table.DefaultTableModel modelTBHoaDon;
     //dua du lieu HoaDon len Table
     //neu la nhan vien thi chi lay hoa don cua nhan vien da tao
     //neu la quan ly thi lay het ds len
-	public void renderListHoaDon() {
-		 HoaDonDao hoaDonDao = new HoaDonDao();
-                 String[] title = { "MaHD", "Ngày Tạo", "Khách Hàng", "Số lượng", "Tổng Tiền", "Tiền Khách Đưa", "Nhân Viên", "Ghi Chú"};
-		
-                 //lay ra nhanVien dang dang nhap
-                    NhanVienDao nvDao = new NhanVienDao();
-                    NhanVien NV = nvDao.getNVByMaTrangThai("online");
-                     TaiKhoanDao tkDao = new TaiKhoanDao();
-                     TaiKhoan tk = tkDao.findTKByMaNV(NV.getMaNV());
-                        ArrayList<HoaDonBanHang> listHoaDon  = null;
-                      if(tk.getTenQuyen().toLowerCase().equals("quản lý")){
-                       listHoaDon  = hoaDonDao.getDsHoaDon();
-                      }
-                      else{
-                          listHoaDon  = hoaDonDao.getDsHoaDonByMaNV(NV.getMaNV());
-                       }
-                     
-              
-              
-                 modelTBHoaDon = new DefaultTableModel(title,0);
-                int i = 0;
-		for(HoaDonBanHang s : listHoaDon) {
-                   //  System.out.print(i++);
-			String[] rowData = {
-				s.getMaHD(),changeDateToString(s.getNgayLapHD()),s.getKhachHang().getTenKH(),String.valueOf(s.getSoLuong()),String.valueOf(s.getTongTien()),
-                            String.valueOf(s.getTienKhachDua()),s.getNhanVien().getTenNV(),s.getGhiChu()
-			};
-                       
-			modelTBHoaDon.addRow(rowData);
-                        
-		}
-               
-		tbHoaDon.setModel(modelTBHoaDon);
-                lblNumHD.setText(String.valueOf(listHoaDon.size()));
-               // System.out.print("render");
-	}
-        
-        /*
-            Chuyen tu date sang String
-            @param date Date
-            return String
-        */
-         public String changeDateToString(Date date){
-            
-                DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-                String dateString  = df.format(date);
-                return dateString;
-          }
+
+    /**
+     * Đọc dữ liệu hóa đơn từ database lên bảng
+     */
+    public void renderListHoaDon() {
+        HoaDonDao hoaDonDao = new HoaDonDao();
+        String[] title = {"MaHD", "Ngày Tạo", "Khách Hàng", "Số lượng", "Tổng Tiền", "Tiền Khách Đưa", "Nhân Viên", "Ghi Chú"};
+        //lay ra nhanVien dang dang nhap
+        NhanVienDao nvDao = new NhanVienDao();
+        NhanVien NV = nvDao.getNVByMaTrangThai("online");
+        TaiKhoanDao tkDao = new TaiKhoanDao();
+        TaiKhoan tk = tkDao.findTKByMaNV(NV.getMaNV());
+        ArrayList<HoaDonBanHang> listHoaDon = null;
+        if (tk.getTenQuyen().toLowerCase().equals("quản lý")) {
+            listHoaDon = hoaDonDao.getDsHoaDon();
+        } else {
+            listHoaDon = hoaDonDao.getDsHoaDonByMaNV(NV.getMaNV());
+        }
+        modelTBHoaDon = new DefaultTableModel(title, 0);
+        int i = 0;
+        for (HoaDonBanHang s : listHoaDon) {
+            //  System.out.print(i++);
+            String[] rowData = {
+                s.getMaHD(), changeDateToString(s.getNgayLapHD()), s.getKhachHang().getTenKH(), String.valueOf(s.getSoLuong()), String.valueOf(s.getTongTien()),
+                String.valueOf(s.getTienKhachDua()), s.getNhanVien().getTenNV(), s.getGhiChu()
+            };
+
+            modelTBHoaDon.addRow(rowData);
+        }
+
+        tbHoaDon.setModel(modelTBHoaDon);
+        lblNumHD.setText(String.valueOf(listHoaDon.size()));
+    }
+
+    /**
+     * Chuyển kiêu dữ liệu Date sang String
+     */
+    public String changeDateToString(Date date) {
+
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String dateString = df.format(date);
+        return dateString;
+    }
     private void txtSearchHDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchHDFocusGained
         txtSearchHD.setText("");
     }//GEN-LAST:event_txtSearchHDFocusGained
@@ -283,24 +282,24 @@ private javax.swing.table.DefaultTableModel modelTBHoaDon;
         AtomicBoolean check = new AtomicBoolean();
         HoaDonDao hoaDonDao = new HoaDonDao();
 
-        ArrayList<HoaDonBanHang> listHoaDon  = hoaDonDao.getDsHoaDon();
+        ArrayList<HoaDonBanHang> listHoaDon = hoaDonDao.getDsHoaDon();
 
-        listHoaDon.forEach(s ->{
-            if(s.getMaHD().toUpperCase().equals(text.toUpperCase())){
+        listHoaDon.forEach(s -> {
+            if (s.getMaHD().toUpperCase().equals(text.toUpperCase())) {
                 check.set(true);
-                String[] title = { "MaHD", "Ngày Tạo", "Khách Hàng", "Số lượng", "Tổng Tiền", "Tiền Khách Đưa", "Nhân Viên", "Ghi Chú"};
-                modelTBHoaDon = new DefaultTableModel(title,0);
+                String[] title = {"MaHD", "Ngày Tạo", "Khách Hàng", "Số lượng", "Tổng Tiền", "Tiền Khách Đưa", "Nhân Viên", "Ghi Chú"};
+                modelTBHoaDon = new DefaultTableModel(title, 0);
                 String[] rowData = {
-                    s.getMaHD(),changeDateToString(s.getNgayLapHD()),s.getKhachHang().getTenKH(),String.valueOf(s.getSoLuong()),String.valueOf(s.getTongTien()),
-                    String.valueOf(s.getTienKhachDua()),s.getNhanVien().getTenNV(),s.getGhiChu()
+                    s.getMaHD(), changeDateToString(s.getNgayLapHD()), s.getKhachHang().getTenKH(), String.valueOf(s.getSoLuong()), String.valueOf(s.getTongTien()),
+                    String.valueOf(s.getTienKhachDua()), s.getNhanVien().getTenNV(), s.getGhiChu()
                 };
                 modelTBHoaDon.addRow(rowData);
                 tbHoaDon.setModel(modelTBHoaDon);
                 btnShowHD.setEnabled(true);
             }
         });
-        if(!check.get()){
-            JOptionPane.showMessageDialog(btnSearchHD, "Không có Hóa Đơn có mã:" + text + " " );
+        if (!check.get()) {
+            JOptionPane.showMessageDialog(btnSearchHD, "Không có Hóa Đơn có mã:" + text + " ");
         }
     }//GEN-LAST:event_btnSearchHDMouseClicked
 

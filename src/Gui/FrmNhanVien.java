@@ -5,7 +5,6 @@
  */
 package Gui;
 
-import Connect.connect;
 import dao.CaLamDao;
 import dao.ChucVuDao;
 import dao.LuongDao;
@@ -15,32 +14,26 @@ import entity.ChucVu;
 import entity.Luong;
 import entity.NhanVien;
 import java.awt.Color;
-import java.awt.event.ItemEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * Hiển thị Giao diện Form Nhân Viên
  *
- * @author HP
  */
 public class FrmNhanVien extends javax.swing.JPanel {
-    public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, new Color(153,153,153));
-   public Border active_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, new Color(153,204,255));
-   public JButton [] buttons;
-   private DefaultTableModel dfCL_Model;
-   private DefaultTableModel dfNV2_Model;
-   private DefaultTableModel dfLuong_Model;
-   ArrayList<CaLam> dsCa;
-   ArrayList<NhanVien> dsNv;
+
+    public Border default_border = BorderFactory.createMatteBorder(0, 0, 3, 0, new Color(153, 153, 153));
+    public Border active_border = BorderFactory.createMatteBorder(0, 0, 3, 0, new Color(153, 204, 255));
+    public JButton[] buttons;
+    ArrayList<CaLam> dsCa;
+    ArrayList<NhanVien> dsNv;
     ArrayList<Luong> dsLuong;
     ArrayList<ChucVu> dsCv;
     CaLamDao ca_dao;
@@ -54,141 +47,23 @@ public class FrmNhanVien extends javax.swing.JPanel {
     public FrmNhanVien() {
         initComponents();
         addBorder();
-//        dsCa = new ArrayList<CaLam>();
-//        ca_dao = new CaLamDao();
-//        nv_dao = new NhanVienDao();
-//        dsNv = new ArrayList<NhanVien>();
-//        dsLuong = new ArrayList<Luong>();
-//        dsCv = new ArrayList<ChucVu>();
-//        cv_dao = new ChucVuDao();
-//        l_dao = new LuongDao();
-//        upTblCaLam();
-//        upTblNV2();
-//        upCbo_NV();
-//        upTblLuong();
-//        upCbo_CV();
-//        LuongNhanVien();
-        
-        
-//        upCbo_Buoi();
 
     }
-    //tìm tên chúc vụ trong bảng lương
-//    public  void TKCV(){
-//        l_dao = new LuongDao();
-//        String ten = cbo_TkCv_Luong.getSelectedItem().toString();
-//       
-//        if(ten.equals("Tất Cả")){
-//            dsLuong.removeAll(dsLuong);
-//            xoaModelLuong();
-//            upTblLuong();
-//        }else{
-//            ArrayList<Luong> list = l_dao.searchTenCV(ten);
-//        
-//        if(!list.isEmpty()){
-//            for (Luong luong : list) {
-//                dfLuong_Model.addRow(new Object[]{
-//                    luong.getMaNV().getMaNV(),luong.getMaNV().getTenNV(),luong.getMaCV().getTenCV(),
-//                    luong.getMaCV().getHsLuong(),luong.getSoCa(),luong.getLuong()
-//                });
-//            }
-////            JOptionPane.showMessageDialog(this, "Đã tìm thấy ");
-//        }else{
-//            JOptionPane.showMessageDialog(this, " Khống có chức vụ nào ");
-//        }
-//        }
-//    }
-    //doc du lieu len cbo chuc vu
-//    public  void upCbo_CV(){
-//        dsCv = cv_dao.getAllCV();
-//        for (ChucVu cv : dsCv) {
-//            cbo_TkCv_Luong.addItem(cv.getTenCV());
-//        }
-//    }
-    //Hiển thị lương nhan viên lên bảng
-//    public void upTblLuong() {
-//        dfLuong_Model = (DefaultTableModel) tbl_Luong.getModel();
-//        dsLuong = l_dao.getAllLuong();
-//        for (Luong luong : dsLuong) {
-//            dfLuong_Model.addRow(new Object[]{
-//                luong.getMaNV().getMaNV(),luong.getMaNV().getTenNV(),luong.getMaCV().getTenCV(),
-//                luong.getMaCV().getHsLuong(),luong.getSoCa(),luong.getLuong()
-//            });
-//        }
-//
-//    }
-    //xóa model luong
-//    public void xoaModelLuong(){
-//        DefaultTableModel del = (DefaultTableModel) tbl_Luong.getModel();
-//        del.getDataVector().removeAllElements();
-//    }
-    //xóa model ca làm
-//    public void xoaModelCa(){
-//        DefaultTableModel del = (DefaultTableModel) tbl_CaLam.getModel();
-//        del.getDataVector().removeAllElements();
-//    }
-    //láy dữ liệu từ textfield
-//    public CaLam restText(){
-//        String maCa = txt_MaCa.getText().toString();
-//        String maNv = cbo_MaNv.getSelectedItem().toString();
-//        String buoi = cbo_Buoi.getSelectedItem().toString();
-//        NhanVien nv = nv_dao.getNVByMaNV(maNv);
-//        
-//        return new CaLam(maCa, nv, buoi);
-//    }
-   
-    //xoá rổng textfield ca làm
-//    public void xoaRongTextCa(){
-//        txt_MaCa.setText("");
-//        
-//    }
-    
-    //đọc dữ liệu lên bảg nhân viên 2
-//    public void upTblNV2(){
-//        dfNV2_Model = (DefaultTableModel) tbl_NV_2.getModel();
-//        dsNv = nv_dao.getAllNV();
-//        for (NhanVien nv : dsNv){
-//            dfNV2_Model.addRow(new Object[]{
-//                nv.getMaNV(),nv.getTenNV(),nv.getChucVu().getTenCV()
-//            });
-//        }
-//    }
-    //đọc dữ liệu lên bảng ca làm
-//    public void upTblCaLam(){
-//        dfCL_Model = (DefaultTableModel) tbl_CaLam.getModel();
-//        dsCa = ca_dao.getAllCaLam();
-//        for (CaLam ca : dsCa) {
-//            dfCL_Model.addRow(new Object[]{
-//                ca.getMaCa(),ca.getNV().getMaNV(),ca.getNV().getTenNV(),ca.getBuoi()
-//            });
-//        }
-//        
-//    }
-    //dọc dữ liêu lên cbo nhân vien
-//    public  void upCbo_NV(){
-//        
-//        for (NhanVien nv : dsNv) {
-//            cbo_MaNv.addItem(nv.getMaNV());
-//        }
-//    }
-    
-    public void addBorder(){
+
+    public void addBorder() {
         buttons = new JButton[3];
-        
-          buttons[0] =btn_tab_NV;
-        buttons[1] =btn_tab_CaLam;
+
+        buttons[0] = btn_tab_NV;
+        buttons[1] = btn_tab_CaLam;
         buttons[2] = btn_tab_Luong;
-        
-        
+
         setButtonBorder(btn_tab_NV);
-        
-   
-        
 
         addAction();
     }
-        //set border active
-    public void setButtonBorder(JButton button){
+    //set border active
+
+    public void setButtonBorder(JButton button) {
 //        for (JButton btn : buttons) {
 //            btn.setBorder(default_border);
 //            btn.setForeground(new Color(153,153,153));
@@ -196,42 +71,44 @@ public class FrmNhanVien extends javax.swing.JPanel {
         button.setBorder(active_border);
         button.setForeground(Color.black);
     }
+
     //add even
-    public void addAction(){
+    public void addAction() {
         for (JButton button : buttons) {
             button.addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     for (JButton btn : buttons) {
-            btn.setBorder(default_border);
-            btn.setForeground(new Color(153,153,153));
-        }
-        button.setBorder(active_border);
-        button.setForeground(Color.black);
+                        btn.setBorder(default_border);
+                        btn.setForeground(new Color(153, 153, 153));
+                    }
+                    button.setBorder(active_border);
+                    button.setForeground(Color.black);
                 }
 
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    
+
                 }
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    
+
                 }
 
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                   
+
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    
+
                 }
             });
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -354,7 +231,7 @@ public class FrmNhanVien extends javax.swing.JPanel {
     private void btn_tab_NVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tab_NVMouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(0);
-        
+
     }//GEN-LAST:event_btn_tab_NVMouseClicked
 
     private void btn_tab_NVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tab_NVActionPerformed
@@ -364,13 +241,13 @@ public class FrmNhanVien extends javax.swing.JPanel {
     private void btn_tab_CaLamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tab_CaLamMouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(1);
-        
+
     }//GEN-LAST:event_btn_tab_CaLamMouseClicked
 
     private void btn_tab_LuongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tab_LuongMouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(2);
-        
+
     }//GEN-LAST:event_btn_tab_LuongMouseClicked
 
 

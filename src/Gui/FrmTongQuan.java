@@ -8,8 +8,8 @@ import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 /**
+ * Hiển thị Giao diện Form tổng quan 
  *
- * @author HP
  */
 public class FrmTongQuan extends javax.swing.JPanel {
     public Timer tm;
@@ -23,6 +23,10 @@ public class FrmTongQuan extends javax.swing.JPanel {
         initComponents();
         Slider();
     }
+/**
+ *Thay đổi hình ảnh 
+ *
+ */
     public void Slider() {
         SetImgSize(2);
         tm = new Timer(2000, new ActionListener() {
@@ -38,6 +42,10 @@ public class FrmTongQuan extends javax.swing.JPanel {
         pnl_ImgTQ.add(lbl_ImgTQ);
         tm.start();
     }
+    /**
+ * Tạo size cho hinh ảnh
+ *
+ */
     public void SetImgSize(int i) {
         ImageIcon icon = new ImageIcon(list[i]);
         Image img = icon.getImage();

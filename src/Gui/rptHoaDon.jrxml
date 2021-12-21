@@ -68,13 +68,6 @@ where a.MaHD = $P{MaHD}]]>
 	<title>
 		<band height="150" splitType="Stretch">
 			<staticText>
-				<reportElement x="200" y="40" width="180" height="18" uuid="4a6ccf5c-edc7-4583-a77c-2956c3b4bd7c"/>
-				<textElement>
-					<font size="14"/>
-				</textElement>
-				<text><![CDATA[01 Văn Bảo Gò Vấp HCM]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="150" y="100" width="270" height="50" uuid="79a8b459-bd3b-4f80-bfea-dc0afa83f4dc"/>
 				<textElement>
 					<font size="25" isBold="true"/>
@@ -82,18 +75,24 @@ where a.MaHD = $P{MaHD}]]>
 				<text><![CDATA[HÓA ĐƠN BÁN HÀNG]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="229" y="70" width="114" height="20" uuid="baa18d92-a437-4011-bbb0-eb9cca73eea8"/>
-				<textElement>
-					<font size="14"/>
-				</textElement>
-				<text><![CDATA[ĐT: 0397530256]]></text>
+				<reportElement x="105" y="0" width="362" height="20" uuid="efb27ea1-3644-41a5-9b19-da4b6f6749f4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[- DAD SHOP - CỬA HÀNG THỜI TRANG MỌI LỨA TUỔI]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="203" y="0" width="174" height="51" uuid="b8e2a267-5eb7-4753-8e25-757b7ca79ee4"/>
-				<textElement>
-					<font size="30" isBold="true"/>
-				</textElement>
-				<text><![CDATA[DAD SHOP]]></text>
+				<reportElement x="105" y="20" width="362" height="20" uuid="4cde12c0-3bed-42f3-9e15-76e94b8a54e2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[- Địa Chỉ: 799 Nguyễn Kiệm, Phường 3, Quận Gò Vấp, TP.Hồ Chí Minh]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="105" y="40" width="362" height="18" uuid="9b527ba2-20da-49ea-a4c8-b276bf9632dc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[- Website: DADFashion.com.vn | Fanpage: fb.com/DADFashion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="105" y="60" width="362" height="22" uuid="487b7488-d468-4144-b6f8-468ca3e1aa60"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[- Hotline: 0959666666 - 0358444444 - 0985999999]]></text>
 			</staticText>
 		</band>
 	</title>

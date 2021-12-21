@@ -72,12 +72,13 @@ public class TaiKhoanDao {
             PreparedStatement stmt = null;
             try {
 		
-                stmt = con.prepareStatement("UPDATE TaiKhoan SET MatKhau = ?,TenQuyen = ?, TrangThau = ?  WHERE TenTaiKhoan = ?");
+                stmt = con.prepareStatement("UPDATE TaiKhoan SET MatKhau = ?,TenQuyen = ?, TrangThau = ?, MaNV = ?  WHERE TenTaiKhoan = ?");
 		
 		stmt.setString(1, tk.getMatKhau());
 		stmt.setString(2, tk.getTenQuyen());
 		stmt.setString(3, tk.getTrangThai());
-                stmt.setString(4, tk.getTenTaiKhoan());
+                stmt.setString(5, tk.getTenTaiKhoan());
+                stmt.setString(4, tk.getNhanVien().getMaNV());
                
 					
 		n = stmt.executeUpdate();

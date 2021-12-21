@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package entity;
 
 /**
@@ -29,17 +26,7 @@ public class KhachHang {
         this.tenKH = tenKH;
         this.sdt = sdt;
     }
-    
-//    public KhachHang( String tenKH, String sdt, String diaChi) {
-//   
-//        this.tenKH = tenKH;
-//        this.sdt = sdt;
-//        this.diaChi = diaChi;
-//    }
-    
-    
 
-   
 
     public String getMaKH() {
         return maKH;
@@ -77,6 +64,5 @@ public class KhachHang {
     public String toString() {
         return "KhachHang{" + "maKH=" + maKH + ", tenKH=" + tenKH + ", sdt=" + sdt + '}';
     }
-    
-    
+
 }

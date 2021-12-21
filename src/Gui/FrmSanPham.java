@@ -5,7 +5,6 @@
  */
 package Gui;
 
-
 import java.awt.Color;
 
 import java.awt.event.MouseEvent;
@@ -17,10 +16,9 @@ import javax.swing.JButton;
 
 import javax.swing.border.Border;
 
-
 /**
+ * Hiển thị Giao diện Form san pham
  *
- * @author HP
  */
 public class FrmSanPham extends javax.swing.JPanel {
 
@@ -35,23 +33,26 @@ public class FrmSanPham extends javax.swing.JPanel {
         initComponents();
         addBorder();
     }
+
     public void addBorder() {
         buttons = new JButton[3];
         //Form san pham
         buttons[0] = btn_tab_SanPham1;
         buttons[1] = btn_tab_DMSanPham1;
         buttons[2] = btn_tab_NhapHang;
-        
+
         setButtonBorder(btn_tab_SanPham1);
         addAction();
     }
 //    //set border active
 //
+
     public void setButtonBorder(JButton button) {
         button.setBorder(active_border);
         button.setForeground(Color.black);
     }
 //    //add even
+
     public void addAction() {
         for (JButton button : buttons) {
             button.addMouseListener(new MouseListener() {
@@ -87,10 +88,11 @@ public class FrmSanPham extends javax.swing.JPanel {
             });
         }
     }
-    public void renderAgian(){
+
+    public void renderAgian() {
         frmDsSp1.reLoad();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

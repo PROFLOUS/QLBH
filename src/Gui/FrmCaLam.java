@@ -22,8 +22,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * Hiển thị Giao diện Form Ca Làm của nhân vien
  *
- * @author HP
  */
 public class FrmCaLam extends javax.swing.JPanel {
 
@@ -60,7 +60,10 @@ public class FrmCaLam extends javax.swing.JPanel {
 
     }
 
-    //kiem tra ngày làm
+/**
+ * Kiểm tra ngày vào làm <p>
+ * Ngày vào làm phải sau ngày hiện tại
+ */
     public boolean kiemTraDate() {
         Date dateTime = jDateChooser1.getDate();
         Date date = new Date();
@@ -71,15 +74,18 @@ public class FrmCaLam extends javax.swing.JPanel {
         return true;
     }
 
-    //dọc dữ liêu lên cbo nhân vien
+/**
+ * Đọc dữ liệu nhân viên từ database lên Combobox
+ */
     public void upCbo_NV() {
 //        dsNv = nv_dao.getAllNV();
         for (NhanVien nv : dsNv) {
             cbo_MaNv.addItem(nv.getMaNV());
         }
     }
-
-    //đọc dữ liệu lên bảg nhân viên 2
+/**
+ * Đọc dữ liệu nhân viên từ database lên bảng thông tin
+ */
     public void upTblNV2() {
         dfNV2_Model = (DefaultTableModel) tbl_NV_2.getModel();
         dsNv = nv_dao.getAllNV();
@@ -90,14 +96,17 @@ public class FrmCaLam extends javax.swing.JPanel {
         }
     }
 
-    //xoá rổng textfield ca làm
+/**
+ * Xóa trắng các ổ nhập thông tin
+ */
     public void xoaRongTextCa() {
         txt_MaCa.setText("");
 
     }
-
+/**
+ * Lấy thông tin ca làm trên các ổ nhập liệu
+ */
     public CaLam restText() {
-
         String maCa = txt_MaCa.getText().toString();
         String maNv = cbo_MaNv.getSelectedItem().toString();
         String buoi = cbo_Buoi.getSelectedItem().toString();
@@ -106,7 +115,9 @@ public class FrmCaLam extends javax.swing.JPanel {
         System.out.println(dateTime);
         return new CaLam(maCa, nv, buoi, java.sql.Date.valueOf(dateTime));
     }
-
+/**
+ * Xóa model bảng ca làm
+ */
     public void xoaModelCa() {
         DefaultTableModel del = (DefaultTableModel) tbl_CaLam.getModel();
         del.getDataVector().removeAllElements();
@@ -419,9 +430,10 @@ public class FrmCaLam extends javax.swing.JPanel {
 
     private void btn_ThemCaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemCaMouseClicked
         xoaRongTextCa();
-        //        btn_SuaAnh.setEnabled(true);
     }//GEN-LAST:event_btn_ThemCaMouseClicked
-    //đọc dữ liệu lên bảng ca làm
+/**
+ * Đọc dữ liệu Ca làm từ database lên bảng thông tin
+ */
     public void upTblCaLam() {
         dfCL_Model = (DefaultTableModel) tbl_CaLam.getModel();
         dsCa = ca_dao.getAllCaLam();
@@ -444,8 +456,6 @@ public class FrmCaLam extends javax.swing.JPanel {
                 xoaRongTextCa();
                 xoaModelCa();
                 upTblCaLam();
-//            xoaModelLuong();
-//            upTblLuong();
                 JOptionPane.showMessageDialog(null, "Thêm thành công");
             } else {
                 JOptionPane.showMessageDialog(null, " đã có vui lòng nhập lại ");
@@ -455,7 +465,7 @@ public class FrmCaLam extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_LuuCaMouseClicked
 
     private void btn_LuuCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LuuCaActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btn_LuuCaActionPerformed
 
     private void btn_XoaCaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaCaMouseClicked

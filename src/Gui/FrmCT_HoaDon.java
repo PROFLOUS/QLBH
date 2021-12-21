@@ -26,8 +26,8 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 
 /**
- *
- * @author GMT
+ *Hiển thị Giao diện Form Chi Tiết Hóa Đơn 
+ * 
  */
 public class FrmCT_HoaDon extends javax.swing.JFrame {
 
@@ -45,6 +45,11 @@ public class FrmCT_HoaDon extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
 
+    /**
+     * Creates new form FrmCT_HoaDon for maHD
+     * @param maHD String
+     * 
+     */
     public FrmCT_HoaDon(String maHD) {
         this.maHD = maHD;
         initComponents();
@@ -59,7 +64,10 @@ public class FrmCT_HoaDon extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
-
+/**
+ * Đọc dữ liệu lên bản chi tiết hóa đơn
+ * 
+ */
     public void renderCTHD() {
         CT_HoaDonDao ctHoaDonDao = new CT_HoaDonDao();
         String[] title = {"Mã SP", "Tên SP", "Số Lượng", "Đơn Giá", "Thành Tiền"};
@@ -81,7 +89,10 @@ public class FrmCT_HoaDon extends javax.swing.JFrame {
 
         tbCTHD.setModel(modelTBHoaDon);
     }
-
+/**
+ * Đọc thông tin của hóa đơn lên phần chi tiết
+ * 
+ */
     public void renderInfoHD() {
         HoaDonDao hoaDonDao = new HoaDonDao();
         HoaDonBanHang hd = hoaDonDao.findHDByMaHD(maHD);
@@ -100,9 +111,10 @@ public class FrmCT_HoaDon extends javax.swing.JFrame {
     }
 
     //lấy ra tên đệm và tên
-    /*
-        Nguyen hoang anh -> hoang anh
-     */
+/**
+ * Lấy ra tên đệm và tên
+ * 
+ */
     public String sliderString(String str) {
         int countSpace = 0;
         for (int i = 0; i < str.trim().length(); i++) {
@@ -124,6 +136,11 @@ public class FrmCT_HoaDon extends javax.swing.JFrame {
             @param date Date
             return String
      */
+/**
+ * Chuyển kiểu dữ liệu Date dang String
+ * @param date Date
+ * @return dateString String
+ */
     public String changeDateToString(Date date) {
 
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -138,11 +155,20 @@ public class FrmCT_HoaDon extends javax.swing.JFrame {
     
         return sl * DonGia;
      */
+/**
+ * Tính tổng tiền của một sản phẩm
+ * 
+ */
     public Double handleMoney(int sl, Double DonGia) {
         return sl * DonGia;
     }
 
-    //Tạo hàm xuất hóa đơn
+/**
+ * Xuất ra hóa đơn
+ * @param maHD String
+ * 
+ * 
+ */
     public void printBill(String maHD) {
         try {
 

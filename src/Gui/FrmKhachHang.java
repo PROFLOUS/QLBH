@@ -21,8 +21,8 @@ import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * Hiển thị Giao diện Form Danh sách thông tin các Khách hàng
  *
- * @author HP
  */
 public class FrmKhachHang extends javax.swing.JPanel {
 
@@ -32,6 +32,7 @@ public class FrmKhachHang extends javax.swing.JPanel {
     ArrayList<KhachHang> dsKh;
     KhachHangDao kh_dao;
     private DefaultTableModel dfKH_Model;
+
     /**
      * Creates new form FrmKhachHang
      */
@@ -43,7 +44,11 @@ public class FrmKhachHang extends javax.swing.JPanel {
         addBorder();
         upTblKh();
     }
-    //doc dữ liệu lên table
+
+    /**
+     * Đọc dữ liệu khách hàng lên bản
+     *
+     */
     public void upTblKh() {
         //bang san pham
         dfKH_Model = (DefaultTableModel) tbl_KH.getModel();
@@ -55,11 +60,15 @@ public class FrmKhachHang extends javax.swing.JPanel {
             });
         }
     }
-    //xóa model khách hàng
+
+    /**
+     * Xóa model bảng Khách hàng
+     */
     public void xoaModelKH() {
         DefaultTableModel del = (DefaultTableModel) tbl_KH.getModel();
         del.getDataVector().removeAllElements();
     }
+
     public void addBorder() {
         buttons = new JButton[1];
         buttons[0] = btn_tab_KhachHang;
@@ -488,14 +497,16 @@ public class FrmKhachHang extends javax.swing.JPanel {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-    //kiem tra dữ liệu nhập
+/**
+     * Kiểm tra dữ liệu nhập
+     */
     public boolean kiemTraData() {
         String tenKh = txtTenKH.getText().trim();
         String sdt = txtSDTKH.getText().trim();
         String diaChi = txtDiaChiKH.getText().trim();
 
         //tên khách hàng 
-        if (!(tenKh.length() > 0 )) {
+        if (!(tenKh.length() > 0)) {
             JOptionPane.showMessageDialog(this, "Tên Khách Hàng phải là chữ");
             return false;
         }
@@ -504,28 +515,34 @@ public class FrmKhachHang extends javax.swing.JPanel {
             return false;
         }
         //Địa chỉ
-        if (!(diaChi.length() > 0 )) {
+        if (!(diaChi.length() > 0)) {
             JOptionPane.showMessageDialog(this, "Địa chỉ không được để trống");
             return false;
         }
 
         return true;
     }
-    //xóa rổng textfiled
-    public  void xoaRongText(){
+
+    /**
+     * xóa trắng các ổ textfield
+     */
+    public void xoaRongText() {
         txtMaKH.setText("");
         txtTenKH.setText("");
         txtSDTKH.setText("");
         txtDiaChiKH.setText("");
     }
-    //láy dữ liệu từ textfield
-    public KhachHang restText(){
+
+    /**
+     * Lấy dữ liệu nhập từ cái ô textfield
+     */
+    public KhachHang restText() {
         String ma = txtMaKH.getText().toString();
         String ten = txtTenKH.getText().toString();
         String sdt = txtSDTKH.getText().toString();
         String diaChi = txtDiaChiKH.getText().toString();
-        
-        return  new KhachHang(ma, ten, sdt,diaChi);
+
+        return new KhachHang(ma, ten, sdt, diaChi);
     }
 
     private void btn_tab_KhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tab_KhachHangMouseClicked
@@ -538,31 +555,31 @@ public class FrmKhachHang extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_tab_KhachHangActionPerformed
 
     private void txtSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchFocusGained
-       txtSearch.setText("");
+        txtSearch.setText("");
     }//GEN-LAST:event_txtSearchFocusGained
 
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
         dfKH_Model.setRowCount(0);
-        
+
         String text = txtSearch.getText().trim().toLowerCase();
         List<KhachHang> list = kh_dao.SearchMaOrTenOrSdt(text);
         for (KhachHang kh : list) {
-                dfKH_Model.addRow(new Object[]{
+            dfKH_Model.addRow(new Object[]{
                 kh.getMaKH(), kh.getTenKH(), kh.getSdt(),
                 kh.getDiaChi()
             });
         }
-        
-        
+
+
     }//GEN-LAST:event_txtSearchActionPerformed
 
     private void btnTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemMouseClicked
-dfKH_Model.setRowCount(0);
-        
+        dfKH_Model.setRowCount(0);
+
         String text = txtSearch.getText().trim().toLowerCase();
         List<KhachHang> list = kh_dao.SearchMaOrTenOrSdt(text);
         for (KhachHang kh : list) {
-                dfKH_Model.addRow(new Object[]{
+            dfKH_Model.addRow(new Object[]{
                 kh.getMaKH(), kh.getTenKH(), kh.getSdt(),
                 kh.getDiaChi()
             });
@@ -571,9 +588,9 @@ dfKH_Model.setRowCount(0);
     }//GEN-LAST:event_btnTimKiemMouseClicked
 
     private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked
-         int r = tbl_KH.getSelectedRow();
-         String id = dfKH_Model.getValueAt(r, 0).toString();
-         if (r != -1) {
+        int r = tbl_KH.getSelectedRow();
+        String id = dfKH_Model.getValueAt(r, 0).toString();
+        if (r != -1) {
             int tb = JOptionPane.showConfirmDialog(null, "Bạn  chắc chắn muốn xóa dòng này không?", "Detele", JOptionPane.YES_NO_OPTION);
             if (tb == JOptionPane.YES_OPTION) {
                 dfKH_Model.removeRow(r);
@@ -590,23 +607,23 @@ dfKH_Model.setRowCount(0);
 
     private void btnCapNhatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCapNhatMouseClicked
         int r = tbl_KH.getSelectedRow();
-        if(r != -1){
+        if (r != -1) {
             String maKh = dfKH_Model.getValueAt(r, 0).toString();
             String tenKh = txtTenKH.getText().trim();
             String sdt = txtSDTKH.getText().trim();
             String diaChi = txtDiaChiKH.getText().trim();
-            
-            KhachHang kh =  new KhachHang(maKh, tenKh, sdt, diaChi);
-            if(kh_dao.updateKH(maKh, kh)){
+
+            KhachHang kh = new KhachHang(maKh, tenKh, sdt, diaChi);
+            if (kh_dao.updateKH(maKh, kh)) {
                 xoaRongText();
                 dfKH_Model.setRowCount(0);
                 dsKh = kh_dao.getAllKh();
                 for (KhachHang khs : dsKh) {
-                dfKH_Model.addRow(new Object[]{
-                khs.getMaKH(), khs.getTenKH(), khs.getSdt(),
-                khs.getDiaChi()
-            });
-        }
+                    dfKH_Model.addRow(new Object[]{
+                        khs.getMaKH(), khs.getTenKH(), khs.getSdt(),
+                        khs.getDiaChi()
+                    });
+                }
                 dsKh.removeAll(dsKh);
                 xoaRongText();
                 xoaModelKH();
@@ -614,8 +631,8 @@ dfKH_Model.setRowCount(0);
                 JOptionPane.showMessageDialog(this, "Cập nhật danh sách thành công");
                 txtTenKH.requestFocus();
             }
-            
-        }else {
+
+        } else {
             JOptionPane.showMessageDialog(null, "Bạn chưa chọn dòng nào!");
         }
     }//GEN-LAST:event_btnCapNhatMouseClicked
@@ -627,12 +644,12 @@ dfKH_Model.setRowCount(0);
     }//GEN-LAST:event_btnShowMouseClicked
 
     private void btnLuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLuuMouseClicked
-        if(kiemTraData()){
+        if (kiemTraData()) {
             KhachHang kh = restText();
-            if(kh_dao.themKH(kh)){
+            if (kh_dao.themKH(kh)) {
                 dfKH_Model.addRow(new Object[]{
                     kh.getMaKH(), kh.getTenKH(), kh.getSdt(),
-                kh.getDiaChi()
+                    kh.getDiaChi()
                 });
                 dsKh.removeAll(dsKh);
                 xoaRongText();
@@ -692,7 +709,7 @@ dfKH_Model.setRowCount(0);
     }//GEN-LAST:event_tbl_KHMouseClicked
 
     private void txtMaKHFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMaKHFocusLost
-         txtSDTKH.setText("");
+        txtSDTKH.setText("");
     }//GEN-LAST:event_txtMaKHFocusLost
 
     private void txtSearchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchFocusLost

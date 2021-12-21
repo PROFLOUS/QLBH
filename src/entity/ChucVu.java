@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package entity;
 
 import java.util.Objects;
@@ -10,12 +6,8 @@ import java.util.Objects;
  *
  * @author GMT
  */
-//
-//●       MaCV - varchar(30) - Primary Key
-//●       TenCV - varchar(255) - not null
-//●       HSLuong - float - not null - không âm( >= 0)
-
 public class ChucVu {
+
     private String maCV;
     private String tenCV;
     private double hsLuong;
@@ -82,11 +74,5 @@ public class ChucVu {
         }
         return true;
     }
-    
-    
-    
-    
-    
-    
-    
+
 }

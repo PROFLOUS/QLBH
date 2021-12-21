@@ -29,8 +29,8 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 
 /**
+ * Hiển thị Giao diện Form Danh sách thông tin các nhân viên
  *
- * @author HP
  */
 public class FrmDsNV extends javax.swing.JPanel {
 private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -58,14 +58,18 @@ ChucVuDao cv_dao;
         editor2.setEditable(false);
     }
 
-    //doc du lieu len cbo chuc vu
+/**
+ * Đọc dữ liệu Chức vụ từ database lên Combobox
+ */
     public  void upCbo_CV(){
         dsCv = cv_dao.getAllCV();
         for (ChucVu cv : dsCv) {
             cbo_CV.addItem(cv.getTenCV());
         }
     }
-    //đọc dữ liệu lên bảg nhân viên 
+/**
+ * Đọc dữ liệu nhân viên từ database lên bảng thông tin
+ */
     public void upTblNV() {
         dfNV_Model = (DefaultTableModel) tbl_NV.getModel();
         dsNv = nv_dao.getAllNV();
@@ -78,7 +82,9 @@ ChucVuDao cv_dao;
         }
     }
     
-    //xoa combobox
+/**
+ * Xóa dữ liệu chức vụ trên combobox
+ */
     public void xoaCBB() {
         int itCount = cbo_CV.getItemCount();
         for (int i = 0; i < itCount; i++) {
@@ -86,23 +92,17 @@ ChucVuDao cv_dao;
         }
 
     }
-    //xóa model Nhân Viên
+/**
+ * Xóa model bảng Nhân viên
+ */
     public void xoaModelNV() {
         DefaultTableModel del = (DefaultTableModel) tbl_NV.getModel();
         del.getDataVector().removeAllElements();
     }
     //kiem tra dữ liệu nhập
-     // boolean kiemTraNgayVaoLam(){
-//           DateFormat formatter = new SimpleDateFormat("yyyyMMdd"); 
-//            Date dateNgaySinh = dt_NgaySinh.getDate();
-//            Date date = new Date();
-//           Date dateNgayLam = dt_NgVaoLam.getDate();
-//        if ((dateNgayLam.getTime() <date.getTime())) {
-//            JOptionPane.showMessageDialog(this, "Ngày vào làm phải sau ngày hiện tại!");
-//            return false;
-//        }
-//         return true;
-    // }
+/**
+ * Kiểm tra dữ liệu nhập
+ */
     public boolean kiemTraData() {
         DateFormat formatter = new SimpleDateFormat("yyyyMMdd"); 
         String tenNv = txtTenNV.getText().trim();
@@ -132,18 +132,16 @@ ChucVuDao cv_dao;
             JOptionPane.showMessageDialog(this, "Địa chỉ không được để trống");
             return false;
         }
-//        if ((dateNgayLam.getTime() <date.getTime())) {
-//            JOptionPane.showMessageDialog(this, "Ngày vào làm phải sau ngày hiện tại!");
-//            return false;
-//        }
+
         if (!(age>18)) {
-            System.out.println("aggg"+age);
             JOptionPane.showMessageDialog(this, "Nhân Viên Phải Đủ 18 Tuổi Trở Lên!");
             return false;
         }
         return true;
     }
-    //xóa rôngr textfiled
+/**
+ * xóa trắng các ổ textfield
+ */
     public void xoaRongTextNv(){
         txtMaNV.setText("");
         txtTenNV.setText("");
@@ -154,7 +152,9 @@ ChucVuDao cv_dao;
               employeeImg = null;
         
     }
-    //láy dữ liệu từ textfiled
+/**
+ * Lấy dữ liệu nhập từ cái ô textfield
+ */
     public NhanVien restText(){
         String maNv = txtMaNV.getText().toString();
         String tenNv = txtTenNV.getText().toString();
@@ -169,11 +169,8 @@ ChucVuDao cv_dao;
         NhanVien nv = new NhanVien(maNv, tenNv, sdt, diaChi, java.sql.Date.valueOf(ngaySinh), java.sql.Date.valueOf(ngayLam), trangThai,employeeImg, cv);
         nv.setEmail(email);
         return nv;
-
     }
-    
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -615,32 +612,30 @@ ChucVuDao cv_dao;
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtTenNVFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTenNVFocusGained
-        // TODO add your handling code here:
-        //   txtTenNCC.setText("");
+
     
     }//GEN-LAST:event_txtTenNVFocusGained
 
     private void txtTenNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenNVActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtTenNVActionPerformed
 
     private void txtDiaChiNVFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiaChiNVFocusGained
-        // txtDiaChiNCC.setText("");
+
        
     }//GEN-LAST:event_txtDiaChiNVFocusGained
 
     private void txtMaNVFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMaNVFocusGained
-        // TODO add your handling code here:
-        ///txtMaNCC1.setTe txtMaNCC1.setForeground(new java.awt.Color(26, 25, 25));xt("");
+
       
     }//GEN-LAST:event_txtMaNVFocusGained
 
     private void txtMaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaNVActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtMaNVActionPerformed
 
     private void txtSDTNVFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSDTNVFocusGained
-        //txtSDTNCC2.setText("");
+
       
     }//GEN-LAST:event_txtSDTNVFocusGained
 
@@ -649,7 +644,7 @@ ChucVuDao cv_dao;
     }//GEN-LAST:event_txtSDTNVActionPerformed
 
     private void cbo_CVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_CVActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_cbo_CVActionPerformed
 
     private void txtSearch1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearch1FocusGained

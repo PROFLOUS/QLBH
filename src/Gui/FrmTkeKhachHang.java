@@ -7,7 +7,6 @@ package Gui;
 
 import Connect.connect;
 import static Gui.FrmDangNhap.quyen;
-import static Gui.GD_Chinh.lbl_title_TaiKhoan1;
 
 import dao.HoaDonDao;
 import entity.HoaDonBanHang;
@@ -43,8 +42,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
+ * Hiển thị Giao diện Form Thống kê khách hàng mua nhiều
  *
- * @author HP
  */
 public class FrmTkeKhachHang extends javax.swing.JPanel {
 
@@ -68,16 +67,19 @@ public class FrmTkeKhachHang extends javax.swing.JPanel {
             System.out.println("loll");
             e.printStackTrace();
         }
-      
-        if(quyen.equals("Nhân viên")){
+
+        if (quyen.equals("Nhân viên")) {
             cb2.removeAllItems();
             cb2.addItem("Ngày");
             cb2.setEnabled(false);
         }
 
     }
-    //lọc thôngn kê theo ngày, thang , năm
 
+    /**
+     * Lọc biểu đồ theo ngày, tháng, năm
+     *
+     */
     public void locBieuDo() {
         if (cb2.getSelectedIndex() == 2) {
             System.out.println("okkk");
@@ -126,6 +128,9 @@ public class FrmTkeKhachHang extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Xuất dữ liệu ra file excel
+     */
     public void exportDataToExcel() {
 
         try {
@@ -608,21 +613,21 @@ public class FrmTkeKhachHang extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-         String year = (String) formatterYear.format(date);
-         String month = (String) formatterMonth.format(date);
-         String day = (String) formatterday.format(date);
+        String year = (String) formatterYear.format(date);
+        String month = (String) formatterMonth.format(date);
+        String day = (String) formatterday.format(date);
         if (cb2.getSelectedIndex() == 2) {
             String source = "src\\BaoCao/rptThongKeKhachHangNam.jrxml";
-            printBill(year,day,month, source);
+            printBill(year, day, month, source);
         } else if (cb2.getSelectedIndex() == 1) {
-            
+
             String source = "src\\BaoCao/rptThongKeKhachHangNamThang.jrxml";
-            printBill(month,day,year, source);
+            printBill(month, day, year, source);
 
         } else if (cb2.getSelectedIndex() == 0) {
-            
+
             String source = "src\\BaoCao/rptThongKeKhachHangNamNgay.jrxml";
-            printBill(day,month,year, source);
+            printBill(day, month, year, source);
 
         }
     }//GEN-LAST:event_jButton3MouseClicked
@@ -630,7 +635,9 @@ public class FrmTkeKhachHang extends javax.swing.JPanel {
     private void cb2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cb2MouseClicked
 //        locBieuDo();
     }//GEN-LAST:event_cb2MouseClicked
-    //đọc dữ liệu lene chi tiet
+    /**
+     * đọc dữ liệu lên bảng chi tiet theo năm
+     */
     public void upTblChiTietTheoNam(String year) {
         dftkKH_Model = (DefaultTableModel) jTable1.getModel();
         dstkKH = hdDao.thongkeKhachHangTheoNam(year);
@@ -642,6 +649,9 @@ public class FrmTkeKhachHang extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * đọc dữ liệu lên bảng chi tiet theo tháng
+     */
     public void upTblChiTietTheoThang(String month, String year) {
         dftkKH_Model = (DefaultTableModel) jTable1.getModel();
         dstkKH = hdDao.thongkeKhachHangTheoThang(month, year);
@@ -653,6 +663,9 @@ public class FrmTkeKhachHang extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * đọc dữ liệu lên bảng chi tiet theo ngày
+     */
     public void upTblChiTietTheoNgay(String day, String month, String year) {
         dftkKH_Model = (DefaultTableModel) jTable1.getModel();
         dstkKH = hdDao.thongkeKhachHangTheoNgay(day, month, year);
@@ -664,13 +677,17 @@ public class FrmTkeKhachHang extends javax.swing.JPanel {
         }
     }
 
-    //xóa model bảng chi tiết
+    /**
+     * xóa model chi tiết
+     */
     public void xoaModelChiTiet() {
         DefaultTableModel del = (DefaultTableModel) jTable1.getModel();
         del.getDataVector().removeAllElements();
     }
 
-    //xoa bieu do 
+    /**
+     * Xóa dữ liệu biểu đồ
+     */
     public void xoaBieuDo() {
         jLabel3.setText("");
         jProgressBar2.setValue(0);
@@ -695,7 +712,12 @@ public class FrmTkeKhachHang extends javax.swing.JPanel {
         jProgressBar7.setString("");
     }
 
-    //thống kê khach hang có tong tien cao nhat
+    /**
+     * Tạo biểu đồ thóng kê
+     *
+     * @param max int
+     *
+     */
     public void bieuDo(int max) {
         try {
             jLabel3.setText(jTable1.getValueAt(0, 0).toString());
@@ -750,9 +772,11 @@ public class FrmTkeKhachHang extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
-    //Tạo hàm xuất hóa đơn
 
-    public void printBill(String date,String month, String year, String source) {
+    /**
+     * Xuất hóa đơn
+     */
+    public void printBill(String date, String month, String year, String source) {
         try {
             Hashtable map = new Hashtable();
             JasperReport report = JasperCompileManager.compileReport(source);

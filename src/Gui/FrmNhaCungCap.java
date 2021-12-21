@@ -20,93 +20,99 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
+
 /**
+ * Hiển thị Giao diện Form Danh sách thông tin nhà cung cấp
  *
- * @author HP
  */
 public class FrmNhaCungCap extends javax.swing.JPanel {
+
     private ArrayList<NhaCC> listNCC = new ArrayList<NhaCC>();
     private NhaCCDao nccDao = new NhaCCDao();
-   
-        private javax.swing.table.DefaultTableModel modelTBNcc;
-        public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, new Color(153,153,153));
-        public Border active_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, new Color(153,204,255));
-        public JButton [] buttons;
+
+    private javax.swing.table.DefaultTableModel modelTBNcc;
+    public Border default_border = BorderFactory.createMatteBorder(0, 0, 3, 0, new Color(153, 153, 153));
+    public Border active_border = BorderFactory.createMatteBorder(0, 0, 3, 0, new Color(153, 204, 255));
+    public JButton[] buttons;
+
     /**
      * Creates new form FrmNhaCungCap
      */
     public FrmNhaCungCap() throws SQLException {
-      
+
         try {
-             initComponents();
-             addBorder();
-             listNCC = nccDao.getDsNcc();
-             connect.getInstance().connect();
-        
-          renderDsNCC(listNCC);
+            initComponents();
+            addBorder();
+            listNCC = nccDao.getDsNcc();
+            txtMaNCC1.setEditable(false);
+            connect.getInstance().connect();
+
+            renderDsNCC(listNCC);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void addBorder(){
+    public void addBorder() {
         buttons = new JButton[2];
-        
+
         //Form san pham
         buttons[0] = btn_tab_dsncc;
-     
-        
-   
         setButtonBorder(btn_tab_dsncc);
-     
 
-        //addAction();
     }
-        //set border active
-    public void setButtonBorder(JButton button){
-//        for (JButton btn : buttons) {
-//            btn.setBorder(default_border);
-//            btn.setForeground(new Color(153,153,153));
-//        }
+    //set border active
+
+    public void setButtonBorder(JButton button) {
         button.setBorder(active_border);
         button.setForeground(Color.black);
     }
+
     //add even
-    public void addAction(){
+    public void addAction() {
         for (JButton button : buttons) {
             button.addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     for (JButton btn : buttons) {
-            btn.setBorder(default_border);
-            btn.setForeground(new Color(153,153,153));
-        }
-        button.setBorder(active_border);
-        button.setForeground(Color.black);
+                        btn.setBorder(default_border);
+                        btn.setForeground(new Color(153, 153, 153));
+                    }
+                    button.setBorder(active_border);
+                    button.setForeground(Color.black);
                 }
 
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    
+
                 }
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    
+
                 }
 
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                   
+
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    
+
                 }
             });
         }
     }
+
+    /**
+     * Xóa model bảng Nhà cung cấp
+     */
+    public void xoaModel() {
+        DefaultTableModel del = (DefaultTableModel) tbNhaCC.getModel();
+        del.getDataVector().removeAllElements();
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -266,16 +272,16 @@ public class FrmNhaCungCap extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblTenNCC)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTenNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblMaNCC)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtMaNCC1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMaNCC1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
@@ -289,7 +295,7 @@ public class FrmNhaCungCap extends javax.swing.JPanel {
                 .addGap(33, 33, 33)
                 .addComponent(lblEmailNCC)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtEmail)
+                .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -378,7 +384,6 @@ public class FrmNhaCungCap extends javax.swing.JPanel {
         btnShow.setText("Hiển thị DS");
         btnShow.setToolTipText("Hiển thị lại DS NCC");
         btnShow.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnShow.setEnabled(false);
         btnShow.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnShowMouseClicked(evt);
@@ -548,72 +553,63 @@ public class FrmNhaCungCap extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSDTNCC2ActionPerformed
 
-    private void txtMaNCC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaNCC1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaNCC1ActionPerformed
-
-    private void txtMaNCC1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMaNCC1FocusGained
-        // TODO add your handling code here:
-        ///txtMaNCC1.setTe txtMaNCC1.setForeground(new java.awt.Color(26, 25, 25));xt("");
-         txtMaNCC1.setForeground(new java.awt.Color(26, 25, 25));
-    }//GEN-LAST:event_txtMaNCC1FocusGained
-
     private void txtTenNCCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTenNCCFocusGained
         // TODO add your handling code here:
-      //   txtTenNCC.setText("");
-         txtTenNCC.setForeground(new java.awt.Color(26, 25, 25));
+        //   txtTenNCC.setText("");
+        txtTenNCC.setForeground(new java.awt.Color(26, 25, 25));
     }//GEN-LAST:event_txtTenNCCFocusGained
 
     private void txtSDTNCC2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSDTNCC2FocusGained
         //txtSDTNCC2.setText("");
-         txtSDTNCC2.setForeground(new java.awt.Color(26, 25, 25));
+        txtSDTNCC2.setForeground(new java.awt.Color(26, 25, 25));
     }//GEN-LAST:event_txtSDTNCC2FocusGained
 
     private void txtDiaChiNCCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiaChiNCCFocusGained
-      // txtDiaChiNCC.setText("");
-         txtDiaChiNCC.setForeground(new java.awt.Color(26, 25, 25));
+        // txtDiaChiNCC.setText("");
+        txtDiaChiNCC.setForeground(new java.awt.Color(26, 25, 25));
     }//GEN-LAST:event_txtDiaChiNCCFocusGained
 
     private void txtEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusGained
-       // txtEmail.setText("");
-         txtEmail.setForeground(new java.awt.Color(26, 25, 25));
+        // txtEmail.setText("");
+        txtEmail.setForeground(new java.awt.Color(26, 25, 25));
     }//GEN-LAST:event_txtEmailFocusGained
 
     private void txtSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchFocusGained
         // TODO add your handling code here:
         txtSearch.setText("");
-         txtSearch.setForeground(new java.awt.Color(26, 25, 25));
-         btnTimKiem.setEnabled(true);
+        txtSearch.setForeground(new java.awt.Color(26, 25, 25));
+        btnTimKiem.setEnabled(true);
     }//GEN-LAST:event_txtSearchFocusGained
 
     private void btnTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemMouseClicked
-        String query =  txtSearch.getText();
-      
-       if(query.length() > 0){
-           ArrayList<NhaCC> arr = SearchNCC(query);
-          if(arr != null){
-              renderDsNCC(SearchNCC(query));
-             btnShow.setEnabled(true);
-          }
-         
-       }
-       else{
-           JOptionPane.showMessageDialog(btnTimKiem, "Bạn chưa nhập Mã, Tên, SĐT NCC");
-           btnTimKiem.setEnabled(false);
-           btnShow.setEnabled(false);
-       }
-     
-       
-       
+        String query = txtSearch.getText();
+
+        if (query.length() > 0) {
+            ArrayList<NhaCC> arr = SearchNCC(query);
+            if (arr != null) {
+                renderDsNCC(SearchNCC(query));
+
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(btnTimKiem, "Bạn chưa nhập Mã, Tên, SĐT NCC");
+            btnTimKiem.setEnabled(false);
+
+        }
+
+
     }//GEN-LAST:event_btnTimKiemMouseClicked
 
     private void btnShowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnShowMouseClicked
         // TODO add your handling code here:
+        listNCC.removeAll(listNCC);
+        xoaModel();
+        listNCC = nccDao.getDsNcc();
         renderDsNCC(listNCC);
-        btnShow.setEnabled(false);
+
         btnTimKiem.setEnabled(false);
         txtSearch.setText("Nhập mã, tên, sđt  NCC...");
-         txtSearch.setForeground(new java.awt.Color(173, 194, 169));
+        txtSearch.setForeground(new java.awt.Color(173, 194, 169));
     }//GEN-LAST:event_btnShowMouseClicked
 
     private void txtTenNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenNCCActionPerformed
@@ -624,22 +620,20 @@ public class FrmNhaCungCap extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSearchActionPerformed
 
-    
-    
+
     private void tbNhaCCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNhaCCMouseClicked
-                int row = tbNhaCC.getSelectedRow();
-               if(row != -1){
-                    setColorInput();
-                     txtMaNCC1.setEnabled(false);
-                    txtMaNCC1.setText(tbNhaCC.getValueAt(row, 0).toString());
-                    txtTenNCC.setText(tbNhaCC.getValueAt(row, 1).toString());
-                    txtSDTNCC2.setText(tbNhaCC.getValueAt(row, 2).toString());
-                    txtEmail.setText(tbNhaCC.getValueAt(row, 3).toString());
-                    txtDiaChiNCC.setText(tbNhaCC.getValueAt(row, 4).toString());
-               }
-		
-                
-		
+        int row = tbNhaCC.getSelectedRow();
+        if (row != -1) {
+            setColorInput();
+            txtMaNCC1.setEnabled(false);
+            txtMaNCC1.setText(tbNhaCC.getValueAt(row, 0).toString());
+            txtTenNCC.setText(tbNhaCC.getValueAt(row, 1).toString());
+            txtSDTNCC2.setText(tbNhaCC.getValueAt(row, 2).toString());
+            txtEmail.setText(tbNhaCC.getValueAt(row, 3).toString());
+            txtDiaChiNCC.setText(tbNhaCC.getValueAt(row, 4).toString());
+        }
+
+
     }//GEN-LAST:event_tbNhaCCMouseClicked
 
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
@@ -647,192 +641,182 @@ public class FrmNhaCungCap extends javax.swing.JPanel {
         txtMaNCC1.setEnabled(true);
         btnLuu.setEnabled(true);
         txtMaNCC1.requestFocus();
-       
+
     }//GEN-LAST:event_btnThemMouseClicked
 
-    
     //click vao Luu
     private void btnLuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLuuMouseClicked
-        if(checkValue() && checkMaNCC()){
-          btnLuu.setEnabled(false);
-             NhaCC ncc = new NhaCC(txtMaNCC1.getText().toUpperCase(),
-                     txtTenNCC.getText().toLowerCase(), txtSDTNCC2.getText().toLowerCase(),
-                     txtEmail.getText().toLowerCase(), txtDiaChiNCC.getText().toLowerCase());
-          
-                 if(nccDao.createNCC(ncc)){
-                    Object[] row = {txtMaNCC1.getText(),
-                     txtTenNCC.getText(), txtSDTNCC2.getText(), txtEmail.getText(), txtDiaChiNCC.getText()};
-                    modelTBNcc.addRow(row);
-                    JOptionPane.showMessageDialog(btnLuu, "Lưu thành công");
-            
-        }     
-      
-             
-         }    
+        if (checkValue()) {
+            btnLuu.setEnabled(false);
+            NhaCC ncc = new NhaCC(
+                    txtTenNCC.getText().toLowerCase(), txtSDTNCC2.getText().toLowerCase(),
+                    txtEmail.getText().toLowerCase(), txtDiaChiNCC.getText().toLowerCase());
+
+            if (nccDao.createNCC2(ncc)) {
+                Object[] row = {txtMaNCC1.getText(),
+                    txtTenNCC.getText(), txtSDTNCC2.getText(), txtEmail.getText(), txtDiaChiNCC.getText()};
+                modelTBNcc.addRow(row);
+                JOptionPane.showMessageDialog(btnLuu, "Lưu thành công");
+
+            }
+
+        }
     }//GEN-LAST:event_btnLuuMouseClicked
 
     //clck vao capnhat de cap nhat lai NCC
     private void btnCapNhatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCapNhatMouseClicked
-           if(checkValue()){
+        if (checkValue()) {
             String MaNcc = txtMaNCC1.getText();
             String TenNCC = txtTenNCC.getText();
             String sdt = txtSDTNCC2.getText();
             String email = txtEmail.getText();
             String DiaChi = txtDiaChiNCC.getText();
-            
+
             NhaCC ncc = new NhaCC(MaNcc, TenNCC, sdt, email, DiaChi);
-            if(nccDao.updateNCC(ncc)){
-                 String[] title = { "MaHD", "Ngày Tạo", "Khách Hàng", "Số lượng", "Tổng Tiền", "Tiền Khách Đưa", "Nhân Viên", "Ghi Chú"};
-		 modelTBNcc = new DefaultTableModel(title,0);
-                 tbNhaCC.setModel(modelTBNcc);
+            if (nccDao.updateNCC(ncc)) {
+                String[] title = {"MaHD", "Ngày Tạo", "Khách Hàng", "Số lượng", "Tổng Tiền", "Tiền Khách Đưa", "Nhân Viên", "Ghi Chú"};
+                modelTBNcc = new DefaultTableModel(title, 0);
+                tbNhaCC.setModel(modelTBNcc);
                 NhaCCDao nccdao = new NhaCCDao();
                 ArrayList<NhaCC> list = nccdao.getDsNcc();
                 renderDsNCC(list);
                 JOptionPane.showMessageDialog(btnTimKiem, "Cập nhật thành công!!");
             }
-           }
+        }
     }//GEN-LAST:event_btnCapNhatMouseClicked
 
     private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked
-       JOptionPane.showMessageDialog(btnTimKiem, "Hệ thống đang nâng cấp");
+        JOptionPane.showMessageDialog(btnTimKiem, "Hệ thống đang nâng cấp");
     }//GEN-LAST:event_btnXoaMouseClicked
 
-    
-    
-        //set color cho the input
-        public void setColorInput(){
-             txtMaNCC1.setForeground(new java.awt.Color(26, 25, 25));
-             txtTenNCC.setForeground(new java.awt.Color(26, 25, 25));
-             txtSDTNCC2.setForeground(new java.awt.Color(26, 25, 25));
-             txtEmail.setForeground(new java.awt.Color(26, 25, 25));
-             txtDiaChiNCC.setForeground(new java.awt.Color(26, 25, 25));
-             
-             
+    private void txtMaNCC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaNCC1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaNCC1ActionPerformed
+
+    private void txtMaNCC1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMaNCC1FocusGained
+        // TODO add your handling code here:
+        ///txtMaNCC1.setTe txtMaNCC1.setForeground(new java.awt.Color(26, 25, 25));xt("");
+        txtMaNCC1.setForeground(new java.awt.Color(26, 25, 25));
+    }//GEN-LAST:event_txtMaNCC1FocusGained
+
+    //set color cho the input
+    public void setColorInput() {
+        txtMaNCC1.setForeground(new java.awt.Color(26, 25, 25));
+        txtTenNCC.setForeground(new java.awt.Color(26, 25, 25));
+        txtSDTNCC2.setForeground(new java.awt.Color(26, 25, 25));
+        txtEmail.setForeground(new java.awt.Color(26, 25, 25));
+        txtDiaChiNCC.setForeground(new java.awt.Color(26, 25, 25));
+
+    }
+
+    /**
+     * Xóa trắng các ổ textfield
+     */
+    public void xoaRongInput() {
+
+        txtMaNCC1.setText("");
+        txtTenNCC.setText("");
+        txtSDTNCC2.setText("");
+        txtEmail.setText("");
+        txtDiaChiNCC.setText("");
+
+    }
+
+    /**
+     * Đọc dữ liệu Nhà cung cấp lên bảng
+     */
+    private void renderDsNCC(ArrayList<NhaCC> arr) {
+
+        String[] title = {"MaNCC", "Tên NCC", "Số điện thooại", "Email", "Địa chỉ"};
+
+        modelTBNcc = new DefaultTableModel(title, 0);
+        for (NhaCC s : arr) {
+            String[] rowData = {
+                s.getMaNCC(), s.getTenNCC(), s.getSdt(), s.getMail(), s.getDiaChi()
+            };
+
+            modelTBNcc.addRow(rowData);
         }
-        
-         //xoa rong cac input
-        public void xoaRongInput(){
-            
-             txtMaNCC1.setText("");
-             txtTenNCC.setText("");
-             txtSDTNCC2.setText("");
-             txtEmail.setText("");
-             txtDiaChiNCC.setText("");
-             
-             
+
+        tbNhaCC.setModel(modelTBNcc);
+
+    }
+
+    /**
+     * Kiểm tra dữ liệu nhập
+     */
+    public boolean checkValue() {
+//            String MaNcc = txtMaNCC1.getText();
+        String TenNCC = txtTenNCC.getText();
+        String sdt = txtSDTNCC2.getText();
+        String email = txtEmail.getText();
+        String DiaChi = txtDiaChiNCC.getText();
+
+        String regexMail = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";//check mail
+        String regexPhone = "^[0-9]{10}";
+
+        if (TenNCC.length() <= 0) {
+            JOptionPane.showMessageDialog(btnLuu, "Tên NCC không được để trống");
+            return false;
         }
-     //dua du lieu NCC len Table
-	private void renderDsNCC(ArrayList<NhaCC> arr) {
-		
-                 String[] title = { "MaNCC", "Tên NCC", "Số điện thooại", "Email", "Địa chỉ"};
-		 
-                modelTBNcc = new DefaultTableModel(title,0);
-		for(NhaCC s : arr) {
-			String[] rowData = {
-				s.getMaNCC(),s.getTenNCC(), s.getSdt(), s.getMail(), s.getDiaChi()
-			};
-                       
-			modelTBNcc.addRow(rowData);
-		}
-               
-		tbNhaCC.setModel(modelTBNcc);
-           
-	}
-        
-        //kiem tra du lieu dau vao
-        public boolean checkMaNCC(){
-            String MaNcc = txtMaNCC1.getText();
-             AtomicBoolean check = new AtomicBoolean(true);
-            listNCC.forEach(val ->{
-                if(val.getMaNCC().toUpperCase().equals(MaNcc.toUpperCase())){
-                   check.set(false);
-                }
-            });
-            if(check.get() == false){
-                JOptionPane.showMessageDialog(btnLuu, "Mã NCC đã tồn tại trong hệ thống. Vui lòng nhập lại mã khác");
-                return false;
+        if (DiaChi.length() <= 0) {
+            JOptionPane.showMessageDialog(btnLuu, "Địa chỉ NCC không được để trống");
+            return false;
+        }
+        if (!email.matches(regexMail)) {
+            JOptionPane.showMessageDialog(btnLuu, "Email không đúng định dạng");
+            return false;
+        }
+        if (!sdt.matches(regexPhone)) {
+            JOptionPane.showMessageDialog(btnLuu, "Số điện thoại có 10 số");
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Tìm nhà cung cấp
+     *
+     * @param query String
+     * @return listNCC
+     */
+    public ArrayList<NhaCC> SearchNCC(String query) {
+        ArrayList<NhaCC> arrNCC = new ArrayList<NhaCC>();
+        AtomicBoolean check = new AtomicBoolean();
+
+        //tim kiem theo MaNCC
+        listNCC.forEach(ncc -> {
+            if (ncc.getMaNCC().toLowerCase().equals(query.toLowerCase())) {
+                arrNCC.add(ncc);
+                check.set(true);
             }
-            
-            return true;
-        }
-        public boolean checkValue(){
-            String MaNcc = txtMaNCC1.getText();
-            String TenNCC = txtTenNCC.getText();
-            String sdt = txtSDTNCC2.getText();
-            String email = txtEmail.getText();
-            String DiaChi = txtDiaChiNCC.getText();
-            
-            String regexMail = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";//check mail
-            String regexPhone = "^[0-9]{10}";
-           
-            
-           
-            if (!(MaNcc.length() > 0 && MaNcc.matches("^NCC[0-9]{3}"))) {
-		JOptionPane.showMessageDialog(btnLuu, "Mã NCC không đúng định dạng NCCxxx");
-		return false;
+        });
+
+        //timKiem theo Ten NCC
+        listNCC.forEach(ncc -> {
+            if (ncc.getTenNCC().toLowerCase().contains(query.toLowerCase())) {
+                arrNCC.add(ncc);
+                check.set(true);
             }
-           if(TenNCC.length()<=0) {
-		JOptionPane.showMessageDialog(btnLuu, "Tên NCC không được để trống");			
-		return false;
+        });
+
+        //timKiem theo sdt
+        listNCC.forEach(ncc -> {
+            if (ncc.getSdt().contains(query)) {
+                arrNCC.add(ncc);
+                check.set(true);
             }
-           if(DiaChi.length() <=0){
-		JOptionPane.showMessageDialog(btnLuu, "Địa chỉ NCC không được để trống");			
-		return false;             
-           }
-//            if(!email.matches(regexMail)){
-//		JOptionPane.showMessageDialog(btnLuu, "Email không đúng định dạng");			
-//		return false;             
-//           }
-             if(!sdt.matches(regexPhone)){
-		JOptionPane.showMessageDialog(btnLuu, "Số điện thoại có 10 số");			
-		return false;             
-           }
-            
-           
-            return true;
+        });
+
+        if (check.get() == true) {
+            return arrNCC;
         }
-        
-        /**
-         *@param String MaNCC or TenNCC
-         * @return ArrayList NhaCC
-         */
-        public ArrayList<NhaCC> SearchNCC(String query){
-            ArrayList<NhaCC> arrNCC = new ArrayList<NhaCC>();
-            AtomicBoolean check = new AtomicBoolean();
-            
-            //tim kiem theo MaNCC
-            listNCC.forEach(ncc ->{
-                if(ncc.getMaNCC().toLowerCase().equals(query.toLowerCase())){
-                    arrNCC.add(ncc);
-                    check.set(true);
-                }
-            });
-            
-            //timKiem theo Ten NCC
-             listNCC.forEach(ncc ->{
-                if(ncc.getTenNCC().toLowerCase().contains(query.toLowerCase())){
-                    arrNCC.add(ncc);
-                    check.set(true);
-                }
-            });
-             
-              //timKiem theo sdt
-             listNCC.forEach(ncc ->{
-                if(ncc.getSdt().contains(query)){
-                    arrNCC.add(ncc);
-                    check.set(true);
-                }
-            });
-            
-            if(check.get() == true){
-                return arrNCC;
-            }
-           
-            JOptionPane.showMessageDialog(btnTimKiem, "Không tìm thấy  "+query+"");
-            return null;
-        }
-    
-    
+
+        JOptionPane.showMessageDialog(btnTimKiem, "Không tìm thấy  " + query + "");
+        return null;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;

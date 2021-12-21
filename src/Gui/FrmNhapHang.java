@@ -46,8 +46,8 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 
 /**
+ * Hiển thị Giao diện Form Nhập Hàng
  *
- * @author HP
  */
 public class FrmNhapHang extends javax.swing.JPanel {
 
@@ -110,11 +110,11 @@ public class FrmNhapHang extends javax.swing.JPanel {
                 String mau = (data.getMauSac());
                 double donGia = (data.getDonGia());
                 String size = (data.getSize());
-                double giaNhap =(data.getGiaNhap());
+                double giaNhap = (data.getGiaNhap());
                 soLuong = 1;
                 thanhTien = soLuong * giaNhap;
 
-                SanPham sp = new SanPham(maSp, tenSp, donGia, soLuong, size, mau,giaNhap);
+                SanPham sp = new SanPham(maSp, tenSp, donGia, soLuong, size, mau, giaNhap);
 
                 //tao vi tri sp
                 int vitri = vitriSP(sp);
@@ -134,7 +134,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
                         e.printStackTrace();
                     }
                     dfbh_model.addRow(new Object[]{
-                        sp.getMaSP(), sp.getTenSP(), sp.getMauSac(), soLuong,sp.getGiaNhap(),sp.getDonGia(), thanhTien
+                        sp.getMaSP(), sp.getTenSP(), sp.getMauSac(), soLuong, sp.getGiaNhap(), sp.getDonGia(), thanhTien
                     });
                 }
                 TinhTong3();
@@ -157,17 +157,6 @@ public class FrmNhapHang extends javax.swing.JPanel {
 
             @Override
             public void itemClick(KhachHang data) {
-//               String maKh = data.getMaKH();
-//               String tenKh = data.getTenKH();
-//               String sDT = data.getSdt();
-//               lbl_TenKh.setText(tenKh);
-//               lbl_maKh.setText(maKh);
-//               lbl_SDT.setText(sDT);
-//               menu2.setVisible(false);
-//               lbl_XoaKh.setEnabled(true);
-//               btn_AddKh.setVisible(false);
-//               txt_Search_KH.setVisible(false);
-//                System.out.println(lbl_TenKh.getText());
             }
 
             @Override
@@ -189,13 +178,15 @@ public class FrmNhapHang extends javax.swing.JPanel {
 
             }
         });
-
         upCbo_DM();
         Hide();
         lbl_HinhAnh.setIcon(new ImageIcon("D:\\code\\DeTai_NB\\PTUD_QLBH-main - Copy\\PTUD_QLBH-main\\src\\imgVSicon\\image.png"));
     }
 
-    //tao vi tri san pham
+    /**
+     * Tìm vị trí của sản phẩm trong list
+     *
+     */
     private int vitriSP(SanPham sp) {
         int i = -1;
         try {
@@ -209,7 +200,10 @@ public class FrmNhapHang extends javax.swing.JPanel {
         return i;
     }
 
-    //kiem tra du lieu them nha cc moi
+    /**
+     * Kiểm tra dữ liệu nhập
+     *
+     */
     public boolean kiemTraData() {
         String tenNcc = txt_tenNcc.getText().trim();
         String sdt = txt_sdt.getText().trim();
@@ -227,10 +221,10 @@ public class FrmNhapHang extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(btn_Luu1, "Địa chỉ NCC không được để trống");
             return false;
         }
-//            if(!email.matches(regexMail)){
-//		JOptionPane.showMessageDialog(btnLuu, "Email không đúng định dạng");			
-//		return false;             
-//           }
+        if (!email.matches(regexMail)) {
+            JOptionPane.showMessageDialog(btn_Luu1, "Email không đúng định dạng");
+            return false;
+        }
         if (!sdt.matches(regexPhone)) {
             JOptionPane.showMessageDialog(btn_Luu1, "Số điện thoại có 10 số");
             return false;
@@ -238,7 +232,10 @@ public class FrmNhapHang extends javax.swing.JPanel {
         return true;
     }
 
-    //kiem tra du lieu them san pham
+    /**
+     * Kiểm tra dữ liệu sản phẩm trức khi thêm
+     *
+     */
     public boolean kiemTraDataSp() {
         String giaNhap = txt_GiaNhap.getText().trim();
         String tenSP = txt_TenSp.getText().trim();
@@ -253,12 +250,12 @@ public class FrmNhapHang extends javax.swing.JPanel {
             return false;
         }
         //Mau phải là chữ
-        if (!(mau.length() > 0 )) {
+        if (!(mau.length() > 0)) {
             JOptionPane.showMessageDialog(this, "Mầu sắc phải là chữ");
             return false;
         }
         //size ko am
-        if (!(size.length() > 0 )) {
+        if (!(size.length() > 0)) {
             JOptionPane.showMessageDialog(this, "Size sản phẩm không được là số âm");
             return false;
         }
@@ -301,13 +298,16 @@ public class FrmNhapHang extends javax.swing.JPanel {
                 return false;
             }
         }
-        
+
         return true;
     }
 
-    //láy thông tin trên textfield sản phẩm
+    /**
+     * Lấy Thông tin sản phảm trên textfield
+     *
+     */
     public SanPham restTextSp() {
-        
+
         Double giaNhap = Double.parseDouble(txt_GiaNhap.getText().toString());
         String tenSp = txt_TenSp.getText().toString();
         String tenDm = cbo_Dm.getSelectedItem().toString();
@@ -315,13 +315,16 @@ public class FrmNhapHang extends javax.swing.JPanel {
         String mau = txt_MauSac.getText().toString();
         String size = txt_Size.getText().toString();
         slNhap = Integer.parseInt(txt_SlKho.getText().toString());
-        int slKho =0;
+        int slKho = 0;
         double donGia = Double.parseDouble(txt_GiaBan.getText());
         String hinh = lbl_HinhAnh.getIcon().toString();
         return new SanPham(dm, tenSp, donGia, slKho, hinh, size, mau, giaNhap);
     }
 
-    //lay du lieu tu tef
+    /**
+     * Lấy Thông tin nhà cung cấp trên textfield
+     *
+     */
     public NhaCC restText() {
         String tenNcc = txt_tenNcc.getText().toString();
         String sdt = txt_sdt.getText().toString();
@@ -330,7 +333,10 @@ public class FrmNhapHang extends javax.swing.JPanel {
         return new NhaCC(tenNcc, sdt, email, diachi);
     }
 
-    //xoa rong text them nha cc
+    /**
+     * Xóa trắng các textfield sản phẩm
+     *
+     */
     public void xoaRongText() {
         txt_SlKho.setText("");
         txt_TenSp.setText("");
@@ -342,7 +348,10 @@ public class FrmNhapHang extends javax.swing.JPanel {
         txt_GiaNhap.requestFocus();
     }
 
-    //xóa sảm phảm từ dơn hàng
+    /**
+     * xóa một sản phẩm nào đó khỏi bảng bán hàng
+     *
+     */
     public void huy(int r) {
 
         String masp = dstt.get(r).getMaSP();
@@ -358,62 +367,27 @@ public class FrmNhapHang extends javax.swing.JPanel {
         dstt.remove(r);
     }
 
-    //tính tổng tiền
-//    public void TinhTong() {
-//        DecimalFormat x = new DecimalFormat("###,###,###");
-//        tong = 0;
-//        for (int i = 0; i < tbl_BanHang.getRowCount(); i++) {
-//            tong += Double.parseDouble(tbl_BanHang.getValueAt(i, 5).toString());
-//        }
-//        System.out.println("tong" + tong);
-//        lbl_TongTien.setText(x.format(tong));
-//        lbl_TienPhaiTra.setText(x.format(tong));
-////        lbl_TongTien.setText(String.valueOf(tong));
-////        lbl_TienPhaiTra.setText(String.valueOf(tong));
-//    }
-
-    //tính tổng tiền
-    public void TinhTong2() {
-        DecimalFormat x = new DecimalFormat("###,###,###");
-        tong = 0;
-        for (int i = 0; i < tbl_BanHang.getRowCount(); i++) {
-            tong += Double.parseDouble(tbl_BanHang.getValueAt(i, 6).toString());
-        }
-        System.out.println("tong" + tong);
-//        lbl_TongTien.setText(x.format(tong));
-        lbl_TienPhaiTra.setText(x.format(tong));
-//        lbl_TongTien.setText(String.valueOf(tong));
-//        lbl_TienPhaiTra.setText(String.valueOf(tong));
-
-    }
-    //tính tổng tiền
-    public void TinhTong3(){        
+    /**
+     * Tính tổng tiền hóa đơn
+     *
+     */
+    public void TinhTong3() {
         // tạo 1 NumberFormat để định dạng tiền tệ theo tiêu chuẩn của Việt Nam
         // đơn vị tiền tệ của Việt Nam là đồng
         Locale localeVN = new Locale("vi", "VN");
         NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
-        tong =0.0;
-        for( int i = 0;i<tbl_BanHang.getRowCount();i++){
-            tong += Double.parseDouble( tbl_BanHang.getValueAt(i, 6).toString());
+        tong = 0.0;
+        for (int i = 0; i < tbl_BanHang.getRowCount(); i++) {
+            tong += Double.parseDouble(tbl_BanHang.getValueAt(i, 6).toString());
         }
 //        lbl_TongTien.setText(currencyVN.format(tong));
         lbl_TienPhaiTra.setText(currencyVN.format(tong));
-        
+
     }
 
-    //tính tiền thừ
-//    public void TinhTienThua(){
-//        DecimalFormat x = new DecimalFormat("###,###,###");
-//        double d = 3.76628729;
-//        double tienThua = 0;
-//        double tienTra = tong;
-//        double tienDua = Double.valueOf(txt_TienDua.getText().toString());
-//        
-//        tienThua = tienDua-tienTra;
-//        System.out.println("tienthua"+tienThua);
-//        lbl_TienThua.setText(x.format(tienThua));
-//    }
-    //ẩn các nút chức năng
+    /**
+     * Ản cái chức năng chưa cần thiết
+     */
     public void Hide() {
         btn_XoaMatHang.setVisible(false);
         lbl_TextSL.setVisible(false);
@@ -426,9 +400,13 @@ public class FrmNhapHang extends javax.swing.JPanel {
         txtDiaChiNCC.setEditable(false);
     }
 
-    //chuyen doi kieu tien te sang double
-    //@param: 128.000 d
-    //@return 128000
+    /**
+     * Chuyển đổi số dạng tiền tệ sang kiêu double
+     *
+     * @param money String
+     * @return double
+     *
+     */
     public Double changeMoney(String money) {
         if (money.length() > 1) {
             String newMoney = money.substring(0, money.length() - 2).replace(".", "");
@@ -437,28 +415,10 @@ public class FrmNhapHang extends javax.swing.JPanel {
         return 0.0;
     }
 
-    //tính tiền thừ va cap nhat tien thua len giao dien
-    //tienthua = tienkhachdua - tienphaitra
-    public void TinhTienThua() {
-//           // tạo 1 NumberFormat để định dạng tiền tệ theo tiêu chuẩn của Việt Nam
-//        // đơn vị tiền tệ của Việt Nam là đồng
-//        Locale localeVN = new Locale("vi", "VN");
-//        NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
-//        
-//      String tienPhaiTra = lbl_TienPhaiTra.getText();
-//      String tienKhachDua = txt_TienDua1.getText();
-//      Double tienThua = changeMoney(tienKhachDua) - changeMoney(tienPhaiTra);
-//       lbl_TienPhaiTra.setText(currencyVN.format(tienThua));
-
-//        Double tienNhap = Double.valueOf(lbl_TongTien.getText().toString());
-//        Double tienThue = Double.valueOf(txt_TienDua1.getText().toString());
-
-//        Double togTien = tienNhap + tienThue;
-//        lbl_TienPhaiTra.setText(togTien.toString());
-
-    }
-
-    //đọc dữ liệu lên combobox danh mục
+    /**
+     * Đọc dữ liệu danh mục sản phẩm lên combobox
+     *
+     */
     public void upCbo_DM() {
         dsDmSP = dm_dao.getAllDM();
         for (DanhMucSP dm : dsDmSP) {
@@ -467,7 +427,11 @@ public class FrmNhapHang extends javax.swing.JPanel {
         }
     }
 
-    //Kiem tra nhap hang
+    /**
+     * Kiểm tra dữ liệu trước khi nhập hàng
+     *
+     * @return boolean
+     */
     private boolean kiemTraTruocNhapHang() {
 
         //kiem tra table co san pham can ban nao chua
@@ -484,7 +448,9 @@ public class FrmNhapHang extends javax.swing.JPanel {
         return true;
     }
 
-    //xoa rong nhap hang
+    /**
+     * Xóa trắng thông tin hóa đơn khi nhập hàng thành công
+     */
     public void xoaRong() {
         txtMaNCC1.setText("");
         txtTenNCC.setText("");
@@ -496,7 +462,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
 //        lbl_TongTien.setText("");
 //        txt_TienDua1.setText("");
         lbl_TienPhaiTra.setText("");
-        
+
         btn_XoaMatHang.setVisible(false);
         lbl_TextSL.setVisible(false);
         lbl_GiamSL.setVisible(false);
@@ -507,7 +473,11 @@ public class FrmNhapHang extends javax.swing.JPanel {
 
     }
 
-    //xuat hoa don
+    /**
+     * Xuất ra hóa đơn
+     *
+     * @param maHD String
+     */
     public void printBill(String maHDN) {
         try {
 
@@ -525,7 +495,9 @@ public class FrmNhapHang extends javax.swing.JPanel {
         }
     }
 
-    //lay san pham tren table
+    /**
+     * Lấy các sản phẩm trên bản bán hàng
+     */
     public List<SanPham> getSpFromTB() {
         List<SanPham> list = new ArrayList<SanPham>();
         for (int i = 0; i < tbl_BanHang.getRowCount(); i++) {
@@ -535,22 +507,11 @@ public class FrmNhapHang extends javax.swing.JPanel {
             String SL = tbl_BanHang.getValueAt(i, 3).toString();
             String donGia = tbl_BanHang.getValueAt(i, 4).toString();
             String giaNhap = tbl_BanHang.getValueAt(i, 5).toString();
-            SanPham sp = new SanPham(maSp, tenSp, Double.parseDouble(donGia), Integer.parseInt(SL), mau,Double.parseDouble(giaNhap));
+            SanPham sp = new SanPham(maSp, tenSp, Double.parseDouble(donGia), Integer.parseInt(SL), mau, Double.parseDouble(giaNhap));
             list.add(sp);
         }
         return list;
     }
-    
-    
-//    public String TaoMaHD(){
-//        Random rand = new Random();
-//         int ranNum = rand.nextInt(100000000)+ 1;
-//         String maHD = "HDNH"+String.valueOf(ranNum);
-//         
-//         return maHD;
-//    }
-
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -970,7 +931,8 @@ public class FrmNhapHang extends javax.swing.JPanel {
                             .addComponent(txt_email))
                         .addContainerGap(44, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(btn_Luu1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_Luu1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
                         .addComponent(btn_Xoa1)
                         .addGap(42, 42, 42))))
@@ -1050,6 +1012,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Nhập Hàng");
+        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton4MouseClicked(evt);
@@ -1619,15 +1582,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
         if (r != -1) {
             huy(r);
             txt_SuaSL.setText("");
-
-        } //        else if(tb){
-        //            btn_XoaMatHang.setVisible(false);
-        //        lbl_TextSL.setVisible(false);
-        //        lbl_GiamSL.setVisible(false);
-        //        lbl_TangSL.setVisible(false);
-        //        txt_SuaSL.setVisible(false);
-        //        }
-        else {
+        } else {
 
             JOptionPane.showMessageDialog(null, "Bạn chưa chọn dòng cần xóa!");
         }
@@ -1828,7 +1783,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
                         e.printStackTrace();
                     }
                     dfbh_model.addRow(new Object[]{
-                        sps.getMaSP(), sps.getTenSP(), sps.getMauSac(), slNhap,sps.getGiaNhap(), sps.getDonGia(), tong
+                        sps.getMaSP(), sps.getTenSP(), sps.getMauSac(), slNhap, sps.getGiaNhap(), sps.getDonGia(), tong
                     });
                 }
 
@@ -1905,10 +1860,9 @@ public class FrmNhapHang extends javax.swing.JPanel {
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         if (kiemTraTruocNhapHang()) {
-            
+
             taoDonNhap();
-            
-            
+
         }
 
 
@@ -1939,26 +1893,28 @@ public class FrmNhapHang extends javax.swing.JPanel {
     private void txt_GiaNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_GiaNhapActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_GiaNhapActionPerformed
-    
-    public void printBillNhap(String maHD){
+
+    public void printBillNhap(String maHD) {
         try {
-            
+
             Hashtable map = new Hashtable();
             JasperReport report = JasperCompileManager.compileReport("src\\Gui/rptHoaDonNhap.jrxml");
-            
+
             map.put("MaHDNhap", maHD);
-                  
-            JasperPrint p = JasperFillManager.fillReport(report,  map, connect.getConnection() );
+
+            JasperPrint p = JasperFillManager.fillReport(report, map, connect.getConnection());
             JasperViewer.viewReport(p, false);
-           // JasperExportManager.exportReportToPdfFile(p, "test.pdf");
+            // JasperExportManager.exportReportToPdfFile(p, "test.pdf");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-           
+
         }
     }
-    
-    
-    //tao hoa don nhap hang
+
+    /**
+     * Tạo một hoán đơn nhập hàng mới
+     *
+     */
     public void taoDonNhap() {
         //lay sp tu table
         List<SanPham> listSp = getSpFromTB();
@@ -1976,7 +1932,7 @@ public class FrmNhapHang extends javax.swing.JPanel {
         System.out.println("nv" + nv);
         //lay tong tien
         Double tongTien = changeMoney(lbl_TienPhaiTra.getText());
-        System.out.println("Tong tien"+tongTien);
+        System.out.println("Tong tien" + tongTien);
         String ghiChu = txt_Ghichu.getText();
         if (ghiChu.equals("Nhập ghi chú đơn hàng")) {
             ghiChu = " ";
@@ -2006,14 +1962,12 @@ public class FrmNhapHang extends javax.swing.JPanel {
         for (int i = 0; i < list_CTHDN.size(); i++) {
             ctnDao.createCTHoaDonNH(list_CTHDN.get(i));
         }
-         xoaRong();
+        xoaRong();
         //in hoa don
         printBillNhap(hn.getMaHDNhap());
-       
 
     }
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Luu;

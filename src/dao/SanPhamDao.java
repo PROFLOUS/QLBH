@@ -173,6 +173,7 @@ public class SanPhamDao {
                 return true;
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }

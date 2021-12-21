@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package entity;
 
 import java.util.Date;
@@ -12,30 +9,21 @@ import java.util.Date;
  * 
  */
 
-//●       MaNV – varchar(30) – Foreign Key
-//●       MaNCC – varchar(30) – Foreign Key
-//●       MaHDNhap – varchar(30) – Primary Key
-//●       NgayLapHD – date – not null
-//●       SoLuongSP – interger – not null – Không âm ( >= 0)
-//●       TongTien – double – not null - Không âm ( >= 0)
-//●       GhiChu – varchar(255)
 
 public class HoaDonNhap {
     
     private String maHDNhap;
     private Date ngayLapHD;
     private int soLuong;
-    private Double tongTien;
+    private double tongTien;
     private String ghiChu;
-    
-    
     private NhanVien nhanVien;
     private NhaCC NCC;
 
     public HoaDonNhap() {
     }
 
-    public HoaDonNhap(String maHDNhap, Date ngayLapHD, int soLuong, Double tongTien, String ghiChu) {
+    public HoaDonNhap(String maHDNhap, Date ngayLapHD, int soLuong, double tongTien, String ghiChu) {
         this.maHDNhap = maHDNhap;
         this.ngayLapHD = ngayLapHD;
         this.soLuong = soLuong;
@@ -43,7 +31,7 @@ public class HoaDonNhap {
         this.ghiChu = ghiChu;
     }
 
-    public HoaDonNhap(Date ngayLapHD, int soLuong, Double tongTien, String ghiChu, NhanVien nhanVien, NhaCC NCC) {
+    public HoaDonNhap(Date ngayLapHD, int soLuong, double tongTien, String ghiChu, NhanVien nhanVien, NhaCC NCC) {
         this.ngayLapHD = ngayLapHD;
         this.soLuong = soLuong;
         this.tongTien = tongTien;
@@ -52,7 +40,7 @@ public class HoaDonNhap {
         this.NCC = NCC;
     }
 
-    public HoaDonNhap(String maHDNhap, Date ngayLapHD, int soLuong, Double tongTien, String ghiChu, NhanVien nhanVien, NhaCC NCC) {
+    public HoaDonNhap(String maHDNhap, Date ngayLapHD, int soLuong, double tongTien, String ghiChu, NhanVien nhanVien, NhaCC NCC) {
         this.maHDNhap = maHDNhap;
         this.ngayLapHD = ngayLapHD;
         this.soLuong = soLuong;
@@ -74,7 +62,7 @@ public class HoaDonNhap {
         return soLuong;
     }
 
-    public Double getTongTien() {
+    public double getTongTien() {
         return tongTien;
     }
 
@@ -102,7 +90,7 @@ public class HoaDonNhap {
         this.soLuong = soLuong;
     }
 
-    public void setTongTien(Double tongTien) {
+    public void setTongTien(double tongTien) {
         this.tongTien = tongTien;
     }
 
@@ -118,7 +106,4 @@ public class HoaDonNhap {
         this.NCC = NCC;
     }
 
-    
-    
-    
 }

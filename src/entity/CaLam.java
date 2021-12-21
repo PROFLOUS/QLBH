@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package entity;
 
 
@@ -13,30 +10,25 @@ import java.util.Objects;
  * @author GMT
  */
 
-//●       MaCa – varchar(30) – Primary Key
-//●       MaNV – varchar(30) - Foreign Key
-//●       NgayLam – date
-//●       Buoi – varchar(25)
-//      (ca sáng : 8h - 3h - ca chiều( 2h - 9h)
 
 public class CaLam {
     private String maCa;
-    private NhanVien NV;
+    private NhanVien nhanVien;
     private String buoi;
     private Date ngayLam;
 
     public CaLam() {
     }
 
-    public CaLam(String maCa, NhanVien NV, String buoi) {
+    public CaLam(String maCa, NhanVien nhanVien, String buoi) {
         this.maCa = maCa;
-        this.NV = NV;
+        this.nhanVien = nhanVien;
         this.buoi = buoi;
     }
 
-    public CaLam(String maCa, NhanVien NV, String buoi, Date ngayLam) {
+    public CaLam(String maCa, NhanVien nhanVien, String buoi, Date ngayLam) {
         this.maCa = maCa;
-        this.NV = NV;
+        this.nhanVien = nhanVien;
         this.buoi = buoi;
         this.ngayLam = ngayLam;
     }
@@ -46,7 +38,7 @@ public class CaLam {
     }
 
     public NhanVien getNV() {
-        return NV;
+        return nhanVien;
     }
 
     public String getBuoi() {
@@ -61,8 +53,8 @@ public class CaLam {
         this.maCa = maCa;
     }
 
-    public void setNV(NhanVien NV) {
-        this.NV = NV;
+    public void setNV(NhanVien nhanVien) {
+        this.nhanVien = nhanVien;
     }
 
     public void setBuoi(String buoi) {
@@ -75,7 +67,7 @@ public class CaLam {
 
     @Override
     public String toString() {
-        return "CaLam{" + "maCa=" + maCa + ", NV=" + NV + ", buoi=" + buoi + ", ngayLam=" + ngayLam + '}';
+        return "CaLam{" + "maCa=" + maCa + ", NV=" + nhanVien + ", buoi=" + buoi + ", ngayLam=" + ngayLam + '}';
     }
 
     @Override

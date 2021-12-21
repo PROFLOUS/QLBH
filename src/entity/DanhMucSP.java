@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package entity;
 
 import java.util.Objects;
@@ -11,12 +7,13 @@ import java.util.Objects;
  * @author GMT
  */
 public class DanhMucSP {
-       private String maloai;
-       private String tenLoai;
-       
-       public DanhMucSP(){
-           
-       }
+
+    private String maloai;
+    private String tenLoai;
+
+    public DanhMucSP() {
+
+    }
 
     public DanhMucSP(String maloai, String tenLoai) {
         this.maloai = maloai;
@@ -26,7 +23,6 @@ public class DanhMucSP {
     public DanhMucSP(String maloai) {
         this.maloai = maloai;
     }
-    
 
     public String getMaloai() {
         return maloai;
@@ -68,6 +64,5 @@ public class DanhMucSP {
         }
         return true;
     }
-    
-       
+
 }

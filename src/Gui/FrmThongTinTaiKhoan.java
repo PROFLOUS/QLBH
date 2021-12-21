@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Gui;
 
 import dao.ImageHelper;
@@ -25,30 +20,30 @@ import javax.swing.border.Border;
 import javax.swing.filechooser.FileFilter;
 
 /**
+ * Hiển thị Giao diện Form Thông tin tài khoản của nhân viên đăng nhập vào hệ
+ * thống
  *
- * @author HP
  */
 public class FrmThongTinTaiKhoan extends javax.swing.JPanel {
-public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, new Color(153,153,153));
-   public Border active_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, new Color(153,204,255));
+
+    public Border default_border = BorderFactory.createMatteBorder(0, 0, 3, 0, new Color(153, 153, 153));
+    public Border active_border = BorderFactory.createMatteBorder(0, 0, 3, 0, new Color(153, 204, 255));
     /**
      * Creates new form FrmThongTinTaiKhoan
      */
-   NhanVienDao nhanvienDao = new NhanVienDao();
+    NhanVienDao nhanvienDao = new NhanVienDao();
+
     public FrmThongTinTaiKhoan() {
         initComponents();
         renderData();
         setButtonBorder(btn_tab_TTTK);
     }
 
-    public void setButtonBorder(JButton button){
-//        for (JButton btn : buttons) {
-//            btn.setBorder(default_border);
-//            btn.setForeground(new Color(153,153,153));
-//        }
+    public void setButtonBorder(JButton button) {
         button.setBorder(active_border);
         button.setForeground(Color.black);
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -379,61 +374,60 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
     }//GEN-LAST:event_btn_tab_TTTKActionPerformed
 
     private void btnDoiMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMKActionPerformed
-       new FrmDoiMK().setVisible(true);
+        new FrmDoiMK().setVisible(true);
     }//GEN-LAST:event_btnDoiMKActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         //su kien cap nhat thong tin nhan vien
-          int tb = JOptionPane.showConfirmDialog(null, "Bạn  chắc chắn muốn xóa dòng này không?", "Detele", JOptionPane.YES_NO_OPTION);
-            if (tb == JOptionPane.YES_OPTION) {
-                  String tenNV = txtTen.getText().trim();
-                    String maNV = txtMaNV.getText();
-                    String DiaChi = txtDiaChi.getText().trim();
-                    String sdt = txtSDT.getText().trim();
-                    //JOptionPane.showMessageDialog(txtMaNV, "Đang nâng cấp!!");
-                    NhanVien nv = new NhanVien(tenNV, sdt,DiaChi);
-                     if(nhanvienDao.updateNhanVien(maNV, nv)){
-                         JOptionPane.showMessageDialog(txtMaNV, "Cập nhật thành công!!");
-                     }
-                     else{
-                         JOptionPane.showMessageDialog(txtMaNV, "Đang nâng cấp!!");
-                     }
+        int tb = JOptionPane.showConfirmDialog(null, "Bạn có chắc cập nhật lại không?", "Update", JOptionPane.YES_NO_OPTION);
+        if (tb == JOptionPane.YES_OPTION) {
+            String tenNV = txtTen.getText().trim();
+            String maNV = txtMaNV.getText();
+            String DiaChi = txtDiaChi.getText().trim();
+            String sdt = txtSDT.getText().trim();
+            //JOptionPane.showMessageDialog(txtMaNV, "Đang nâng cấp!!");
+            NhanVien nv = new NhanVien(tenNV, sdt, DiaChi);
+            if (nhanvienDao.updateNhanVien(maNV, nv)) {
+                JOptionPane.showMessageDialog(txtMaNV, "Cập nhật thành công!!");
+            } else {
+                JOptionPane.showMessageDialog(txtMaNV, "Đang nâng cấp!!");
             }
-      
-        
-        
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
-    public boolean checkValue(){
-               String tenNV = txtTen.getText().trim();
 
-               String DiaChi = txtDiaChi.getText().trim();
-               String sdt = txtSDT.getText().trim();
-               String regexMail = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";//check mail
-               String regexPhone = "^[0-9]{10}";
+    /**
+     * Kiểm tra dữ liệu nhập
+     */
+    public boolean checkValue() {
+        String tenNV = txtTen.getText().trim();
 
-
-
-
-              if(tenNV.length()<=0) {
-                   JOptionPane.showMessageDialog(txtDiaChi, "Tên Nhân viên không được để trống");			
-                   return false;
-               }
-              if(DiaChi.length() <=0){
-                   JOptionPane.showMessageDialog(txtDiaChi, "Địa chỉ NCC không được để trống");			
-                   return false;             
-              }
-            if(!sdt.matches(regexPhone)){
-                          JOptionPane.showMessageDialog(txtDiaChi, "Số điện thoại có 10 số");			
-                          return false;             
-                     }
-              return true;
+        String DiaChi = txtDiaChi.getText().trim();
+        String sdt = txtSDT.getText().trim();
+        String regexMail = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";//check mail
+        String regexPhone = "^[0-9]{10}";
+        if (tenNV.length() <= 0) {
+            JOptionPane.showMessageDialog(txtDiaChi, "Tên Nhân viên không được để trống");
+            return false;
+        }
+        if (DiaChi.length() <= 0) {
+            JOptionPane.showMessageDialog(txtDiaChi, "Địa chỉ NCC không được để trống");
+            return false;
+        }
+        if (!sdt.matches(regexPhone)) {
+            JOptionPane.showMessageDialog(txtDiaChi, "Số điện thoại có 10 số");
+            return false;
+        }
+        return true;
     }
 
-    public void renderData(){
+    /**
+     * Đọc dữ liệu thông tiên nhân viên lên giao diện
+     */
+    public void renderData() {
         NhanVienDao nvDao = new NhanVienDao();
         NhanVien nv = nvDao.getNVByMaTrangThai("online");
-       // System.out.println("Gui.FrmThongTinTaiKhoan.renderData()"+nv);
-        if(nv!=null){
+        // System.out.println("Gui.FrmThongTinTaiKhoan.renderData()"+nv);
+        if (nv != null) {
             txtTen.setText(nv.getTenNV());
             txtMaNV.setText(nv.getMaNV());
             txtSDT.setText(nv.getSdt());
@@ -450,28 +444,26 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
             txtMatKhau.setText(tk.getMatKhau());
 
             txtUser.setEnabled(false);
-            
+
             //set img
-            if(nv.getImg() != null){
-                 try {
-                 
+            if (nv.getImg() != null) {
+                try {
+
                     Image img = ImageHelper.createImgFromByArray(nv.getImg(), "jpg");
                     Image imgResize = ImageHelper.resize(img, 150, 200);
-                  
+
                     lblImg.setIcon(new ImageIcon(imgResize));
                     employeeImg = nv.getImg();
                 } catch (IOException ex) {
                     Logger.getLogger(FrmDsNV.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            } else {
+                lblImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/new-arrival.png"))); // NOI18N
+                employeeImg = nv.getImg();
             }
-            else{
-                 lblImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgVSicon/new-arrival.png"))); // NOI18N
-                  employeeImg = nv.getImg();
-            }
-            
+
         }
-        
-       
+
     }
     private byte[] employeeImg;
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -497,7 +489,7 @@ public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, n
     private javax.swing.JTextField txtChucVu;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtMaNV;
-    private javax.swing.JTextField txtMatKhau;
+    public static javax.swing.JTextField txtMatKhau;
     private javax.swing.JTextField txtNgaySinh;
     private javax.swing.JTextField txtNgayVaoLam;
     private javax.swing.JTextField txtSDT;

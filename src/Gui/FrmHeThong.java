@@ -28,20 +28,21 @@ import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * Hiển thị Giao diện Form Hệ thống
  *
- * @author HP
  */
 public class FrmHeThong extends javax.swing.JPanel {
+
     private ArrayList<TaiKhoan> listTK = new ArrayList<TaiKhoan>();
     TaiKhoanDao tkDao = new TaiKhoanDao();
-     private javax.swing.table.DefaultTableModel modelTbTK;
-     //chua ds  NV tuong ung tung chi so index trong jcomboNV
-     private List<NhanVien> listNV = new ArrayList<NhanVien>();
-     
-     
-   public  Border default_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, new Color(153,153,153));
-   public Border active_border = BorderFactory.createMatteBorder(0, 0   , 3, 0, new Color(153,204,255));
-   public JButton [] buttons;
+    private javax.swing.table.DefaultTableModel modelTbTK;
+    //chua ds  NV tuong ung tung chi so index trong jcomboNV
+    private List<NhanVien> listNV = new ArrayList<NhanVien>();
+
+    public Border default_border = BorderFactory.createMatteBorder(0, 0, 3, 0, new Color(153, 153, 153));
+    public Border active_border = BorderFactory.createMatteBorder(0, 0, 3, 0, new Color(153, 204, 255));
+    public JButton[] buttons;
+
     /**
      * Creates new form FrmHeThong
      */
@@ -53,107 +54,98 @@ public class FrmHeThong extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(FrmHeThong.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-         // renderDsTK(listTK);
-          renderJCB();
-          setButtonBorder(btn_tab_HeThong);
-    }
-    
-     //dua du lieu TaiKhoan len Table
-	private void renderDsTK(ArrayList<TaiKhoan> arr) {
-		
-                 String[] title = { "Tên Tài Khoản", "Mật Khẩu", "Tên Quyền", "Trạng Thái", "Nhân Viên"};
-		 
-                modelTbTK = new DefaultTableModel(title,0);
-		for(TaiKhoan s : arr) {
-			String[] rowData = {
-				s.getTenTaiKhoan(),s.getMatKhau(),s.getTenQuyen(),s.getTrangThai(),s.getNhanVien().getTenNV()
-			};
-                       
-			modelTbTK.addRow(rowData);
-		}
-               
-		tbTaiKhoan.setModel(modelTbTK);
-           
-	}
-        
-        public void renderDsTKAgain() {
-		
-                 String[] title = { "Tên Tài Khoản", "Mật Khẩu", "Tên Quyền", "Trạng Thái", "Nhân Viên"};
-		 
-                modelTbTK = new DefaultTableModel(title,0);
-              modelTbTK.setRowCount(0);
-              TaiKhoanDao taiKhoanDao = new TaiKhoanDao();
-                ArrayList<TaiKhoan> arr = taiKhoanDao.getDsTaiKhoan();
-		for(TaiKhoan s : arr) {
-			String[] rowData = {
-				s.getTenTaiKhoan(),s.getMatKhau(),s.getTenQuyen(),s.getTrangThai(),s.getNhanVien().getTenNV()
-			};
-                       
-			modelTbTK.addRow(rowData);
-		}
-               
-		tbTaiKhoan.setModel(modelTbTK);
-           
-	}
 
-//    public void addBorder(){
-//        buttons = new JButton[2];
-//        
-//        //Form san pham
-//        buttons[0] = btn_tab_dsncc;
-//        buttons[1] = btn_tab_tkncc;
-//        
-//   
-//        setButtonBorder(btn_tab_HeThong);
-//
-//        addAction();
-//    }
-        //set border active
-    public void setButtonBorder(JButton button){
-//        for (JButton btn : buttons) {
-//            btn.setBorder(default_border);
-//            btn.setForeground(new Color(153,153,153));
-//        }
+        // renderDsTK(listTK);
+        renderJCB();
+        setButtonBorder(btn_tab_HeThong);
+    }
+
+    /**
+     * Đọc dữ liệu Tài khoản nhân viên từ database lên bảng thông tin
+     */
+    private void renderDsTK(ArrayList<TaiKhoan> arr) {
+
+        String[] title = {"Tên Tài Khoản", "Mật Khẩu", "Tên Quyền", "Trạng Thái", "Nhân Viên"};
+
+        modelTbTK = new DefaultTableModel(title, 0);
+        for (TaiKhoan s : arr) {
+            String[] rowData = {
+                s.getTenTaiKhoan(), s.getMatKhau(), s.getTenQuyen(), s.getTrangThai(), s.getNhanVien().getTenNV()
+            };
+
+            modelTbTK.addRow(rowData);
+        }
+
+        tbTaiKhoan.setModel(modelTbTK);
+
+    }
+
+    /**
+     * Tải lại danh sách tài khoản
+     */
+    public void renderDsTKAgain() {
+
+        String[] title = {"Tên Tài Khoản", "Mật Khẩu", "Tên Quyền", "Trạng Thái", "Nhân Viên"};
+
+        modelTbTK = new DefaultTableModel(title, 0);
+        modelTbTK.setRowCount(0);
+        TaiKhoanDao taiKhoanDao = new TaiKhoanDao();
+        ArrayList<TaiKhoan> arr = taiKhoanDao.getDsTaiKhoan();
+        for (TaiKhoan s : arr) {
+            String[] rowData = {
+                s.getTenTaiKhoan(), s.getMatKhau(), s.getTenQuyen(), s.getTrangThai(), s.getNhanVien().getTenNV()
+            };
+
+            modelTbTK.addRow(rowData);
+        }
+
+        tbTaiKhoan.setModel(modelTbTK);
+
+    }
+
+    //set border active
+    public void setButtonBorder(JButton button) {
         button.setBorder(active_border);
         button.setForeground(Color.black);
     }
+
     //add even
-    public void addAction(){
+    public void addAction() {
         for (JButton button : buttons) {
             button.addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     for (JButton btn : buttons) {
-            btn.setBorder(default_border);
-            btn.setForeground(new Color(153,153,153));
-        }
-        button.setBorder(active_border);
-        button.setForeground(Color.black);
+                        btn.setBorder(default_border);
+                        btn.setForeground(new Color(153, 153, 153));
+                    }
+                    button.setBorder(active_border);
+                    button.setForeground(Color.black);
                 }
 
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    
+
                 }
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    
+
                 }
 
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                   
+
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    
+
                 }
             });
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -508,100 +500,101 @@ public class FrmHeThong extends javax.swing.JPanel {
     private void txtTaiKhoanFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTaiKhoanFocusGained
         // TODO add your handling code here:
         txtTaiKhoan.setText("");
-       txtTaiKhoan.setForeground(new java.awt.Color(26, 25, 25));
+        txtTaiKhoan.setForeground(new java.awt.Color(26, 25, 25));
     }//GEN-LAST:event_txtTaiKhoanFocusGained
 
     private void txtMatKhauFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMatKhauFocusGained
         // TODO add your handling code here:
         txtMatKhau.setText("");
-     txtMatKhau.setForeground(new java.awt.Color(26, 25, 25));
-         
+        txtMatKhau.setForeground(new java.awt.Color(26, 25, 25));
+
     }//GEN-LAST:event_txtMatKhauFocusGained
 
     private void tbTaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTaiKhoanMouseClicked
-                int row = tbTaiKhoan.getSelectedRow();
-               if(row != -1){
-                    setColorInput();
-                    txtTaiKhoan.setEnabled(false);
-                    txtTaiKhoan.setText(tbTaiKhoan.getValueAt(row, 0).toString());
-                    txtMatKhau.setText(tbTaiKhoan.getValueAt(row, 1).toString());
-                    String TenQuyen = tbTaiKhoan.getValueAt(row, 2).toString();
-                    if(TenQuyen.toUpperCase().equals("Nhân viên".toUpperCase())){
-                        jcbTenQuyen.setSelectedIndex(0);
+        int row = tbTaiKhoan.getSelectedRow();
+        if (row != -1) {
+            setColorInput();
+            txtTaiKhoan.setEnabled(false);
+            txtTaiKhoan.setText(tbTaiKhoan.getValueAt(row, 0).toString());
+            txtMatKhau.setText(tbTaiKhoan.getValueAt(row, 1).toString());
+            String TenQuyen = tbTaiKhoan.getValueAt(row, 2).toString();
+            if (TenQuyen.toUpperCase().equals("Nhân viên".toUpperCase())) {
+                jcbTenQuyen.setSelectedIndex(0);
+            } else if (TenQuyen.toUpperCase().equals("Quản lý".toUpperCase())) {
+                jcbTenQuyen.setSelectedIndex(1);
+            }
+
+            String TrangThai = tbTaiKhoan.getValueAt(row, 3).toString();
+
+            if (TrangThai.toLowerCase().equals("đã khóa")) {
+                jcbTrangThai.setSelectedIndex(1);
+            } else if (TrangThai.toUpperCase().equals("Hoạt động".toUpperCase())) {
+                jcbTrangThai.setSelectedIndex(0);
+            }
+
+            String NhanVien = tbTaiKhoan.getValueAt(row, 4).toString();
+            try {
+                NhanVienDao nvDao = new NhanVienDao();
+                ArrayList<NhanVien> listNV = nvDao.getAllNV();
+
+                for (int i = 0; i < listNV.size(); i++) {
+                    if (listNV.get(i).getTenNV().toUpperCase().equals(NhanVien.toUpperCase())) {
+                        jcbNhanVien1.setSelectedIndex(i);
+                        break;
                     }
-                    else if(TenQuyen.toUpperCase().equals("Quản lý".toUpperCase())){
-                        jcbTenQuyen.setSelectedIndex(1);
-                    }
-                    
-                    
-                    
-                     String TrangThai = tbTaiKhoan.getValueAt(row, 3).toString();
-                
-                    if(TrangThai.toLowerCase().equals("đã khóa")){
-                        jcbTrangThai.setSelectedIndex(1);
-                    }
-                    else if(TrangThai.toUpperCase().equals("Hoạt động".toUpperCase())){
-                        jcbTrangThai.setSelectedIndex(0);
-                    }
-                    
-                    
-                     String NhanVien = tbTaiKhoan.getValueAt(row, 4).toString();
-                      try {
-                    NhanVienDao nvDao = new NhanVienDao();
-                    ArrayList<NhanVien> listNV = nvDao.getAllNV();
-                    
-                     for(int i =0; i < listNV.size(); i++) {
-				if(listNV.get(i).getTenNV().toUpperCase().equals(NhanVien.toUpperCase())){
-                                    jcbNhanVien1.setSelectedIndex(i);
-                                    break;
-                                }
-			}
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-               }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }//GEN-LAST:event_tbTaiKhoanMouseClicked
 
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
-       txtTaiKhoan.setEnabled(true);
-       btnLuu1.setEnabled(true);
-       txtTaiKhoan.requestFocus();
-         xoaRong();
-        
+        txtTaiKhoan.setEnabled(true);
+        btnLuu1.setEnabled(true);
+        txtTaiKhoan.requestFocus();
+        xoaRong();
+
     }//GEN-LAST:event_btnThemMouseClicked
 
     //su kien clich vao Update
     private void btnCapNhatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCapNhatMouseClicked
-                if(checkValue()){
-                    String username = txtTaiKhoan.getText();
-                   String passWorld = txtMatKhau.getText();
-                   String tenQuyen = jcbTenQuyen.getSelectedItem().toString().toLowerCase();
-                   String trangThai = jcbTrangThai.getSelectedItem().toString().toLowerCase();
-                   
-                   TaiKhoan tk = new TaiKhoan(passWorld, tenQuyen, trangThai, username);
-                   if(tkDao.updateTaiKhoan(tk)){
-                        String[] title = { "Tên Tài Khoản", "Mật Khẩu", "Tên Quyền", "Trạng Thái", "Nhân Viên"};
-                        modelTbTK = new DefaultTableModel(title,0);
-                        tbTaiKhoan.setModel(modelTbTK);
-                       TaiKhoanDao tkd = new TaiKhoanDao();
-                       ArrayList<TaiKhoan> list = tkd.getDsTaiKhoan();
-                       renderDsTK(list);
-                       JOptionPane.showMessageDialog(btnThem, "Cập nhật thành công!!");
-                   }
-                }
+        if (checkValue()) {
+            String username = txtTaiKhoan.getText();
+            String passWorld = txtMatKhau.getText();
+            String tenQuyen = jcbTenQuyen.getSelectedItem().toString().toLowerCase();
+            String trangThai = jcbTrangThai.getSelectedItem().toString().toLowerCase();
+            String tenNV = jcbNhanVien1.getSelectedItem().toString();
+            System.out.println("tenv" + tenNV);
+            NhanVienDao nvDao = new NhanVienDao();
+            NhanVien nv = nvDao.getNVByTenNV(tenNV);
+            System.out.println("nvv" + nv);
+            TaiKhoan tk = new TaiKhoan(passWorld, tenQuyen, trangThai, username);
+            tk.setNhanVien(nv);
+            System.out.println("taikona" + tk);
+            if (tkDao.updateTaiKhoan(tk)) {
+                String[] title = {"Tên Tài Khoản", "Mật Khẩu", "Tên Quyền", "Trạng Thái", "Nhân Viên"};
+                modelTbTK = new DefaultTableModel(title, 0);
+                tbTaiKhoan.setModel(modelTbTK);
+                TaiKhoanDao tkd = new TaiKhoanDao();
+                ArrayList<TaiKhoan> list = tkd.getDsTaiKhoan();
+                renderDsTK(list);
+                JOptionPane.showMessageDialog(btnThem, "Cập nhật thành công!!");
+            }
+        }
     }//GEN-LAST:event_btnCapNhatMouseClicked
 
     private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked
-        	int row = tbTaiKhoan.getSelectedRow();
-			if(row >= 0) {
-				String tenTK = tbTaiKhoan.getValueAt(row, 0).toString();
-				if(tkDao.deleteTaiKhoan(tenTK)) {
-					modelTbTK.removeRow(row);
-					xoaRong();
-					JOptionPane.showMessageDialog(btnThem, "Xóa thành công");
-				}
-				
-			}
+        int row = tbTaiKhoan.getSelectedRow();
+        if (row >= 0) {
+            String tenTK = tbTaiKhoan.getValueAt(row, 0).toString();
+            if (tkDao.deleteTaiKhoan(tenTK)) {
+                modelTbTK.removeRow(row);
+                xoaRong();
+                JOptionPane.showMessageDialog(btnThem, "Xóa thành công");
+            }
+
+        }
     }//GEN-LAST:event_btnXoaMouseClicked
 
     //click vao luu
@@ -612,113 +605,115 @@ public class FrmHeThong extends javax.swing.JPanel {
         String trangThai = jcbTrangThai.getSelectedItem().toString().toLowerCase();
         int tenNvIdx = jcbNhanVien1.getSelectedIndex();
         NhanVien nv = listNV.get(tenNvIdx);
-        
-        if(checkValue()&& checkNVandUserName() ){
-           TaiKhoan tk = new TaiKhoan(pass, tenQuyen, trangThai, tenTk);
+
+        if (checkValue() && checkNVandUserName()) {
+            TaiKhoan tk = new TaiKhoan(pass, tenQuyen, trangThai, tenTk);
             tk.setNhanVien(nv);
-            if(tkDao.createTaiKhoan(tk)){
-               
-                
+            if (tkDao.createTaiKhoan(tk)) {
+
                 //cap nhat lai table
-                  Object[] row = {tk.getTenTaiKhoan(),
-                     tk.getMatKhau(), tk.getTenQuyen(), tk.getTrangThai(), tk.getNhanVien().getTenNV()};
-                    modelTbTK.addRow(row);
-                    xoaRong();
-                    btnLuu1.setEnabled(false);
-                     JOptionPane.showMessageDialog(btnThem, "Thêm thành công !!");
+                Object[] row = {tk.getTenTaiKhoan(),
+                    tk.getMatKhau(), tk.getTenQuyen(), tk.getTrangThai(), tk.getNhanVien().getTenNV()};
+                modelTbTK.addRow(row);
+                xoaRong();
+                btnLuu1.setEnabled(false);
+                JOptionPane.showMessageDialog(btnThem, "Thêm thành công !!");
             }
         }
-     
-              
+
+
     }//GEN-LAST:event_btnLuu1MouseClicked
-    public boolean checkNVandUserName(){
-         //kiem tra ten dang nhap da ton tai chuwa
-          String tenTk = txtTaiKhoan.getText().trim();
-              TaiKhoanDao tkDao = new TaiKhoanDao();
-              TaiKhoan tk = tkDao.findTKByUserName(tenTk);
-              if(tk!=null){
-                  JOptionPane.showMessageDialog(btnThem, "Tên đăng nhập đã tồn tài trong hệ thống.");
-                  return false;
-              }
-                //lay ra chi so index trong jcbNV
-                //kiem tra nv da co tk chua
-                //1 nv chi co 1 tk
-              int idxNV = jcbNhanVien1.getSelectedIndex();
-               TaiKhoan taikhoan = tkDao.findTKByMaNV(listNV.get(idxNV).getMaNV());
-               if(taikhoan!=null){
-                   JOptionPane.showMessageDialog(btnThem, "Nhân viên đã có tài khoản trong hệ thống.\n Mỗi nhân viên chỉ có thể đăng ký 1 tài khoản.");
-                   return false;
-               }
-        
+
+    /**
+     * Kiểm tra tên đăng nhập có tồn tại trong database không
+     */
+    public boolean checkNVandUserName() {
+        //kiem tra ten dang nhap da ton tai chuwa
+        String tenTk = txtTaiKhoan.getText().trim();
+        TaiKhoanDao tkDao = new TaiKhoanDao();
+        TaiKhoan tk = tkDao.findTKByUserName(tenTk);
+        if (tk != null) {
+            JOptionPane.showMessageDialog(btnThem, "Tên đăng nhập đã tồn tài trong hệ thống.");
+            return false;
+        }
+        //lay ra chi so index trong jcbNV
+        //kiem tra nv da co tk chua
+        //1 nv chi co 1 tk
+        int idxNV = jcbNhanVien1.getSelectedIndex();
+        TaiKhoan taikhoan = tkDao.findTKByMaNV(listNV.get(idxNV).getMaNV());
+        if (taikhoan != null) {
+            JOptionPane.showMessageDialog(btnThem, "Nhân viên đã có tài khoản trong hệ thống.\n Mỗi nhân viên chỉ có thể đăng ký 1 tài khoản.");
+            return false;
+        }
+
         return true;
     }
-    
-    public boolean checkValue(){
-            
-            
-           
-              
-            //check mật khẩu từ 6-18 ký tự và không có ký tự đặc biệt
-            ///^[a-z0-9_-]{6,18}$/
-            String passWorld = txtMatKhau.getText().trim();
-             String regexPasWorld = "^[a-z0-9_-]{6,18}$";//check mail
-              if ( !passWorld.matches("^[a-z0-9_-]{6,18}$")) {
-		JOptionPane.showMessageDialog(btnThem, "Mật khẩu 6-18 ký tự và không chứa ký tự đặc biệt");
-		return false;
-                }
-             
-              //kiem tra ten ng dung
-             //  /^[a-z0-9_-]{3,16}$/
-             String tenTk = txtTaiKhoan.getText().trim();
-              if ( !tenTk.matches("^[a-zA-Z0-9_-]{3,16}$")) {
-		JOptionPane.showMessageDialog(btnThem, "Tên đăng nhập từ 3-16 ký tự và không chứa ký tự đặc biệt");
-		return false;
-                }
-              
-             
-              
-          
-            return true;
+
+    /**
+     * Kiểm tra mật khẩu
+     */
+    public boolean checkValue() {
+
+        //check mật khẩu từ 6-18 ký tự và không có ký tự đặc biệt
+        ///^[a-z0-9_-]{6,18}$/
+        String passWorld = txtMatKhau.getText().trim();
+        String regexPasWorld = "^[a-z0-9_-]{6,18}$";//check mail
+        if (!passWorld.matches("^[a-z0-9_-]{6,18}$")) {
+            JOptionPane.showMessageDialog(btnThem, "Mật khẩu 6-18 ký tự và không chứa ký tự đặc biệt");
+            return false;
         }
-        
-        public  void xoaRong(){
-              txtTaiKhoan.setText("");
-              txtMatKhau.setText("");
+        //kiem tra ten ng dung
+        //  /^[a-z0-9_-]{3,16}$/
+        String tenTk = txtTaiKhoan.getText().trim();
+        if (!tenTk.matches("^[a-zA-Z0-9_-]{3,16}$")) {
+            JOptionPane.showMessageDialog(btnThem, "Tên đăng nhập từ 3-16 ký tự và không chứa ký tự đặc biệt");
+            return false;
         }
-     //set color cho the input
-        public void setColorInput(){
-             txtTaiKhoan.setForeground(new java.awt.Color(26, 25, 25));
-             txtMatKhau.setForeground(new java.awt.Color(26, 25, 25));                    
+        return true;
+    }
+
+    /**
+     * xóa trắng các ổ textfield
+     */
+    public void xoaRong() {
+        txtTaiKhoan.setText("");
+        txtMatKhau.setText("");
+    }
+
+    public void setColorInput() {
+        txtTaiKhoan.setForeground(new java.awt.Color(26, 25, 25));
+        txtMatKhau.setForeground(new java.awt.Color(26, 25, 25));
+    }
+
+    /**
+     * Đọc dữ liệu từ database lên Combobox
+     */
+    public void renderJCB() {
+
+        jcbTenQuyen.removeAllItems();
+        jcbTenQuyen.addItem("Nhân viên");
+        jcbTenQuyen.addItem("Quản lý");
+
+        jcbTrangThai.removeAllItems();
+        jcbTrangThai.addItem("Hoạt động");
+        jcbTrangThai.addItem("Đã khóa");
+
+        //lay ra ds Ten nhan ven dua len jcombobox
+        try {
+            NhanVienDao nvDao = new NhanVienDao();
+            listNV = nvDao.getAllNV();
+            System.out.println("Gui.FrmHeThong.renderJCB()" + listNV);
+            jcbNhanVien1.removeAllItems();
+            for (NhanVien nv : listNV) {
+
+                jcbNhanVien1.addItem(nv.getTenNV());
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        
-        //render jcombobox len giao dien
-        public void renderJCB(){
- 
-                jcbTenQuyen.removeAllItems();
-                jcbTenQuyen.addItem("Nhân viên");
-                jcbTenQuyen.addItem("Quản lý");
-                
-                jcbTrangThai.removeAllItems();
-                jcbTrangThai.addItem("Hoạt động");
-                jcbTrangThai.addItem("Đã khóa");
-                
-                //lay ra ds Ten nhan ven dua len jcombobox
-                try {
-                    NhanVienDao nvDao = new NhanVienDao();
-                    listNV = nvDao.getAllNV();
-                    System.out.println("Gui.FrmHeThong.renderJCB()"+listNV);
-                     jcbNhanVien1.removeAllItems();
-                     for(NhanVien nv : listNV) {
-                         
-			jcbNhanVien1.addItem(nv.getTenNV());
-                       
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-        }
-        
-      
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;

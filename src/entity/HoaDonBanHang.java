@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package entity;
 
 import java.util.Date;
@@ -11,14 +8,7 @@ import java.util.Date;
  *
  * @author GMT
  */
-//●       MaHD – varchar(30) – PrimaryKey
-//●       MaKH – varchar(30) - Foreign Key
-//●       MaNV – varchar(30) - Foreign Key
-//●       NgayLapHD – date - not null
-//●       SoLuongSP – interger – not null - Không âm ( >= 0)
-//●       TongTien –  – not null - Không âm ( >= 0)
-//●       TienKhachDua –  – not null
-//●       GhiChu – varchar(255)
+
 
 public class HoaDonBanHang {
     private String maHD;

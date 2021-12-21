@@ -61,12 +61,43 @@ public class NhanVienDao {
                                  String trangthai = rs.getString(8);
                                  String maCV = rs.getString(7);
                                   String email = rs.getString("email");
-                                 
                                  ChucVuDao chucVuDao = new ChucVuDao();
                                  ChucVu cv = chucVuDao.getCVByMaCV(maCV);
-                              
                                  nv = new NhanVien(maNV, tenNV, sdt, diaChi, ngaySinh, ngayVaoLam, trangthai, trangthai, email, cv);
                              
+                        }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+               return nv;
+    } 
+    
+    //lay thong tin nhan vien theo têm nhân viên
+    /*
+        @param tenNV String
+        return nhanVien NhanVien
+    */
+    public NhanVien getNVByTenNV(String tenNV){
+         NhanVien nv = null;
+            try {
+                 
+                java.sql.Connection con = connect.getInstance().getConnection();
+                String sql = "select * from NhanVien where TenNV = N'"+tenNV+"' ";
+                Statement statement = con.createStatement();
+			ResultSet rs = statement.executeQuery(sql);
+			while(rs.next()) {
+				String maNhanVien = rs.getString(1);
+                                String tenNv = rs.getString(2);
+                                String sdt = rs.getString(3);
+                                 Date ngaySinh = rs.getDate(4);
+                                 String diaChi = rs.getString(5);
+                                 Date ngayVaoLam = rs.getDate(6);
+                                 String trangthai = rs.getString(8);
+                                 String maCV = rs.getString(7);
+                                  String email = rs.getString("email");
+                                 ChucVuDao chucVuDao = new ChucVuDao();
+                                 ChucVu cv = chucVuDao.getCVByMaCV(maCV);
+                                 nv = new NhanVien(maNhanVien, tenNv, sdt, diaChi, ngaySinh, ngayVaoLam, trangthai, trangthai, email, cv);
                         }
             } catch (Exception e) {
                 e.printStackTrace();

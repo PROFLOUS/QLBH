@@ -20,60 +20,70 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * Hiển thị Giao diện Form danh sách hóa đơn nhập hàng
  *
- * @author HP
  */
 public class FrmHoaDonNhapHang extends javax.swing.JPanel {
-private javax.swing.table.DefaultTableModel modelTBHoaDon;
-private ArrayList<HoaDonNhap> listHoaDon ;
-  
-    public FrmHoaDonNhapHang()throws SQLException {
-        
+
+    private javax.swing.table.DefaultTableModel modelTBHoaDon;
+    private ArrayList<HoaDonNhap> listHoaDon;
+
+    public FrmHoaDonNhapHang() throws SQLException {
+
         initComponents();
         listHoaDon = new ArrayList<HoaDonNhap>();
         try {
             connect.getInstance().connect();
-        
+
             renderListHoaDon();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-//dua du lieu HoaDon len Table
-	public void renderListHoaDon() {
-		          HoaDonNhapDao hoaDonNhapDao = new HoaDonNhapDao();
-                 String[] title = { "MaHD", "Ngày Tạo", "Nhà Cung Cấp", "Số lượng", "Tổng Tiền", "Nhân Viên", "Ghi Chú"};
-		 listHoaDon  = hoaDonNhapDao.getDsHoaDonNhap();
-                System.out.print(listHoaDon.size());
-                 modelTBHoaDon = new DefaultTableModel(title,0);
-                int i = 0;
-		for(HoaDonNhap s : listHoaDon) {
-                   //  System.out.print(i++);
-			String[] rowData = {
-				s.getMaHDNhap(),changeDateToString(s.getNgayLapHD()),s.getNCC().getTenNCC(),String.valueOf(s.getSoLuong()),String.valueOf(s.getTongTien()),
-                            s.getNhanVien().getTenNV(),s.getGhiChu()
-			};
-                       
-			modelTBHoaDon.addRow(rowData);
-                        
-		}
-               
-		tbHoaDon.setModel(modelTBHoaDon);
-                lblNumHD.setText(String.valueOf(listHoaDon.size()));
-                
-	}
-        
-        public String changeDateToString(Date date){
-            
-                DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-                String dateString  = df.format(date);
-                return dateString;
-          }
-        public void xoaModel() {
+
+    /**
+     * Đọc dữ liệu hóa đơn từ database lên bảng
+     */
+    public void renderListHoaDon() {
+        HoaDonNhapDao hoaDonNhapDao = new HoaDonNhapDao();
+        String[] title = {"MaHD", "Ngày Tạo", "Nhà Cung Cấp", "Số lượng", "Tổng Tiền", "Nhân Viên", "Ghi Chú"};
+        listHoaDon = hoaDonNhapDao.getDsHoaDonNhap();
+        System.out.print(listHoaDon.size());
+        modelTBHoaDon = new DefaultTableModel(title, 0);
+        int i = 0;
+        for (HoaDonNhap s : listHoaDon) {
+            //  System.out.print(i++);
+            String[] rowData = {
+                s.getMaHDNhap(), changeDateToString(s.getNgayLapHD()), s.getNCC().getTenNCC(), String.valueOf(s.getSoLuong()), String.valueOf(s.getTongTien()),
+                s.getNhanVien().getTenNV(), s.getGhiChu()
+            };
+
+            modelTBHoaDon.addRow(rowData);
+        }
+
+        tbHoaDon.setModel(modelTBHoaDon);
+        lblNumHD.setText(String.valueOf(listHoaDon.size()));
+
+    }
+
+    /**
+     * Chuyển kiêu dữ liệu Date sang String
+     */
+    public String changeDateToString(Date date) {
+
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String dateString = df.format(date);
+        return dateString;
+    }
+
+    /**
+     * Xóa model bảng nhập hàng
+     */
+    public void xoaModel() {
         DefaultTableModel del = (DefaultTableModel) tbHoaDon.getModel();
         del.getDataVector().removeAllElements();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -247,8 +257,7 @@ private ArrayList<HoaDonNhap> listHoaDon ;
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
+
     private void txtSearchHDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchHDFocusGained
         txtSearchHD.setText("");
     }//GEN-LAST:event_txtSearchHDFocusGained
@@ -268,24 +277,24 @@ private ArrayList<HoaDonNhap> listHoaDon ;
         AtomicBoolean check = new AtomicBoolean();
         HoaDonNhapDao hoaDonNhapDao = new HoaDonNhapDao();
 
-        ArrayList<HoaDonNhap> listHoaDon  = hoaDonNhapDao.getDsHoaDonNhap();
+        ArrayList<HoaDonNhap> listHoaDon = hoaDonNhapDao.getDsHoaDonNhap();
 
-        listHoaDon.forEach(s ->{
-            if(s.getMaHDNhap().toUpperCase().equals(text.toUpperCase())){
+        listHoaDon.forEach(s -> {
+            if (s.getMaHDNhap().toUpperCase().equals(text.toUpperCase())) {
                 check.set(true);
-                String[] title = { "MaHD", "Ngày Tạo", "Nhà Cung Cấp", "Số lượng", "Tổng Tiền", "Nhân Viên", "Ghi Chú"};
-                modelTBHoaDon = new DefaultTableModel(title,0);
+                String[] title = {"MaHD", "Ngày Tạo", "Nhà Cung Cấp", "Số lượng", "Tổng Tiền", "Nhân Viên", "Ghi Chú"};
+                modelTBHoaDon = new DefaultTableModel(title, 0);
                 String[] rowData = {
-                    s.getMaHDNhap(),changeDateToString(s.getNgayLapHD()),s.getNCC().getTenNCC(),String.valueOf(s.getSoLuong()),String.valueOf(s.getTongTien()),
-                   s.getNhanVien().getTenNV(),s.getGhiChu()
+                    s.getMaHDNhap(), changeDateToString(s.getNgayLapHD()), s.getNCC().getTenNCC(), String.valueOf(s.getSoLuong()), String.valueOf(s.getTongTien()),
+                    s.getNhanVien().getTenNV(), s.getGhiChu()
                 };
                 modelTBHoaDon.addRow(rowData);
                 tbHoaDon.setModel(modelTBHoaDon);
                 btnShowHD.setEnabled(true);
             }
         });
-        if(!check.get()){
-            JOptionPane.showMessageDialog(btnSearchHD, "Không có Hóa Đơn có mã:" + text + " " );
+        if (!check.get()) {
+            JOptionPane.showMessageDialog(btnSearchHD, "Không có Hóa Đơn có mã:" + text + " ");
         }
     }//GEN-LAST:event_btnSearchHDMouseClicked
 
@@ -324,28 +333,28 @@ private ArrayList<HoaDonNhap> listHoaDon ;
     }//GEN-LAST:event_tbHoaDonMouseClicked
 
     private void txtSearchHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchHDActionPerformed
-         String text = txtSearchHD.getText();
+        String text = txtSearchHD.getText();
         AtomicBoolean check = new AtomicBoolean();
         HoaDonNhapDao hoaDonDao = new HoaDonNhapDao();
 
-        ArrayList<HoaDonNhap> listHoaDon  = hoaDonDao.getDsHoaDonNhap();
+        ArrayList<HoaDonNhap> listHoaDon = hoaDonDao.getDsHoaDonNhap();
 
-        listHoaDon.forEach(s ->{
-            if(s.getMaHDNhap().toUpperCase().equals(text.toUpperCase())){
+        listHoaDon.forEach(s -> {
+            if (s.getMaHDNhap().toUpperCase().equals(text.toUpperCase())) {
                 check.set(true);
-                String[] title = { "MaHD", "Ngày Tạo", "Nhà Cung Cấp", "Số lượng", "Tổng Tiền", "Nhân Viên", "Ghi Chú"};
-                modelTBHoaDon = new DefaultTableModel(title,0);
+                String[] title = {"MaHD", "Ngày Tạo", "Nhà Cung Cấp", "Số lượng", "Tổng Tiền", "Nhân Viên", "Ghi Chú"};
+                modelTBHoaDon = new DefaultTableModel(title, 0);
                 String[] rowData = {
-                    s.getMaHDNhap(),changeDateToString(s.getNgayLapHD()),s.getNCC().getTenNCC(),String.valueOf(s.getSoLuong()),String.valueOf(s.getTongTien()),
-                    s.getNhanVien().getTenNV(),s.getGhiChu()
+                    s.getMaHDNhap(), changeDateToString(s.getNgayLapHD()), s.getNCC().getTenNCC(), String.valueOf(s.getSoLuong()), String.valueOf(s.getTongTien()),
+                    s.getNhanVien().getTenNV(), s.getGhiChu()
                 };
                 modelTBHoaDon.addRow(rowData);
                 tbHoaDon.setModel(modelTBHoaDon);
                 btnShowHD.setEnabled(true);
             }
         });
-        if(!check.get()){
-            JOptionPane.showMessageDialog(btnSearchHD, "Không có Hóa Đơn có mã:" + text + " " );
+        if (!check.get()) {
+            JOptionPane.showMessageDialog(btnSearchHD, "Không có Hóa Đơn có mã:" + text + " ");
         }
     }//GEN-LAST:event_txtSearchHDActionPerformed
 

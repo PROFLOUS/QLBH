@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Gui;
-
 
 import Connect.connect;
 import dao.PanelSearch;
@@ -18,9 +12,8 @@ import dao.KhachHangDao;
 import dao.NhanVienDao;
 import dao.SanPhamDao;
 import entity.CT_HDBanHang;
-import entity.CT_HDDatHang;
+
 import entity.HoaDonBanHang;
-import entity.HoaDonDatHang;
 import entity.KhachHang;
 import entity.NhaCC;
 import entity.NhanVien;
@@ -60,23 +53,23 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 
-
 /**
+ * Hiển thị Giao diện Form Đặt Hàng
  *
- * @author HP
  */
 public class FrmDatHang extends javax.swing.JPanel {
-   private JPopupMenu menu;
+
+    private JPopupMenu menu;
     private PanelSearch search;
     private JPopupMenu menu2;
     private PanelSearch search2;
     BanHangDao bhDao;
     KhachHangDao khDao;
     private DefaultTableModel dfbh_model;
-    private ArrayList<SanPham>dstt = null;
-    private ArrayList<SanPham>dssp;
+    private ArrayList<SanPham> dstt = null;
+    private ArrayList<SanPham> dssp;
     private int soLuongTon = 0;
-    private int soLuong =0;
+    private int soLuong = 0;
     SanPham sp = new SanPham();
     private Double tong;
     private int r;
@@ -84,70 +77,69 @@ public class FrmDatHang extends javax.swing.JPanel {
     private String dvvc;
     //bien toan phan
     //click vao 1 san pham trong table lay ra ma san pham
-   
+
     private String maSPClick = "";
-    
-    
-    
+
     public FrmDatHang() {
         initComponents();
         setMemoric();
         bhDao = new BanHangDao();
         khDao = new KhachHangDao();
         dstt = new ArrayList<SanPham>();
-        dssp = new  ArrayList<SanPham>();
+        dssp = new ArrayList<SanPham>();
         SanPham sp = new SanPham();
-        
+
         jPanel2.setVisible(false);
-        
-       txt_KhuyenMai.setText("0");
+
+        txt_KhuyenMai.setText("0");
         Hide();
 
         menu = new JPopupMenu();
         search = new PanelSearch();
-        
+
         menu2 = new JPopupMenu();
         search2 = new PanelSearch();
-        
+
         menu2.add(search2);
         menu2.setFocusable(false);
-        
-        
+
         menu.add(search);
         menu.setFocusable(false);
-
+        //Láy dữ liệu  sản phẩm xuống bảng đặt hàng
         search.addEventClick(new EventClick() {
             private double tongtien;
-             @Override
+
+            @Override
             public void itemClick(NhaCC data) {
             }
+
             @Override
             public void itemClick(SanPham data) {
-               
+
                 dfbh_model = (DefaultTableModel) tbl_BanHang.getModel();
                 //System.out.println("Click" +data.getTenSP());
                 menu.setVisible(false);
                 String maSp = (data.getMaSP());
                 String tenSp = (data.getTenSP());
                 String mau = (data.getMauSac());
-                double donGia =( data.getDonGia());
+                double donGia = (data.getDonGia());
                 String size = (data.getSize());
                 int soLuong = 1;
                 double thanhTien = soLuong * donGia;
-                
+
                 SanPham sp = new SanPham(maSp, tenSp, donGia, soLuong, size, mau);
-                
+
                 //tao vi tri sp
                 int vitri = vitriSP(sp);
                 System.out.println(vitri);
-                
-                if(vitri >-1){
-                    Integer sl = dstt.get(vitri).getSoLuong()+1;
+
+                if (vitri > -1) {
+                    Integer sl = dstt.get(vitri).getSoLuong() + 1;
                     dstt.get(vitri).setSoLuong(sl);
                     tongtien = sl * sp.getDonGia();
                     dfbh_model.setValueAt(sl, vitri, 3);
                     dfbh_model.setValueAt(tongtien, vitri, 5);
-                }else{
+                } else {
                     try {
                         dstt.add(sp);
                     } catch (Exception e) {
@@ -155,146 +147,140 @@ public class FrmDatHang extends javax.swing.JPanel {
                         e.printStackTrace();
                     }
                     dfbh_model.addRow(new Object[]{
-                        sp.getMaSP(),sp.getTenSP(),sp.getMauSac(),soLuong,sp.getDonGia(),thanhTien
+                        sp.getMaSP(), sp.getTenSP(), sp.getMauSac(), soLuong, sp.getDonGia(), thanhTien
                     });
                 }
                 TinhTong();
-                
 
             }
 
             @Override
             public void itemClick(KhachHang data) {
-                
+
             }
 
             private int vitriSP(SanPham sp) {
-                int i =-1;
-                try { 
-                if(dstt.contains(sp)){
-                    return dstt.indexOf(sp);
-                }
+                int i = -1;
+                try {
+                    if (dstt.contains(sp)) {
+                        return dstt.indexOf(sp);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
-                   
+
                 }
-                 return  i;
+                return i;
             }
         });
-        
+
         //enven click chon khach hang
         search2.addEventClick(new EventClick() {
             @Override
             public void itemClick(SanPham data) {
-            
+
             }
+
             @Override
             public void itemClick(NhaCC data) {
             }
 
             @Override
             public void itemClick(KhachHang data) {
-               String maKh = data.getMaKH();
-               String tenKh = data.getTenKH();
-               String sDT = data.getSdt();
-               String diaChi = data.getDiaChi();
-               
-               
-               lbl_TenKh.setText(tenKh);
-               lbl_maKh.setText(maKh);
-               lbl_SDT.setText(sDT);
-               lbl_SDT3.setText(diaChi);
-               lbl_SDT5.setText(diaChi);
-               lbl_SDT2.setText(sDT);
-               lbl_SDT4.setText(sDT);
-               jPanel1.setVisible(false);
-               jPanel2.setVisible(true);
-               menu2.setVisible(false);
-               txt_Search_KH.setText("");
-               
-                
+                String maKh = data.getMaKH();
+                String tenKh = data.getTenKH();
+                String sDT = data.getSdt();
+                String diaChi = data.getDiaChi();
+
+                lbl_TenKh.setText(tenKh);
+                lbl_maKh.setText(maKh);
+                lbl_SDT.setText(sDT);
+                lbl_SDT3.setText(diaChi);
+                lbl_SDT5.setText(diaChi);
+                lbl_SDT2.setText(sDT);
+                lbl_SDT4.setText(sDT);
+                jPanel1.setVisible(false);
+                jPanel2.setVisible(true);
+                menu2.setVisible(false);
+                txt_Search_KH.setText("");
 
             }
         });
-        
-        
-        
+
     }
-    //xóa sảm phảm từ dơn hàng
-    public void huy(int r){
-        
+
+    /**
+     * xóa một sản phẩm nào đó khỏi bảng bán hàng
+     *
+     */
+    public void huy(int r) {
+
         String masp = dstt.get(r).getMaSP();
         int index = -1;
-        for(SanPham sp : dssp)
-        {
-            if(sp.getMaSP() == masp){
-                index=dssp.indexOf(sp);
-            break;
+        for (SanPham sp : dssp) {
+            if (sp.getMaSP() == masp) {
+                index = dssp.indexOf(sp);
+                break;
             }
         }
-        
-        
+
         dfbh_model.removeRow(r);
         dstt.remove(r);
     }
-    //tính tổng tiền
-    public void TinhTong(){        
+
+    /**
+     * Tính tổng tiền hóa đơn
+     *
+     */
+    public void TinhTong() {
         // tạo 1 NumberFormat để định dạng tiền tệ theo tiêu chuẩn của Việt Nam
         // đơn vị tiền tệ của Việt Nam là đồng
         Locale localeVN = new Locale("vi", "VN");
         NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
-        
-        tong =0.0;
-        for( int i = 0;i<tbl_BanHang.getRowCount();i++){
-            tong += Double.parseDouble( tbl_BanHang.getValueAt(i, 5).toString());
+
+        tong = 0.0;
+        for (int i = 0; i < tbl_BanHang.getRowCount(); i++) {
+            tong += Double.parseDouble(tbl_BanHang.getValueAt(i, 5).toString());
         }
         lbl_TongTien.setText(currencyVN.format(tong));
         lbl_TienPhaiTra.setText(currencyVN.format(tong));
 //         txt_TienDua.setText(currencyVN.format(tong));              
     }
-    //tính tiền thừ va cap nhat tien thua len giao dien
-    //tienthua = tienkhachdua - tienphaitra
-    public void TinhTienThua(){
-           // tạo 1 NumberFormat để định dạng tiền tệ theo tiêu chuẩn của Việt Nam
+
+    /**
+     * Tính tiền thừa của hóa đơn
+     */
+    public void TinhTienThua() {
+        // tạo 1 NumberFormat để định dạng tiền tệ theo tiêu chuẩn của Việt Nam
         // đơn vị tiền tệ của Việt Nam là đồng
         Locale localeVN = new Locale("vi", "VN");
         NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
-        
-      String tienPhaiTra = lbl_TienPhaiTra.getText();
+
+        String tienPhaiTra = lbl_TienPhaiTra.getText();
 //      String tienKhachDua = txt_TienDua.getText();
 //      Double tienThua = changeMoney(tienKhachDua) - changeMoney(tienPhaiTra);
 //       lbl_TienThua.setText(currencyVN.format(tienThua));
     }
-    
-    //ẩn các nút chức năng
-    public void Hide(){
+
+    /**
+     * Ản cái chức năng chưa cần thiết
+     */
+    public void Hide() {
         btn_XoaMatHang.setVisible(false);
         lbl_TextSL.setVisible(false);
         lbl_GiamSL.setVisible(false);
         lbl_TangSL.setVisible(false);
-        
+
         txt_SuaSL.setVisible(false);
     }
-            //set phim tat
-        public void setMemoric(){
-            btn_ThanhToan.setMnemonic(KeyEvent.VK_F1);
-        }
-      public void setKhachHangLenGui(KhachHang kh){
-             String maKh = kh.getMaKH();
-               String tenKh = kh.getTenKH();
-               String sDT = kh.getSdt();
-               
-               lbl_TenKh.setText(tenKh);
-               lbl_maKh.setText(maKh);
-               lbl_SDT.setText(sDT);
-              
-//               lbl_XoaKh.setEnabled(true);
-               btn_AddKh.setVisible(false);
-               txt_Search_KH.setVisible(false);
-               
-                
+
+    /**
+     * Tạo phím tắt khi thanh toán
+     *
+     */
+    public void setMemoric() {
+        btn_ThanhToan.setMnemonic(KeyEvent.VK_F1);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1117,28 +1103,28 @@ public class FrmDatHang extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_Search_KHFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_Search_KHFocusGained
-        if(txt_Search_KH.getText().equals("Thêm Khách Hàng Vào Đơn")){
+        if (txt_Search_KH.getText().equals("Thêm Khách Hàng Vào Đơn")) {
             txt_Search_KH.setText("");
             txt_Search_KH.setForeground(Color.black);
         }
     }//GEN-LAST:event_txt_Search_KHFocusGained
 
     private void txt_Search_KHFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_Search_KHFocusLost
-        if(txt_Search_KH.getText().equals("")){
+        if (txt_Search_KH.getText().equals("")) {
             txt_Search_KH.setText("Thêm Khách Hàng Vào Đơn");
             txt_Search_KH.setForeground(Color.black);
         }
     }//GEN-LAST:event_txt_Search_KHFocusLost
 
     private void txt_Search_SPFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_Search_SPFocusGained
-        if(txt_Search_SP.getText().equals("Thêm Sản Phẩm Vào Đơn Hàng")){
+        if (txt_Search_SP.getText().equals("Thêm Sản Phẩm Vào Đơn Hàng")) {
             txt_Search_SP.setText("");
             txt_Search_SP.setForeground(Color.white);
         }
     }//GEN-LAST:event_txt_Search_SPFocusGained
 
     private void txt_Search_SPFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_Search_SPFocusLost
-        if(txt_Search_SP.getText().equals("")){
+        if (txt_Search_SP.getText().equals("")) {
             txt_Search_SP.setText("Thêm Sản Phẩm Vào Đơn Hàng");
             txt_Search_SP.setForeground(Color.white);
         }
@@ -1153,11 +1139,11 @@ public class FrmDatHang extends javax.swing.JPanel {
     private void txt_Search_SPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_Search_SPActionPerformed
 //        txt_Search_SP.requestFocus();
         //click enter neu khong co sp nao can tim hien thị thong bao
-        if (search.getItemSize() < 1){
+        if (search.getItemSize() < 1) {
             JOptionPane.showMessageDialog(tbl_BanHang, "Không tìm thấy sản phẩm trong kho");
         }
-        
-        
+
+
     }//GEN-LAST:event_txt_Search_SPActionPerformed
 
     private void txt_Search_SPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_Search_SPKeyReleased
@@ -1172,102 +1158,86 @@ public class FrmDatHang extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txt_Search_SPKeyReleased
 
-//    private List<SanPham> search(String search) {
-//        int limitData = 7;
-//        List<DataSearch> list = new ArrayList<>();
-//        
-//        
-//        return list;
-//    }
-
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void btn_XoaMatHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaMatHangMouseClicked
-        
+
         r = tbl_BanHang.getSelectedRow();
-        if (r!=-1){
+        if (r != -1) {
             huy(r);
             txt_SuaSL.setText("");
             TinhTong();
 //            lbl_TienThua.setText("0");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Bạn chưa chọn dòng cần xóa!");
         }
-        
+
     }//GEN-LAST:event_btn_XoaMatHangMouseClicked
 
     private void btn_XoaMatHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaMatHangActionPerformed
-        
+
     }//GEN-LAST:event_btn_XoaMatHangActionPerformed
 
     private void tbl_BanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_BanHangMouseClicked
         r = tbl_BanHang.getSelectedRow();
         dfbh_model = (DefaultTableModel) tbl_BanHang.getModel();
-        
-        if (r!=-1){
-                String ssl= tbl_BanHang.getValueAt(r, 3).toString();
-                txt_SuaSL.setText(ssl);
-                btn_XoaMatHang.setVisible(true);
-                lbl_TextSL.setVisible(true);
-                lbl_GiamSL.setVisible(true);
-                lbl_TangSL.setVisible(true);
-                
-                txt_SuaSL.setVisible(true);
-                
-                //lay ra ma sp vua click
-                 maSPClick = tbl_BanHang.getValueAt(r, 0).toString();
-            
+
+        if (r != -1) {
+            String ssl = tbl_BanHang.getValueAt(r, 3).toString();
+            txt_SuaSL.setText(ssl);
+            btn_XoaMatHang.setVisible(true);
+            lbl_TextSL.setVisible(true);
+            lbl_GiamSL.setVisible(true);
+            lbl_TangSL.setVisible(true);
+
+            txt_SuaSL.setVisible(true);
+
+            //lay ra ma sp vua click
+            maSPClick = tbl_BanHang.getValueAt(r, 0).toString();
+
         }
-        
+
     }//GEN-LAST:event_tbl_BanHangMouseClicked
 
-    
     //click vao thanh toan
     private void btn_ThanhToanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThanhToanMouseClicked
-       
-//        if(kiemTraTruocThanhToan()){
-//           taoHoaDon();
-//        }
-        
-        
-       
-        
+
     }//GEN-LAST:event_btn_ThanhToanMouseClicked
 
-    //tao hoa don va luu va CSDL
-    public void taoHoaDon(){
-         //lay ra dc cac san pham dang ban
-        List<SanPham> listSP =  getSpFromTB();
+    /**
+     * Tạo một hoán đơn mới
+     *
+     */
+    public void taoHoaDon() {
+        //lay ra dc cac san pham dang ban
+        List<SanPham> listSP = getSpFromTB();
         //lay ra so luong cac san pham
         int slSanPham = 0;
-        for(int i = 0; i < listSP.size(); i++){
-            slSanPham+=listSP.get(i).getSoLuong();
+        for (int i = 0; i < listSP.size(); i++) {
+            slSanPham += listSP.get(i).getSoLuong();
         }
 
         //lay ra ma KHachHang 
-        String ma =lbl_maKh.getText();
+        String ma = lbl_maKh.getText();
         KhachHang KH = khDao.getKHByMaKH(ma);
-        
+
         //lay ra nhanVien thanh toan hoa don
         NhanVienDao nvDao = new NhanVienDao();
         NhanVien NV = nvDao.getNVByMaTrangThai("online");
-        
-       
-        
+
         String maHD = TaoMaHD();
-      
-       //lay tien khach dua
+
+        //lay tien khach dua
 //       Double tienKhachDua = changeMoney(txt_TienDua.getText());
-        String ghiChu="" ;
-        String tinhTrang="Đang Giao";
-        double tienKhachDua =0.0;
-        double tienKhuyenMai= changeMoney(txt_KhuyenMai.getText());
-        
-        
-        HoaDonBanHang hd = new HoaDonBanHang(maHD,slSanPham, tong,tienKhachDua, ghiChu,tienKhuyenMai, tinhTrang);
+        String ghiChu = "";
+        String tinhTrang = "Đang Giao";
+        double tienKhachDua = 0.0;
+        double tienKhuyenMai = changeMoney(txt_KhuyenMai.getText());
+
+        HoaDonBanHang hd = new HoaDonBanHang(maHD, slSanPham, tong, tienKhachDua, ghiChu, tienKhuyenMai, tinhTrang);
         hd.setKhachHang(KH);//them doi tuong KH vao HD
         hd.setNhanVien(NV);//them doi tuong NV vao HD
 //        HoaDonBanHang hd = new HoaDonBanHang(maHD, slSanPham,tong, tienKhachDua, ghiChu,tienKhuyenMai);
@@ -1279,51 +1249,56 @@ public class FrmDatHang extends javax.swing.JPanel {
 
         //tao ds doi tuong CT_HoaDon
         List<CT_HDBanHang> list_CTHD = new ArrayList<CT_HDBanHang>();
-       
-        for(int i = 0; i < listSP.size(); i++){
-           int sl = listSP.get(i).getSoLuong();
-           double donGia = listSP.get(i).getDonGia();
-           CT_HDBanHang ct = new CT_HDBanHang(sl, donGia);
-           
-           //lay ra san pham bang maSP
-           SanPhamDao spDao = new SanPhamDao();
-           SanPham sp = spDao.findSPByMaSP(listSP.get(i).getMaSP());
-           
-           ct.setSanPham(sp);//them san pham vao CTHoaDon
-           ct.setHoaDon(hd);
 
-           list_CTHD.add(ct);
+        for (int i = 0; i < listSP.size(); i++) {
+            int sl = listSP.get(i).getSoLuong();
+            double donGia = listSP.get(i).getDonGia();
+            CT_HDBanHang ct = new CT_HDBanHang(sl, donGia);
 
-           //thuc hien cap nhat lai sl sanPham
-           spDao.updateSLSP(listSP.get(i).getMaSP(), sl);
-         
+            //lay ra san pham bang maSP
+            SanPhamDao spDao = new SanPhamDao();
+            SanPham sp = spDao.findSPByMaSP(listSP.get(i).getMaSP());
+
+            ct.setSanPham(sp);//them san pham vao CTHoaDon
+            ct.setHoaDon(hd);
+
+            list_CTHD.add(ct);
+
+            //thuc hien cap nhat lai sl sanPham
+            spDao.updateSLSP(listSP.get(i).getMaSP(), sl);
+
         }
 
         //them CTHoaDon vao csdl
         CT_HoaDonDao ctDao = new CT_HoaDonDao();
-        for(int i = 0; i < list_CTHD.size(); i++){
+        for (int i = 0; i < list_CTHD.size(); i++) {
             ctDao.createCTHoaDonBH(list_CTHD.get(i));
         }
-        
+
         //in hoa don
         printBill(maHD);
         xoaTrang();
     }
-    
-    //kiem tra du lieu them nha cc moi
+
+    /**
+     * Kiểm tra thông tin của khách hàng trước khi thêm vào database<p>
+     * Tên khách hàng phải là chữa
+     * <p>
+     * Số điện thoại phải 10 số<p>
+     * Email đúng định đạng
+     */
     public boolean kiemTraData() {
         String tenKh = txt_tenNcc.getText().trim();
         String sdt = txt_sdt.getText().trim();
         String diaChi = txt_DiaChi.getText().trim();
 
         String regexPhone = "^[0-9]{10}";
-        //ten ncc 
         if (tenKh.length() <= 0) {
-            JOptionPane.showMessageDialog(btn_Luu1, "Tên NCC không được để trống");
+            JOptionPane.showMessageDialog(btn_Luu1, "Tên Khách Hàng không được để trống");
             return false;
         }
         if (diaChi.length() <= 0) {
-            JOptionPane.showMessageDialog(btn_Luu1, "Địa chỉ NCC không được để trống");
+            JOptionPane.showMessageDialog(btn_Luu1, "Địa chỉ Khách Hàng không được để trống");
             return false;
         }
         if (!sdt.matches(regexPhone)) {
@@ -1332,15 +1307,17 @@ public class FrmDatHang extends javax.swing.JPanel {
         }
         return true;
     }
-    
-    //lay du lieu tu tef
+
+    /**
+     * Lấy thông tin khác hàng
+     */
     public KhachHang restText() {
         String tenKh = txt_tenNcc.getText().toString();
         String sdt = txt_sdt.getText().toString();
         String diachi = txt_DiaChi.getText().toString();
         return new KhachHang("", tenKh, sdt, diachi);
     }
-    
+
     private void txt_Search_KHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_Search_KHKeyReleased
         String text = txt_Search_KH.getText().trim().toLowerCase();
         search2.setDataKh(khDao.SearchMaOrTenOrSdt2(text));
@@ -1357,27 +1334,30 @@ public class FrmDatHang extends javax.swing.JPanel {
         if (search2.getItemSize() > 0) {
             menu2.show(txt_Search_KH, 0, txt_Search_KH.getHeight());
         }
-        if(txt_Search_KH.getText().length()<0){
+        if (txt_Search_KH.getText().length() < 0) {
             menu2.setVisible(false);
         }
     }//GEN-LAST:event_txt_Search_KHMouseClicked
 
     private void btn_ThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThanhToanActionPerformed
-         if(kiemTraTruocThanhToan()){
-           taoHoaDon();
+        if (kiemTraTruocThanhToan()) {
+            taoHoaDon();
         }
     }//GEN-LAST:event_btn_ThanhToanActionPerformed
 
-  
-    //chuyen doi kieu tien te sang double
-    //@param: 128.000 d
-    //@return 128000
-    public Double changeMoney(String money){
-        if(money.length()>1){
-            String newMoney = money.substring(0,money.length()-2).replace(".","");          
-             return Double.parseDouble(newMoney); 
+    /**
+     * Chuyển đổi số dạng tiền tệ sang kiêu double
+     *
+     * @param money String
+     * @return double
+     *
+     */
+    public Double changeMoney(String money) {
+        if (money.length() > 1) {
+            String newMoney = money.substring(0, money.length() - 2).replace(".", "");
+            return Double.parseDouble(newMoney);
         }
-           return 0.0;
+        return 0.0;
     }
     private void txt_SuaSLFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_SuaSLFocusGained
         // TODO add your handling code here:
@@ -1393,24 +1373,20 @@ public class FrmDatHang extends javax.swing.JPanel {
 
     private void txt_SuaSLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_SuaSLActionPerformed
         //lay ra so luong san pham cua san pham dang can ban
-        SanPhamDao  spDao = new SanPhamDao();
+        SanPhamDao spDao = new SanPhamDao();
         SanPham sanPham = spDao.findSPByMaSP(maSPClick);
-       
 
         int sl = Integer.parseInt(txt_SuaSL.getText().toString());
-       
-     
-        
-        if(sl + 1 > sanPham.getSoLuong()){
-           JOptionPane.showMessageDialog(tbl_BanHang,"Sản phẩm trong kho không đủ số lượng!!");
-        }
-        else{
+
+        if (sl + 1 > sanPham.getSoLuong()) {
+            JOptionPane.showMessageDialog(tbl_BanHang, "Sản phẩm trong kho không đủ số lượng!!");
+        } else {
             //        txt_SuaSL.setText(String.valueOf(plus));
-        tbl_BanHang.setValueAt(sl, r, 3);
-        lbl_GiamSL.setEnabled(true);
-        double donGia = Double.parseDouble( tbl_BanHang.getValueAt(r, 4).toString());
-        tbl_BanHang.setValueAt(sl * donGia, r, 5);
-        TinhTong();
+            tbl_BanHang.setValueAt(sl, r, 3);
+            lbl_GiamSL.setEnabled(true);
+            double donGia = Double.parseDouble(tbl_BanHang.getValueAt(r, 4).toString());
+            tbl_BanHang.setValueAt(sl * donGia, r, 5);
+            TinhTong();
         }
 
     }//GEN-LAST:event_txt_SuaSLActionPerformed
@@ -1425,55 +1401,52 @@ public class FrmDatHang extends javax.swing.JPanel {
 
     private void lbl_GiamSLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_GiamSLMouseClicked
         // TODO add your handling code here:
-        if(txt_SuaSL.getText().equals("0")){
+        if (txt_SuaSL.getText().equals("0")) {
             lbl_GiamSL.setEnabled(false);
-        }else{
+        } else {
             int minus = 0;
             int sl = Integer.parseInt(txt_SuaSL.getText().toString());
-            
-            if(sl-1>0){
-                 minus = sl-1; 
+
+            if (sl - 1 > 0) {
+                minus = sl - 1;
                 txt_SuaSL.setText(String.valueOf(minus));
                 tbl_BanHang.setValueAt(minus, r, 3);
-                double donGia = Double.parseDouble( tbl_BanHang.getValueAt(r, 4).toString());
+                double donGia = Double.parseDouble(tbl_BanHang.getValueAt(r, 4).toString());
                 tbl_BanHang.setValueAt(minus * donGia, r, 5);
                 lbl_GiamSL.setEnabled(true);
-                TinhTong();    
+                TinhTong();
             }
-            
+
         }
     }//GEN-LAST:event_lbl_GiamSLMouseClicked
 
     private void lbl_TangSLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_TangSLMouseClicked
         //lay ra so luong san pham cua san pham dang can ban
-        SanPhamDao  spDao = new SanPhamDao();
+        SanPhamDao spDao = new SanPhamDao();
         SanPham sanPham = spDao.findSPByMaSP(maSPClick);
-       
 
         int plus = 0;
         int sl = Integer.parseInt(txt_SuaSL.getText().toString());
-     
-        
-        if(sl + 1 > sanPham.getSoLuong()){
-           JOptionPane.showMessageDialog(tbl_BanHang,"Sản phẩm trong kho không đủ số lượng!!");
+
+        if (sl + 1 > sanPham.getSoLuong()) {
+            JOptionPane.showMessageDialog(tbl_BanHang, "Sản phẩm trong kho không đủ số lượng!!");
+        } else {
+
+            plus = sl + 1;
+            txt_SuaSL.setText(String.valueOf(plus));
+            tbl_BanHang.setValueAt(plus, r, 3);
+            lbl_GiamSL.setEnabled(true);
+            double donGia = Double.parseDouble(tbl_BanHang.getValueAt(r, 4).toString());
+            tbl_BanHang.setValueAt(plus * donGia, r, 5);
+            TinhTong();
         }
-        else{
-            
-               plus = sl+1; 
-                txt_SuaSL.setText(String.valueOf(plus));
-                tbl_BanHang.setValueAt(plus, r, 3);
-                lbl_GiamSL.setEnabled(true);
-                double donGia = Double.parseDouble( tbl_BanHang.getValueAt(r, 4).toString());
-                tbl_BanHang.setValueAt(plus * donGia, r, 5);
-                TinhTong();
-        }
-       
+
     }//GEN-LAST:event_lbl_TangSLMouseClicked
 
     private void txt_KhuyenMaiFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_KhuyenMaiFocusGained
-           String money = txt_KhuyenMai.getText();
-             
-             txt_KhuyenMai.setText(String.valueOf(changeMoney(money)));
+        String money = txt_KhuyenMai.getText();
+
+        txt_KhuyenMai.setText(String.valueOf(changeMoney(money)));
     }//GEN-LAST:event_txt_KhuyenMaiFocusGained
 
     private void txt_KhuyenMaiFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_KhuyenMaiFocusLost
@@ -1488,12 +1461,7 @@ public class FrmDatHang extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_KhuyenMaiMouseClicked
 
     private void txt_KhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_KhuyenMaiActionPerformed
-        //chuyen doi tien khuyenmai sang dinh dang tien te
-//        Locale localeVN = new Locale("vi", "VN");
-//        NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
-//        Double money = Double.parseDouble(txt_KhuyenMai.getText());
-//        txt_KhuyenMai.setText(currencyVN.format(money));
-//            txt_TienDua.requestFocus();
+
     }//GEN-LAST:event_txt_KhuyenMaiActionPerformed
 
     //nhap so tien khuyen mai
@@ -1503,25 +1471,22 @@ public class FrmDatHang extends javax.swing.JPanel {
         // đơn vị tiền tệ của Việt Nam là đồng
 //        Locale localeVN = new Locale("vi", "VN");
 //        NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
-        
+
         //kiem tra tienKM nhap vao co chu hoac ky dac biet( không phải là số) 
-       
-            String tienKM = txt_KhuyenMai.getText().substring(0,txt_KhuyenMai.getText().length()-2).replace(".","");
-                 
-            if (!tienKM.matches("^[0-9]*$")) {
-		JOptionPane.showMessageDialog(tbl_BanHang, "Không được nhập chữ hoặc ký tự đặc biệt");
-		
-            }
-            else{
-                Locale localeVN = new Locale("vi", "VN");
-                  NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
-                 double tienKhuyenMai = Double.parseDouble(txt_KhuyenMai.getText());
-                lbl_TienPhaiTra.setText(currencyVN.format(tong-tienKhuyenMai));
+        String tienKM = txt_KhuyenMai.getText().substring(0, txt_KhuyenMai.getText().length() - 2).replace(".", "");
+
+        if (!tienKM.matches("^[0-9]*$")) {
+            JOptionPane.showMessageDialog(tbl_BanHang, "Không được nhập chữ hoặc ký tự đặc biệt");
+
+        } else {
+            Locale localeVN = new Locale("vi", "VN");
+            NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+            double tienKhuyenMai = Double.parseDouble(txt_KhuyenMai.getText());
+            lbl_TienPhaiTra.setText(currencyVN.format(tong - tienKhuyenMai));
 //                txt_TienDua.setText(currencyVN.format(tong-tienKhuyenMai));
-            }
-           
-       
-        
+        }
+
+
     }//GEN-LAST:event_txt_KhuyenMaiKeyReleased
 
     private void txt_KhuyenMaiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_KhuyenMaiKeyTyped
@@ -1529,13 +1494,11 @@ public class FrmDatHang extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_KhuyenMaiKeyTyped
 
     private void btn_AddKhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_AddKhMouseClicked
-//       new FrmThemKh().setVisible(true);
-//        jPanel1.setVisible(false);
-//        jPanel2.setVisible(true);
-           jFrame2.setVisible(true);
-           jFrame2.setResizable(false);
-            jFrame2.setLocationRelativeTo(null);
-            txt_tenNcc.requestFocus();
+
+        jFrame2.setVisible(true);
+        jFrame2.setResizable(false);
+        jFrame2.setLocationRelativeTo(null);
+        txt_tenNcc.requestFocus();
     }//GEN-LAST:event_btn_AddKhMouseClicked
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -1549,14 +1512,14 @@ public class FrmDatHang extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void txt_GhichuFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_GhichuFocusGained
-        if(txt_Ghichu.getText().equals("Nhập ghi chú đơn hàng")){
+        if (txt_Ghichu.getText().equals("Nhập ghi chú đơn hàng")) {
             txt_Ghichu.setText("");
             txt_Ghichu.setForeground(Color.black);
         }
     }//GEN-LAST:event_txt_GhichuFocusGained
 
     private void txt_GhichuFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_GhichuFocusLost
-        if(txt_Ghichu.getText().equals("")){
+        if (txt_Ghichu.getText().equals("")) {
             txt_Ghichu.setText("Nhập ghi chú đơn hàng");
             txt_Ghichu.setForeground(Color.black);
         }
@@ -1576,18 +1539,18 @@ public class FrmDatHang extends javax.swing.JPanel {
             KhachHangDao khDao = new KhachHangDao();
             if (khDao.themKH(kh)) {
                 KhachHang khNew = khDao.getKhNew();
-                
+
                 lbl_TenKh.setText(khNew.getTenKH());
-               lbl_maKh.setText(khNew.getMaKH());
-               lbl_SDT.setText(khNew.getSdt());
-               lbl_SDT3.setText(khNew.getDiaChi());
-               lbl_SDT5.setText(khNew.getDiaChi());
-               lbl_SDT2.setText(khNew.getSdt());
-               lbl_SDT4.setText(khNew.getSdt());
+                lbl_maKh.setText(khNew.getMaKH());
+                lbl_SDT.setText(khNew.getSdt());
+                lbl_SDT3.setText(khNew.getDiaChi());
+                lbl_SDT5.setText(khNew.getDiaChi());
+                lbl_SDT2.setText(khNew.getSdt());
+                lbl_SDT4.setText(khNew.getSdt());
                 JOptionPane.showMessageDialog(null, "Thêm thành công");
                 jFrame2.setVisible(false);
                 jPanel1.setVisible(false);
-               jPanel2.setVisible(true);
+                jPanel2.setVisible(true);
             }
         }
     }//GEN-LAST:event_btn_Luu1MouseClicked
@@ -1659,106 +1622,104 @@ public class FrmDatHang extends javax.swing.JPanel {
 
     //kiem tra dieu kien truoc khi thanh toan
     /**
-    /@param no
-    * @return boolean
-    */
+     * /@param no
+     *
+     * @return boolean
+     */
     private boolean kiemTraTruocThanhToan() {
-        
+
         //kt khách hàng
         if (lbl_maKh.getText().length() == 0) {
             JOptionPane.showMessageDialog(tbl_BanHang, "Chưa có thông tin Khách Hàng!");
             return false;
         }
-        
+
         //kiem tra table co san pham can ban nao chua
-        if(tbl_BanHang.getRowCount()<=0){
+        if (tbl_BanHang.getRowCount() <= 0) {
             JOptionPane.showMessageDialog(tbl_BanHang, "Bạn chưa chọn sản phẩm để thanh toán");
             return false;
         }
 
-        
         return true;
     }
-    
-    //lay danh sach cac san pham tren table
-    /*
-        @param 
-        @return list<SanPham>
-    */
-    public List<SanPham> getSpFromTB(){
+
+    /**
+     * Lấy các sản phẩm trên bản bán hàng
+     */
+    public List<SanPham> getSpFromTB() {
         List<SanPham> list = new ArrayList<SanPham>();
-         for( int i = 0;i<tbl_BanHang.getRowCount();i++){
-            
+        for (int i = 0; i < tbl_BanHang.getRowCount(); i++) {
+
             String maSp = tbl_BanHang.getValueAt(i, 0).toString();
             String tenSp = tbl_BanHang.getValueAt(i, 1).toString();
             String mau = tbl_BanHang.getValueAt(i, 2).toString();
             String SL = tbl_BanHang.getValueAt(i, 3).toString();
             String donGia = tbl_BanHang.getValueAt(i, 4).toString();
-                
-            SanPham sp = new SanPham(maSp, tenSp, Double.parseDouble(donGia),Integer.parseInt(SL), mau );
+
+            SanPham sp = new SanPham(maSp, tenSp, Double.parseDouble(donGia), Integer.parseInt(SL), mau);
             list.add(sp);
         }
-        
+
         return list;
     }
-    
-    //SInh ma HoaDon tu dong
-    /*
-        @param
-        @return String HDxxxxxx
-    */
-    public String TaoMaHD(){
+
+    /**
+     * Phát sinh mã hóa đơn tự động
+     *
+     * @return HDxxxxxx
+     */
+    public String TaoMaHD() {
         Random rand = new Random();
-         int ranNum = rand.nextInt(100000000)+ 1;
-         String maHD = "HD"+String.valueOf(ranNum);
-         
-         return maHD;
+        int ranNum = rand.nextInt(100000000) + 1;
+        String maHD = "HD" + String.valueOf(ranNum);
+
+        return maHD;
     }
-    
-      //Tạo hàm xuất hóa đơn
-    public void printBill(String maHD){
+
+    /**
+     * Xuất ra hóa đơn
+     *
+     * @param maHD String
+     */
+    public void printBill(String maHD) {
         try {
             Hashtable map = new Hashtable();
             JasperReport report = JasperCompileManager.compileReport("src\\Gui/rptHoaDon.jrxml");
             map.put("MaHD", maHD);
-            JasperPrint p = JasperFillManager.fillReport(report,  map, connect.getConnection() );
+            JasperPrint p = JasperFillManager.fillReport(report, map, connect.getConnection());
             JasperViewer.viewReport(p, false);
-           // JasperExportManager.exportReportToPdfFile(p, "test.pdf");
+            // JasperExportManager.exportReportToPdfFile(p, "test.pdf");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-           
+
         }
     }
+
     /**
-     * xoa trang khi thuc hien clich vao thanh toan
-     * @param 
-     * @return 
+     * Xóa trắng thông tin hóa đơn khi khi thanh toán thành công
      */
-    public void xoaTrang(){
-         txt_Search_SP.setText("Thêm Sản Phẩm Vào Đơn Hàng");
-         txt_Search_SP.setForeground(Color.white);
-         lbl_TongTien.setText("");
-         txt_KhuyenMai.setText("0");
-         lbl_TienPhaiTra.setText("");
+    public void xoaTrang() {
+        txt_Search_SP.setText("Thêm Sản Phẩm Vào Đơn Hàng");
+        txt_Search_SP.setForeground(Color.white);
+        lbl_TongTien.setText("");
+        txt_KhuyenMai.setText("0");
+        lbl_TienPhaiTra.setText("");
 //         txt_TienDua.setText("");
 //         lbl_TienThua.setText("0");
-         dfbh_model.setRowCount(0);
-          lbl_TenKh.setText("");
-               lbl_maKh.setText("");
-               lbl_SDT.setText("");
+        dfbh_model.setRowCount(0);
+        lbl_TenKh.setText("");
+        lbl_maKh.setText("");
+        lbl_SDT.setText("");
 //              txt_Ghichu.setText("Nhập ghi chú");
-              txt_Search_KH.setText("Thêm Khách Hàng Vào Đơn");
-              jPanel1.setVisible(true);
-              jPanel2.setVisible(false);
-              dstt.removeAll(dstt);
-              btn_XoaMatHang.setVisible(false);
+        txt_Search_KH.setText("Thêm Khách Hàng Vào Đơn");
+        jPanel1.setVisible(true);
+        jPanel2.setVisible(false);
+        dstt.removeAll(dstt);
+        btn_XoaMatHang.setVisible(false);
         lbl_TextSL.setVisible(false);
         lbl_GiamSL.setVisible(false);
         lbl_TangSL.setVisible(false);
         txt_SuaSL.setVisible(false);
     }
 
-    
-  
-                
 }
