@@ -7,14 +7,14 @@ package entity;
 public class CT_HDBanHang {
 
     private int soLuong;
-    private Double donGia;
+    private double donGia;
     private HoaDonBanHang hoaDon;
     private SanPham sanPham;
 
     public CT_HDBanHang() {
     }
 
-    public CT_HDBanHang(int soLuong, Double donGia) {
+    public CT_HDBanHang(int soLuong, double donGia) {
         this.soLuong = soLuong;
         this.donGia = donGia;
     }
@@ -27,7 +27,7 @@ public class CT_HDBanHang {
         return soLuong;
     }
 
-    public Double getDonGia() {
+    public double getDonGia() {
         return donGia;
     }
 
@@ -43,7 +43,7 @@ public class CT_HDBanHang {
         this.soLuong = soLuong;
     }
 
-    public void setDonGia(Double donGia) {
+    public void setDonGia(double donGia) {
         this.donGia = donGia;
     }
 

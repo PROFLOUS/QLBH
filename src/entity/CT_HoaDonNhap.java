@@ -9,12 +9,12 @@ public class CT_HoaDonNhap {
     private SanPham sanPham;
     private HoaDonNhap hoaDonNhap;
     private int soLuong;
-    private Double donGia;
+    private double donGia;
 
     public CT_HoaDonNhap() {
     }
 
-    public CT_HoaDonNhap(int soLuong, Double donGia) {
+    public CT_HoaDonNhap(int soLuong, double donGia) {
         this.soLuong = soLuong;
         this.donGia = donGia;
     }
@@ -31,7 +31,7 @@ public class CT_HoaDonNhap {
         return soLuong;
     }
 
-    public Double getDonGia() {
+    public double getDonGia() {
         return donGia;
     }
 
@@ -47,8 +47,15 @@ public class CT_HoaDonNhap {
         this.soLuong = soLuong;
     }
 
-    public void setDonGia(Double donGia) {
+    public void setDonGia(double donGia) {
         this.donGia = donGia;
     }
+
+    @Override
+    public String toString() {
+        return "CT_HoaDonNhap{" + "sanPham=" + sanPham + ", hoaDonNhap=" + hoaDonNhap + ", soLuong=" + soLuong + ", donGia=" + donGia + '}';
+    }
+    
+    
 
 }

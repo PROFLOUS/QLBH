@@ -307,7 +307,7 @@ public class FrmTkeDoanhThu extends javax.swing.JPanel {
                 Workbook wb = new XSSFWorkbook();
                 Sheet sheet = wb.createSheet(title);
 
-                Row rowCol = sheet.createRow(3);
+                Row rowCol = sheet.createRow(0);
 
                 for (int i = 0; i < jTable2.getColumnCount(); i++) {
                     Cell cell = rowCol.createCell(i, CellType.NUMERIC);
